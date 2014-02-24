@@ -1,0 +1,476 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ED5B867118BACA6500932430 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5B867018BACA6500932430 /* Foundation.framework */; };
+		ED5B867318BACA6500932430 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5B867218BACA6500932430 /* CoreGraphics.framework */; };
+		ED5B867518BACA6500932430 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5B867418BACA6500932430 /* UIKit.framework */; };
+		ED5B867B18BACA6500932430 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED5B867918BACA6500932430 /* InfoPlist.strings */; };
+		ED5B867D18BACA6500932430 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5B867C18BACA6500932430 /* main.m */; };
+		ED5B868118BACA6500932430 /* HATAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5B868018BACA6500932430 /* HATAppDelegate.m */; };
+		ED5B868418BACA6500932430 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED5B868218BACA6500932430 /* Main.storyboard */; };
+		ED5B868718BACA6500932430 /* HATViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5B868618BACA6500932430 /* HATViewController.m */; };
+		ED5B868918BACA6500932430 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED5B868818BACA6500932430 /* Images.xcassets */; };
+		ED5B869018BACA6600932430 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5B868F18BACA6600932430 /* XCTest.framework */; };
+		ED5B869118BACA6600932430 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5B867018BACA6500932430 /* Foundation.framework */; };
+		ED5B869218BACA6600932430 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5B867418BACA6500932430 /* UIKit.framework */; };
+		ED5B869A18BACA6600932430 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED5B869818BACA6600932430 /* InfoPlist.strings */; };
+		ED5B869C18BACA6600932430 /* HatnoteListenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5B869B18BACA6600932430 /* HatnoteListenTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ED5B869318BACA6600932430 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED5B866518BACA6500932430 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED5B866C18BACA6500932430;
+			remoteInfo = HatnoteListen;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ED5B866D18BACA6500932430 /* HatnoteListen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HatnoteListen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED5B867018BACA6500932430 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		ED5B867218BACA6500932430 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		ED5B867418BACA6500932430 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		ED5B867818BACA6500932430 /* HatnoteListen-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HatnoteListen-Info.plist"; sourceTree = "<group>"; };
+		ED5B867A18BACA6500932430 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ED5B867C18BACA6500932430 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ED5B867E18BACA6500932430 /* HatnoteListen-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HatnoteListen-Prefix.pch"; sourceTree = "<group>"; };
+		ED5B867F18BACA6500932430 /* HATAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HATAppDelegate.h; sourceTree = "<group>"; };
+		ED5B868018BACA6500932430 /* HATAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HATAppDelegate.m; sourceTree = "<group>"; };
+		ED5B868318BACA6500932430 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ED5B868518BACA6500932430 /* HATViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HATViewController.h; sourceTree = "<group>"; };
+		ED5B868618BACA6500932430 /* HATViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HATViewController.m; sourceTree = "<group>"; };
+		ED5B868818BACA6500932430 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		ED5B868E18BACA6600932430 /* HatnoteListenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HatnoteListenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED5B868F18BACA6600932430 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		ED5B869718BACA6600932430 /* HatnoteListenTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HatnoteListenTests-Info.plist"; sourceTree = "<group>"; };
+		ED5B869918BACA6600932430 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		ED5B869B18BACA6600932430 /* HatnoteListenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HatnoteListenTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ED5B866A18BACA6500932430 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED5B867318BACA6500932430 /* CoreGraphics.framework in Frameworks */,
+				ED5B867518BACA6500932430 /* UIKit.framework in Frameworks */,
+				ED5B867118BACA6500932430 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED5B868B18BACA6600932430 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED5B869018BACA6600932430 /* XCTest.framework in Frameworks */,
+				ED5B869218BACA6600932430 /* UIKit.framework in Frameworks */,
+				ED5B869118BACA6600932430 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ED5B866418BACA6500932430 = {
+			isa = PBXGroup;
+			children = (
+				ED5B867618BACA6500932430 /* HatnoteListen */,
+				ED5B869518BACA6600932430 /* HatnoteListenTests */,
+				ED5B866F18BACA6500932430 /* Frameworks */,
+				ED5B866E18BACA6500932430 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ED5B866E18BACA6500932430 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED5B866D18BACA6500932430 /* HatnoteListen.app */,
+				ED5B868E18BACA6600932430 /* HatnoteListenTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ED5B866F18BACA6500932430 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED5B867018BACA6500932430 /* Foundation.framework */,
+				ED5B867218BACA6500932430 /* CoreGraphics.framework */,
+				ED5B867418BACA6500932430 /* UIKit.framework */,
+				ED5B868F18BACA6600932430 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ED5B867618BACA6500932430 /* HatnoteListen */ = {
+			isa = PBXGroup;
+			children = (
+				ED5B867F18BACA6500932430 /* HATAppDelegate.h */,
+				ED5B868018BACA6500932430 /* HATAppDelegate.m */,
+				ED5B868218BACA6500932430 /* Main.storyboard */,
+				ED5B868518BACA6500932430 /* HATViewController.h */,
+				ED5B868618BACA6500932430 /* HATViewController.m */,
+				ED5B868818BACA6500932430 /* Images.xcassets */,
+				ED5B867718BACA6500932430 /* Supporting Files */,
+			);
+			path = HatnoteListen;
+			sourceTree = "<group>";
+		};
+		ED5B867718BACA6500932430 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ED5B867818BACA6500932430 /* HatnoteListen-Info.plist */,
+				ED5B867918BACA6500932430 /* InfoPlist.strings */,
+				ED5B867C18BACA6500932430 /* main.m */,
+				ED5B867E18BACA6500932430 /* HatnoteListen-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ED5B869518BACA6600932430 /* HatnoteListenTests */ = {
+			isa = PBXGroup;
+			children = (
+				ED5B869B18BACA6600932430 /* HatnoteListenTests.m */,
+				ED5B869618BACA6600932430 /* Supporting Files */,
+			);
+			path = HatnoteListenTests;
+			sourceTree = "<group>";
+		};
+		ED5B869618BACA6600932430 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ED5B869718BACA6600932430 /* HatnoteListenTests-Info.plist */,
+				ED5B869818BACA6600932430 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ED5B866C18BACA6500932430 /* HatnoteListen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED5B869F18BACA6600932430 /* Build configuration list for PBXNativeTarget "HatnoteListen" */;
+			buildPhases = (
+				ED5B866918BACA6500932430 /* Sources */,
+				ED5B866A18BACA6500932430 /* Frameworks */,
+				ED5B866B18BACA6500932430 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HatnoteListen;
+			productName = HatnoteListen;
+			productReference = ED5B866D18BACA6500932430 /* HatnoteListen.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ED5B868D18BACA6600932430 /* HatnoteListenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED5B86A218BACA6600932430 /* Build configuration list for PBXNativeTarget "HatnoteListenTests" */;
+			buildPhases = (
+				ED5B868A18BACA6600932430 /* Sources */,
+				ED5B868B18BACA6600932430 /* Frameworks */,
+				ED5B868C18BACA6600932430 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED5B869418BACA6600932430 /* PBXTargetDependency */,
+			);
+			name = HatnoteListenTests;
+			productName = HatnoteListenTests;
+			productReference = ED5B868E18BACA6600932430 /* HatnoteListenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ED5B866518BACA6500932430 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = HAT;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Bryan Oltman";
+				TargetAttributes = {
+					ED5B868D18BACA6600932430 = {
+						TestTargetID = ED5B866C18BACA6500932430;
+					};
+				};
+			};
+			buildConfigurationList = ED5B866818BACA6500932430 /* Build configuration list for PBXProject "HatnoteListen" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ED5B866418BACA6500932430;
+			productRefGroup = ED5B866E18BACA6500932430 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ED5B866C18BACA6500932430 /* HatnoteListen */,
+				ED5B868D18BACA6600932430 /* HatnoteListenTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ED5B866B18BACA6500932430 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED5B868918BACA6500932430 /* Images.xcassets in Resources */,
+				ED5B867B18BACA6500932430 /* InfoPlist.strings in Resources */,
+				ED5B868418BACA6500932430 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED5B868C18BACA6600932430 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED5B869A18BACA6600932430 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ED5B866918BACA6500932430 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED5B868118BACA6500932430 /* HATAppDelegate.m in Sources */,
+				ED5B867D18BACA6500932430 /* main.m in Sources */,
+				ED5B868718BACA6500932430 /* HATViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED5B868A18BACA6600932430 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED5B869C18BACA6600932430 /* HatnoteListenTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ED5B869418BACA6600932430 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED5B866C18BACA6500932430 /* HatnoteListen */;
+			targetProxy = ED5B869318BACA6600932430 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		ED5B867918BACA6500932430 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED5B867A18BACA6500932430 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		ED5B868218BACA6500932430 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED5B868318BACA6500932430 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		ED5B869818BACA6600932430 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ED5B869918BACA6600932430 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ED5B869D18BACA6600932430 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		ED5B869E18BACA6600932430 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ED5B86A018BACA6600932430 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
+				INFOPLIST_FILE = "HatnoteListen/HatnoteListen-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		ED5B86A118BACA6600932430 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
+				INFOPLIST_FILE = "HatnoteListen/HatnoteListen-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		ED5B86A318BACA6600932430 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HatnoteListen.app/HatnoteListen";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "HatnoteListenTests/HatnoteListenTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		ED5B86A418BACA6600932430 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HatnoteListen.app/HatnoteListen";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
+				INFOPLIST_FILE = "HatnoteListenTests/HatnoteListenTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ED5B866818BACA6500932430 /* Build configuration list for PBXProject "HatnoteListen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED5B869D18BACA6600932430 /* Debug */,
+				ED5B869E18BACA6600932430 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED5B869F18BACA6600932430 /* Build configuration list for PBXNativeTarget "HatnoteListen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED5B86A018BACA6600932430 /* Debug */,
+				ED5B86A118BACA6600932430 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		ED5B86A218BACA6600932430 /* Build configuration list for PBXNativeTarget "HatnoteListenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED5B86A318BACA6600932430 /* Debug */,
+				ED5B86A418BACA6600932430 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ED5B866518BACA6500932430 /* Project object */;
+}
