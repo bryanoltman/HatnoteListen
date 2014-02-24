@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SRWebSocket.h"
 
-@interface HATViewController : UIViewController
+@interface HATViewController : UIViewController <SRWebSocketDelegate>
 
 @end
