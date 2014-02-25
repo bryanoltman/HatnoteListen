@@ -7,6 +7,8 @@
 //
 
 #import "HATViewController.h"
+#import "HATUpdateView.h"
+#import "HATWikipediaViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 
 #define kNumClav 27
@@ -15,6 +17,8 @@
 
 @interface HATViewController ()
 @property (strong, nonatomic) SRWebSocket *socket;
+@property (strong, nonatomic) NSMutableArray *activeViews;
+@property (strong, nonatomic) HATWikipediaViewController *wikiVC;
 @end
 
 @implementation HATViewController
@@ -63,9 +67,36 @@
     return langs;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.activeViews = [NSMutableArray array];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(bubbleClicked:)
+                                                     name:@"bubbleClicked"
+                                                   object:nil];
+    }
+    
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"bubbleClicked"
+                                                  object:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+ 
+    self.wikiVC = [self.childViewControllers objectAtIndex:0];
+    [self hideWikiView:NO];
+    
+    self.view.backgroundColor = [UIColor darkGrayColor];
+    
     NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
     NSDictionary *langMap = [HATViewController languageMap];
     NSString *wsString = [langMap objectForKey:language] ?: @"en";
@@ -73,15 +104,126 @@
     self.socket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:wsString]];
     self.socket.delegate = self;
     [self.socket open];
+    
+    [NSTimer scheduledTimerWithTimeInterval:2
+                                     target:self
+                                   selector:@selector(timerTicked:)
+                                   userInfo:nil
+                                    repeats:YES];
+}
+
+- (void)timerTicked:(NSTimer *)timer
+{
+    NSMutableArray *toRemove = [NSMutableArray new];
+    for (HATUpdateView *view in self.activeViews) {
+        if (view.alpha == 0) {
+            [toRemove addObject:view];
+        }
+    }
+    
+    for (HATUpdateView *view in toRemove) {
+        [view removeFromSuperview];
+        [self.activeViews removeObject:view];
+    }
+}
+
+- (void)bubbleClicked:(NSNotification *)notification
+{
+    NSDictionary *info = notification.object;
+    self.wikiVC.info = info;
+    [self showWikiView:YES];
+}
+
+- (void)viewTapped:(id)sender
+{
+    [self hideWikiView:YES];
+}
+
+- (void)showWikiView:(BOOL)animated
+{
+    [UIView animateWithDuration:animated ? 0.3 : 0
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.wikiVC.view.transform = CGAffineTransformIdentity;
+                     } completion:nil];
+}
+
+- (void)hideWikiView:(BOOL)animated
+{
+    [UIView animateWithDuration:animated ? 0.3 : 0
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.wikiVC.view.transform = CGAffineTransformMakeTranslation(0, CGRectGetHeight(self.wikiVC.view.frame));
+                     } completion:nil];
 }
 
 - (void)playSoundWithPath:(NSString *)path
 {
     NSString *soundPath = [[NSBundle mainBundle] pathForResource:path ofType:@"mp3"];
-    NSLog(@"attempting to open soundPath %@ from orig path %@", soundPath, path);
     SystemSoundID soundID;
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath: soundPath], &soundID);
     AudioServicesPlaySystemSound(soundID);
+}
+
+- (CGPoint)getRandomPoint
+{
+    return CGPointMake(fmod(arc4random(), CGRectGetWidth(self.view.bounds)),
+                       fmod(arc4random(), CGRectGetHeight(self.view.bounds)));
+}
+
+- (void)showViewCenteredAt:(CGPoint)point
+                 withColor:(UIColor *)color
+                 magnitude:(NSInteger)magnitude
+                  andInfo:(NSDictionary *)info
+{
+    CGFloat magMultiple = 0.5;
+    CGFloat radius = magMultiple * magnitude;
+    
+    HATUpdateView *dotView = [[HATUpdateView alloc] initWithFrame:CGRectMake(point.x - radius / 2,
+                                                                             point.y - radius / 2,
+                                                                             radius,
+                                                                             radius)];
+    dotView.color = color;
+    dotView.magnitude = magnitude;
+    dotView.info = info;
+    dotView.alpha = 0.6;
+    [self.view insertSubview:dotView atIndex:0];
+    dotView.transform = CGAffineTransformMakeScale(0.1, 0.1);
+    [self.activeViews addObject:dotView];
+    
+    [UIView animateWithDuration:0.8 + (fmodf(arc4random(), 100) / 100)
+                          delay:0
+         usingSpringWithDamping:0.4
+          initialSpringVelocity:0.7
+                        options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         dotView.transform = CGAffineTransformMakeScale(1, 1);
+                     } completion:^(BOOL finished) {
+                         [UIView animateKeyframesWithDuration:6
+                                                        delay:0
+                                                      options:UIViewKeyframeAnimationOptionCalculationModeCubic | UIViewKeyframeAnimationOptionAllowUserInteraction
+                                                   animations:^{
+                                                       [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1 animations:^{
+                                                           dotView.transform = CGAffineTransformTranslate(dotView.transform, 0, -1.0f * fmodf(arc4random(), 100));
+                                                       }];
+                                                       
+//                                  [UIView addKeyframeWithRelativeStartTime:0.01 relativeDuration:0.99 animations:^{
+//                                      dotView.layer.transform = CATransform3DScale(dotView.layer.transform, 0.9, 0.9, 1);
+//                                  }];
+                                                       
+                                                       [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
+                                                           dotView.alpha = 0.3;
+                                                       }];
+                                                   } completion:^(BOOL finished) {
+                                                       [UIView animateWithDuration:0.2
+                                                                        animations:^{
+                                                                            dotView.alpha = 0;
+                                                                        } completion:nil];
+                                                   }];
+                     }];
+
 }
 
 #pragma mark - SRWebSocketDelegate
@@ -93,7 +235,9 @@
     NSString *soundPath;
     if ([[json objectForKey:@"page_title"] isEqualToString:@"Special:Log/newusers"]) {
         soundPath = [NSString stringWithFormat:@"swell%d", (rand() % kNumSwells) + 1];
-        NSLog(@"%@", [json objectForKey:@"user"]);
+//        NSLog(@"%@", [json objectForKey:@"user"]);
+        
+        // TODO visual
     }
     else {
         NSNumber *changeSize = [json objectForKey:@"change_size"];
@@ -101,8 +245,8 @@
             return;
         }
         
-        //        so the clav is the bell sound, that's for additions
-        //        and the celesta is the string sound, that's for subtractions
+//        so the clav is the bell sound, that's for additions
+//        and the celesta is the string sound, that's for subtractions
         BOOL isAddition = [changeSize intValue] > 0;
         if (isAddition) {
             soundPath = [NSString stringWithFormat:@"c%03d", (rand() % kNumClav) + 1];
@@ -127,11 +271,13 @@
             dotColor = [UIColor whiteColor];
         }
         
-        // TODO draw dot
-        NSLog(@"%@", json);
+        [self showViewCenteredAt:[self getRandomPoint]
+                       withColor:dotColor
+                       magnitude:changeSize.integerValue
+                         andInfo:json];
     }
     
-    NSLog(@"sound path is %@", soundPath);
+//    NSLog(@"sound path is %@", soundPath);
     [self playSoundWithPath:soundPath];
 }
 

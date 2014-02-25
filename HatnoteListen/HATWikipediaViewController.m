@@ -14,25 +14,23 @@
 
 @implementation HATWikipediaViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)setInfo:(NSDictionary *)info
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    _info = info;
+    self.textLabel.text = [info objectForKey:@"page_title"];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    UINavigationBar *bar = [[UINavigationBar alloc] initWithFrame:self.view.bounds];
+    bar.barStyle = UIBarStyleBlack;
+    [self.view insertSubview:bar atIndex:0];
 }
 
-- (void)didReceiveMemoryWarning
+- (IBAction)viewTapped:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self.info objectForKey:@"url"]]];
 }
 
 @end

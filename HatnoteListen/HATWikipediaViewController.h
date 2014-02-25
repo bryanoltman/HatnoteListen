@@ -10,4 +10,10 @@
 
 @interface HATWikipediaViewController : UIViewController
 
+@property (strong, nonatomic) NSDictionary *info;
+
+@property (weak, nonatomic) IBOutlet UILabel *textLabel;
+
+- (IBAction)viewTapped:(id)sender;
+
 @end

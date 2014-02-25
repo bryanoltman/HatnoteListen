@@ -81,6 +81,7 @@
 		ED755DAB18BB084600E7AC88 /* swell1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7218BB084600E7AC88 /* swell1.mp3 */; };
 		ED755DAC18BB084600E7AC88 /* swell2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7318BB084600E7AC88 /* swell2.mp3 */; };
 		ED755DAD18BB084600E7AC88 /* swell3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7418BB084600E7AC88 /* swell3.mp3 */; };
+		ED946AA718BC239700B4EEAF /* HATUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED946AA618BC239700B4EEAF /* HATUpdateView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +176,8 @@
 		ED755D7218BB084600E7AC88 /* swell1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swell1.mp3; sourceTree = "<group>"; };
 		ED755D7318BB084600E7AC88 /* swell2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swell2.mp3; sourceTree = "<group>"; };
 		ED755D7418BB084600E7AC88 /* swell3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swell3.mp3; sourceTree = "<group>"; };
+		ED946AA518BC239700B4EEAF /* HATUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATUpdateView.h; sourceTree = "<group>"; };
+		ED946AA618BC239700B4EEAF /* HATUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATUpdateView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,15 +242,18 @@
 		ED5B867618BACA6500932430 /* HatnoteListen */ = {
 			isa = PBXGroup;
 			children = (
-				ED755C4C18BB04BB00E7AC88 /* Sounds */,
+				ED946AAE18BC509900B4EEAF /* iPad */,
 				ED5B867F18BACA6500932430 /* HATAppDelegate.h */,
 				ED5B868018BACA6500932430 /* HATAppDelegate.m */,
-				ED5B868218BACA6500932430 /* Main.storyboard */,
-				ED5B868518BACA6500932430 /* HATViewController.h */,
-				ED5B868618BACA6500932430 /* HATViewController.m */,
 				ED755D3418BB065500E7AC88 /* HATWikipediaViewController.h */,
 				ED755D3518BB065500E7AC88 /* HATWikipediaViewController.m */,
+				ED946AA518BC239700B4EEAF /* HATUpdateView.h */,
+				ED946AA618BC239700B4EEAF /* HATUpdateView.m */,
+				ED5B868518BACA6500932430 /* HATViewController.h */,
+				ED5B868618BACA6500932430 /* HATViewController.m */,
 				ED5B868818BACA6500932430 /* Images.xcassets */,
+				ED5B868218BACA6500932430 /* Main.storyboard */,
+				ED755C4C18BB04BB00E7AC88 /* Sounds */,
 				ED5B867718BACA6500932430 /* Supporting Files */,
 			);
 			path = HatnoteListen;
@@ -371,6 +377,13 @@
 			);
 			name = swells;
 			path = sounds/swells;
+			sourceTree = "<group>";
+		};
+		ED946AAE18BC509900B4EEAF /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -565,6 +578,7 @@
 			files = (
 				ED5B868118BACA6500932430 /* HATAppDelegate.m in Sources */,
 				ED5B867D18BACA6500932430 /* main.m in Sources */,
+				ED946AA718BC239700B4EEAF /* HATUpdateView.m in Sources */,
 				ED755D3618BB065500E7AC88 /* HATWikipediaViewController.m in Sources */,
 				ED5B868718BACA6500932430 /* HATViewController.m in Sources */,
 			);
@@ -697,7 +711,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
 				INFOPLIST_FILE = "HatnoteListen/HatnoteListen-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -711,7 +727,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
 				INFOPLIST_FILE = "HatnoteListen/HatnoteListen-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
