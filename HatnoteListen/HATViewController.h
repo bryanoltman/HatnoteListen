@@ -11,6 +11,4 @@
 
 @interface HATViewController : UIViewController <SRWebSocketDelegate>
 
-- (IBAction)viewTapped:(id)sender;
-
 @end

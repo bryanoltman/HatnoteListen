@@ -26,11 +26,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    NSLog(@"deallocing hatupdateview");
-}
-
 - (void)didTouchButton
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"bubbleClicked" object:self.info];
@@ -38,7 +33,7 @@
 
 - (void)setInfo:(NSDictionary *)info
 {
-    _info = [info copy];
+    _info = info;
     self.textLabel.text = [info objectForKey:@"page_title"];
 }
 

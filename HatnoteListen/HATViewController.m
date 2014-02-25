@@ -17,7 +17,6 @@
 
 @interface HATViewController ()
 @property (strong, nonatomic) SRWebSocket *socket;
-@property (strong, nonatomic) NSMutableArray *activeViews;
 @property (strong, nonatomic) HATWikipediaViewController *wikiVC;
 @end
 
@@ -71,11 +70,18 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.activeViews = [NSMutableArray array];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(bubbleClicked:)
                                                      name:@"bubbleClicked"
                                                    object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver: self
+                                                 selector: @selector(didBecomeActive)
+                                                     name: UIApplicationDidBecomeActiveNotification
+                                                   object: nil];
+        [[NSNotificationCenter defaultCenter] addObserver: self
+                                                 selector: @selector(didEnterBackground)
+                                                     name: UIApplicationDidEnterBackgroundNotification
+                                                   object: nil];
     }
     
     return self;
@@ -85,6 +91,12 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:@"bubbleClicked"
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidBecomeActiveNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidEnterBackgroundNotification
                                                   object:nil];
 }
 
@@ -96,6 +108,14 @@
     [self hideWikiView:NO];
     
     self.view.backgroundColor = [UIColor darkGrayColor];
+    [self initSocket];
+}
+
+- (void)initSocket
+{
+    if (self.socket) {
+        return;
+    }
     
     NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
     NSDictionary *langMap = [HATViewController languageMap];
@@ -104,27 +124,17 @@
     self.socket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:wsString]];
     self.socket.delegate = self;
     [self.socket open];
-    
-    [NSTimer scheduledTimerWithTimeInterval:2
-                                     target:self
-                                   selector:@selector(timerTicked:)
-                                   userInfo:nil
-                                    repeats:YES];
 }
 
-- (void)timerTicked:(NSTimer *)timer
+- (void)didEnterBackground
 {
-    NSMutableArray *toRemove = [NSMutableArray new];
-    for (HATUpdateView *view in self.activeViews) {
-        if (view.alpha == 0) {
-            [toRemove addObject:view];
-        }
-    }
-    
-    for (HATUpdateView *view in toRemove) {
-        [view removeFromSuperview];
-        [self.activeViews removeObject:view];
-    }
+    [self.socket close];
+    self.socket = nil;
+}
+
+- (void)didBecomeActive
+{
+    [self initSocket];
 }
 
 - (void)bubbleClicked:(NSNotification *)notification
@@ -132,11 +142,6 @@
     NSDictionary *info = notification.object;
     self.wikiVC.info = info;
     [self showWikiView:YES];
-}
-
-- (void)viewTapped:(id)sender
-{
-    [self hideWikiView:YES];
 }
 
 - (void)showWikiView:(BOOL)animated
@@ -179,7 +184,7 @@
                   andInfo:(NSDictionary *)info
 {
     CGFloat magMultiple = 0.5;
-    CGFloat radius = magMultiple * magnitude;
+    CGFloat radius = MAX(0, MIN(magMultiple * magnitude, CGRectGetHeight(self.view.bounds)));
     
     HATUpdateView *dotView = [[HATUpdateView alloc] initWithFrame:CGRectMake(point.x - radius / 2,
                                                                              point.y - radius / 2,
@@ -191,7 +196,6 @@
     dotView.alpha = 0.6;
     [self.view insertSubview:dotView atIndex:0];
     dotView.transform = CGAffineTransformMakeScale(0.1, 0.1);
-    [self.activeViews addObject:dotView];
     
     [UIView animateWithDuration:0.8 + (fmodf(arc4random(), 100) / 100)
                           delay:0
@@ -209,9 +213,9 @@
                                                            dotView.transform = CGAffineTransformTranslate(dotView.transform, 0, -1.0f * fmodf(arc4random(), 100));
                                                        }];
                                                        
-//                                  [UIView addKeyframeWithRelativeStartTime:0.01 relativeDuration:0.99 animations:^{
-//                                      dotView.layer.transform = CATransform3DScale(dotView.layer.transform, 0.9, 0.9, 1);
-//                                  }];
+                                                       [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
+                                                           dotView.transform = CGAffineTransformScale(dotView.transform, 0.7, 0.7);
+                                                       }];
                                                        
                                                        [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
                                                            dotView.alpha = 0.3;
@@ -220,7 +224,9 @@
                                                        [UIView animateWithDuration:0.2
                                                                         animations:^{
                                                                             dotView.alpha = 0;
-                                                                        } completion:nil];
+                                                                        } completion:^(BOOL finished) {
+                                                                            [dotView removeFromSuperview];
+                                                                        }];
                                                    }];
                      }];
 
@@ -230,7 +236,6 @@
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message
 {
     NSDictionary *json = [message objectFromJSONString];
-//    NSLog(@"%@", json);
     
     NSString *soundPath;
     if ([[json objectForKey:@"page_title"] isEqualToString:@"Special:Log/newusers"]) {
@@ -277,14 +282,7 @@
                          andInfo:json];
     }
     
-//    NSLog(@"sound path is %@", soundPath);
     [self playSoundWithPath:soundPath];
 }
-
-//- (void)webSocketDidOpen:(SRWebSocket *)webSocket
-//{
-//    // TODO anything?
-//    NSLog(@"opened!");
-//}
 
 @end

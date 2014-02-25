@@ -23,17 +23,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="Fy0-Df-CTv" appends="YES" id="arI-PB-P8F"/>
-                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer cancelsTouchesInView="NO" id="Fy0-Df-CTv">
-                    <connections>
-                        <action selector="viewTapped:" destination="vXZ-lx-hvc" id="G2J-Se-Q1A"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
         </scene>
         <!--Wikipedia View Controller-->
