@@ -19,6 +19,7 @@
 @property (strong, nonatomic) HATWikipediaViewController *wikiVC;
 @property (strong, nonatomic) NSMutableArray *avPlayers;
 @property (strong, nonatomic) NSMutableArray *dotViews;
+@property (strong, nonatomic) NSTimer *hideTimer;
 @end
 
 @implementation HATViewController
@@ -209,7 +210,20 @@
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          self.wikiVC.view.transform = CGAffineTransformIdentity;
+                         self.muteButton.transform = CGAffineTransformMakeTranslation(0, -CGRectGetHeight(self.wikiVC.view.frame));
                      } completion:nil];
+    
+    [self.hideTimer invalidate];
+    self.hideTimer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                      target:self
+                                                    selector:@selector(removeTimerTicked:)
+                                                    userInfo:nil
+                                                     repeats:NO];
+}
+
+- (void)removeTimerTicked:(NSTimer *)timer
+{
+    [self hideWikiView:YES];
 }
 
 - (void)hideWikiView:(BOOL)animated
@@ -219,6 +233,7 @@
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          self.wikiVC.view.transform = CGAffineTransformMakeTranslation(0, CGRectGetHeight(self.wikiVC.view.frame));
+                         self.muteButton.transform = CGAffineTransformIdentity;
                      } completion:nil];
 }
 
@@ -266,7 +281,7 @@
     [self.dotViews addObject:dotView];
     dotView.transform = CGAffineTransformMakeScale(0.1, 0.1);
     
-    [UIView animateWithDuration:0//0.8 + (fmodf(arc4random(), 100) / 100) // 0.8 + 0 to 1 seconds
+    [UIView animateWithDuration:0.8 + (fmodf(arc4random(), 100) / 100) // 0.8 + 0 to 1 seconds
                           delay:0
          usingSpringWithDamping:0.4
           initialSpringVelocity:0.7
