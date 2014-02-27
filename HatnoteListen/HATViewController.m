@@ -9,7 +9,6 @@
 #import "HATViewController.h"
 #import "HATUpdateView.h"
 #import "HATWikipediaViewController.h"
-#import <AudioToolbox/AudioToolbox.h>
 
 #define kNumClav 27
 #define kNumCelesta 27
@@ -18,6 +17,8 @@
 @interface HATViewController ()
 @property (strong, nonatomic) SRWebSocket *socket;
 @property (strong, nonatomic) HATWikipediaViewController *wikiVC;
+@property (strong, nonatomic) NSMutableArray *avPlayers;
+@property (strong, nonatomic) NSMutableArray *dotViews;
 @end
 
 @implementation HATViewController
@@ -113,6 +114,8 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        self.avPlayers = [NSMutableArray array];
+        self.dotViews = [NSMutableArray array];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(bubbleClicked:)
                                                      name:@"bubbleClicked"
@@ -157,6 +160,13 @@
     
     self.view.backgroundColor = [UIColor darkGrayColor];
     [self initSocket];
+}
+
+- (void)setMuteButton:(UIButton *)muteButton
+{
+    _muteButton = muteButton;
+    UIImage *image = [UIImage imageNamed:@"speaker-down"];
+    [muteButton setImage:image forState:(UIControlStateHighlighted | UIControlStateSelected)];
 }
 
 - (void)initSocket
@@ -215,9 +225,19 @@
 - (void)playSoundWithPath:(NSString *)path
 {
     NSString *soundPath = [[NSBundle mainBundle] pathForResource:path ofType:@"mp3"];
-    SystemSoundID soundID;
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath: soundPath], &soundID);
-    AudioServicesPlaySystemSound(soundID);
+    NSURL *url = [NSURL fileURLWithPath:soundPath];
+    
+    NSError *error;
+    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    player.volume = self.muteButton.selected ? 0 : 1;
+    player.delegate = self;
+    [self.avPlayers addObject:player];
+    [player play];
+}
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    [self.avPlayers removeObject:player];
 }
 
 - (CGPoint)getRandomPoint
@@ -243,9 +263,10 @@
     dotView.info = info;
     dotView.alpha = 0.6;
     [self.view insertSubview:dotView atIndex:0];
+    [self.dotViews addObject:dotView];
     dotView.transform = CGAffineTransformMakeScale(0.1, 0.1);
     
-    [UIView animateWithDuration:0.8 + (fmodf(arc4random(), 100) / 100) // 0.8 + 0 to 1 seconds
+    [UIView animateWithDuration:0//0.8 + (fmodf(arc4random(), 100) / 100) // 0.8 + 0 to 1 seconds
                           delay:0
          usingSpringWithDamping:0.4
           initialSpringVelocity:0.7
@@ -253,22 +274,22 @@
                      animations:^{
                          dotView.transform = CGAffineTransformMakeScale(1, 1);
                      } completion:^(BOOL finished) {
-                         [UIView animateKeyframesWithDuration:6
-                                                        delay:0
-                                                      options:UIViewKeyframeAnimationOptionAllowUserInteraction 
-                                                   animations:^{
+                         [UIView animateWithDuration:6
+                                               delay:0
+                                             options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionCurveEaseIn
+                                          animations:^{
 //                                                       [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1 animations:^{
-//                                                           dotView.transform = CGAffineTransformTranslate(dotView.transform, 0, -1.0f * fmodf(arc4random(), 100));
+                                                           dotView.transform = CGAffineTransformTranslate(dotView.transform, 0, -1.0f * fmodf(arc4random(), 100));
 //                                                       }];
 //
-                                                       [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.4 animations:^{
-                                                           dotView.transform = CGAffineTransformScale(dotView.transform, 0.7, 0.7);
-                                                       }];
-                                                       
-                                                       [UIView addKeyframeWithRelativeStartTime:0.9 relativeDuration:0.1 animations:^{
-                                                           dotView.transform = CGAffineTransformScale(dotView.transform, 0.0, 0.0);
-                                                       }];
+//                                                       [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.4 animations:^{
+//                                                           dotView.transform = CGAffineTransformScale(dotView.transform, 0.7, 0.7);
+//                                                       }];
 //                                                       
+//                                                       [UIView addKeyframeWithRelativeStartTime:0.9 relativeDuration:0.1 animations:^{
+//                                                           dotView.transform = CGAffineTransformScale(dotView.transform, 0.0, 0.0);
+//                                                       }];
+//
 //                                                       [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
 //                                                           dotView.alpha = 0.3;
 //                                                       }];
@@ -278,10 +299,19 @@
                                                                             dotView.alpha = 0;
                                                                         } completion:^(BOOL finished) {
                                                                             [dotView removeFromSuperview];
+                                                                            [self.dotViews removeObject:dotView];
                                                                         }];
                                                    }];
                      }];
 
+}
+
+- (void)muteButtonClicked:(UIButton *)sender
+{
+    [sender setSelected:!sender.selected];
+    for (AVAudioPlayer *player in self.avPlayers) {
+        player.volume = self.muteButton.selected ? 0 : 1;
+    }
 }
 
 #pragma mark - SRWebSocketDelegate

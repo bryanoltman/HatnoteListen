@@ -23,7 +23,6 @@
 		ED5B869A18BACA6600932430 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED5B869818BACA6600932430 /* InfoPlist.strings */; };
 		ED5B869C18BACA6600932430 /* HatnoteListenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5B869B18BACA6600932430 /* HatnoteListenTests.m */; };
 		ED755D3618BB065500E7AC88 /* HATWikipediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED755D3518BB065500E7AC88 /* HATWikipediaViewController.m */; };
-		ED755D3818BB071A00E7AC88 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED755D3718BB071A00E7AC88 /* AudioToolbox.framework */; };
 		ED755D7518BB084600E7AC88 /* c001.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D3A18BB084600E7AC88 /* c001.mp3 */; };
 		ED755D7618BB084600E7AC88 /* c002.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D3B18BB084600E7AC88 /* c002.mp3 */; };
 		ED755D7718BB084600E7AC88 /* c003.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D3C18BB084600E7AC88 /* c003.mp3 */; };
@@ -83,6 +82,10 @@
 		ED755DAD18BB084600E7AC88 /* swell3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7418BB084600E7AC88 /* swell3.mp3 */; };
 		ED946AA718BC239700B4EEAF /* HATUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED946AA618BC239700B4EEAF /* HATUpdateView.m */; };
 		EDDD564118BEDE8400D7AD6F /* NSObject+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */; };
+		EDDD564318BEE7B700D7AD6F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDD564218BEE7B700D7AD6F /* AVFoundation.framework */; };
+		EDDD564718BEEDB300D7AD6F /* speaker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDDD564518BEEDB300D7AD6F /* speaker@2x.png */; };
+		EDDD564818BEEDB300D7AD6F /* speaker-muted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDDD564618BEEDB300D7AD6F /* speaker-muted@2x.png */; };
+		EDDD564C18BEF33100D7AD6F /* speaker-down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDDD564A18BEF33100D7AD6F /* speaker-down@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,6 +184,10 @@
 		ED946AA618BC239700B4EEAF /* HATUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATUpdateView.m; sourceTree = "<group>"; };
 		EDDD563F18BEDE8400D7AD6F /* NSObject+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Util.h"; sourceTree = "<group>"; };
 		EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Util.m"; sourceTree = "<group>"; };
+		EDDD564218BEE7B700D7AD6F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		EDDD564518BEEDB300D7AD6F /* speaker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speaker@2x.png"; sourceTree = "<group>"; };
+		EDDD564618BEEDB300D7AD6F /* speaker-muted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speaker-muted@2x.png"; sourceTree = "<group>"; };
+		EDDD564A18BEF33100D7AD6F /* speaker-down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speaker-down@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED755D3818BB071A00E7AC88 /* AudioToolbox.framework in Frameworks */,
+				EDDD564318BEE7B700D7AD6F /* AVFoundation.framework in Frameworks */,
 				ED5B867318BACA6500932430 /* CoreGraphics.framework in Frameworks */,
 				ED5B867518BACA6500932430 /* UIKit.framework in Frameworks */,
 				ED5B867118BACA6500932430 /* Foundation.framework in Frameworks */,
@@ -232,6 +239,7 @@
 		ED5B866F18BACA6500932430 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EDDD564218BEE7B700D7AD6F /* AVFoundation.framework */,
 				ED755D3718BB071A00E7AC88 /* AudioToolbox.framework */,
 				ED5B867018BACA6500932430 /* Foundation.framework */,
 				ED5B867218BACA6500932430 /* CoreGraphics.framework */,
@@ -245,6 +253,7 @@
 		ED5B867618BACA6500932430 /* HatnoteListen */ = {
 			isa = PBXGroup;
 			children = (
+				EDDD564418BEED9F00D7AD6F /* Images */,
 				EDDD563F18BEDE8400D7AD6F /* NSObject+Util.h */,
 				EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */,
 				ED5B867F18BACA6500932430 /* HATAppDelegate.h */,
@@ -383,6 +392,16 @@
 			path = sounds/swells;
 			sourceTree = "<group>";
 		};
+		EDDD564418BEED9F00D7AD6F /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EDDD564A18BEF33100D7AD6F /* speaker-down@2x.png */,
+				EDDD564618BEEDB300D7AD6F /* speaker-muted@2x.png */,
+				EDDD564518BEEDB300D7AD6F /* speaker@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -462,6 +481,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDDD564C18BEF33100D7AD6F /* speaker-down@2x.png in Resources */,
 				ED5B868918BACA6500932430 /* Images.xcassets in Resources */,
 				ED755DA918BB084600E7AC88 /* c026.mp3 in Resources */,
 				ED755D8518BB084600E7AC88 /* c017.mp3 in Resources */,
@@ -475,6 +495,7 @@
 				ED755DA518BB084600E7AC88 /* c022.mp3 in Resources */,
 				ED755D9418BB084600E7AC88 /* c005.mp3 in Resources */,
 				ED755D7F18BB084600E7AC88 /* c011.mp3 in Resources */,
+				EDDD564718BEEDB300D7AD6F /* speaker@2x.png in Resources */,
 				ED755D7D18BB084600E7AC88 /* c009.mp3 in Resources */,
 				ED755D9E18BB084600E7AC88 /* c015.mp3 in Resources */,
 				ED755D7A18BB084600E7AC88 /* c006.mp3 in Resources */,
@@ -512,6 +533,7 @@
 				ED755DA018BB084600E7AC88 /* c017.mp3 in Resources */,
 				ED755DA318BB084600E7AC88 /* c020.mp3 in Resources */,
 				ED755D9618BB084600E7AC88 /* c007.mp3 in Resources */,
+				EDDD564818BEEDB300D7AD6F /* speaker-muted@2x.png in Resources */,
 				ED755DAD18BB084600E7AC88 /* swell3.mp3 in Resources */,
 				ED755DA218BB084600E7AC88 /* c019.mp3 in Resources */,
 				ED755DA718BB084600E7AC88 /* c024.mp3 in Resources */,

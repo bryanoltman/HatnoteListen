@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "SRWebSocket.h"
 
-@interface HATViewController : UIViewController <SRWebSocketDelegate>
+@interface HATViewController : UIViewController <AVAudioPlayerDelegate, SRWebSocketDelegate>
+
+@property (weak, nonatomic) IBOutlet UIButton *muteButton;
+
+- (IBAction)muteButtonClicked:(id)sender;
 
 @end
