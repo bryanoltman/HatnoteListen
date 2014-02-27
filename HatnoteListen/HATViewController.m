@@ -22,7 +22,7 @@
 
 @implementation HATViewController
 
-+ (NSDictionary *)languageMap
++ (NSDictionary *)languageUrlMap
 {
     static NSDictionary *langs = nil;
     if (!langs) {
@@ -66,6 +66,49 @@
     return langs;
 }
 
++ (NSDictionary *)languageNameMap
+{
+    NSDictionary *langs = nil;
+    if (!langs) {
+        langs = @{
+                  @"en": @"English",
+                  @"de": @"German",
+                  @"ru": @"Russian",
+                  @"uk": @"Ukrainian",
+                  @"ja": @"Japanese",
+                  @"es": @"Spanish",
+                  @"fr": @"French",
+                  @"nl": @"Dutch",
+                  @"it": @"Italian",
+                  @"sv": @"Swedish",
+                  @"ar": @"Arabic",
+                  @"fa": @"Farsi",
+                  @"he": @"Hebrew",
+                  @"id": @"Indonesian",
+                  @"zh": @"Chinese",
+                  @"as": @"Assamese",
+                  @"hi": @"Hindi",
+                  @"bn": @"Bengali",
+                  @"pa": @"Punjabi",
+                  @"te": @"Telugu",
+                  @"ta": @"Tamil",
+                  @"ml": @"Malayalam",
+                  @"mr": @"Western Mari",
+                  @"kn": @"Kannada",
+                  @"or": @"Oriya",
+                  @"sa": @"Sanskrit", 
+                  @"gu": @"Gujarati",
+                  @"pl": @"Polish" ,
+                  @"mk": @"Macedonian",
+                  @"be": @"Belarusian",
+                  @"bg": @"Bulgarian",
+                  @"sr": @"Serbian"
+                  };
+    }
+    
+    return langs;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -100,6 +143,11 @@
                                                   object:nil];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -118,7 +166,7 @@
     }
     
     NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
-    NSDictionary *langMap = [HATViewController languageMap];
+    NSDictionary *langMap = [HATViewController languageUrlMap];
     NSString *wsString = [langMap objectForKey:language] ?: @"en";
     
     self.socket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:wsString]];
@@ -197,7 +245,7 @@
     [self.view insertSubview:dotView atIndex:0];
     dotView.transform = CGAffineTransformMakeScale(0.1, 0.1);
     
-    [UIView animateWithDuration:0.8 + (fmodf(arc4random(), 100) / 100)
+    [UIView animateWithDuration:0.8 + (fmodf(arc4random(), 100) / 100) // 0.8 + 0 to 1 seconds
                           delay:0
          usingSpringWithDamping:0.4
           initialSpringVelocity:0.7
@@ -207,19 +255,23 @@
                      } completion:^(BOOL finished) {
                          [UIView animateKeyframesWithDuration:6
                                                         delay:0
-                                                      options:UIViewKeyframeAnimationOptionCalculationModeCubic | UIViewKeyframeAnimationOptionAllowUserInteraction
+                                                      options:UIViewKeyframeAnimationOptionAllowUserInteraction 
                                                    animations:^{
-                                                       [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1 animations:^{
-                                                           dotView.transform = CGAffineTransformTranslate(dotView.transform, 0, -1.0f * fmodf(arc4random(), 100));
-                                                       }];
-                                                       
-                                                       [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
+//                                                       [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1 animations:^{
+//                                                           dotView.transform = CGAffineTransformTranslate(dotView.transform, 0, -1.0f * fmodf(arc4random(), 100));
+//                                                       }];
+//
+                                                       [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.4 animations:^{
                                                            dotView.transform = CGAffineTransformScale(dotView.transform, 0.7, 0.7);
                                                        }];
                                                        
-                                                       [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
-                                                           dotView.alpha = 0.3;
+                                                       [UIView addKeyframeWithRelativeStartTime:0.9 relativeDuration:0.1 animations:^{
+                                                           dotView.transform = CGAffineTransformScale(dotView.transform, 0.0, 0.0);
                                                        }];
+//                                                       
+//                                                       [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
+//                                                           dotView.alpha = 0.3;
+//                                                       }];
                                                    } completion:^(BOOL finished) {
                                                        [UIView animateWithDuration:0.2
                                                                         animations:^{

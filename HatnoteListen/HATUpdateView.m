@@ -14,13 +14,17 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self addTarget:self action:@selector(didTouchButton) forControlEvents:UIControlEventTouchUpInside];
+        [self addTarget:self
+                 action:@selector(didTouchButton)
+       forControlEvents:UIControlEventTouchUpInside];
         
-        self.textLabel = [[UILabel alloc] initWithFrame:(CGRect){CGPointZero, frame.size}];
-        self.textLabel.font = [UIFont systemFontOfSize:8];
-        self.textLabel.textAlignment = NSTextAlignmentCenter;
-        [self.textLabel setMinimumScaleFactor:0.1];
-        [self addSubview:self.textLabel];
+        if ([self showsText]) {
+            self.textLabel = [[UILabel alloc] initWithFrame:(CGRect){CGPointZero, frame.size}];
+            self.textLabel.font = [UIFont systemFontOfSize:8];
+            self.textLabel.textAlignment = NSTextAlignmentCenter;
+            [self.textLabel setMinimumScaleFactor:0.1];
+            [self addSubview:self.textLabel];
+        }
     }
     
     return self;
@@ -41,6 +45,11 @@
 {
     [super setHighlighted:highlighted];
     [self setNeedsDisplay];
+}
+
+- (BOOL)showsText
+{
+    return CGRectGetWidth(self.frame) > 40;
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event

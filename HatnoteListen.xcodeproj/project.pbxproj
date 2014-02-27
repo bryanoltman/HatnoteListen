@@ -82,6 +82,7 @@
 		ED755DAC18BB084600E7AC88 /* swell2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7318BB084600E7AC88 /* swell2.mp3 */; };
 		ED755DAD18BB084600E7AC88 /* swell3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7418BB084600E7AC88 /* swell3.mp3 */; };
 		ED946AA718BC239700B4EEAF /* HATUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED946AA618BC239700B4EEAF /* HATUpdateView.m */; };
+		EDDD564118BEDE8400D7AD6F /* NSObject+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +179,8 @@
 		ED755D7418BB084600E7AC88 /* swell3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swell3.mp3; sourceTree = "<group>"; };
 		ED946AA518BC239700B4EEAF /* HATUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATUpdateView.h; sourceTree = "<group>"; };
 		ED946AA618BC239700B4EEAF /* HATUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATUpdateView.m; sourceTree = "<group>"; };
+		EDDD563F18BEDE8400D7AD6F /* NSObject+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Util.h"; sourceTree = "<group>"; };
+		EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Util.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,7 +245,8 @@
 		ED5B867618BACA6500932430 /* HatnoteListen */ = {
 			isa = PBXGroup;
 			children = (
-				ED946AAE18BC509900B4EEAF /* iPad */,
+				EDDD563F18BEDE8400D7AD6F /* NSObject+Util.h */,
+				EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */,
 				ED5B867F18BACA6500932430 /* HATAppDelegate.h */,
 				ED5B868018BACA6500932430 /* HATAppDelegate.m */,
 				ED755D3418BB065500E7AC88 /* HATWikipediaViewController.h */,
@@ -377,13 +381,6 @@
 			);
 			name = swells;
 			path = sounds/swells;
-			sourceTree = "<group>";
-		};
-		ED946AAE18BC509900B4EEAF /* iPad */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = iPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -577,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED5B868118BACA6500932430 /* HATAppDelegate.m in Sources */,
+				EDDD564118BEDE8400D7AD6F /* NSObject+Util.m in Sources */,
 				ED5B867D18BACA6500932430 /* main.m in Sources */,
 				ED946AA718BC239700B4EEAF /* HATUpdateView.m in Sources */,
 				ED755D3618BB065500E7AC88 /* HATWikipediaViewController.m in Sources */,
