@@ -20,7 +20,7 @@
         
         if ([self showsText]) {
             CGRect textFrame = (CGRect){CGPointZero, frame.size};
-            textFrame = CGRectInset(textFrame, 3, 0);
+            textFrame = CGRectInset(textFrame, 5, 0);
             self.textLabel = [[UILabel alloc] initWithFrame:textFrame];
 
             CGFloat fontSize = frame.size.width / 10;
