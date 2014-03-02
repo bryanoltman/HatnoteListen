@@ -21,7 +21,7 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Jeg-GR-42u">
-                                <rect key="frame" x="251" y="499" width="77" height="69"/>
+                                <rect key="frame" x="258" y="512" width="68" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <state key="normal" image="speaker.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -81,9 +81,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="speaker-down.png" width="45" height="34"/>
-        <image name="speaker-muted.png" width="45" height="34"/>
-        <image name="speaker.png" width="45" height="34"/>
+        <image name="speaker-down.png" width="38" height="34"/>
+        <image name="speaker-muted.png" width="38" height="34"/>
+        <image name="speaker.png" width="38" height="34"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
