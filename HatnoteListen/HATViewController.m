@@ -159,7 +159,10 @@
     self.wikiVC = [self.childViewControllers objectAtIndex:0];
     [self hideWikiView:NO];
     
-    self.view.backgroundColor = [UIColor darkGrayColor];
+    self.view.backgroundColor = [UIColor colorWithRed:28.0/255.0
+                                                green:39.0/255.0
+                                                 blue:51/255.0
+                                                alpha:1];
     [self initSocket];
 }
 
@@ -364,10 +367,16 @@
         NSNumber *isBot = [json objectForKey:@"is_bot"];
         UIColor *dotColor;
         if ([isAnon boolValue]) {
-            dotColor = [UIColor greenColor];
+            dotColor = [UIColor colorWithRed:46.0/255.0
+                                       green:204.0/255.0
+                                        blue:113.0/255.0
+                                       alpha:1];
         }
         else if ([isBot boolValue]) {
-            dotColor = [UIColor purpleColor];
+            dotColor = [UIColor colorWithRed:155.0/255.0
+                                       green:89.0/255.0
+                                        blue:182.0/255.0
+                                       alpha:1];
         }
         else {
             dotColor = [UIColor whiteColor];
