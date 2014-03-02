@@ -337,15 +337,19 @@
 {
     NSDictionary *json = [message objectFromJSONString];
     
+    if (![[json[@"ns"] lowercaseString] isEqualToString:@"main"]) {
+        return;
+    }
+    
     NSString *soundPath;
-    if ([[json objectForKey:@"page_title"] isEqualToString:@"Special:Log/newusers"]) {
+    if ([json[@"page_title"] isEqualToString:@"Special:Log/newusers"]) {
         soundPath = [NSString stringWithFormat:@"swell%d", (rand() % kNumSwells) + 1];
 //        NSLog(@"%@", [json objectForKey:@"user"]);
         
         // TODO visual
     }
     else {
-        NSNumber *changeSize = [json objectForKey:@"change_size"];
+        NSNumber *changeSize = json[@"change_size"];
         if ([changeSize isKindOfClass:[NSNull class]]) {
             return;
         }
@@ -363,8 +367,8 @@
 //        green is anon
 //        purple is bot
 //        white is registered
-        NSNumber *isAnon = [json objectForKey:@"is_anon"];
-        NSNumber *isBot = [json objectForKey:@"is_bot"];
+        NSNumber *isAnon = json[@"is_anon"];
+        NSNumber *isBot = json[@"is_bot"];
         UIColor *dotColor;
         if ([isAnon boolValue]) {
             dotColor = [UIColor colorWithRed:46.0/255.0
