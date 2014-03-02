@@ -19,10 +19,17 @@
        forControlEvents:UIControlEventTouchUpInside];
         
         if ([self showsText]) {
-            self.textLabel = [[UILabel alloc] initWithFrame:(CGRect){CGPointZero, frame.size}];
-            self.textLabel.font = [UIFont systemFontOfSize:8];
+            CGRect textFrame = (CGRect){CGPointZero, frame.size};
+            textFrame = CGRectInset(textFrame, 3, 0);
+            self.textLabel = [[UILabel alloc] initWithFrame:textFrame];
+
+            CGFloat fontSize = frame.size.width / 10;
+            self.textLabel.font = [UIFont systemFontOfSize:fontSize];
+            
             self.textLabel.textAlignment = NSTextAlignmentCenter;
+            self.textLabel.adjustsFontSizeToFitWidth = YES;
             [self.textLabel setMinimumScaleFactor:0.1];
+            
             [self addSubview:self.textLabel];
         }
     }
