@@ -253,7 +253,6 @@
 		ED5B867618BACA6500932430 /* HatnoteListen */ = {
 			isa = PBXGroup;
 			children = (
-				EDDD564418BEED9F00D7AD6F /* Images */,
 				EDDD563F18BEDE8400D7AD6F /* NSObject+Util.h */,
 				EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */,
 				ED5B867F18BACA6500932430 /* HATAppDelegate.h */,
@@ -266,6 +265,7 @@
 				ED5B868618BACA6500932430 /* HATViewController.m */,
 				ED5B868818BACA6500932430 /* Images.xcassets */,
 				ED5B868218BACA6500932430 /* Main.storyboard */,
+				EDDD564418BEED9F00D7AD6F /* Images */,
 				ED755C4C18BB04BB00E7AC88 /* Sounds */,
 				ED5B867718BACA6500932430 /* Supporting Files */,
 			);
