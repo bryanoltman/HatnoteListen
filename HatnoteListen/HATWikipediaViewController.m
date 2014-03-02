@@ -17,7 +17,7 @@
 - (void)setInfo:(NSDictionary *)info
 {
     _info = info;
-    self.textLabel.text = [info objectForKey:@"page_title"];
+    self.textLabel.text = info[@"page_title"];
 }
 
 - (void)viewDidLoad
@@ -31,7 +31,7 @@
 
 - (IBAction)viewTapped:(id)sender
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self.info objectForKey:@"url"]]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.info[@"url"]]];
 }
 
 @end
