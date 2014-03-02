@@ -25,6 +25,7 @@
     [super viewDidLoad];
     UINavigationBar *bar = [[UINavigationBar alloc] initWithFrame:self.view.bounds];
     bar.barStyle = UIBarStyleBlack;
+    bar.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     [self.view insertSubview:bar atIndex:0];
 }
 
