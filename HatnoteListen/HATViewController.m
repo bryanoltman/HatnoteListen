@@ -166,10 +166,24 @@
     return UIStatusBarStyleLightContent;
 }
 
+- (void)setMuted:(BOOL)muted
+{
+    _muted = muted;
+    for (AVAudioPlayer *player in self.avPlayers) {
+        player.volume = muted ? 0 : 1;
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setBool:muted forKey:@"muted"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
  
+    self.muted = [[NSUserDefaults standardUserDefaults] boolForKey:@"muted"];
+    self.muteButton.selected = self.muted;
+    
     self.wikiVC = self.childViewControllers[0];
     [self hideNewUserView:NO];
     [self hideWikiView:NO];
@@ -378,9 +392,7 @@
 - (void)muteButtonClicked:(UIButton *)sender
 {
     [sender setSelected:!sender.selected];
-    for (AVAudioPlayer *player in self.avPlayers) {
-        player.volume = self.muteButton.selected ? 0 : 1;
-    }
+    self.muted = self.muteButton.selected;
 }
 
 #pragma mark - SRWebSocketDelegate

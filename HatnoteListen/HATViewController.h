@@ -11,6 +11,8 @@
 
 @interface HATViewController : UIViewController <AVAudioPlayerDelegate, SRWebSocketDelegate>
 
+@property (nonatomic) BOOL muted;
+
 @property (weak, nonatomic) IBOutlet UIButton *muteButton;
 @property (weak, nonatomic) IBOutlet UIView *userView;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
