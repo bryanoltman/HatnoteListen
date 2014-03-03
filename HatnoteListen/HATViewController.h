@@ -18,5 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
 
 - (IBAction)muteButtonClicked:(id)sender;
+- (IBAction)newUserViewTapped:(id)sender;
 
 @end

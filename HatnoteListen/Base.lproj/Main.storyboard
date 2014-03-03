@@ -45,6 +45,9 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.16078431372549018" green="0.50196078431372548" blue="0.72549019607843135" alpha="0.75" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="tKe-nP-sKr" appends="YES" id="9zq-gp-2x5"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.10980392156862745" green="0.15294117647058825" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -57,6 +60,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="tKe-nP-sKr">
+                    <connections>
+                        <action selector="newUserViewTapped:" destination="vXZ-lx-hvc" id="aV6-HX-PF9"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
         </scene>
         <!--Wikipedia View Controller-->

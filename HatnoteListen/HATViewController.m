@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSMutableArray *avPlayers;
 @property (strong, nonatomic) NSTimer *wikiHideTimer;
 @property (strong, nonatomic) NSTimer *userHideTimer;
+@property (strong, nonatomic) NSString *newestUserName;
 @end
 
 @implementation HATViewController
@@ -229,6 +230,13 @@
     [self showWikiView:YES];
 }
 
+- (void)newUserViewTapped:(UITapGestureRecognizer *)recognizer
+{
+    NSString *urlString = [NSString stringWithFormat:@"http://en.wikipedia.org/w/index.php?title=User_talk:%@&action=edit&section=new",
+                           self.newestUserName];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+}
+
 - (void)showNewUserView:(BOOL)animated
 {
     self.userView.alpha = 1;
@@ -385,7 +393,8 @@
     if ([json[@"page_title"] isEqualToString:@"Special:Log/newusers"]) {
         soundPath = [NSString stringWithFormat:@"swell%d", (rand() % kNumSwells) + 1];
         NSString *message = [[HATViewController newUserMessages] randomObject];
-        self.userLabel.text = [NSString stringWithFormat:message, json[@"user"]];
+        self.newestUserName = json[@"user"];
+        self.userLabel.text = [NSString stringWithFormat:message, self.newestUserName];
         [self showNewUserView:YES];
     }
     else if (![[json[@"ns"] lowercaseString] isEqualToString:@"main"]) {
