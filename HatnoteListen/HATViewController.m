@@ -306,8 +306,9 @@
 
 - (CGPoint)getRandomPoint
 {
-    return CGPointMake(fmod(arc4random(), CGRectGetWidth(self.view.bounds)),
-                       fmod(arc4random(), CGRectGetHeight(self.view.bounds)));
+    CGPoint ret = CGPointMake(fmod(arc4random(), CGRectGetWidth(self.view.bounds) - 30),
+                              fmod(arc4random(), CGRectGetHeight(self.view.bounds) - 30));
+    return ret;
 }
 
 - (void)showViewCenteredAt:(CGPoint)point
@@ -317,11 +318,13 @@
 {
     CGFloat magMultiple = 0.5;
     CGFloat radius = MAX(0, MIN(magMultiple * magnitude, CGRectGetHeight(self.view.bounds)));
-    
+
     HATUpdateView *dotView = [[HATUpdateView alloc] initWithFrame:CGRectMake(point.x - radius / 2,
                                                                              point.y - radius / 2,
                                                                              radius,
                                                                              radius)];
+//    NSLog(@"showing dot view with frame %@", NSStringFromCGRect(dotView.frame));
+
     dotView.color = color;
     dotView.magnitude = magnitude;
     dotView.info = info;
@@ -432,9 +435,10 @@
             dotColor = [UIColor whiteColor];
         }
         
+        CGFloat dotMin = arc4random() % 100 + 35;
         [self showViewCenteredAt:[self getRandomPoint]
                        withColor:dotColor
-                       magnitude:changeSize.integerValue
+                       magnitude:MAX(labs(changeSize.integerValue), dotMin)
                          andInfo:json];
     }
     
