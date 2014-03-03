@@ -13,8 +13,8 @@
 @property (strong, nonatomic) UIColor *color;
 @property (nonatomic) NSInteger magnitude;
 @property (strong, nonatomic) NSString *title;
-@property (nonatomic) BOOL selected;
 @property (strong, nonatomic) NSDictionary *info;
 @property (strong, nonatomic) UILabel *textLabel;
+@property (nonatomic) BOOL invert;
 
 @end

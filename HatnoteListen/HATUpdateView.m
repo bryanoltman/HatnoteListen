@@ -87,6 +87,12 @@
         bgColor = self.color;
     }
     
+    if (self.invert) {
+        UIColor *swap = bgColor;
+        bgColor = highlightColor;
+        highlightColor = swap;
+    }
+    
     self.textLabel.textColor = highlightColor;
     
     CGContextRef context = UIGraphicsGetCurrentContext();

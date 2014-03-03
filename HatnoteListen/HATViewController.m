@@ -340,6 +340,7 @@
     dotView.color = color;
     dotView.magnitude = magnitude;
     dotView.info = info;
+    dotView.invert = [info[@"change_size"] integerValue] < 0;
     dotView.alpha = 0.6;
     [self.view insertSubview:dotView atIndex:0];
     dotView.transform = CGAffineTransformMakeScale(0.1, 0.1);
