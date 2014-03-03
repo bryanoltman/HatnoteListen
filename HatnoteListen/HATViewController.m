@@ -13,13 +13,15 @@
 #define kNumClav 27
 #define kNumCelesta 27
 #define kNumSwells 3
+#define kNewUserTargetColor 0x2980b9
 
 @interface HATViewController ()
 @property (strong, nonatomic) SRWebSocket *socket;
 @property (strong, nonatomic) HATWikipediaViewController *wikiVC;
 @property (strong, nonatomic) NSMutableArray *avPlayers;
 @property (strong, nonatomic) NSMutableArray *dotViews;
-@property (strong, nonatomic) NSTimer *hideTimer;
+@property (strong, nonatomic) NSTimer *wikiHideTimer;
+@property (strong, nonatomic) NSTimer *userHideTimer;
 @end
 
 @implementation HATViewController
@@ -111,6 +113,18 @@
     return langs;
 }
 
++ (NSArray *)newUserMessages
+{
+    static NSArray *ret = nil;
+    if (!ret) {
+        ret = @[@"Welcome to %@, Wikipedia's newest user!",
+                @"Wikipedia has a new user, %@! Welcome!",
+                @"%@ has joined Wikipedia!"];
+    }
+    
+    return ret;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -156,13 +170,10 @@
 {
     [super viewDidLoad];
  
-    self.wikiVC = [self.childViewControllers objectAtIndex:0];
+    self.wikiVC = self.childViewControllers[0];
+    [self hideNewUserView:NO];
     [self hideWikiView:NO];
     
-    self.view.backgroundColor = [UIColor colorWithRed:28.0/255.0
-                                                green:39.0/255.0
-                                                 blue:51/255.0
-                                                alpha:1];
     [self initSocket];
 }
 
@@ -206,6 +217,36 @@
     [self showWikiView:YES];
 }
 
+- (void)showNewUserView:(BOOL)animated
+{
+    self.userView.alpha = 1;
+    [UIView animateWithDuration:animated ? 0.3 : 0
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.userView.transform = CGAffineTransformIdentity;
+                     } completion:nil];
+    
+    [self.userHideTimer invalidate];
+    self.userHideTimer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                          target:self
+                                                        selector:@selector(removeTimerTicked:)
+                                                        userInfo:nil
+                                                         repeats:NO];
+}
+
+- (void)hideNewUserView:(BOOL)animated
+{
+    [UIView animateWithDuration:animated ? 0.3 : 0
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.userView.alpha = 0;
+                     } completion:^(BOOL finished) {
+                         self.userView.transform = CGAffineTransformMakeTranslation(0, -CGRectGetHeight(self.userView.bounds));
+                     }];
+}
+
 - (void)showWikiView:(BOOL)animated
 {
     [UIView animateWithDuration:animated ? 0.3 : 0
@@ -216,8 +257,8 @@
                          self.muteButton.transform = CGAffineTransformMakeTranslation(0, -CGRectGetHeight(self.wikiVC.view.frame));
                      } completion:nil];
     
-    [self.hideTimer invalidate];
-    self.hideTimer = [NSTimer scheduledTimerWithTimeInterval:5
+    [self.wikiHideTimer invalidate];
+    self.wikiHideTimer = [NSTimer scheduledTimerWithTimeInterval:5
                                                       target:self
                                                     selector:@selector(removeTimerTicked:)
                                                     userInfo:nil
@@ -226,7 +267,12 @@
 
 - (void)removeTimerTicked:(NSTimer *)timer
 {
-    [self hideWikiView:YES];
+    if (timer == self.userHideTimer) {
+        [self hideNewUserView:YES];
+    }
+    else if (timer == self.wikiHideTimer) {
+        [self hideWikiView:YES];
+    }
 }
 
 - (void)hideWikiView:(BOOL)animated
@@ -315,6 +361,8 @@
                                                        [UIView animateWithDuration:0.2
                                                                         animations:^{
                                                                             dotView.alpha = 0;
+                                                                            dotView.transform = CGAffineTransformScale(dotView.transform,
+                                                                                                                       0.1, 0.1);
                                                                         } completion:^(BOOL finished) {
                                                                             [dotView removeFromSuperview];
                                                                             [self.dotViews removeObject:dotView];
@@ -336,17 +384,15 @@
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message
 {
     NSDictionary *json = [message objectFromJSONString];
-    
-    if (![[json[@"ns"] lowercaseString] isEqualToString:@"main"]) {
-        return;
-    }
-    
     NSString *soundPath;
     if ([json[@"page_title"] isEqualToString:@"Special:Log/newusers"]) {
         soundPath = [NSString stringWithFormat:@"swell%d", (rand() % kNumSwells) + 1];
-//        NSLog(@"%@", [json objectForKey:@"user"]);
-        
-        // TODO visual
+        NSString *message = [[HATViewController newUserMessages] randomObject];
+        self.userLabel.text = [NSString stringWithFormat:message, json[@"user"]];
+        [self showNewUserView:YES];
+    }
+    else if (![[json[@"ns"] lowercaseString] isEqualToString:@"main"]) {
+        return;
     }
     else {
         NSNumber *changeSize = json[@"change_size"];

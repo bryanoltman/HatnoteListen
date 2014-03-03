@@ -86,6 +86,8 @@
 		EDDD564718BEEDB300D7AD6F /* speaker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDDD564518BEEDB300D7AD6F /* speaker@2x.png */; };
 		EDDD564818BEEDB300D7AD6F /* speaker-muted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDDD564618BEEDB300D7AD6F /* speaker-muted@2x.png */; };
 		EDDD564C18BEF33100D7AD6F /* speaker-down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDDD564A18BEF33100D7AD6F /* speaker-down@2x.png */; };
+		EDEFBEA318C3F8F6002AE9C6 /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBEA218C3F8F6002AE9C6 /* UIColor+Util.m */; };
+		EDEFBEA718C3FE1E002AE9C6 /* NSArray+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBEA618C3FE1E002AE9C6 /* NSArray+Util.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -188,6 +190,10 @@
 		EDDD564518BEEDB300D7AD6F /* speaker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speaker@2x.png"; sourceTree = "<group>"; };
 		EDDD564618BEEDB300D7AD6F /* speaker-muted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speaker-muted@2x.png"; sourceTree = "<group>"; };
 		EDDD564A18BEF33100D7AD6F /* speaker-down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speaker-down@2x.png"; sourceTree = "<group>"; };
+		EDEFBEA118C3F8F6002AE9C6 /* UIColor+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Util.h"; sourceTree = "<group>"; };
+		EDEFBEA218C3F8F6002AE9C6 /* UIColor+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Util.m"; sourceTree = "<group>"; };
+		EDEFBEA518C3FE1E002AE9C6 /* NSArray+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Util.h"; sourceTree = "<group>"; };
+		EDEFBEA618C3FE1E002AE9C6 /* NSArray+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Util.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,8 +259,7 @@
 		ED5B867618BACA6500932430 /* HatnoteListen */ = {
 			isa = PBXGroup;
 			children = (
-				EDDD563F18BEDE8400D7AD6F /* NSObject+Util.h */,
-				EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */,
+				EDEFBEA418C3F8FF002AE9C6 /* Categories */,
 				ED5B867F18BACA6500932430 /* HATAppDelegate.h */,
 				ED5B868018BACA6500932430 /* HATAppDelegate.m */,
 				ED755D3418BB065500E7AC88 /* HATWikipediaViewController.h */,
@@ -400,6 +405,19 @@
 				EDDD564518BEEDB300D7AD6F /* speaker@2x.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		EDEFBEA418C3F8FF002AE9C6 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				EDDD563F18BEDE8400D7AD6F /* NSObject+Util.h */,
+				EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */,
+				EDEFBEA118C3F8F6002AE9C6 /* UIColor+Util.h */,
+				EDEFBEA218C3F8F6002AE9C6 /* UIColor+Util.m */,
+				EDEFBEA518C3FE1E002AE9C6 /* NSArray+Util.h */,
+				EDEFBEA618C3FE1E002AE9C6 /* NSArray+Util.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -597,7 +615,9 @@
 			files = (
 				ED5B868118BACA6500932430 /* HATAppDelegate.m in Sources */,
 				EDDD564118BEDE8400D7AD6F /* NSObject+Util.m in Sources */,
+				EDEFBEA718C3FE1E002AE9C6 /* NSArray+Util.m in Sources */,
 				ED5B867D18BACA6500932430 /* main.m in Sources */,
+				EDEFBEA318C3F8F6002AE9C6 /* UIColor+Util.m in Sources */,
 				ED946AA718BC239700B4EEAF /* HATUpdateView.m in Sources */,
 				ED755D3618BB065500E7AC88 /* HATWikipediaViewController.m in Sources */,
 				ED5B868718BACA6500932430 /* HATViewController.m in Sources */,
@@ -728,6 +748,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
 				INFOPLIST_FILE = "HatnoteListen/HatnoteListen-Info.plist";
@@ -744,6 +765,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
 				INFOPLIST_FILE = "HatnoteListen/HatnoteListen-Info.plist";
