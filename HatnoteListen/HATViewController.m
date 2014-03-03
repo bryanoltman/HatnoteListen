@@ -367,19 +367,19 @@
     [self.view insertSubview:dotView atIndex:0];
     dotView.transform = CGAffineTransformMakeScale(0.1, 0.1);
     
-    [UIView animateWithDuration:0.8 + (fmodf(arc4random(), 100) / 100) // 0.8 + 0 to 1 seconds
+    [UIView animateWithDuration:0.4 + (fmodf(arc4random(), 100) / 400) // 0.8 + 0 to 1 seconds
                           delay:0
-         usingSpringWithDamping:0.4
+         usingSpringWithDamping:0.5
           initialSpringVelocity:0.7
                         options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction
                      animations:^{
                          dotView.transform = CGAffineTransformMakeScale(1, 1);
                      } completion:^(BOOL finished) {
-                         [UIView animateWithDuration:6
+                         [UIView animateWithDuration:8
                                                delay:0
                                              options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionCurveEaseIn
                                           animations:^{
-                                              dotView.transform = CGAffineTransformTranslate(dotView.transform, 0, -1.0f * fmodf(arc4random(), 100));
+                                              dotView.transform = CGAffineTransformTranslate(dotView.transform, 0, -1.0f * fmodf(arc4random(), 150));
                                           } completion:^(BOOL finished) {
                                               [UIView animateWithDuration:0.2
                                                                animations:^{
