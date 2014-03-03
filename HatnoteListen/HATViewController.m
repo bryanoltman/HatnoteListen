@@ -13,7 +13,6 @@
 #define kNumClav 27
 #define kNumCelesta 27
 #define kNumSwells 3
-#define kNewUserTargetColor 0x2980b9
 
 @interface HATViewController ()
 @property (strong, nonatomic) SRWebSocket *socket;
@@ -176,12 +175,28 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (NSString *)currentLanguageCode
+{
+    return [[NSLocale preferredLanguages] objectAtIndex:0] ?: @"en";
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
  
     self.muted = [[NSUserDefaults standardUserDefaults] boolForKey:@"muted"];
     self.muteButton.selected = self.muted;
+    
+    UINavigationBar *bar = [[UINavigationBar alloc] initWithFrame:self.userView.frame];
+    bar.autoresizingMask = self.userView.autoresizingMask;
+    bar.barTintColor = [UIColor colorWithRed:0.f/255.f
+                                       green:133.f/255.f
+                                        blue:230.f/200.f
+                                       alpha:0.75];
+    [self.userView removeFromSuperview];
+    self.userView = bar;
+    [self.userView addSubview:self.userLabel];
+    [self.view addSubview:self.userView];
     
     self.wikiVC = self.childViewControllers[0];
     [self hideNewUserView:NO];
@@ -202,10 +217,9 @@
     if (self.socket) {
         return;
     }
-    
-    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0] ?: @"en";
+
     NSDictionary *langMap = [HATViewController languageUrlMap];
-    NSString *wsString = [langMap objectForKey:language];
+    NSString *wsString = [langMap objectForKey:[self currentLanguageCode]];
     
     self.socket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:wsString]];
     self.socket.delegate = self;
@@ -232,8 +246,8 @@
 
 - (void)newUserViewTapped:(UITapGestureRecognizer *)recognizer
 {
-    NSString *urlString = [NSString stringWithFormat:@"http://en.wikipedia.org/w/index.php?title=User_talk:%@&action=edit&section=new",
-                           self.newestUserName];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@.wikipedia.org/w/index.php?title=User_talk:%@&action=edit&section=new",
+                           self.currentLanguageCode, self.newestUserName];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
