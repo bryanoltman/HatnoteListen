@@ -307,7 +307,7 @@
     
     NSError *error;
     AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    player.volume = self.muteButton.selected ? 0 : 1;
+    player.volume = self.muted ? 0 : 1;
     player.delegate = self;
     [self.avPlayers addObject:player];
     [player play];
