@@ -19,7 +19,6 @@
 @property (strong, nonatomic) SRWebSocket *socket;
 @property (strong, nonatomic) HATWikipediaViewController *wikiVC;
 @property (strong, nonatomic) NSMutableArray *avPlayers;
-@property (strong, nonatomic) NSMutableArray *dotViews;
 @property (strong, nonatomic) NSTimer *wikiHideTimer;
 @property (strong, nonatomic) NSTimer *userHideTimer;
 @end
@@ -130,7 +129,6 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.avPlayers = [NSMutableArray array];
-        self.dotViews = [NSMutableArray array];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(bubbleClicked:)
                                                      name:@"bubbleClicked"
@@ -344,7 +342,6 @@
     dotView.info = info;
     dotView.alpha = 0.6;
     [self.view insertSubview:dotView atIndex:0];
-    [self.dotViews addObject:dotView];
     dotView.transform = CGAffineTransformMakeScale(0.1, 0.1);
     
     [UIView animateWithDuration:0.8 + (fmodf(arc4random(), 100) / 100) // 0.8 + 0 to 1 seconds
@@ -359,34 +356,18 @@
                                                delay:0
                                              options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionCurveEaseIn
                                           animations:^{
-//                                                       [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1 animations:^{
-                                                           dotView.transform = CGAffineTransformTranslate(dotView.transform, 0, -1.0f * fmodf(arc4random(), 100));
-//                                                       }];
-//
-//                                                       [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.4 animations:^{
-//                                                           dotView.transform = CGAffineTransformScale(dotView.transform, 0.7, 0.7);
-//                                                       }];
-//                                                       
-//                                                       [UIView addKeyframeWithRelativeStartTime:0.9 relativeDuration:0.1 animations:^{
-//                                                           dotView.transform = CGAffineTransformScale(dotView.transform, 0.0, 0.0);
-//                                                       }];
-//
-//                                                       [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
-//                                                           dotView.alpha = 0.3;
-//                                                       }];
-                                                   } completion:^(BOOL finished) {
-                                                       [UIView animateWithDuration:0.2
-                                                                        animations:^{
-                                                                            dotView.alpha = 0;
-                                                                            dotView.transform = CGAffineTransformScale(dotView.transform,
-                                                                                                                       0.1, 0.1);
-                                                                        } completion:^(BOOL finished) {
-                                                                            [dotView removeFromSuperview];
-                                                                            [self.dotViews removeObject:dotView];
-                                                                        }];
-                                                   }];
+                                              dotView.transform = CGAffineTransformTranslate(dotView.transform, 0, -1.0f * fmodf(arc4random(), 100));
+                                          } completion:^(BOOL finished) {
+                                              [UIView animateWithDuration:0.2
+                                                               animations:^{
+                                                                   dotView.alpha = 0;
+                                                                   dotView.transform = CGAffineTransformScale(dotView.transform,
+                                                                                                              0.1, 0.1);
+                                                               } completion:^(BOOL finished) {
+                                                                   [dotView removeFromSuperview];
+                                                               }];
+                                          }];
                      }];
-
 }
 
 - (void)muteButtonClicked:(UIButton *)sender
