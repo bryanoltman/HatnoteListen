@@ -202,9 +202,9 @@
         return;
     }
     
-    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0] ?: @"en";
     NSDictionary *langMap = [HATViewController languageUrlMap];
-    NSString *wsString = [langMap objectForKey:language] ?: @"en";
+    NSString *wsString = [langMap objectForKey:language];
     
     self.socket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:wsString]];
     self.socket.delegate = self;
