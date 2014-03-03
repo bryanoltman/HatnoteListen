@@ -400,10 +400,10 @@
 //        and the celesta is the string sound, that's for subtractions
         BOOL isAddition = [changeSize intValue] > 0;
         if (isAddition) {
-            soundPath = [NSString stringWithFormat:@"c%03d", (rand() % kNumClav) + 1];
+            soundPath = [NSString stringWithFormat:@"clav%03d", (rand() % kNumClav) + 1];
         }
         else {
-            soundPath = [NSString stringWithFormat:@"c%03d", (rand() % kNumCelesta) + 1];
+            soundPath = [NSString stringWithFormat:@"cel%03d", (rand() % kNumCelesta) + 1];
         }
         
 //        green is anon
