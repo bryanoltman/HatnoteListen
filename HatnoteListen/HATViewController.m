@@ -367,10 +367,10 @@
     [self.view insertSubview:dotView atIndex:0];
     dotView.transform = CGAffineTransformMakeScale(0.1, 0.1);
     
-    [UIView animateWithDuration:0.4 + (fmodf(arc4random(), 100) / 400) // 0.8 + 0 to 1 seconds
+    [UIView animateWithDuration:0.6 + (fmodf(arc4random(), 50) / 100) // 0.6 + 0 to 0.5 seconds
                           delay:0
-         usingSpringWithDamping:0.5
-          initialSpringVelocity:0.7
+         usingSpringWithDamping:0.6
+          initialSpringVelocity:0.75
                         options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction
                      animations:^{
                          dotView.transform = CGAffineTransformMakeScale(1, 1);
