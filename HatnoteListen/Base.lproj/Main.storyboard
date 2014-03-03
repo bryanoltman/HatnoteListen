@@ -20,14 +20,13 @@
                                     <segue destination="zh1-Em-DBZ" kind="embed" id="iAb-K4-HzQ"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Jeg-GR-42u">
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Jeg-GR-42u">
                                 <rect key="frame" x="258" y="512" width="68" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <state key="normal" image="speaker.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" image="speaker-muted.png"/>
-                                <state key="highlighted" image="speaker-down.png"/>
                                 <connections>
                                     <action selector="muteButtonClicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="D7K-Sb-1g5"/>
                                 </connections>
@@ -98,7 +97,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="speaker-down.png" width="38" height="34"/>
         <image name="speaker-muted.png" width="38" height="34"/>
         <image name="speaker.png" width="38" height="34"/>
     </resources>
