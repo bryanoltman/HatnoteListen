@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSTimer *wikiHideTimer;
 @property (strong, nonatomic) NSTimer *userHideTimer;
 @property (strong, nonatomic) NSString *newestUserName;
+@property (strong, nonatomic) NSDate *startTime;
 @end
 
 @implementation HATViewController
@@ -128,6 +129,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        self.startTime = [NSDate date];
         self.avPlayers = [NSMutableArray array];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(bubbleClicked:)
@@ -405,6 +407,11 @@
     NSDictionary *json = [message objectFromJSONString];
     NSString *soundPath;
     if ([json[@"page_title"] isEqualToString:@"Special:Log/newusers"]) {
+        // Don't show new user notifications during the first 20 seconds
+        if ([[NSDate date] timeIntervalSinceDate:self.startTime] < 20) {
+            return;
+        }
+        
         soundPath = [NSString stringWithFormat:@"swell%d", (rand() % kNumSwells) + 1];
         NSString *message = [[HATViewController newUserMessages] randomObject];
         self.newestUserName = json[@"user"];
