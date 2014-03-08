@@ -381,6 +381,8 @@
                                                delay:0
                                              options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionCurveEaseIn
                                           animations:^{
+                                              dotView.showTime = [NSDate date];
+                                              dotView.duration = 8;
                                               dotView.transform = CGAffineTransformTranslate(dotView.transform, 0, -1.0f * fmodf(arc4random(), 150));
                                           } completion:^(BOOL finished) {
                                               [UIView animateWithDuration:0.2

@@ -8,15 +8,19 @@
 
 #import "HATUpdateView.h"
 
+@interface HATUpdateView ()
+@property (nonatomic) CGRect initialFrame;
+@end
+
 @implementation HATUpdateView
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self addTarget:self
-                 action:@selector(didTouchButton)
-       forControlEvents:UIControlEventTouchUpInside];
+        self.userInteractionEnabled = NO;
+        self.initialFrame = frame;
+        self.backgroundColor = [UIColor clearColor];
         
         if ([self showsText]) {
             CGRect textFrame = (CGRect){CGPointZero, frame.size};
@@ -37,11 +41,6 @@
     return self;
 }
 
-- (void)didTouchButton
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"bubbleClicked" object:self.info];
-}
-
 - (void)setInfo:(NSDictionary *)info
 {
     _info = info;
@@ -50,8 +49,24 @@
 
 - (void)setHighlighted:(BOOL)highlighted
 {
-    [super setHighlighted:highlighted];
+    _highlighted = highlighted;
     [self setNeedsDisplay];
+}
+
+- (CGRect)currentFrame
+{
+//    NSLog(@"---------------");
+    NSTimeInterval elapsed = -[self.showTime timeIntervalSinceNow];
+//    NSLog(@"elapsed is %f", elapsed);
+    CGFloat perc = elapsed / self.duration;
+//    NSLog(@"perc is %f", perc);
+    CGRect ret = self.initialFrame;
+//    NSLog(@"current frame was %@", NSStringFromCGRect(ret));
+    ret.origin.x += (self.frame.origin.x - self.initialFrame.origin.x) * perc;
+    ret.origin.y += (self.frame.origin.y - self.initialFrame.origin.y) * perc;
+    // our width/height don't change, but those would be computed the same way
+//    NSLog(@"current frame is %@", NSStringFromCGRect(ret));
+    return ret;
 }
 
 - (BOOL)showsText
