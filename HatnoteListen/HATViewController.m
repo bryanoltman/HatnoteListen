@@ -416,6 +416,10 @@
 - (void)playSoundWithPath:(NSString *)path
 {
     NSString *soundPath = [[NSBundle mainBundle] pathForResource:path ofType:@"mp3"];
+    if (!soundPath) {
+        return;
+    }
+    
     NSURL *url = [NSURL fileURLWithPath:soundPath];
     
     NSError *error;
