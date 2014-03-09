@@ -15,7 +15,9 @@
     [[AVAudioSession sharedInstance]
      setCategory:AVAudioSessionCategoryPlayback
      error:nil];
-        
+    
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+
     return YES;
 }
 
