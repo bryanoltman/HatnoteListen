@@ -10,16 +10,14 @@
 
 @interface HATUpdateView : UIView
 
-@property (nonatomic) BOOL highlighted;
 @property (strong, nonatomic) UIColor *color;
-@property (nonatomic) NSInteger magnitude;
-@property (strong, nonatomic) NSString *title;
+@property (nonatomic) BOOL highlighted;
 @property (strong, nonatomic) NSDictionary *info;
 @property (strong, nonatomic) UILabel *textLabel;
-@property (nonatomic) BOOL invert;
 @property (nonatomic) CGFloat duration;
 @property (strong, nonatomic) NSDate *showTime;
 
+- (instancetype)initWithFrame:(CGRect)frame andInfo:(NSDictionary *)info;
 - (CGRect)currentFrame;
 
 @end

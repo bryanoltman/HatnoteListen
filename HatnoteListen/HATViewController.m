@@ -214,6 +214,8 @@
 
 - (void)didReceiveMemoryWarning
 {
+    [self.avPlayers removeAllObjects];
+    
     for (UIView *subview in self.view.subviews) {
         if (![subview isKindOfClass:[HATUpdateView class]]) {
             break;
@@ -372,9 +374,8 @@
 }
 
 - (void)showViewCenteredAt:(CGPoint)point
-                 withColor:(UIColor *)color
-                 magnitude:(NSInteger)magnitude
-                  andInfo:(NSDictionary *)info
+             withMagnitude:(NSInteger)magnitude
+                    andInfo:(NSDictionary *)info
 {
     CGFloat magMultiple = 0.5;
     CGFloat radius = MAX(0, MIN(magMultiple * magnitude, CGRectGetHeight(self.view.bounds)));
@@ -382,14 +383,10 @@
     HATUpdateView *dotView = [[HATUpdateView alloc] initWithFrame:CGRectMake(point.x - radius / 2,
                                                                              point.y - radius / 2,
                                                                              radius,
-                                                                             radius)];
+                                                                             radius)
+                                                          andInfo:info];
 //    NSLog(@"showing dot view with frame %@", NSStringFromCGRect(dotView.frame));
-
-    dotView.color = color;
-    dotView.magnitude = magnitude;
-    dotView.info = info;
-    dotView.invert = [info[@"change_size"] integerValue] < 0;
-    dotView.alpha = 0.6;
+    
     [self.view insertSubview:dotView atIndex:0];
     dotView.transform = CGAffineTransformMakeScale(0.1, 0.1);
 //    [self.viewsCache setObject:dotView forKey:dotView.info[@"page_title"]];
@@ -429,18 +426,18 @@
 }
 
 #pragma mark - NSCacheDelegate
-//- (void)cache:(NSCache *)cache willEvictObject:(id)obj
-//{
-//    HATUpdateView *dotView = obj;
-//    [UIView animateWithDuration:0.4
-//                     animations:^{
-//                         dotView.alpha = 0;
-//                         dotView.transform = CGAffineTransformScale(dotView.transform,
-//                                                                    0.1, 0.1);
-//                     } completion:^(BOOL finished) {
-//                         [dotView removeFromSuperview];
-//                     }];
-//}
+- (void)cache:(NSCache *)cache willEvictObject:(id)obj
+{
+    HATUpdateView *dotView = obj;
+    [UIView animateWithDuration:0.4
+                     animations:^{
+                         dotView.alpha = 0;
+                         dotView.transform = CGAffineTransformScale(dotView.transform,
+                                                                    0.1, 0.1);
+                     } completion:^(BOOL finished) {
+                         [dotView removeFromSuperview];
+                     }];
+}
 
 #pragma mark - SRWebSocketDelegate
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message
@@ -478,32 +475,9 @@
             soundPath = [NSString stringWithFormat:@"cel%03d", (rand() % kNumCelesta) + 1];
         }
         
-//        green is anon
-//        purple is bot
-//        white is registered
-        NSNumber *isAnon = json[@"is_anon"];
-        NSNumber *isBot = json[@"is_bot"];
-        UIColor *dotColor;
-        if ([isAnon boolValue]) {
-            dotColor = [UIColor colorWithRed:46.0/255.0
-                                       green:204.0/255.0
-                                        blue:113.0/255.0
-                                       alpha:1];
-        }
-        else if ([isBot boolValue]) {
-            dotColor = [UIColor colorWithRed:155.0/255.0
-                                       green:89.0/255.0
-                                        blue:182.0/255.0
-                                       alpha:1];
-        }
-        else {
-            dotColor = [UIColor whiteColor];
-        }
-        
         CGFloat dotMin = arc4random() % 100 + 35;
         [self showViewCenteredAt:[self getRandomPoint]
-                       withColor:dotColor
-                       magnitude:MAX(labs(changeSize.integerValue), dotMin)
+                       withMagnitude:MAX(labs(changeSize.integerValue), dotMin)
                          andInfo:json];
     }
     

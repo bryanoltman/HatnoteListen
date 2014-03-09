@@ -10,32 +10,20 @@
 
 @interface HATUpdateView ()
 @property (nonatomic) CGRect initialFrame;
+@property (nonatomic) BOOL invert;
 @end
 
 @implementation HATUpdateView
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame andInfo:(NSDictionary *)info
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.userInteractionEnabled = NO;
-        self.initialFrame = frame;
+        self.alpha = 0.6;
         self.backgroundColor = [UIColor clearColor];
-        
-        if ([self showsText]) {
-            CGRect textFrame = (CGRect){CGPointZero, frame.size};
-            textFrame = CGRectInset(textFrame, 5, 0);
-            self.textLabel = [[UILabel alloc] initWithFrame:textFrame];
-
-            CGFloat fontSize = frame.size.width / 10;
-            self.textLabel.font = [UIFont systemFontOfSize:fontSize];
-            
-            self.textLabel.textAlignment = NSTextAlignmentCenter;
-            self.textLabel.adjustsFontSizeToFitWidth = YES;
-            [self.textLabel setMinimumScaleFactor:0.1];
-            
-            [self addSubview:self.textLabel];
-        }
+        self.info = info;
+        self.initialFrame = frame;
+        self.userInteractionEnabled = NO;
     }
     
     return self;
@@ -44,7 +32,23 @@
 - (void)setInfo:(NSDictionary *)info
 {
     _info = info;
-    self.textLabel.text = [info objectForKey:@"page_title"];
+    
+    self.color = [self displayColor];
+    self.invert = [info[@"change_size"] integerValue] < 0;
+    
+    if ([self showsText]) {
+        CGRect textFrame = (CGRect){CGPointZero, self.frame.size};
+        textFrame = CGRectInset(textFrame, 5, 0);
+        self.textLabel = [[UILabel alloc] initWithFrame:textFrame];
+        
+        self.textLabel.font = [UIFont systemFontOfSize:17];
+        self.textLabel.textAlignment = NSTextAlignmentCenter;
+        self.textLabel.adjustsFontSizeToFitWidth = YES;
+        [self.textLabel setMinimumScaleFactor:0.4];
+        self.textLabel.text = [info objectForKey:@"page_title"];
+
+        [self addSubview:self.textLabel];
+    }
 }
 
 - (void)setHighlighted:(BOOL)highlighted
@@ -69,9 +73,43 @@
     return ret;
 }
 
+- (UIColor *)displayColor
+{
+    UIColor *dotColor;
+    NSNumber *isAnon = self.info[@"is_anon"];
+    NSNumber *isBot = self.info[@"is_bot"];
+    
+    // green is anon
+    // purple is bot
+    // white is registered
+    if ([isAnon boolValue]) {
+        dotColor = [UIColor colorWithRed:46.0/255.0
+                                   green:204.0/255.0
+                                    blue:113.0/255.0
+                                   alpha:1];
+    }
+    else if ([isBot boolValue]) {
+        dotColor = [UIColor colorWithRed:155.0/255.0
+                                   green:89.0/255.0
+                                    blue:182.0/255.0
+                                   alpha:1];
+    }
+    else {
+        dotColor = [UIColor whiteColor];
+    }
+    
+    return dotColor;
+}
+
 - (BOOL)showsText
 {
-    return CGRectGetWidth(self.frame) > 40;
+    if (!self.info) {
+        return YES;
+    }
+    
+    NSString *text = [self.info objectForKey:@"page_title"];
+    CGSize size = [text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.f*0.4f]}];
+    return size.width <= CGRectGetWidth(self.frame);
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
