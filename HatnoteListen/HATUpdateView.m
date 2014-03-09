@@ -120,5 +120,4 @@
     CGContextFillPath(context);
 }
 
-
 @end

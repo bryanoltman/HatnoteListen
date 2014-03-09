@@ -22,6 +22,7 @@
 @property (strong, nonatomic) NSTimer *userHideTimer;
 @property (strong, nonatomic) NSString *newestUserName;
 @property (strong, nonatomic) NSDate *startTime;
+@property (strong, nonatomic) NSCache *viewsCache;
 @end
 
 @implementation HATViewController
@@ -131,18 +132,22 @@
     if (self) {
         self.startTime = [NSDate date];
         self.avPlayers = [NSMutableArray array];
+//        self.viewsCache = [NSCache new];
+//        self.viewsCache.countLimit = 4;
+//        self.viewsCache.delegate = self;
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(bubbleClicked:)
                                                      name:@"bubbleClicked"
                                                    object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver: self
-                                                 selector: @selector(didBecomeActive)
-                                                     name: UIApplicationDidBecomeActiveNotification
-                                                   object: nil];
-        [[NSNotificationCenter defaultCenter] addObserver: self
-                                                 selector: @selector(didEnterBackground)
-                                                     name: UIApplicationDidEnterBackgroundNotification
-                                                   object: nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didBecomeActive)
+                                                     name:UIApplicationDidBecomeActiveNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didEnterBackground)
+                                                     name:UIApplicationDidEnterBackgroundNotification
+                                                   object:nil];
     }
     
     return self;
@@ -205,6 +210,25 @@
     [self hideWikiView:NO];
     
     [self initSocket];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    for (UIView *subview in self.view.subviews) {
+        if (![subview isKindOfClass:[HATUpdateView class]]) {
+            break;
+        }
+        
+        HATUpdateView *dotView = (HATUpdateView *)subview;
+        [UIView animateWithDuration:0.4
+                         animations:^{
+                             dotView.alpha = 0;
+                             dotView.transform = CGAffineTransformScale(dotView.transform,
+                                                                        0.1, 0.1);
+                         } completion:^(BOOL finished) {
+                             [dotView removeFromSuperview];
+                         }];
+    }
 }
 
 - (void)setMuteButton:(UIButton *)muteButton
@@ -368,6 +392,7 @@
     dotView.alpha = 0.6;
     [self.view insertSubview:dotView atIndex:0];
     dotView.transform = CGAffineTransformMakeScale(0.1, 0.1);
+//    [self.viewsCache setObject:dotView forKey:dotView.info[@"page_title"]];
     
     [UIView animateWithDuration:0.6 + (fmodf(arc4random(), 50) / 100) // 0.6 + 0 to 0.5 seconds
                           delay:0
@@ -402,6 +427,20 @@
     [sender setSelected:!sender.selected];
     self.muted = self.muteButton.selected;
 }
+
+#pragma mark - NSCacheDelegate
+//- (void)cache:(NSCache *)cache willEvictObject:(id)obj
+//{
+//    HATUpdateView *dotView = obj;
+//    [UIView animateWithDuration:0.4
+//                     animations:^{
+//                         dotView.alpha = 0;
+//                         dotView.transform = CGAffineTransformScale(dotView.transform,
+//                                                                    0.1, 0.1);
+//                     } completion:^(BOOL finished) {
+//                         [dotView removeFromSuperview];
+//                     }];
+//}
 
 #pragma mark - SRWebSocketDelegate
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message

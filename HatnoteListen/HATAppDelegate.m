@@ -15,7 +15,7 @@
     [[AVAudioSession sharedInstance]
      setCategory:AVAudioSessionCategoryPlayback
      error:nil];
-    
+        
     return YES;
 }
 
