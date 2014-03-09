@@ -281,7 +281,6 @@
     self.muted = self.muteButton.selected;
 }
 
-#pragma mark - Auxiliary Views
 - (void)newUserViewTapped:(UITapGestureRecognizer *)recognizer
 {
     NSString *urlString = [NSString stringWithFormat:@"http://%@.wikipedia.org/w/index.php?title=User_talk:%@&action=edit&section=new",
@@ -289,6 +288,7 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
+#pragma mark - Auxiliary Views
 - (void)showNewUserView:(BOOL)animated
 {
     self.userView.alpha = 1;
