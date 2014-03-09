@@ -29,6 +29,16 @@
     return self;
 }
 
+- (CGFloat)fontSize
+{
+    return MAX(10, self.frame.size.width / 15);
+}
+
+- (CGRect)textViewFrame
+{
+    return CGRectInset(self.bounds, 5, 0);
+}
+
 - (void)setInfo:(NSDictionary *)info
 {
     _info = info;
@@ -37,14 +47,9 @@
     self.invert = [info[@"change_size"] integerValue] < 0;
     
     if ([self showsText]) {
-        CGRect textFrame = (CGRect){CGPointZero, self.frame.size};
-        textFrame = CGRectInset(textFrame, 5, 0);
-        self.textLabel = [[UILabel alloc] initWithFrame:textFrame];
-        
-        self.textLabel.font = [UIFont systemFontOfSize:17];
+        self.textLabel = [[UILabel alloc] initWithFrame:[self textViewFrame]];
+        self.textLabel.font = [UIFont systemFontOfSize:[self fontSize]];
         self.textLabel.textAlignment = NSTextAlignmentCenter;
-        self.textLabel.adjustsFontSizeToFitWidth = YES;
-        [self.textLabel setMinimumScaleFactor:0.4];
         self.textLabel.text = [info objectForKey:@"page_title"];
 
         [self addSubview:self.textLabel];
@@ -108,8 +113,8 @@
     }
     
     NSString *text = [self.info objectForKey:@"page_title"];
-    CGSize size = [text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:17.f*0.4f]}];
-    return size.width <= CGRectGetWidth(self.frame);
+    CGSize size = [text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:[self fontSize]]}];
+    return size.width <= CGRectGetWidth([self textViewFrame]);
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
