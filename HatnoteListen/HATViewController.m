@@ -171,22 +171,6 @@
     return UIStatusBarStyleLightContent;
 }
 
-- (void)setMuted:(BOOL)muted
-{
-    _muted = muted;
-    for (AVAudioPlayer *player in self.avPlayers) {
-        player.volume = muted ? 0 : 1;
-    }
-    
-    [[NSUserDefaults standardUserDefaults] setBool:muted forKey:@"muted"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (NSString *)currentLanguageCode
-{
-    return [[NSLocale preferredLanguages] objectAtIndex:0] ?: @"en";
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -233,6 +217,22 @@
     }
 }
 
+- (NSString *)currentLanguageCode
+{
+    return [[NSLocale preferredLanguages] objectAtIndex:0] ?: @"en";
+}
+
+- (void)setMuted:(BOOL)muted
+{
+    _muted = muted;
+    for (AVAudioPlayer *player in self.avPlayers) {
+        player.volume = muted ? 0 : 1;
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setBool:muted forKey:@"muted"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)setMuteButton:(UIButton *)muteButton
 {
     _muteButton = muteButton;
@@ -240,6 +240,7 @@
     [muteButton setImage:image forState:(UIControlStateHighlighted | UIControlStateSelected)];
 }
 
+#pragma mark - Socket
 - (void)initSocket
 {
     if (self.socket) {
@@ -262,9 +263,11 @@
 
 - (void)didBecomeActive
 {
+    self.startTime = [NSDate date];
     [self initSocket];
 }
 
+#pragma mark - Events
 - (void)bubbleClicked:(NSNotification *)notification
 {
     NSDictionary *info = notification.object;
@@ -272,6 +275,13 @@
     [self showWikiView:YES];
 }
 
+- (void)muteButtonClicked:(UIButton *)sender
+{
+    [sender setSelected:!sender.selected];
+    self.muted = self.muteButton.selected;
+}
+
+#pragma mark - Auxiliary Views
 - (void)newUserViewTapped:(UITapGestureRecognizer *)recognizer
 {
     NSString *urlString = [NSString stringWithFormat:@"http://%@.wikipedia.org/w/index.php?title=User_talk:%@&action=edit&section=new",
@@ -348,24 +358,7 @@
                      } completion:nil];
 }
 
-- (void)playSoundWithPath:(NSString *)path
-{
-    NSString *soundPath = [[NSBundle mainBundle] pathForResource:path ofType:@"mp3"];
-    NSURL *url = [NSURL fileURLWithPath:soundPath];
-    
-    NSError *error;
-    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    player.volume = self.muted ? 0 : 1;
-    player.delegate = self;
-    [self.avPlayers addObject:player];
-    [player play];
-}
-
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
-{
-    [self.avPlayers removeObject:player];
-}
-
+#pragma mark - Dot Display
 - (CGPoint)getRandomPoint
 {
     CGPoint ret = CGPointMake(fmod(arc4random(), CGRectGetWidth(self.view.bounds) - 30),
@@ -419,10 +412,23 @@
                      }];
 }
 
-- (void)muteButtonClicked:(UIButton *)sender
+#pragma mark - Audio
+- (void)playSoundWithPath:(NSString *)path
 {
-    [sender setSelected:!sender.selected];
-    self.muted = self.muteButton.selected;
+    NSString *soundPath = [[NSBundle mainBundle] pathForResource:path ofType:@"mp3"];
+    NSURL *url = [NSURL fileURLWithPath:soundPath];
+    
+    NSError *error;
+    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    player.volume = self.muted ? 0 : 1;
+    player.delegate = self;
+    [self.avPlayers addObject:player];
+    [player play];
+}
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    [self.avPlayers removeObject:player];
 }
 
 #pragma mark - NSCacheDelegate
@@ -477,7 +483,7 @@
         
         CGFloat dotMin = arc4random() % 100 + 35;
         [self showViewCenteredAt:[self getRandomPoint]
-                       withMagnitude:MAX(labs(changeSize.integerValue), dotMin)
+                   withMagnitude:MAX(labs(changeSize.integerValue), dotMin)
                          andInfo:json];
     }
     
