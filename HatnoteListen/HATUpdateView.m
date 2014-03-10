@@ -8,6 +8,8 @@
 
 #import "HATUpdateView.h"
 
+#define kMinFontSize 10.0f
+
 @interface HATUpdateView ()
 @property (nonatomic) CGRect initialFrame;
 @property (nonatomic) BOOL invert;
@@ -31,7 +33,7 @@
 
 - (CGFloat)fontSize
 {
-    return MAX(10, self.frame.size.width / 15);
+    return MAX(kMinFontSize, self.frame.size.width / 15);
 }
 
 - (CGRect)textViewFrame
@@ -48,9 +50,13 @@
     
     if ([self showsText]) {
         self.textLabel = [[UILabel alloc] initWithFrame:[self textViewFrame]];
-        self.textLabel.font = [UIFont systemFontOfSize:[self fontSize]];
         self.textLabel.textAlignment = NSTextAlignmentCenter;
         self.textLabel.text = [info objectForKey:@"page_title"];
+
+        self.textLabel.font = [UIFont systemFontOfSize:[self fontSize]];
+        self.textLabel.adjustsFontSizeToFitWidth = YES;
+        self.textLabel.numberOfLines = 1;
+        self.textLabel.minimumScaleFactor = kMinFontSize / [self fontSize]; // scale down to the minimum font size
 
         [self addSubview:self.textLabel];
     }
@@ -113,7 +119,7 @@
     }
     
     NSString *text = [self.info objectForKey:@"page_title"];
-    CGSize size = [text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:[self fontSize]]}];
+    CGSize size = [text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:kMinFontSize]}];
     return size.width <= CGRectGetWidth([self textViewFrame]);
 }
 
