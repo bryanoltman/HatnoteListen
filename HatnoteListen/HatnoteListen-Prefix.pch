@@ -21,4 +21,5 @@
     #import "NSArray+Util.h"
     #import "UIColor+Util.h"
     #import "NSArray+FunctionalHelper.h"
+    #import "HATSettings.h"
 #endif
