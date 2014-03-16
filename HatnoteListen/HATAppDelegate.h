@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HATViewController.h"
+#import "HATSettingsViewController.h"
+#import "JSSlidingViewController.h"
 
-@interface HATAppDelegate : UIResponder <UIApplicationDelegate>
+@interface HATAppDelegate : UIResponder <JSSlidingViewControllerDelegate, UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) JSSlidingViewController *container;
+@property (strong, nonatomic) HATViewController *viewController;
+@property (strong, nonatomic) HATSettingsViewController *settingsViewController;
 
 @end

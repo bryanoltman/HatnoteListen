@@ -84,6 +84,9 @@
 		ED91831618C41648003D91A0 /* clav026.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED9182FB18C41648003D91A0 /* clav026.mp3 */; };
 		ED91831718C41648003D91A0 /* clav027.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED9182FC18C41648003D91A0 /* clav027.mp3 */; };
 		ED946AA718BC239700B4EEAF /* HATUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED946AA618BC239700B4EEAF /* HATUpdateView.m */; };
+		EDCBD03F18D51DA900EC2892 /* JSSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCBD03E18D51DA900EC2892 /* JSSlidingViewController.m */; };
+		EDCBD04118D51FF800EC2892 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCBD04018D51FF800EC2892 /* Settings.storyboard */; };
+		EDCBD04518D5206A00EC2892 /* HATLanguageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCBD04418D5206A00EC2892 /* HATLanguageTableViewCell.m */; };
 		EDCE382918CBC004006C3B6F /* HATContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE382818CBC004006C3B6F /* HATContainerView.m */; };
 		EDDD564118BEDE8400D7AD6F /* NSObject+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */; };
 		EDDD564318BEE7B700D7AD6F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDD564218BEE7B700D7AD6F /* AVFoundation.framework */; };
@@ -193,6 +196,11 @@
 		ED9182FC18C41648003D91A0 /* clav027.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clav027.mp3; sourceTree = "<group>"; };
 		ED946AA518BC239700B4EEAF /* HATUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATUpdateView.h; sourceTree = "<group>"; };
 		ED946AA618BC239700B4EEAF /* HATUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATUpdateView.m; sourceTree = "<group>"; };
+		EDCBD03D18D51DA900EC2892 /* JSSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSSlidingViewController.h; sourceTree = "<group>"; };
+		EDCBD03E18D51DA900EC2892 /* JSSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSSlidingViewController.m; sourceTree = "<group>"; };
+		EDCBD04018D51FF800EC2892 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		EDCBD04318D5206A00EC2892 /* HATLanguageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATLanguageTableViewCell.h; sourceTree = "<group>"; };
+		EDCBD04418D5206A00EC2892 /* HATLanguageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATLanguageTableViewCell.m; sourceTree = "<group>"; };
 		EDCE382718CBC004006C3B6F /* HATContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATContainerView.h; sourceTree = "<group>"; };
 		EDCE382818CBC004006C3B6F /* HATContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATContainerView.m; sourceTree = "<group>"; };
 		EDDD563F18BEDE8400D7AD6F /* NSObject+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Util.h"; sourceTree = "<group>"; };
@@ -269,11 +277,16 @@
 		ED5B867618BACA6500932430 /* HatnoteListen */ = {
 			isa = PBXGroup;
 			children = (
+				EDCBD04218D5201400EC2892 /* Settings */,
 				EDEFBEA418C3F8FF002AE9C6 /* Categories */,
+				EDCBD03D18D51DA900EC2892 /* JSSlidingViewController.h */,
+				EDCBD03E18D51DA900EC2892 /* JSSlidingViewController.m */,
 				ED5B867F18BACA6500932430 /* HATAppDelegate.h */,
 				ED5B868018BACA6500932430 /* HATAppDelegate.m */,
 				EDCE382718CBC004006C3B6F /* HATContainerView.h */,
 				EDCE382818CBC004006C3B6F /* HATContainerView.m */,
+				ED5A04A518CEB5CB0068D325 /* HATSettings.h */,
+				ED5A04A618CEB5CB0068D325 /* HATSettings.m */,
 				ED5A049F18CEA71C0068D325 /* HATSettingsViewController.h */,
 				ED5A04A018CEA71C0068D325 /* HATSettingsViewController.m */,
 				ED946AA518BC239700B4EEAF /* HATUpdateView.h */,
@@ -287,8 +300,6 @@
 				ED5B868218BACA6500932430 /* Main.storyboard */,
 				ED755C4C18BB04BB00E7AC88 /* Sounds */,
 				ED5B867718BACA6500932430 /* Supporting Files */,
-				ED5A04A518CEB5CB0068D325 /* HATSettings.h */,
-				ED5A04A618CEB5CB0068D325 /* HATSettings.m */,
 			);
 			path = HatnoteListen;
 			sourceTree = "<group>";
@@ -413,6 +424,16 @@
 			path = sounds/swells;
 			sourceTree = "<group>";
 		};
+		EDCBD04218D5201400EC2892 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				EDCBD04018D51FF800EC2892 /* Settings.storyboard */,
+				EDCBD04318D5206A00EC2892 /* HATLanguageTableViewCell.h */,
+				EDCBD04418D5206A00EC2892 /* HATLanguageTableViewCell.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		EDDD564418BEED9F00D7AD6F /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,7 +505,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = HAT;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Bryan Oltman";
 				TargetAttributes = {
 					ED5B868D18BACA6600932430 = {
@@ -522,6 +543,7 @@
 				ED9182D218C4163E003D91A0 /* cel012.mp3 in Resources */,
 				ED9182D018C4163E003D91A0 /* cel010.mp3 in Resources */,
 				ED9182DD18C4163E003D91A0 /* cel023.mp3 in Resources */,
+				EDCBD04118D51FF800EC2892 /* Settings.storyboard in Resources */,
 				ED9182DA18C4163E003D91A0 /* cel020.mp3 in Resources */,
 				ED91830318C41648003D91A0 /* clav007.mp3 in Resources */,
 				EDDD564718BEEDB300D7AD6F /* speaker@2x.png in Resources */,
@@ -637,6 +659,8 @@
 				ED5A04A118CEA71C0068D325 /* HATSettingsViewController.m in Sources */,
 				EDEFBEA318C3F8F6002AE9C6 /* UIColor+Util.m in Sources */,
 				ED946AA718BC239700B4EEAF /* HATUpdateView.m in Sources */,
+				EDCBD03F18D51DA900EC2892 /* JSSlidingViewController.m in Sources */,
+				EDCBD04518D5206A00EC2892 /* HATLanguageTableViewCell.m in Sources */,
 				ED755D3618BB065500E7AC88 /* HATWikipediaViewController.m in Sources */,
 				ED5B868718BACA6500932430 /* HATViewController.m in Sources */,
 				ED5A04A718CEB5CB0068D325 /* HATSettings.m in Sources */,
@@ -694,7 +718,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -733,7 +756,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -799,7 +821,6 @@
 		ED5B86A318BACA6600932430 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HatnoteListen.app/HatnoteListen";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -822,7 +843,6 @@
 		ED5B86A418BACA6600932430 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HatnoteListen.app/HatnoteListen";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

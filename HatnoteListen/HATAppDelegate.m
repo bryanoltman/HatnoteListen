@@ -17,7 +17,20 @@
      error:nil];
     
     [UIApplication sharedApplication].idleTimerDisabled = YES;
-
+    
+    self.viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+    
+    self.settingsViewController = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController];
+    
+    self.container = [[JSSlidingViewController alloc] initWithFrontViewController:self.viewController
+                                                               backViewController:self.settingsViewController];
+    self.container.delegate = self;
+    self.container.useParallaxMotionEffect = YES;
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = self.container;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

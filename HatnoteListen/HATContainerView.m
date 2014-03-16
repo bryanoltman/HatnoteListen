@@ -27,7 +27,6 @@
         HATUpdateView *view = (HATUpdateView *)subview;
         if (CGRectContainsPoint([view currentFrame], point)) {
             self.highlightedView = view;
-            break;
         }
     }
     
