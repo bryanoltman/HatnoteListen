@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HATWikipediaLanguage.h"
 
 @interface HATLanguageTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *languageNameLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *toggleSwitch;
+
+@property (strong, nonatomic) HATWikipediaLanguage *language;
+
++ (NSString *)reuseId;
+
+- (IBAction)toggleSwitchToggled;
 
 @end

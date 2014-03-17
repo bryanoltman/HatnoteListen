@@ -12,6 +12,7 @@
 #define SelectedLanguagesKey (@"SelectedLanguagesKey")
 
 @interface HATSettings ()
+@property (strong, nonatomic) NSMutableArray *selectedLanguagesMutable;
 @end
 
 @implementation HATSettings
@@ -103,34 +104,59 @@
     return langs;
 }
 
-+ (instancetype)instance
++ (instancetype)sharedSettings
 {
     static HATSettings *instance = nil;
     if (!instance) {
-        instance = [self new];
+        instance = [HATSettings new];
     }
     
     return instance;
 }
 
-+ (NSMutableDictionary *)settings
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.selectedLanguagesMutable = self.settings[SelectedLanguagesKey];
+        if (!self.selectedLanguages) {
+            HATWikipediaLanguage *englishLanguage = [[HATSettings availableLanguages] find:^BOOL(HATWikipediaLanguage *lang) {
+                return [lang.code isEqualToString:@"en"];
+            }];
+            
+            self.selectedLanguagesMutable = [@[englishLanguage] mutableCopy];
+        }
+    }
+    
+    return self;
+}
+
+- (NSMutableDictionary *)settings
 {
     static NSMutableDictionary *settings = nil;
     if (!settings) {
-        settings = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:SettingsKey] mutableCopy];
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SettingsKey];
+        settings = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    
+    if (!settings) {
+        settings = [NSMutableDictionary new];
     }
     
     return settings;
 }
 
-+ (void)save
+- (void)save
 {
-    [[NSUserDefaults standardUserDefaults] setObject:self.settings
+    [self.settings setObject:self.selectedLanguagesMutable forKey:SelectedLanguagesKey];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[self settings]];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:data
                                               forKey:SettingsKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (id)objectForSettingsKey:(NSString *)key
+- (id)objectForSettingsKey:(NSString *)key
 {
     JSONDecoder *decoder = [JSONDecoder new];
     NSString *json = self.settings[SelectedLanguagesKey];
@@ -141,19 +167,54 @@
     return [decoder objectWithData:[json dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
-+ (NSArray *)selectedLanguages
+- (NSArray *)selectedLanguages
 {
-    return [self objectForSettingsKey:SelectedLanguagesKey] ?: @[@"en"];
+    return self.selectedLanguagesMutable;
 }
 
-+ (NSArray *)selectedAddresses
+- (void)addSelectedLanguage:(HATWikipediaLanguage *)lang
 {
-    NSMutableArray *ret = [NSMutableArray new];
-    for (NSString *lang in [self selectedLanguages]) {
-        [ret addObject:[self languageUrlMap][lang]];
+    NSIndexSet *index = [NSIndexSet indexSetWithIndex:[self.selectedLanguagesMutable count]];
+    [self willChange:NSKeyValueChangeInsertion
+     valuesAtIndexes:index
+              forKey:@"selectedLanguages"];
+    [self.selectedLanguagesMutable addObject:lang];
+    [self didChange:NSKeyValueChangeInsertion
+    valuesAtIndexes:index
+             forKey:@"selectedLanguages"];
+    
+    [self save];
+}
+
+- (void)removeSelectedLanguage:(HATWikipediaLanguage *)lang
+{
+    NSIndexSet *index = [NSIndexSet indexSetWithIndex:[self.selectedLanguagesMutable indexOfObject:lang]];
+    [self willChange:NSKeyValueChangeRemoval
+     valuesAtIndexes:index
+              forKey:@"selectedLanguages"];
+    [self.selectedLanguagesMutable removeObject:lang];
+    [self didChange:NSKeyValueChangeRemoval 
+    valuesAtIndexes:index
+             forKey:@"selectedLanguages"];
+
+    [self save];
+}
+
++ (NSArray *)availableLanguages
+{
+    static NSMutableArray *ret = nil;
+    if (!ret) {
+        ret = [NSMutableArray new];
+        [[self languageNameMap] enumerateKeysAndObjectsUsingBlock:^(NSString *name, NSString *code, BOOL *stop) {
+            HATWikipediaLanguage *lang = [HATWikipediaLanguage new];
+            lang.name = name;
+            lang.code = code;
+            lang.websocketURL = [NSURL URLWithString:[self languageUrlMap][code]];
+            [ret addObject:lang];
+        }];
     }
     
-    return ret;
+    return [ret sortedArrayUsingSelector:@selector(compare:)];
 }
 
 @end

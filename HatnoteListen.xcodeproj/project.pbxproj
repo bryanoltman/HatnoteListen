@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A2D9BADBE7942998EA54F60 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 876574A93C6D4104A0E2E555 /* libPods.a */; };
+		ED536D4318D67B2400A5827C /* HATWikipediaLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = ED536D4218D67B2400A5827C /* HATWikipediaLanguage.m */; };
 		ED5A04A118CEA71C0068D325 /* HATSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5A04A018CEA71C0068D325 /* HATSettingsViewController.m */; };
 		ED5A04A418CEA87F0068D325 /* NSArray+FunctionalHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5A04A318CEA87F0068D325 /* NSArray+FunctionalHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		ED5A04A718CEB5CB0068D325 /* HATSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5A04A618CEB5CB0068D325 /* HATSettings.m */; };
@@ -109,6 +110,8 @@
 /* Begin PBXFileReference section */
 		11D2B121FC08490EB3A4A0A5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		876574A93C6D4104A0E2E555 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED536D4118D67B2400A5827C /* HATWikipediaLanguage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATWikipediaLanguage.h; sourceTree = "<group>"; };
+		ED536D4218D67B2400A5827C /* HATWikipediaLanguage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATWikipediaLanguage.m; sourceTree = "<group>"; };
 		ED5A049F18CEA71C0068D325 /* HATSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATSettingsViewController.h; sourceTree = "<group>"; };
 		ED5A04A018CEA71C0068D325 /* HATSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATSettingsViewController.m; sourceTree = "<group>"; };
 		ED5A04A218CEA87F0068D325 /* NSArray+FunctionalHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+FunctionalHelper.h"; path = "NSArray-FunctionalHelper/NSArray+FunctionalHelper.h"; sourceTree = SOURCE_ROOT; };
@@ -240,6 +243,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED536D4418D67B2C00A5827C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ED5A04A518CEB5CB0068D325 /* HATSettings.h */,
+				ED5A04A618CEB5CB0068D325 /* HATSettings.m */,
+				ED536D4118D67B2400A5827C /* HATWikipediaLanguage.h */,
+				ED536D4218D67B2400A5827C /* HATWikipediaLanguage.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		ED5B866418BACA6500932430 = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +291,7 @@
 		ED5B867618BACA6500932430 /* HatnoteListen */ = {
 			isa = PBXGroup;
 			children = (
+				ED536D4418D67B2C00A5827C /* Models */,
 				EDCBD04218D5201400EC2892 /* Settings */,
 				EDEFBEA418C3F8FF002AE9C6 /* Categories */,
 				EDCBD03D18D51DA900EC2892 /* JSSlidingViewController.h */,
@@ -285,10 +300,6 @@
 				ED5B868018BACA6500932430 /* HATAppDelegate.m */,
 				EDCE382718CBC004006C3B6F /* HATContainerView.h */,
 				EDCE382818CBC004006C3B6F /* HATContainerView.m */,
-				ED5A04A518CEB5CB0068D325 /* HATSettings.h */,
-				ED5A04A618CEB5CB0068D325 /* HATSettings.m */,
-				ED5A049F18CEA71C0068D325 /* HATSettingsViewController.h */,
-				ED5A04A018CEA71C0068D325 /* HATSettingsViewController.m */,
 				ED946AA518BC239700B4EEAF /* HATUpdateView.h */,
 				ED946AA618BC239700B4EEAF /* HATUpdateView.m */,
 				ED5B868518BACA6500932430 /* HATViewController.h */,
@@ -427,9 +438,11 @@
 		EDCBD04218D5201400EC2892 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				EDCBD04018D51FF800EC2892 /* Settings.storyboard */,
 				EDCBD04318D5206A00EC2892 /* HATLanguageTableViewCell.h */,
 				EDCBD04418D5206A00EC2892 /* HATLanguageTableViewCell.m */,
+				ED5A049F18CEA71C0068D325 /* HATSettingsViewController.h */,
+				ED5A04A018CEA71C0068D325 /* HATSettingsViewController.m */,
+				EDCBD04018D51FF800EC2892 /* Settings.storyboard */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -652,6 +665,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED5B868118BACA6500932430 /* HATAppDelegate.m in Sources */,
+				ED536D4318D67B2400A5827C /* HATWikipediaLanguage.m in Sources */,
 				EDDD564118BEDE8400D7AD6F /* NSObject+Util.m in Sources */,
 				EDEFBEA718C3FE1E002AE9C6 /* NSArray+Util.m in Sources */,
 				EDCE382918CBC004006C3B6F /* HATContainerView.m in Sources */,

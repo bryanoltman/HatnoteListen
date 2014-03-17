@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HATLanguageTableViewCell.h"
 
-@interface HATSettingsViewController : UIViewController
+@interface HATSettingsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end

@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-KVOController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SocketRocket.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0838B498254940A696E19540</key>
+		<key>111FDE08F68A47A691B7F505</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3DE78C1F2F524035850027BC</key>
+		<key>50987EB16B634DE8A77BE749</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F06D311F37704648994DF83E</key>
+		<key>85C94EDF28B44DE3A0440288</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A01DCC6108D84AF7B56B21CF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

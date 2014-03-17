@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SRWebSocket.h"
+#import "FBKVOController.h"
 
 @interface HATViewController : UIViewController <AVAudioPlayerDelegate, NSCacheDelegate, SRWebSocketDelegate>
 

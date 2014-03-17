@@ -16,6 +16,7 @@
 #define kNumSwells 3
 
 @interface HATViewController ()
+@property (strong, nonatomic) FBKVOController *KVOController;
 @property (strong, nonatomic) NSMutableDictionary *sockets;
 @property (strong, nonatomic) HATWikipediaViewController *wikiVC;
 @property (strong, nonatomic) HATSettingsViewController *settingsVC;
@@ -28,8 +29,6 @@
 @end
 
 @implementation HATViewController
-
-
 
 + (NSArray *)newUserMessages
 {
@@ -54,6 +53,24 @@
 //        self.viewsCache.countLimit = 4;
 //        self.viewsCache.delegate = self;
         
+        self.KVOController = [FBKVOController controllerWithObserver:self];
+
+        [self.KVOController observe:[HATSettings sharedSettings]
+                            keyPath:@"selectedLanguages"
+                            options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                              block:^(id observer, HATSettings *settings, NSDictionary *change) {
+                                  NSKeyValueChange kind = [change[NSKeyValueChangeKindKey] integerValue];
+                                  if (kind == NSKeyValueChangeInsertion) {
+                                      [change[NSKeyValueChangeNewKey] each:^(HATWikipediaLanguage *lang) {
+                                          [self openSocketForLanguage:lang];
+                                      }];
+                                  }
+                                  else if (kind == NSKeyValueChangeRemoval) {
+                                      [change[NSKeyValueChangeOldKey] each:^(HATWikipediaLanguage *lang) {
+                                          [self closeSocketForLanguage:lang];
+                                      }];
+                                  }
+                              }];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(bubbleClicked:)
                                                      name:@"bubbleClicked"
@@ -119,8 +136,6 @@
     
     [self hideNewUserView:NO];
     [self hideWikiView:NO];
-    
-    [self initSockets];
 }
 
 - (void)didReceiveMemoryWarning
@@ -168,20 +183,24 @@
 }
 
 #pragma mark - Socket
-- (void)initSockets
+- (void)openSocketForLanguage:(HATWikipediaLanguage *)language
 {
-    for (NSString *wsString in [HATSettings selectedAddresses]) {
-        SRWebSocket *socket = self.sockets[wsString];
-        if (socket && socket.readyState == SR_OPEN) {
-            // We already have an open socket
-            continue;
-        }
-        
-        socket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:wsString]];
-        socket.delegate = self;
-        [socket open];
-        [self.sockets setObject:socket forKey:wsString];
+    SRWebSocket *socket = self.sockets[language.code];
+    if (socket && (socket.readyState == SR_OPEN || socket.readyState == SR_CONNECTING)) {
+        return;
     }
+    
+    socket = [[SRWebSocket alloc] initWithURL:language.websocketURL];
+    socket.delegate = self;
+    [socket open];
+    [self.sockets setObject:socket forKey:language.code];
+}
+
+- (void)closeSocketForLanguage:(HATWikipediaLanguage *)language
+{
+    SRWebSocket *socket = self.sockets[language.code];
+    [socket close];
+    [self.sockets removeObjectForKey:language.code];
 }
 
 - (void)didEnterBackground
@@ -196,7 +215,6 @@
 - (void)didBecomeActive
 {
     self.startTime = [NSDate date];
-    [self initSockets];
 }
 
 #pragma mark - Events
@@ -347,6 +365,10 @@
 #pragma mark - Audio
 - (void)playSoundWithPath:(NSString *)path
 {
+    if (self.muted) {
+        return;
+    }
+    
     NSString *soundPath = [[NSBundle mainBundle] pathForResource:path ofType:@"mp3"];
     if (!soundPath) {
         return;

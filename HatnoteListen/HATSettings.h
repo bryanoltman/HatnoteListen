@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HATWikipediaLanguage.h"
 
 @interface HATSettings : NSObject
-+ (NSArray *)selectedAddresses;
-+ (NSArray *)selectedLanguages;
++ (instancetype)sharedSettings;
+
++ (NSArray *)availableLanguages;
+- (NSArray *)selectedLanguages;
+- (void)addSelectedLanguage:(HATWikipediaLanguage *)lang;
+- (void)removeSelectedLanguage:(HATWikipediaLanguage *)lang;
 @end
