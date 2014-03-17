@@ -10,7 +10,7 @@
 #import "SRWebSocket.h"
 #import "FBKVOController.h"
 
-@interface HATViewController : UIViewController <AVAudioPlayerDelegate, NSCacheDelegate, SRWebSocketDelegate>
+@interface HATViewController : UIViewController <AVAudioPlayerDelegate, SRWebSocketDelegate>
 
 @property (nonatomic) BOOL muted;
 

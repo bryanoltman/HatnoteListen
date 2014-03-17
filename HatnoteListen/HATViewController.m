@@ -25,7 +25,6 @@
 @property (strong, nonatomic) NSTimer *userHideTimer;
 @property (strong, nonatomic) NSString *newestUserName;
 @property (strong, nonatomic) NSDate *startTime;
-@property (strong, nonatomic) NSCache *viewsCache;
 @end
 
 @implementation HATViewController
@@ -49,10 +48,6 @@
         self.startTime = [NSDate date];
         self.avPlayers = [NSMutableArray new];
         self.sockets = [NSMutableDictionary new];
-//        self.viewsCache = [NSCache new];
-//        self.viewsCache.countLimit = 4;
-//        self.viewsCache.delegate = self;
-        
         self.KVOController = [FBKVOController controllerWithObserver:self];
 
         [self.KVOController observe:[HATSettings sharedSettings]
@@ -387,20 +382,6 @@
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {
     [self.avPlayers removeObject:player];
-}
-
-#pragma mark - NSCacheDelegate
-- (void)cache:(NSCache *)cache willEvictObject:(id)obj
-{
-    HATUpdateView *dotView = obj;
-    [UIView animateWithDuration:0.4
-                     animations:^{
-                         dotView.alpha = 0;
-                         dotView.transform = CGAffineTransformScale(dotView.transform,
-                                                                    0.1, 0.1);
-                     } completion:^(BOOL finished) {
-                         [dotView removeFromSuperview];
-                     }];
 }
 
 #pragma mark - SRWebSocketDelegate
