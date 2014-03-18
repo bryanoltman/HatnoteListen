@@ -21,4 +21,6 @@
 - (IBAction)muteButtonClicked:(id)sender;
 - (IBAction)newUserViewTapped:(id)sender;
 
+- (void)showAboutView;
+
 @end

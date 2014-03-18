@@ -7,6 +7,7 @@
 //
 
 #import "HATViewController.h"
+#import "HATAboutViewController.h"
 #import "HATUpdateView.h"
 #import "HATWikipediaViewController.h"
 #import "HATSettingsViewController.h"
@@ -55,12 +56,12 @@
                             options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                               block:^(id observer, HATSettings *settings, NSDictionary *change) {
                                   NSKeyValueChange kind = [change[NSKeyValueChangeKindKey] integerValue];
-                                  if (kind == NSKeyValueChangeInsertion) {
+                                  if (kind & (NSKeyValueChangeInsertion|NSKeyValueChangeSetting)) {
                                       [change[NSKeyValueChangeNewKey] each:^(HATWikipediaLanguage *lang) {
                                           [self openSocketForLanguage:lang];
                                       }];
                                   }
-                                  else if (kind == NSKeyValueChangeRemoval) {
+                                  else if (kind & NSKeyValueChangeRemoval) {
                                       [change[NSKeyValueChangeOldKey] each:^(HATWikipediaLanguage *lang) {
                                           [self closeSocketForLanguage:lang];
                                       }];
@@ -180,6 +181,7 @@
 #pragma mark - Socket
 - (void)openSocketForLanguage:(HATWikipediaLanguage *)language
 {
+    NSLog(@"opening socket for %@", language.name);
     SRWebSocket *socket = self.sockets[language.code];
     if (socket && (socket.readyState == SR_OPEN || socket.readyState == SR_CONNECTING)) {
         return;
@@ -301,6 +303,18 @@
                          self.wikiVC.view.transform = CGAffineTransformMakeTranslation(0, CGRectGetHeight(self.wikiVC.view.frame));
                          self.muteButton.transform = CGAffineTransformIdentity;
                      } completion:nil];
+}
+
+- (void)showAboutView
+{
+    [[appDelegate container] closeSlider:YES
+                              completion:^{
+                                  HATAboutViewController *aboutVC = [[UIStoryboard storyboardWithName:@"About"
+                                                                                               bundle:nil] instantiateInitialViewController];
+                                  [self addChildViewController:aboutVC];
+                                  [self.view addSubview:aboutVC.view];
+                                  [aboutVC show:nil];
+    }];
 }
 
 #pragma mark - Dot Display

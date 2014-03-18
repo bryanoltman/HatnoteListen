@@ -18,9 +18,21 @@
 #define COCOAPODS_VERSION_MINOR_KVOController 0
 #define COCOAPODS_VERSION_PATCH_KVOController 0
 
+// Reveal-iOS-SDK
+#define COCOAPODS_POD_AVAILABLE_Reveal_iOS_SDK
+#define COCOAPODS_VERSION_MAJOR_Reveal_iOS_SDK 1
+#define COCOAPODS_VERSION_MINOR_Reveal_iOS_SDK 0
+#define COCOAPODS_VERSION_PATCH_Reveal_iOS_SDK 3
+
 // SocketRocket
 #define COCOAPODS_POD_AVAILABLE_SocketRocket
 #define COCOAPODS_VERSION_MAJOR_SocketRocket 0
 #define COCOAPODS_VERSION_MINOR_SocketRocket 3
 #define COCOAPODS_VERSION_PATCH_SocketRocket 1
+
+// TTTAttributedLabel
+#define COCOAPODS_POD_AVAILABLE_TTTAttributedLabel
+#define COCOAPODS_VERSION_MAJOR_TTTAttributedLabel 1
+#define COCOAPODS_VERSION_MINOR_TTTAttributedLabel 9
+#define COCOAPODS_VERSION_PATCH_TTTAttributedLabel 1
 

@@ -19,7 +19,12 @@
     #import "JSONKit.h"
     #import "NSObject+Util.h"
     #import "NSArray+Util.h"
+    #import "NSString+Util.h"
     #import "UIColor+Util.h"
     #import "NSArray+FunctionalHelper.h"
     #import "HATSettings.h"
+
+    #import "HATAppDelegate.h"
 #endif
+
+#define appDelegate ((HATAppDelegate*)[[UIApplication sharedApplication] delegate])
