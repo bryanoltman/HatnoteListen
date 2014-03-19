@@ -65,7 +65,6 @@
             
             range = [attrText.string rangeOfString:@"Hatnote's Listen to Wikipedia"];
             [ret addLinkToURL:[NSURL URLWithString:@"http://listen.hatnote.com"] withRange:range];
-
         }
             break;
         case 1: {
@@ -90,6 +89,7 @@
 
 - (void)show:(void(^)(void))complated
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [UIView animateWithDuration:0.2
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut
@@ -113,6 +113,7 @@
 
 - (void)hide:(void(^)(void))complated
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [UIView animateWithDuration:0.2
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut

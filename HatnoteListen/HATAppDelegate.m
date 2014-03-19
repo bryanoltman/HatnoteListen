@@ -62,7 +62,8 @@
 
 - (void)slidingViewControllerWillOpen:(JSSlidingViewController *)viewController
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES
+                                            withAnimation:UIStatusBarAnimationFade];
 }
 
 - (void)slidingViewControllerDidOpen:(JSSlidingViewController *)viewController
@@ -72,7 +73,8 @@
 
 - (void)slidingViewControllerWillClose:(JSSlidingViewController *)viewController
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO
+                                            withAnimation:UIStatusBarAnimationFade];
 }
 
 @end
