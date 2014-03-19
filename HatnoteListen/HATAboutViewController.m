@@ -32,7 +32,7 @@
                                                                                    self.view.frame.size.width - 2*kTextPadding,
                                                                                    self.view.frame.size.height - 2*kTextPadding)];
     ret.delegate = self;
-    [ret setLinkAttributes:@{ NSForegroundColorAttributeName : [UIColor darkGrayColor] }];
+    [ret setLinkAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithWhite:0.5 alpha:1] }];
     ret.numberOfLines = 0;
     
     NSMutableParagraphStyle *headerParagraphStyle = [[NSMutableParagraphStyle alloc] init];
