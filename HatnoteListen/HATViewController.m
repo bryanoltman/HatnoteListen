@@ -211,6 +211,10 @@
 - (void)didBecomeActive
 {
     self.startTime = [NSDate date];
+    
+    [[[HATSettings sharedSettings] selectedLanguages] each:^(HATWikipediaLanguage *lang) {
+        [self openSocketForLanguage:lang];
+    }];
 }
 
 #pragma mark - Events
