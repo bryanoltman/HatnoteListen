@@ -7,7 +7,6 @@
 //
 
 #import "HATViewController.h"
-#import "HATAboutViewController.h"
 #import "HATUpdateView.h"
 #import "HATWikipediaViewController.h"
 #import "HATSettingsViewController.h"
@@ -309,11 +308,21 @@
 {
     [[appDelegate container] closeSlider:YES
                               completion:^{
-                                  HATAboutViewController *aboutVC = [[UIStoryboard storyboardWithName:@"About"
-                                                                                               bundle:nil] instantiateInitialViewController];
-                                  [self addChildViewController:aboutVC];
-                                  [self.view addSubview:aboutVC.view];
-                                  [aboutVC show:nil];
+                                  self.aboutVC = [[UIStoryboard storyboardWithName:@"About"
+                                                                            bundle:nil]
+                                                  instantiateInitialViewController];
+                                  [self addChildViewController:self.aboutVC];
+                                  [self.view addSubview:self.aboutVC.view];
+                                  [self.aboutVC show:nil];
+    }];
+}
+
+- (void)hideAboutView
+{
+    [self.aboutVC hide:^{
+        [self.aboutVC removeFromParentViewController];
+        [self.aboutVC.view removeFromSuperview];
+        self.aboutVC = nil;
     }];
 }
 

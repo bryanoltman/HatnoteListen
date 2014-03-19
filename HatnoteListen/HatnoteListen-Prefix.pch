@@ -15,6 +15,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <AVFoundation/AVFoundation.h>
+    #import <CAAnimation+EasingEquations.h>
     #import "SRWebSocket.h"
     #import "JSONKit.h"
     #import "NSObject+Util.h"

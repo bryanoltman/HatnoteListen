@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SRWebSocket.h"
 #import "FBKVOController.h"
+#import "HATAboutViewController.h"
 
 @interface HATViewController : UIViewController <AVAudioPlayerDelegate, SRWebSocketDelegate>
 
@@ -17,10 +18,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *muteButton;
 @property (weak, nonatomic) IBOutlet UIView *userView;
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
+@property (strong, nonatomic) HATAboutViewController *aboutVC;
 
 - (IBAction)muteButtonClicked:(id)sender;
 - (IBAction)newUserViewTapped:(id)sender;
 
 - (void)showAboutView;
+- (void)hideAboutView;
 
 @end

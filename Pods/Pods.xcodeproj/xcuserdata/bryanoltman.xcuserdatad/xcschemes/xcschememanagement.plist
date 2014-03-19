@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-CAAnimation-EasingEquations.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-JSONKit-NoWarning.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>6A1A946F25DD43AF9F73B976</key>
+		<key>3B48B26E28B24665A38F74FA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>81803AC9EA834E9CAEEA9C5E</key>
+		<key>89253E958F1C43F7B1D74B07</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>83822075FF9042C8B175B802</key>
+		<key>929C3203C97142C1ADA3A029</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B44D26899F6F4A468E970E50</key>
+		<key>9BC409833767472E8DBCBFB6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CDF1895F261F4B0DB99E2C0C</key>
+		<key>A9EB88142D6243D2A58807C0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F036BEDDF8474798967E488F</key>
+		<key>B6B0CA69547D4FAB88D76F75</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D802A61AD7184FFDB3857629</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -10,9 +10,7 @@
 		1A2D9BADBE7942998EA54F60 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 876574A93C6D4104A0E2E555 /* libPods.a */; };
 		ED075D1E18D7E0F900581187 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED075D1D18D7E0F900581187 /* About.storyboard */; };
 		ED075D2118D7E10100581187 /* HATAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED075D2018D7E10100581187 /* HATAboutViewController.m */; };
-		ED075D2318D7E4B400581187 /* about0.html in Resources */ = {isa = PBXBuildFile; fileRef = ED075D2218D7E4B400581187 /* about0.html */; };
 		ED075D2618D7EDAC00581187 /* NSString+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ED075D2518D7EDAC00581187 /* NSString+Util.m */; };
-		ED075D2818D7F82700581187 /* about1.html in Resources */ = {isa = PBXBuildFile; fileRef = ED075D2718D7F82700581187 /* about1.html */; };
 		ED536D4318D67B2400A5827C /* HATWikipediaLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = ED536D4218D67B2400A5827C /* HATWikipediaLanguage.m */; };
 		ED5A04A118CEA71C0068D325 /* HATSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5A04A018CEA71C0068D325 /* HATSettingsViewController.m */; };
 		ED5A04A418CEA87F0068D325 /* NSArray+FunctionalHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5A04A318CEA87F0068D325 /* NSArray+FunctionalHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -118,10 +116,8 @@
 		ED075D1D18D7E0F900581187 /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
 		ED075D1F18D7E10100581187 /* HATAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATAboutViewController.h; sourceTree = "<group>"; };
 		ED075D2018D7E10100581187 /* HATAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATAboutViewController.m; sourceTree = "<group>"; };
-		ED075D2218D7E4B400581187 /* about0.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about0.html; sourceTree = "<group>"; };
 		ED075D2418D7EDAC00581187 /* NSString+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Util.h"; sourceTree = "<group>"; };
 		ED075D2518D7EDAC00581187 /* NSString+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Util.m"; sourceTree = "<group>"; };
-		ED075D2718D7F82700581187 /* about1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about1.html; sourceTree = "<group>"; };
 		ED536D4118D67B2400A5827C /* HATWikipediaLanguage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATWikipediaLanguage.h; sourceTree = "<group>"; };
 		ED536D4218D67B2400A5827C /* HATWikipediaLanguage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATWikipediaLanguage.m; sourceTree = "<group>"; };
 		ED5A049F18CEA71C0068D325 /* HATSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATSettingsViewController.h; sourceTree = "<group>"; };
@@ -259,8 +255,6 @@
 			isa = PBXGroup;
 			children = (
 				ED075D1D18D7E0F900581187 /* About.storyboard */,
-				ED075D2218D7E4B400581187 /* about0.html */,
-				ED075D2718D7F82700581187 /* about1.html */,
 				ED075D1F18D7E10100581187 /* HATAboutViewController.h */,
 				ED075D2018D7E10100581187 /* HATAboutViewController.m */,
 			);
@@ -635,11 +629,9 @@
 				ED5B868418BACA6500932430 /* Main.storyboard in Resources */,
 				ED91830218C41648003D91A0 /* clav006.mp3 in Resources */,
 				ED9182CD18C4163E003D91A0 /* cel007.mp3 in Resources */,
-				ED075D2318D7E4B400581187 /* about0.html in Resources */,
 				ED9182CF18C4163E003D91A0 /* cel009.mp3 in Resources */,
 				ED91830818C41648003D91A0 /* clav012.mp3 in Resources */,
 				ED7BB69718CCD0B400ED30F2 /* swell1.mp3 in Resources */,
-				ED075D2818D7F82700581187 /* about1.html in Resources */,
 				ED9182CB18C4163E003D91A0 /* cel005.mp3 in Resources */,
 				ED9182D818C4163E003D91A0 /* cel018.mp3 in Resources */,
 				ED9182FE18C41648003D91A0 /* clav002.mp3 in Resources */,

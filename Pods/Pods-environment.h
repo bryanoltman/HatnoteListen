@@ -6,6 +6,12 @@
 // project.
 
 
+// CAAnimation-EasingEquations
+#define COCOAPODS_POD_AVAILABLE_CAAnimation_EasingEquations
+#define COCOAPODS_VERSION_MAJOR_CAAnimation_EasingEquations 1
+#define COCOAPODS_VERSION_MINOR_CAAnimation_EasingEquations 0
+#define COCOAPODS_VERSION_PATCH_CAAnimation_EasingEquations 2
+
 // JSONKit-NoWarning
 #define COCOAPODS_POD_AVAILABLE_JSONKit_NoWarning
 #define COCOAPODS_VERSION_MAJOR_JSONKit_NoWarning 1

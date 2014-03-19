@@ -60,4 +60,19 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)slidingViewControllerWillOpen:(JSSlidingViewController *)viewController
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+}
+
+- (void)slidingViewControllerDidOpen:(JSSlidingViewController *)viewController
+{
+    [[self viewController] hideAboutView];
+}
+
+- (void)slidingViewControllerWillClose:(JSSlidingViewController *)viewController
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
+
 @end

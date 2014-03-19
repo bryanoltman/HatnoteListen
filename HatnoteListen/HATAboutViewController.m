@@ -11,7 +11,7 @@
 #define kAboutViews 2
 #define kTextPadding 20
 
-@interface HATAboutViewController ()
+@interface HATAboutViewController () <TTTAttributedLabelDelegate>
 @end
 
 @implementation HATAboutViewController
@@ -27,51 +27,62 @@
 
 - (TTTAttributedLabel *)labelForIndex:(NSUInteger)index
 {
-    NSError* err = nil;
-    NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"about%@", @(index)]
-                                                     ofType:@"html"];
-    NSString *html = [NSString stringWithContentsOfFile:path
-                                               encoding:NSUTF8StringEncoding
-                                                  error:&err];
-    if (err) {
-        // do something
-        return nil;
-    }
-    
-    NSDictionary *textOptions = @{
-                                  NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType,
-                                  NSCharacterEncodingDocumentAttribute : @(NSUTF8StringEncoding)
-                                  };
-    NSAttributedString *attrText = [[NSAttributedString alloc] initWithData:[html dataUsingEncoding:NSUTF8StringEncoding]
-                                                                    options:textOptions
-                                                         documentAttributes:nil
-                                                                      error:&err];
-    if (err) {
-        // do something
-        return nil;
-    }
-    
+    NSMutableAttributedString *attrText = [NSMutableAttributedString new];
     TTTAttributedLabel *ret = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(kTextPadding, kTextPadding,
-                                                                                  self.view.frame.size.width - 2*kTextPadding,
+                                                                                   self.view.frame.size.width - 2*kTextPadding,
                                                                                    self.view.frame.size.height - 2*kTextPadding)];
-    ret.numberOfLines = 0;
-    ret.font = [UIFont systemFontOfSize:32];
-    
+    ret.delegate = self;
     [ret setLinkAttributes:@{ NSForegroundColorAttributeName : [UIColor darkGrayColor] }];
+    ret.numberOfLines = 0;
     
-    [ret setText:attrText afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
-        [mutableAttributedString addAttributes:@{kTTTBackgroundCornerRadiusAttributeName: @(5),
-                                                 (NSString *)kCTFontSizeAttribute : @(32)}
-                                         range:[mutableAttributedString range]];
-        return mutableAttributedString;
-    }];
+    NSMutableParagraphStyle *headerParagraphStyle = [[NSMutableParagraphStyle alloc] init];
+    headerParagraphStyle.paragraphSpacing = 15;
+
+    NSMutableParagraphStyle *bodyParagraphStyle = [[NSMutableParagraphStyle alloc] init];
+    bodyParagraphStyle.paragraphSpacing = 10;
     
-    if (index == 0) {
-        NSRange range = [attrText.string rangeOfString:@"Bryan Oltman"];
-        [ret addLinkToURL:[NSURL URLWithString:@"http://bryanoltman.com/"] withRange:range];
-        
-        range = [attrText.string rangeOfString:@"Hatnote's Listen to Wikipedia"];
-        [ret addLinkToURL:[NSURL URLWithString:@"http://listen.hatnote.com"] withRange:range];
+    UIFont *headerFont = [UIFont systemFontOfSize:30];
+    UIFont *bodyFont = [UIFont systemFontOfSize:18];
+    
+    NSDictionary *headerAttrs = @{NSFontAttributeName:headerFont,
+                                  NSParagraphStyleAttributeName:headerParagraphStyle};
+    NSDictionary *bodyAttrs = @{NSFontAttributeName:bodyFont,
+                                NSParagraphStyleAttributeName:bodyParagraphStyle};
+    switch (index) {
+        case 0: {
+            NSAttributedString *line = [[NSAttributedString alloc] initWithString:@"Listen to Wikipedia\n"
+                                                                       attributes:headerAttrs];
+            [attrText appendAttributedString:line];
+            
+            line = [[NSAttributedString alloc] initWithString:@"Developed by Bryan Oltman\nInspired by Hatnote's Listen to Wikipedia"
+                                                   attributes:bodyAttrs];
+            [attrText appendAttributedString:line];
+            
+            [ret setAttributedText:attrText];
+
+            NSRange range = [attrText.string rangeOfString:@"Bryan Oltman"];
+            [ret addLinkToURL:[NSURL URLWithString:@"http://bryanoltman.com/"] withRange:range];
+            
+            range = [attrText.string rangeOfString:@"Hatnote's Listen to Wikipedia"];
+            [ret addLinkToURL:[NSURL URLWithString:@"http://listen.hatnote.com"] withRange:range];
+
+        }
+            break;
+        case 1: {
+            NSAttributedString *line = [[NSAttributedString alloc] initWithString:@"Colors and Sounds\n"
+                                                                       attributes:headerAttrs];
+            [attrText appendAttributedString:line];
+            
+            line = [[NSAttributedString alloc] initWithString:@"Bells are additions, strings are subtractions. There’s something reassuring about knowing that every user makes a noise, every edit has a voice in the roar.\nGreen circles are anonymous edits\nPurple circles are bots\nWhite circles are brought to you by Registered Users Like You"
+                                                   attributes:bodyAttrs];
+            
+            [attrText appendAttributedString:line];
+            
+            [ret setAttributedText:attrText];
+        }
+            break;
+        default:
+            break;
     }
     
     return ret;
@@ -83,26 +94,20 @@
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         self.backgroundView.alpha = 0.6;
+                         self.backgroundView.alpha = 0.925;
                      } completion:^(BOOL finished) {
-//                         [self performBlock:^{
-//                             [UIView animateKeyframesWithDuration:0.4
-//                                                            delay:0
-//                                                          options:UIViewKeyframeAnimationOptionAllowUserInteraction|UIViewKeyframeAnimationOptionCalculationModeCubic
-//                                                       animations:^{
-//                                                           [UIView addKeyframeWithRelativeStartTime:0
-//                                                                                   relativeDuration:0.9
-//                                                                                         animations:^{
-//                                                                                             self.carousel.transform = CGAffineTransformMakeTranslation(0, -20);
-//                                                                                         }];
-//                                                           
-//                                                           [UIView addKeyframeWithRelativeStartTime:0.9
-//                                                                                   relativeDuration:0.1
-//                                                                                         animations:^{
-//                                                                                             self.carousel.transform = CGAffineTransformIdentity;
-//                                                                                         }];
-//                                                       } completion:nil];
-//                         } afterDelay:0.2];
+                         CGFloat duration = 0.3;
+                         [CAAnimation addAnimationToLayer:self.collectionView.layer
+                                                 duration:duration
+                                                transform:CATransform3DMakeTranslation(0, -30, 0)
+                                           easingFunction:CAAnimationEasingFunctionEaseOutCubic];
+                         
+                         [self performBlock:^{
+                             [CAAnimation addAnimationToLayer:self.collectionView.layer
+                                                     duration:0.7
+                                                    transform:CATransform3DIdentity
+                                               easingFunction:CAAnimationEasingFunctionEaseOutQuintic];
+                         } afterDelay:duration];
                      }];
 }
 
