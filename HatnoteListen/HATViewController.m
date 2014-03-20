@@ -74,6 +74,12 @@
                               block:^(id observer, id object, NSDictionary *change) {
                                   if ([change[NSKeyValueChangeNewKey] isEqual:@(JASidePanelLeftVisible)]) {
                                       [weakSelf hideAboutView];
+                                      [[UIApplication sharedApplication] setStatusBarHidden:YES
+                                                                              withAnimation:UIStatusBarAnimationFade];
+                                  }
+                                  else {
+                                      [[UIApplication sharedApplication] setStatusBarHidden:NO
+                                                                              withAnimation:UIStatusBarAnimationFade];
                                   }
          }];
         
