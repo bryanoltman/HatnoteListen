@@ -50,6 +50,7 @@
         self.sockets = [NSMutableDictionary new];
         self.KVOController = [FBKVOController controllerWithObserver:self];
 
+        __weak HATViewController *weakSelf = self;
         [self.KVOController observe:[HATSettings sharedSettings]
                             keyPath:@"selectedLanguages"
                             options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
@@ -57,15 +58,25 @@
                                   NSKeyValueChange kind = [change[NSKeyValueChangeKindKey] integerValue];
                                   if (kind & (NSKeyValueChangeInsertion|NSKeyValueChangeSetting)) {
                                       [change[NSKeyValueChangeNewKey] each:^(HATWikipediaLanguage *lang) {
-                                          [self openSocketForLanguage:lang];
+                                          [weakSelf openSocketForLanguage:lang];
                                       }];
                                   }
                                   else if (kind & NSKeyValueChangeRemoval) {
                                       [change[NSKeyValueChangeOldKey] each:^(HATWikipediaLanguage *lang) {
-                                          [self closeSocketForLanguage:lang];
+                                          [weakSelf closeSocketForLanguage:lang];
                                       }];
                                   }
                               }];
+        
+        HATSidePanelController *container = [appDelegate container];
+        [self.KVOController observe:container
+                            keyPath:@"state"
+                            options:(NSKeyValueObservingOptionNew|NSKeyValueChangeSetting)
+                              block:^(id observer, id object, NSDictionary *change) {
+                                  NSLog(@"CHANGE %@", change);
+                                  [weakSelf hideAboutView];
+         }];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(bubbleClicked:)
                                                      name:@"bubbleClicked"
@@ -310,15 +321,13 @@
 
 - (void)showAboutView
 {
-    [[appDelegate container] closeSlider:YES
-                              completion:^{
-                                  self.aboutVC = [[UIStoryboard storyboardWithName:@"About"
-                                                                            bundle:nil]
-                                                  instantiateInitialViewController];
-                                  [self addChildViewController:self.aboutVC];
-                                  [self.view addSubview:self.aboutVC.view];
-                                  [self.aboutVC show:nil];
-    }];
+    [[appDelegate container] showCenterPanelAnimated:YES];
+    self.aboutVC = [[UIStoryboard storyboardWithName:@"About"
+                                              bundle:nil]
+                    instantiateInitialViewController];
+    [self addChildViewController:self.aboutVC];
+    [self.view addSubview:self.aboutVC.view];
+    [self.aboutVC show:nil];
 }
 
 - (void)hideAboutView

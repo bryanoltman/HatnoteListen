@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "HATViewController.h"
 #import "HATSettingsViewController.h"
-#import "JSSlidingViewController.h"
+#import "HATSidePanelController.h"
 
-@interface HATAppDelegate : UIResponder <JSSlidingViewControllerDelegate, UIApplicationDelegate>
+@interface HATAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) JSSlidingViewController *container;
+@property (strong, nonatomic) HATSidePanelController *container;
 @property (strong, nonatomic) HATViewController *viewController;
 @property (strong, nonatomic) HATSettingsViewController *settingsViewController;
 

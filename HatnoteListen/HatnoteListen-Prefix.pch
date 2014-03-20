@@ -16,6 +16,7 @@
     #import <Foundation/Foundation.h>
     #import <AVFoundation/AVFoundation.h>
     #import <CAAnimation+EasingEquations.h>
+    #import <JASidePanels/JASidePanelController.h>
     #import "SRWebSocket.h"
     #import "JSONKit.h"
     #import "NSObject+Util.h"
@@ -25,7 +26,6 @@
     #import "UIDevice+Util.h"
     #import "NSArray+FunctionalHelper.h"
     #import "HATSettings.h"
-
     #import "HATAppDelegate.h"
 #endif
 

@@ -88,8 +88,8 @@
 		ED91831618C41648003D91A0 /* clav026.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED9182FB18C41648003D91A0 /* clav026.mp3 */; };
 		ED91831718C41648003D91A0 /* clav027.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED9182FC18C41648003D91A0 /* clav027.mp3 */; };
 		ED946AA718BC239700B4EEAF /* HATUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED946AA618BC239700B4EEAF /* HATUpdateView.m */; };
+		ED9D311B18DA72FB0038DD46 /* HATSidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9D311A18DA72FB0038DD46 /* HATSidePanelController.m */; };
 		EDB7D08218D94A6A0025D63C /* UIDevice+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB7D08118D94A6A0025D63C /* UIDevice+Util.m */; };
-		EDCBD03F18D51DA900EC2892 /* JSSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCBD03E18D51DA900EC2892 /* JSSlidingViewController.m */; };
 		EDCBD04118D51FF800EC2892 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCBD04018D51FF800EC2892 /* Settings.storyboard */; };
 		EDCBD04518D5206A00EC2892 /* HATLanguageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCBD04418D5206A00EC2892 /* HATLanguageTableViewCell.m */; };
 		EDCE382918CBC004006C3B6F /* HATContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE382818CBC004006C3B6F /* HATContainerView.m */; };
@@ -208,10 +208,10 @@
 		ED9182FC18C41648003D91A0 /* clav027.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clav027.mp3; sourceTree = "<group>"; };
 		ED946AA518BC239700B4EEAF /* HATUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATUpdateView.h; sourceTree = "<group>"; };
 		ED946AA618BC239700B4EEAF /* HATUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATUpdateView.m; sourceTree = "<group>"; };
+		ED9D311918DA72FB0038DD46 /* HATSidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATSidePanelController.h; sourceTree = "<group>"; };
+		ED9D311A18DA72FB0038DD46 /* HATSidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATSidePanelController.m; sourceTree = "<group>"; };
 		EDB7D08018D94A6A0025D63C /* UIDevice+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Util.h"; sourceTree = "<group>"; };
 		EDB7D08118D94A6A0025D63C /* UIDevice+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Util.m"; sourceTree = "<group>"; };
-		EDCBD03D18D51DA900EC2892 /* JSSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSSlidingViewController.h; sourceTree = "<group>"; };
-		EDCBD03E18D51DA900EC2892 /* JSSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSSlidingViewController.m; sourceTree = "<group>"; };
 		EDCBD04018D51FF800EC2892 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		EDCBD04318D5206A00EC2892 /* HATLanguageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATLanguageTableViewCell.h; sourceTree = "<group>"; };
 		EDCBD04418D5206A00EC2892 /* HATLanguageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATLanguageTableViewCell.m; sourceTree = "<group>"; };
@@ -312,26 +312,26 @@
 		ED5B867618BACA6500932430 /* HatnoteListen */ = {
 			isa = PBXGroup;
 			children = (
-				ED075D1A18D7E0AA00581187 /* About */,
+				EDDD564418BEED9F00D7AD6F /* Images */,
+				ED755C4C18BB04BB00E7AC88 /* Sounds */,
+				EDEFBEA418C3F8FF002AE9C6 /* Categories */,
 				ED536D4418D67B2C00A5827C /* Models */,
 				EDCBD04218D5201400EC2892 /* Settings */,
-				EDEFBEA418C3F8FF002AE9C6 /* Categories */,
-				EDCBD03D18D51DA900EC2892 /* JSSlidingViewController.h */,
-				EDCBD03E18D51DA900EC2892 /* JSSlidingViewController.m */,
+				ED075D1A18D7E0AA00581187 /* About */,
 				ED5B867F18BACA6500932430 /* HATAppDelegate.h */,
 				ED5B868018BACA6500932430 /* HATAppDelegate.m */,
 				EDCE382718CBC004006C3B6F /* HATContainerView.h */,
 				EDCE382818CBC004006C3B6F /* HATContainerView.m */,
+				ED9D311918DA72FB0038DD46 /* HATSidePanelController.h */,
+				ED9D311A18DA72FB0038DD46 /* HATSidePanelController.m */,
 				ED946AA518BC239700B4EEAF /* HATUpdateView.h */,
 				ED946AA618BC239700B4EEAF /* HATUpdateView.m */,
 				ED5B868518BACA6500932430 /* HATViewController.h */,
 				ED5B868618BACA6500932430 /* HATViewController.m */,
 				ED755D3418BB065500E7AC88 /* HATWikipediaViewController.h */,
 				ED755D3518BB065500E7AC88 /* HATWikipediaViewController.m */,
-				EDDD564418BEED9F00D7AD6F /* Images */,
 				ED5B868818BACA6500932430 /* Images.xcassets */,
 				ED5B868218BACA6500932430 /* Main.storyboard */,
-				ED755C4C18BB04BB00E7AC88 /* Sounds */,
 				ED5B867718BACA6500932430 /* Supporting Files */,
 			);
 			path = HatnoteListen;
@@ -695,13 +695,13 @@
 				ED536D4318D67B2400A5827C /* HATWikipediaLanguage.m in Sources */,
 				EDDD564118BEDE8400D7AD6F /* NSObject+Util.m in Sources */,
 				EDEFBEA718C3FE1E002AE9C6 /* NSArray+Util.m in Sources */,
+				ED9D311B18DA72FB0038DD46 /* HATSidePanelController.m in Sources */,
 				ED075D2618D7EDAC00581187 /* NSString+Util.m in Sources */,
 				EDCE382918CBC004006C3B6F /* HATContainerView.m in Sources */,
 				ED5B867D18BACA6500932430 /* main.m in Sources */,
 				ED5A04A118CEA71C0068D325 /* HATSettingsViewController.m in Sources */,
 				EDEFBEA318C3F8F6002AE9C6 /* UIColor+Util.m in Sources */,
 				ED946AA718BC239700B4EEAF /* HATUpdateView.m in Sources */,
-				EDCBD03F18D51DA900EC2892 /* JSSlidingViewController.m in Sources */,
 				ED075D2118D7E10100581187 /* HATAboutViewController.m in Sources */,
 				EDCBD04518D5206A00EC2892 /* HATLanguageTableViewCell.m in Sources */,
 				EDB7D08218D94A6A0025D63C /* UIDevice+Util.m in Sources */,

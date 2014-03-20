@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A9EB88142D6243D2A58807C0"
+               BlueprintIdentifier = "D81592B086B7425CAF913B2E"
                BuildableName = "libPods-CAAnimation-EasingEquations.a"
                BlueprintName = "Pods-CAAnimation-EasingEquations"
                ReferencedContainer = "container:Pods.xcodeproj">

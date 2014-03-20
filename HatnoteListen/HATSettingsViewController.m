@@ -25,6 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[appDelegate container] setLeftFixedWidth:self.tableView.frame.size.width + 5];
 }
 
 #pragma mark - UITableView

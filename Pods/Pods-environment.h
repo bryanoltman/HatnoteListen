@@ -12,6 +12,12 @@
 #define COCOAPODS_VERSION_MINOR_CAAnimation_EasingEquations 0
 #define COCOAPODS_VERSION_PATCH_CAAnimation_EasingEquations 2
 
+// JASidePanels
+#define COCOAPODS_POD_AVAILABLE_JASidePanels
+#define COCOAPODS_VERSION_MAJOR_JASidePanels 1
+#define COCOAPODS_VERSION_MINOR_JASidePanels 3
+#define COCOAPODS_VERSION_PATCH_JASidePanels 2
+
 // JSONKit-NoWarning
 #define COCOAPODS_POD_AVAILABLE_JSONKit_NoWarning
 #define COCOAPODS_VERSION_MAJOR_JSONKit_NoWarning 1
