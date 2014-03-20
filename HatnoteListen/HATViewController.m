@@ -68,13 +68,13 @@
                                   }
                               }];
         
-        HATSidePanelController *container = [appDelegate container];
-        [self.KVOController observe:container
+        [self.KVOController observe:[appDelegate container]
                             keyPath:@"state"
                             options:(NSKeyValueObservingOptionNew|NSKeyValueChangeSetting)
                               block:^(id observer, id object, NSDictionary *change) {
-                                  NSLog(@"CHANGE %@", change);
-                                  [weakSelf hideAboutView];
+                                  if ([change[NSKeyValueChangeNewKey] isEqual:@(JASidePanelLeftVisible)]) {
+                                      [weakSelf hideAboutView];
+                                  }
          }];
         
         [[NSNotificationCenter defaultCenter] addObserver:self

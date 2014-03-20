@@ -18,11 +18,9 @@
     
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     
-    self.viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
-    
-    self.settingsViewController = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController];
-    
     self.container = [HATSidePanelController new];
+    self.viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+    self.settingsViewController = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController];
     self.container.leftPanel = self.settingsViewController;
     self.container.centerPanel = self.viewController;
     
