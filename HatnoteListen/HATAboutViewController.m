@@ -12,34 +12,59 @@
 #define kTextPadding 20
 
 @interface HATAboutViewController () <TTTAttributedLabelDelegate>
+@property BOOL showingWelcome;
+@property (strong, nonatomic) NSMutableArray *pages;
 @end
 
 @implementation HATAboutViewController
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self readAboutText];
+    }
+    
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    [self readAboutText];
+ 
+    self.dismissRecognizer.direction = DirectionPanGestureRecognizerHorizontal;
+    
     self.backgroundView = [[UINavigationBar alloc] initWithFrame:self.view.bounds];
     self.backgroundView.alpha = 0;
     [self.view insertSubview:self.backgroundView atIndex:0];
+    
+    self.collectionView.alpha = 0;
 }
 
-- (TTTAttributedLabel *)labelForIndex:(NSUInteger)index
+- (void)readAboutText
 {
-    NSMutableAttributedString *attrText = [NSMutableAttributedString new];
-    TTTAttributedLabel *ret = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(kTextPadding, kTextPadding,
-                                                                                   self.view.frame.size.width - 2*kTextPadding,
-                                                                                   self.view.frame.size.height - 2*kTextPadding)];
-    ret.delegate = self;
-    [ret setLinkAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithWhite:0.5 alpha:1] }];
-    ret.numberOfLines = 0;
+    NSError* err = nil;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"about"
+                                                     ofType:@"txt"];
+    NSString *aboutText = [NSString stringWithContentsOfFile:path
+                                                    encoding:NSUTF8StringEncoding
+                                                       error:&err];
     
-    NSMutableParagraphStyle *headerParagraphStyle = [[NSMutableParagraphStyle alloc] init];
-    headerParagraphStyle.paragraphSpacing = 15;
+    NSArray *lines = [aboutText componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
 
-    NSMutableParagraphStyle *bodyParagraphStyle = [[NSMutableParagraphStyle alloc] init];
+    self.pages = [NSMutableArray new];
+    
+    NSMutableParagraphStyle *headerParagraphStyle = [NSMutableParagraphStyle new];
+    headerParagraphStyle.paragraphSpacing = 15;
+    headerParagraphStyle.alignment = NSTextAlignmentCenter;
+
+    NSMutableParagraphStyle *bodyParagraphStyle = [NSMutableParagraphStyle new];
     bodyParagraphStyle.paragraphSpacing = 10;
+    
+    NSMutableParagraphStyle *ellipsisParagraphStyle = [NSMutableParagraphStyle new];
+    ellipsisParagraphStyle.alignment = NSTextAlignmentCenter;
     
     UIFont *headerFont = [UIFont systemFontOfSize:30];
     UIFont *bodyFont = [UIFont systemFontOfSize:18];
@@ -48,66 +73,110 @@
                                   NSParagraphStyleAttributeName:headerParagraphStyle};
     NSDictionary *bodyAttrs = @{NSFontAttributeName:bodyFont,
                                 NSParagraphStyleAttributeName:bodyParagraphStyle};
-    switch (index) {
-        case 0: {
-            NSAttributedString *line = [[NSAttributedString alloc] initWithString:@"Listen to Wikipedia\n"
-                                                                       attributes:headerAttrs];
-            [attrText appendAttributedString:line];
-            
-            line = [[NSAttributedString alloc] initWithString:@"Developed by Bryan Oltman\nInspired by Hatnote's Listen to Wikipedia"
-                                                   attributes:bodyAttrs];
-            [attrText appendAttributedString:line];
-            
-            [ret setAttributedText:attrText];
+    NSDictionary *ellipsisAttrs = @{NSFontAttributeName:headerFont,
+                                    NSParagraphStyleAttributeName:ellipsisParagraphStyle};
+    NSMutableAttributedString *attrText = [NSMutableAttributedString new];
+    
+    NSUInteger page = 0;
+    for (NSString *line in lines) {
+        if ([line isEqualToString:@" "]) {
+            self.pages[page] = attrText;
+            attrText = [NSMutableAttributedString new];
+            page++;
+            continue;
+        }
+        
+        NSString *writeLine = [[NSString stringWithFormat:@"%@\n", line] stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
+        if ([writeLine rangeOfString:@"\t"].location == 0) {
+            // body text
+            [attrText appendAttributedString:[[NSAttributedString alloc] initWithString:[writeLine stringByReplacingOccurrencesOfString:@"\t"
+                                                                                                                        withString:@""]
+                                                                             attributes:bodyAttrs]];
+        }
+        else if ([writeLine isEqualToString:@"…"]) {
+            [attrText appendAttributedString:[[NSAttributedString alloc] initWithString:writeLine
+                                                                             attributes:ellipsisAttrs]];
 
-            NSRange range = [attrText.string rangeOfString:@"Bryan Oltman"];
-            [ret addLinkToURL:[NSURL URLWithString:@"http://bryanoltman.com/"] withRange:range];
-            
-            range = [attrText.string rangeOfString:@"Hatnote's Listen to Wikipedia"];
-            [ret addLinkToURL:[NSURL URLWithString:@"http://listen.hatnote.com"] withRange:range];
         }
-            break;
-        case 1: {
-            NSAttributedString *line = [[NSAttributedString alloc] initWithString:@"Colors and Sounds\n"
-                                                                       attributes:headerAttrs];
-            [attrText appendAttributedString:line];
-            
-            line = [[NSAttributedString alloc] initWithString:@"Bells are additions, strings are subtractions. There’s something reassuring about knowing that every user makes a noise, every edit has a voice in the roar.\nGreen circles are anonymous edits\nPurple circles are bots\nWhite circles are brought to you by Registered Users Like You"
-                                                   attributes:bodyAttrs];
-            
-            [attrText appendAttributedString:line];
-            
-            [ret setAttributedText:attrText];
+        else {
+            // header text
+            [attrText appendAttributedString:[[NSAttributedString alloc] initWithString:writeLine
+                                                                             attributes:headerAttrs]];
         }
-            break;
-        default:
-            break;
     }
     
+    self.pages[page] = attrText;
+}
+
+- (TTTAttributedLabel *)labelForIndex:(NSUInteger)index
+{
+    TTTAttributedLabel *ret = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(kTextPadding, kTextPadding,
+                                                                                   self.view.frame.size.width - 2*kTextPadding,
+                                                                                   self.view.frame.size.height - 2*kTextPadding)];
+    ret.delegate = self;
+    [ret setLinkAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithWhite:0.5 alpha:1] }];
+    ret.numberOfLines = 0;
+    
+    NSUInteger page = index + (self.showingWelcome ? 0 : 1);
+    ret.attributedText = [self pageForIndex:page];
+    
+    NSRange range = [ret.attributedText.string rangeOfString:@"Bryan Oltman"];
+    [ret addLinkToURL:[NSURL URLWithString:@"http://bryanoltman.com/"] withRange:range];
+    
+    range = [ret.attributedText.string rangeOfString:@"Hatnote's Listen to Wikipedia"];
+    [ret addLinkToURL:[NSURL URLWithString:@"http://listen.hatnote.com"] withRange:range];
+
     return ret;
+}
+
+- (NSAttributedString *)pageForIndex:(NSUInteger)index
+{
+    if (self.pages.count <= index) {
+        return nil;
+    }
+    
+    return self.pages[index];
+}
+
+- (CGFloat)backgroundAlpha
+{
+    return 0.9f;
+}
+
+- (void)showWelcome
+{
+    self.showingWelcome = YES;
+    [self show:nil];
 }
 
 - (void)show:(void(^)(void))complated
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    [UIView animateWithDuration:0.2
-                          delay:0
+    [UIView animateWithDuration:0.4
+                          delay:0.3
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         self.backgroundView.alpha = 0.925;
+                         self.backgroundView.alpha = [self backgroundAlpha];
+                         self.collectionView.alpha = 1;
                      } completion:^(BOOL finished) {
-                         CGFloat duration = 0.3;
-                         [CAAnimation addAnimationToLayer:self.collectionView.layer
-                                                 duration:duration
-                                                transform:CATransform3DMakeTranslation(0, -30, 0)
-                                           easingFunction:CAAnimationEasingFunctionEaseOutCubic];
+                         if (self.showingWelcome) {
+                             return;
+                         }
                          
+                         CGFloat duration = 0.4;
                          [self performBlock:^{
                              [CAAnimation addAnimationToLayer:self.collectionView.layer
-                                                     duration:0.7
-                                                    transform:CATransform3DIdentity
-                                               easingFunction:CAAnimationEasingFunctionEaseOutQuintic];
-                         } afterDelay:duration];
+                                                     duration:duration
+                                                    transform:CATransform3DMakeTranslation(0, -30, 0)
+                                               easingFunction:CAAnimationEasingFunctionEaseOutCubic];
+                             
+                             [self performBlock:^{
+                                 [CAAnimation addAnimationToLayer:self.collectionView.layer
+                                                         duration:0.7
+                                                        transform:CATransform3DIdentity
+                                                   easingFunction:CAAnimationEasingFunctionEaseOutQuintic];
+                             } afterDelay:duration / 1.5];
+                         } afterDelay:0.5];
                      }];
 }
 
@@ -123,6 +192,47 @@
                          [self.view removeFromSuperview];
                          [self removeFromParentViewController];
                      }];
+}
+
+- (void)panned:(UIPanGestureRecognizer *)sender
+{
+    switch (sender.state) {
+        case UIGestureRecognizerStateChanged: {
+            CGPoint trans = [sender translationInView:self.collectionView];
+            if (fabsf(trans.y) > 10 && fabsf(trans.y) > fabsf(trans.x) * 2) {
+                [sender setEnabled:NO];
+                [sender setEnabled:YES];
+                return;
+            }
+
+            self.collectionView.transform = CGAffineTransformMakeTranslation(trans.x, 0);
+            self.backgroundView.alpha = self.collectionView.alpha = [self backgroundAlpha] - (fabsf(trans.x) / self.collectionView.frame.size.width);
+        }
+            break;
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateFailed: {
+            CGPoint trans = [sender translationInView:self.collectionView];
+            
+            if (fabsf(trans.x) > 150) {
+                [self hide:nil];
+            }
+            else {
+                [UIView animateWithDuration:0.4
+                                      delay:0
+                     usingSpringWithDamping:0.5
+                      initialSpringVelocity:0.3
+                                    options:UIViewAnimationOptionCurveEaseOut
+                                 animations:^{
+                                     self.collectionView.transform = CGAffineTransformIdentity;
+                                     self.backgroundView.alpha = self.collectionView.alpha = [self backgroundAlpha];
+                                 } completion:nil];
+            }
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - UICollectionView
@@ -141,7 +251,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return kAboutViews;
+    return self.pages.count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

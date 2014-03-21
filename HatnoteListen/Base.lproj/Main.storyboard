@@ -53,6 +53,7 @@
                         <color key="backgroundColor" red="0.10980392156862745" green="0.15294117647058825" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                     </view>
+                    <navigationItem key="navigationItem" id="YZp-6R-JyY"/>
                     <connections>
                         <outlet property="muteButton" destination="Jeg-GR-42u" id="7UA-e9-rwb"/>
                         <outlet property="userLabel" destination="05X-gP-mjY" id="6im-qE-Wad"/>

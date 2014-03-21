@@ -1,0 +1,27 @@
+Welcome!
+	This is Listen to Wikipedia, a real-time visualization of edits to Wikipedia.
+	Scroll down to learn a little bit more about the app.
+ 
+Each bubble represents an update to Wikipedia
+ 
+You can tap on the bubble to get more information about its article
+ 
+Bigger bubbles represent bigger changes
+ 
+Light bubbles represent addition and make a bell sound
+ 
+Dark bubbles represent subtraction and make a string sound
+ 
+Wikipedia is powered by its users – every edit has a voice in the roar
+ 
+A white circle represents a change made by a registered user
+ 
+Green circles are anonymous edits
+ 
+Purple circles represent edits made by bots
+ 
+New users are welcomed with a blue banner at the top of the screen
+ 
+Developed by Bryan Oltman\n\nInspired by Hatnote's Listen to Wikipedia
+ 
+That's it! Slide to either side to get started

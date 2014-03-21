@@ -7,17 +7,17 @@
         <!--About View Controller-->
         <scene sceneID="T1D-h9-RaQ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q8K-eJ-5rs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="AHe-Cb-hTM" customClass="HATAboutViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M4Z-gh-cl8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="zou-ye-hYL">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="zou-ye-hYL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aDv-8M-uMt">
+                                <gestureRecognizers/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="aDv-8M-uMt">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -37,6 +37,7 @@
                                 <connections>
                                     <outlet property="dataSource" destination="AHe-Cb-hTM" id="hjU-Ft-TL0"/>
                                     <outlet property="delegate" destination="AHe-Cb-hTM" id="379-NC-L0C"/>
+                                    <outletCollection property="gestureRecognizers" destination="sjL-8D-mZR" appends="YES" id="WWO-rz-aka"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -47,8 +48,16 @@
                     <size key="freeformSize" width="320" height="480"/>
                     <connections>
                         <outlet property="collectionView" destination="zou-ye-hYL" id="GXm-eK-ljJ"/>
+                        <outlet property="dismissRecognizer" destination="sjL-8D-mZR" id="jIp-KR-GQx"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q8K-eJ-5rs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="sjL-8D-mZR" customClass="HATHorizontalPanGestureRecognizer">
+                    <connections>
+                        <action selector="panned:" destination="AHe-Cb-hTM" id="sI2-qr-H35"/>
+                        <outlet property="delegate" destination="AHe-Cb-hTM" id="vZ4-pJ-JjL"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="399" y="-451"/>
         </scene>

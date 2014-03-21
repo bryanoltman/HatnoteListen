@@ -148,6 +148,21 @@
     
     [self hideNewUserView:NO];
     [self hideWikiView:NO];
+    
+    BOOL hasUserSeenWelcome = NO;
+    if (!hasUserSeenWelcome) {
+        self.muted = YES;
+        [self performBlock:^{
+            self.aboutVC = [[UIStoryboard storyboardWithName:@"About"
+                                                      bundle:nil]
+                            instantiateInitialViewController];
+            [[appDelegate container] addChildViewController:self.aboutVC];
+            self.aboutVC.view.frame = [[appDelegate container].view convertRect:self.aboutVC.view.frame
+                                                                       fromView:[appDelegate container].centerPanelContainer];
+            [[appDelegate container].view addSubview:self.aboutVC.view];
+            [self.aboutVC showWelcome];
+        } afterDelay:0.2];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -182,6 +197,8 @@
     for (AVAudioPlayer *player in self.avPlayers) {
         player.volume = muted ? 0 : 1;
     }
+    
+    [self.muteButton setSelected:muted];
     
     [[NSUserDefaults standardUserDefaults] setBool:muted forKey:@"muted"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -244,8 +261,7 @@
 
 - (void)muteButtonClicked:(UIButton *)sender
 {
-    [sender setSelected:!sender.selected];
-    self.muted = self.muteButton.selected;
+    self.muted = !self.muteButton.selected;
 }
 
 - (void)newUserViewTapped:(UITapGestureRecognizer *)recognizer
@@ -331,8 +347,10 @@
     self.aboutVC = [[UIStoryboard storyboardWithName:@"About"
                                               bundle:nil]
                     instantiateInitialViewController];
-    [self addChildViewController:self.aboutVC];
-    [self.view addSubview:self.aboutVC.view];
+    [[appDelegate container] addChildViewController:self.aboutVC];
+    self.aboutVC.view.frame = [[appDelegate container].view convertRect:self.aboutVC.view.frame
+                                                               fromView:[appDelegate container].centerPanelContainer];
+    [[appDelegate container].view addSubview:self.aboutVC.view];
     [self.aboutVC show:nil];
 }
 
