@@ -10,8 +10,6 @@
 
 @implementation HATHorizontalPanGestureRecognizer
 
-int const static kDirectionPanThreshold = 5;
-
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesMoved:touches withEvent:event];
