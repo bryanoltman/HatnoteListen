@@ -149,7 +149,7 @@
     [self hideNewUserView:NO];
     [self hideWikiView:NO];
     
-    BOOL hasUserSeenWelcome = NO;
+    BOOL hasUserSeenWelcome = [[NSUserDefaults standardUserDefaults] boolForKey:@"shownWelcome"];
     if (!hasUserSeenWelcome) {
         self.muted = YES;
         [self performBlock:^{
@@ -161,6 +161,9 @@
                                                                        fromView:[appDelegate container].centerPanelContainer];
             [[appDelegate container].view addSubview:self.aboutVC.view];
             [self.aboutVC showWelcome];
+            
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shownWelcome"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         } afterDelay:0.2];
     }
 }
