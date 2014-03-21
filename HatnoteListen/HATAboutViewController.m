@@ -158,26 +158,7 @@
                      animations:^{
                          self.backgroundView.alpha = [self backgroundAlpha];
                          self.collectionView.alpha = 1;
-                     } completion:^(BOOL finished) {
-                         if (self.showingWelcome) {
-                             return;
-                         }
-                         
-                         CGFloat duration = 0.4;
-                         [self performBlock:^{
-                             [CAAnimation addAnimationToLayer:self.collectionView.layer
-                                                     duration:duration
-                                                    transform:CATransform3DMakeTranslation(0, -30, 0)
-                                               easingFunction:CAAnimationEasingFunctionEaseOutCubic];
-                             
-                             [self performBlock:^{
-                                 [CAAnimation addAnimationToLayer:self.collectionView.layer
-                                                         duration:0.7
-                                                        transform:CATransform3DIdentity
-                                                   easingFunction:CAAnimationEasingFunctionEaseOutQuintic];
-                             } afterDelay:duration / 1.5];
-                         } afterDelay:0.5];
-                     }];
+                     } completion:nil];
 }
 
 - (void)hide:(void(^)(void))complated
@@ -198,7 +179,7 @@
 {
     switch (sender.state) {
         case UIGestureRecognizerStateChanged: {
-            CGPoint trans = [sender translationInView:self.collectionView];
+            CGPoint trans = [sender translationInView:self.view];
             if (fabsf(trans.y) > 10 && fabsf(trans.y) > fabsf(trans.x) * 2) {
                 [sender setEnabled:NO];
                 [sender setEnabled:YES];

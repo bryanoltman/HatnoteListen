@@ -325,6 +325,8 @@
 				ED075D1A18D7E0AA00581187 /* About */,
 				ED5B867F18BACA6500932430 /* HATAppDelegate.h */,
 				ED5B868018BACA6500932430 /* HATAppDelegate.m */,
+				ED3E7A5918DBEA4800CADCCC /* HATHorizontalPanGestureRecognizer.h */,
+				ED3E7A5A18DBEA4800CADCCC /* HATHorizontalPanGestureRecognizer.m */,
 				EDCE382718CBC004006C3B6F /* HATContainerView.h */,
 				EDCE382818CBC004006C3B6F /* HATContainerView.m */,
 				ED9D311918DA72FB0038DD46 /* HATSidePanelController.h */,
@@ -338,8 +340,6 @@
 				ED5B868818BACA6500932430 /* Images.xcassets */,
 				ED5B868218BACA6500932430 /* Main.storyboard */,
 				ED5B867718BACA6500932430 /* Supporting Files */,
-				ED3E7A5918DBEA4800CADCCC /* HATHorizontalPanGestureRecognizer.h */,
-				ED3E7A5A18DBEA4800CADCCC /* HATHorizontalPanGestureRecognizer.m */,
 			);
 			path = HatnoteListen;
 			sourceTree = "<group>";
