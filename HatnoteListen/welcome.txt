@@ -1,5 +1,5 @@
 Welcome!
-	This is app shows edits to Wikipedia as they happen, so you can watch the encyclopedia grow and change.
+	This is app shows edits to Wikipedia as they happen, so you can watch as the encyclopedia grows and changes.
 	Scroll down for an explanation of what everything means.
  
 Each bubble represents an update to Wikipedia
