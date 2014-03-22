@@ -195,8 +195,14 @@
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateFailed: {
             CGPoint trans = [sender translationInView:self.collectionView];
-            
-            if (fabsf(trans.x) > 100) {
+            CGFloat xVelocity = [sender velocityInView:self.view].x;
+            if (fabsf(trans.x) > 160 || fabsf(xVelocity) > 1000) {
+                [UIView animateWithDuration:0.2
+                                      delay:0
+                                    options:UIViewAnimationOptionCurveEaseIn
+                                 animations:^{
+                                     self.collectionView.transform = CGAffineTransformMakeTranslation(xVelocity, 0);
+                                 } completion:nil];
                 [self hide:nil];
             }
             else {
