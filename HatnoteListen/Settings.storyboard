@@ -48,7 +48,7 @@
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AboutCell" id="PnA-5n-Xax">
                                         <rect key="frame" x="0.0" y="99" width="290" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="HATAboutCell" tableViewCell="PnA-5n-Xax" id="w5C-f3-Y5l">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PnA-5n-Xax" id="w5C-f3-Y5l">
                                             <rect key="frame" x="0.0" y="0.0" width="257" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
@@ -56,7 +56,7 @@
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsCell" textLabel="ehu-p0-vnC" detailTextLabel="VSU-wa-75X" style="IBUITableViewCellStyleValue1" id="I7F-aZ-IET">
                                         <rect key="frame" x="0.0" y="143" width="290" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="HATAboutCell" tableViewCell="I7F-aZ-IET" id="iW5-oI-2gY">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I7F-aZ-IET" id="iW5-oI-2gY">
                                             <rect key="frame" x="0.0" y="0.0" width="290" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
