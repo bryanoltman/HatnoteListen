@@ -196,7 +196,7 @@
         case UIGestureRecognizerStateFailed: {
             CGPoint trans = [sender translationInView:self.collectionView];
             CGFloat xVelocity = [sender velocityInView:self.view].x;
-            if (fabsf(trans.x) > 160 || fabsf(xVelocity) > 1000) {
+            if (fabsf(trans.x) > 160 || fabsf(xVelocity) > 750) {
                 [UIView animateWithDuration:0.2
                                       delay:0
                                     options:UIViewAnimationOptionCurveEaseIn
