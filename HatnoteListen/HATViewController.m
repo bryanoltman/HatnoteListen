@@ -164,15 +164,7 @@
     if (!hasUserSeenWelcome) {
         [[HATSettings sharedSettings] setSoundsMuted:YES];
         [self performBlock:^{
-            self.aboutVC = [[UIStoryboard storyboardWithName:@"About"
-                                                      bundle:nil]
-                            instantiateInitialViewController];
-            [[appDelegate container] addChildViewController:self.aboutVC];
-            self.aboutVC.view.frame = [[appDelegate container].view convertRect:self.aboutVC.view.frame
-                                                                       fromView:[appDelegate container].centerPanelContainer];
-            [[appDelegate container].view addSubview:self.aboutVC.view];
-            [self.aboutVC show:HATAboutScreenContentWelcome];
-            
+            [self showAboutView:HATAboutScreenContentWelcome];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shownWelcome"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         } afterDelay:0.2];
