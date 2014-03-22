@@ -99,6 +99,8 @@
 		EDDD564318BEE7B700D7AD6F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDD564218BEE7B700D7AD6F /* AVFoundation.framework */; };
 		EDDD564718BEEDB300D7AD6F /* speaker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDDD564518BEEDB300D7AD6F /* speaker@2x.png */; };
 		EDDD564818BEEDB300D7AD6F /* speaker-muted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDDD564618BEEDB300D7AD6F /* speaker-muted@2x.png */; };
+		EDE5A5AD18DD3E4C0042F5D0 /* tutorial.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDE5A5AB18DD3E4C0042F5D0 /* tutorial.txt */; };
+		EDE5A5AE18DD3E4C0042F5D0 /* welcome.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDE5A5AC18DD3E4C0042F5D0 /* welcome.txt */; };
 		EDEFBEA318C3F8F6002AE9C6 /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBEA218C3F8F6002AE9C6 /* UIColor+Util.m */; };
 		EDEFBEA718C3FE1E002AE9C6 /* NSArray+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBEA618C3FE1E002AE9C6 /* NSArray+Util.m */; };
 /* End PBXBuildFile section */
@@ -227,6 +229,8 @@
 		EDDD564218BEE7B700D7AD6F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		EDDD564518BEEDB300D7AD6F /* speaker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speaker@2x.png"; sourceTree = "<group>"; };
 		EDDD564618BEEDB300D7AD6F /* speaker-muted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speaker-muted@2x.png"; sourceTree = "<group>"; };
+		EDE5A5AB18DD3E4C0042F5D0 /* tutorial.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tutorial.txt; sourceTree = "<group>"; };
+		EDE5A5AC18DD3E4C0042F5D0 /* welcome.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = welcome.txt; sourceTree = "<group>"; };
 		EDEFBEA118C3F8F6002AE9C6 /* UIColor+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Util.h"; sourceTree = "<group>"; };
 		EDEFBEA218C3F8F6002AE9C6 /* UIColor+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Util.m"; sourceTree = "<group>"; };
 		EDEFBEA518C3FE1E002AE9C6 /* NSArray+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Util.h"; sourceTree = "<group>"; };
@@ -347,6 +351,8 @@
 		ED5B867718BACA6500932430 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EDE5A5AB18DD3E4C0042F5D0 /* tutorial.txt */,
+				EDE5A5AC18DD3E4C0042F5D0 /* welcome.txt */,
 				ED3E7A5718DBE29600CADCCC /* about.txt */,
 				ED5B867818BACA6500932430 /* HatnoteListen-Info.plist */,
 				ED5B867918BACA6500932430 /* InfoPlist.strings */,
@@ -584,6 +590,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDE5A5AE18DD3E4C0042F5D0 /* welcome.txt in Resources */,
 				ED9182C718C4163E003D91A0 /* cel001.mp3 in Resources */,
 				ED5B868918BACA6500932430 /* Images.xcassets in Resources */,
 				ED075D1E18D7E0F900581187 /* About.storyboard in Resources */,
@@ -598,6 +605,7 @@
 				EDDD564718BEEDB300D7AD6F /* speaker@2x.png in Resources */,
 				ED9182DC18C4163E003D91A0 /* cel022.mp3 in Resources */,
 				ED91831218C41648003D91A0 /* clav022.mp3 in Resources */,
+				EDE5A5AD18DD3E4C0042F5D0 /* tutorial.txt in Resources */,
 				ED9182E018C4163E003D91A0 /* cel026.mp3 in Resources */,
 				ED91830518C41648003D91A0 /* clav009.mp3 in Resources */,
 				ED91831518C41648003D91A0 /* clav025.mp3 in Resources */,

@@ -23,7 +23,7 @@
 - (IBAction)muteButtonClicked:(id)sender;
 - (IBAction)newUserViewTapped:(id)sender;
 
-- (void)showAboutView;
+- (void)showAboutView:(HATAboutScreenContent)content;
 - (void)hideAboutView;
 
 @end

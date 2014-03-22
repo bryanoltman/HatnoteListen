@@ -150,6 +150,7 @@
     [self hideWikiView:NO];
     
     BOOL hasUserSeenWelcome = [[NSUserDefaults standardUserDefaults] boolForKey:@"shownWelcome"];
+    hasUserSeenWelcome = NO;
     if (!hasUserSeenWelcome) {
         self.muted = YES;
         [self performBlock:^{
@@ -160,7 +161,7 @@
             self.aboutVC.view.frame = [[appDelegate container].view convertRect:self.aboutVC.view.frame
                                                                        fromView:[appDelegate container].centerPanelContainer];
             [[appDelegate container].view addSubview:self.aboutVC.view];
-            [self.aboutVC showWelcome];
+            [self.aboutVC show:HATAboutScreenContentWelcome];
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shownWelcome"];
             [[NSUserDefaults standardUserDefaults] synchronize];
@@ -344,7 +345,7 @@
                      } completion:nil];
 }
 
-- (void)showAboutView
+- (void)showAboutView:(HATAboutScreenContent)content
 {
     [[appDelegate container] showCenterPanelAnimated:YES];
     self.aboutVC = [[UIStoryboard storyboardWithName:@"About"
@@ -354,7 +355,7 @@
     self.aboutVC.view.frame = [[appDelegate container].view convertRect:self.aboutVC.view.frame
                                                                fromView:[appDelegate container].centerPanelContainer];
     [[appDelegate container].view addSubview:self.aboutVC.view];
-    [self.aboutVC show:nil];
+    [self.aboutVC show:content];
 }
 
 - (void)hideAboutView

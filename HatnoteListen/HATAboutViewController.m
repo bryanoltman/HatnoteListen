@@ -12,7 +12,6 @@
 #define kTextPadding 20
 
 @interface HATAboutViewController () <TTTAttributedLabelDelegate>
-@property BOOL showingWelcome;
 @property (strong, nonatomic) NSMutableArray *pages;
 @end
 
@@ -22,7 +21,6 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self readAboutText];
     }
     
     return self;
@@ -31,8 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self readAboutText];
  
     self.dismissRecognizer.direction = DirectionPanGestureRecognizerHorizontal;
     
@@ -43,10 +39,10 @@
     self.collectionView.alpha = 0;
 }
 
-- (void)readAboutText
+- (void)readAboutText:(NSString *)fileName
 {
     NSError* err = nil;
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"about"
+    NSString *path = [[NSBundle mainBundle] pathForResource:fileName
                                                      ofType:@"txt"];
     NSString *aboutText = [NSString stringWithContentsOfFile:path
                                                     encoding:NSUTF8StringEncoding
@@ -117,8 +113,7 @@
     [ret setLinkAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithWhite:0.5 alpha:1] }];
     ret.numberOfLines = 0;
     
-    NSUInteger page = index + (self.showingWelcome ? 0 : 1);
-    ret.attributedText = [self pageForIndex:page];
+    ret.attributedText = [self pageForIndex:index];
     
     NSRange range = [ret.attributedText.string rangeOfString:@"Bryan Oltman"];
     [ret addLinkToURL:[NSURL URLWithString:@"http://bryanoltman.com/"] withRange:range];
@@ -143,13 +138,44 @@
     return 0.9f;
 }
 
-- (void)showWelcome
+- (void)show:(HATAboutScreenContent)content
 {
-    self.showingWelcome = YES;
-    [self show:nil];
+    switch (content) {
+        case HATAboutScreenContentWelcome:
+            [self readAboutText:@"welcome"];
+            break;
+        case HATAboutScreenContentTutorial:
+            [self readAboutText:@"tutorial"];
+            break;
+        case HATAboutScreenContentAbout:
+            [self readAboutText:@"about"];
+            break;
+        default:
+            break;
+    }
+    
+    [self show];
 }
+//
+//- (void)showWelcome
+//{
+//    [self readAboutText:@"welcome"];
+//    [self show:nil];
+//}
+//
+//- (void)showAbout
+//{
+//    [self readAboutText:@"about"];
+//    [self show:nil];
+//}
+//
+//- (void)showTutorial
+//{
+//    [self readAboutText:@"tutorial"];
+//    [self show:nil];
+//}
 
-- (void)show:(void(^)(void))complated
+- (void)show
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [UIView animateWithDuration:0.4

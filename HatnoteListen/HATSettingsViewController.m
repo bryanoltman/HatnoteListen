@@ -10,6 +10,8 @@
 
 #define kLanguageSection 0
 #define kAboutSection 1
+#define kAboutSectionTutorial 0
+#define kAboutSectionAbout 1
 
 @implementation HATSettingsViewController
 
@@ -31,7 +33,7 @@
 #pragma mark - UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -40,7 +42,7 @@
         case kLanguageSection:
             return [[HATSettings availableLanguages] count];
         case kAboutSection:
-            return 1;
+            return 2;
     }
 
     return 0;
@@ -55,8 +57,20 @@
         hatLanguageCell.language = [HATSettings availableLanguages][[indexPath row]];
     }
     else if (indexPath.section == kAboutSection) {
-        static NSString *reuseId = @"HATAboutCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+        switch (indexPath.row) {
+            case kAboutSectionTutorial: {
+                static NSString *reuseId = @"HATTutorialCell";
+                cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+            }
+                break;
+            case kAboutSectionAbout: {
+                static NSString *reuseId = @"HATAboutCell";
+                cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+            }
+                break;
+            default:
+                break;
+        }
     }
 
     return cell;
@@ -75,7 +89,18 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == kAboutSection) {
-        [[appDelegate viewController] showAboutView];
+        switch (indexPath.row) {
+            case kAboutSectionTutorial: {
+                [[appDelegate viewController] showAboutView:HATAboutScreenContentTutorial];
+            }
+                break;
+            case kAboutSectionAbout: {
+                [[appDelegate viewController] showAboutView:HATAboutScreenContentAbout];
+            }
+                break;
+            default:
+                break;
+        }
     }
 }
 

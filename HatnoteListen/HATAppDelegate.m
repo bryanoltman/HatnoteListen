@@ -23,6 +23,7 @@
     self.settingsViewController = [[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController];
     self.container.leftPanel = self.settingsViewController;
     self.container.centerPanel = self.viewController;
+    self.container.bounceOnSidePanelOpen = NO;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = self.container;
