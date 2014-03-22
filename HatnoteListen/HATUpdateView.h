@@ -16,6 +16,7 @@
 @property (strong, nonatomic) UILabel *textLabel;
 @property (nonatomic) CGFloat duration;
 @property (strong, nonatomic) NSDate *showTime;
+@property (nonatomic) NSDate *lastTouchDate;
 
 - (instancetype)initWithFrame:(CGRect)frame andInfo:(NSDictionary *)info;
 - (CGRect)currentFrame;

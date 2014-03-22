@@ -26,6 +26,7 @@
         self.info = info;
         self.initialFrame = frame;
         self.userInteractionEnabled = NO;
+        self.lastTouchDate = [NSDate distantPast];
     }
     
     return self;

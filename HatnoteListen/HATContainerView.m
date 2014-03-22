@@ -19,6 +19,7 @@
 {
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint point = [touch locationInView:self];
+    NSMutableArray *hitViews = [NSMutableArray new];
     for (UIView *subview in self.subviews) {
         if (![subview isKindOfClass:[HATUpdateView class]]) {
             continue;
@@ -26,11 +27,16 @@
         
         HATUpdateView *view = (HATUpdateView *)subview;
         if (CGRectContainsPoint([view currentFrame], point)) {
-            self.highlightedView = view;
+            [hitViews addObject:view];
         }
     }
     
+    self.highlightedView = [hitViews minimum:^id(HATUpdateView *view) {
+        return view.lastTouchDate;
+    }];
+    
     if (self.highlightedView) {
+        self.highlightedView.lastTouchDate = [NSDate date];
         self.highlightedView.highlighted = YES;
     }
 }
