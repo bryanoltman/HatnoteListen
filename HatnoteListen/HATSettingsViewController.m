@@ -9,25 +9,42 @@
 #import "HATSettingsViewController.h"
 
 #define kLanguageSection 0
-#define kAboutSection 1
+#define kSettingsSection 1
+#define kSettingsSectionTextVolume 0
+#define kAboutSection 2
 #define kAboutSectionTutorial 0
 #define kAboutSectionAbout 1
 
-@implementation HATSettingsViewController
+#define kTextVolumeSheet 10000
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-    }
-    
-    return self;
-}
+@interface HATSettingsViewController () <UIActionSheetDelegate>
+@property (strong, nonatomic) FBKVOController *kvoController;
+@end
+
+@implementation HATSettingsViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [[appDelegate container] setLeftFixedWidth:self.tableView.frame.size.width + 5];
+    self.kvoController = [FBKVOController controllerWithObserver:self];
+    
+    __weak HATSettingsViewController *weakSelf = self;
+    [self.kvoController observe:[HATSettings sharedSettings]
+                        keyPath:@"textVolume"
+                        options:NSKeyValueObservingOptionNew
+                          block:^(id observer, id object, NSDictionary *change) {
+                              [weakSelf.tableView reloadSections:[[NSIndexSet alloc] initWithIndex:kSettingsSection]
+                                                withRowAnimation:UITableViewRowAnimationAutomatic];
+                          }];
+}
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == kTextVolumeSheet) {
+        [[HATSettings sharedSettings] setTextVolume:buttonIndex];
+    }
 }
 
 #pragma mark - UITableView
@@ -41,6 +58,8 @@
     switch (section) {
         case kLanguageSection:
             return [[HATSettings availableLanguages] count];
+        case kSettingsSection:
+            return 1;
         case kAboutSection:
             return 2;
     }
@@ -57,17 +76,32 @@
         hatLanguageCell.language = [HATSettings availableLanguages][[indexPath row]];
     }
     else if (indexPath.section == kAboutSection) {
+        static NSString *reuseId = @"AboutCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+
         switch (indexPath.row) {
-            case kAboutSectionTutorial: {
-                static NSString *reuseId = @"HATTutorialCell";
-                cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
-            }
+            case kAboutSectionTutorial:
+                cell.textLabel.text = @"Tutorial";
                 break;
             case kAboutSectionAbout: {
-                static NSString *reuseId = @"HATAboutCell";
-                cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+                cell.textLabel.text = @"About";
             }
                 break;
+            default:
+                break;
+        }
+    }
+    else if (indexPath.section == kSettingsSection) {
+        static NSString *reuseId = @"SettingsCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+        
+        switch (indexPath.row) {
+            case kSettingsSectionTextVolume:
+                cell.textLabel.text = @"Text Volume";
+                cell.detailTextLabel.text = [self displayStringForHATTextVolume:[[HATSettings sharedSettings] textVolume]
+                                                                   showSelected:NO];
+                break;
+                
             default:
                 break;
         }
@@ -85,10 +119,59 @@
     return YES;
 }
 
+- (NSString *)displayStringForHATTextVolume:(HATTextVolume)textVolume showSelected:(BOOL)showSelected
+{
+    NSString *ret = nil;
+    switch (textVolume) {
+        case HATTextVolumeNone:
+            ret = @"No Text";
+            break;
+        case HATTextVolumeSome:
+            ret = @"Some Text";
+            break;
+        case HATTextVolumeLots:
+            ret = @"Lots of Text";
+            break;
+        case HATTextVolumeAll:
+            ret = @"All Text";
+            break;
+        case HATTextVolumeMAX:
+            ret = @"!!!MAX!!!";
+            break;
+        default:
+            break;
+    }
+    
+    if (showSelected && textVolume == [[HATSettings sharedSettings] textVolume]) {
+        ret = [NSString stringWithFormat:@"%@\342\234\223", ret];
+    }
+    
+    return ret;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == kAboutSection) {
+    if (indexPath.section == kSettingsSection) {
+        switch (indexPath.row) {
+            case kSettingsSectionTextVolume: {
+                UIActionSheet *actionSheet = [UIActionSheet new];
+                actionSheet.tag = kTextVolumeSheet;
+                actionSheet.delegate = self;
+                for (int i = 0; i < HATTextVolumeMAX; i++) {
+                    [actionSheet addButtonWithTitle:[self displayStringForHATTextVolume:i
+                                                                           showSelected:YES]];
+                }
+                
+                [actionSheet showInView:self.view];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    else if (indexPath.section == kAboutSection) {
         switch (indexPath.row) {
             case kAboutSectionTutorial: {
                 [[appDelegate viewController] showAboutView:HATAboutScreenContentTutorial];

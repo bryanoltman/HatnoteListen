@@ -11,6 +11,7 @@
 #define SettingsKey (@"SettingsKey")
 #define SelectedLanguagesKey (@"SelectedLanguagesKey")
 #define SoundsMutedKey (@"SoundsMutedKey")
+#define TextVolumeKey (@"TextVolumeKey")
 
 @interface HATSettings ()
 @property (strong, nonatomic) NSMutableArray *selectedLanguagesMutable;
@@ -129,6 +130,7 @@
         }
         
         self.soundsMuted = [self.settings[SoundsMutedKey] boolValue];
+        self.textVolume = [self.settings[TextVolumeKey] intValue];
     }
     
     return self;
@@ -151,10 +153,8 @@
 
 - (void)save
 {
-    [self.settings setObject:self.selectedLanguagesMutable forKey:SelectedLanguagesKey];
-    [self.settings setObject:@(self.soundsMuted) forKey:SoundsMutedKey];
+    NSLog(@"saving settings: %@", [self settings]);
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[self settings]];
-    
     [[NSUserDefaults standardUserDefaults] setObject:data
                                               forKey:SettingsKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -187,6 +187,7 @@
     valuesAtIndexes:index
              forKey:@"selectedLanguages"];
     
+    [self.settings setObject:self.selectedLanguagesMutable forKey:SelectedLanguagesKey];
     [self save];
 }
 
@@ -228,6 +229,18 @@
     }
     
     _soundsMuted = soundsMuted;
+    [self.settings setObject:@(soundsMuted) forKey:SoundsMutedKey];
+    [self save];
+}
+
+- (void)setTextVolume:(HATTextVolume)textVolume
+{
+    if (textVolume == _textVolume) {
+        return;
+    }
+    
+    _textVolume = textVolume;
+    [self.settings setObject:@(textVolume) forKey:TextVolumeKey];
     [self save];
 }
 

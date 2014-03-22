@@ -9,10 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "HATWikipediaLanguage.h"
 
+typedef NS_OPTIONS(NSUInteger, HATTextVolume) {
+    HATTextVolumeNone,
+    HATTextVolumeSome,
+    HATTextVolumeLots,
+    HATTextVolumeAll,
+    HATTextVolumeMAX
+};
+
 @interface HATSettings : NSObject
 + (instancetype)sharedSettings;
 
 @property (nonatomic) BOOL soundsMuted;
+@property (nonatomic) HATTextVolume textVolume;
 
 + (NSArray *)availableLanguages;
 - (NSArray *)selectedLanguages;
