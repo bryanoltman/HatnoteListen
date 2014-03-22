@@ -83,6 +83,18 @@
                                   }
          }];
         
+        [self.KVOController observe:[HATSettings sharedSettings]
+                            keyPath:@"soundsMuted"
+                            options:NSKeyValueObservingOptionNew
+                              block:^(id observer, id object, NSDictionary *change) {
+                                  BOOL muted = [change[NSKeyValueChangeNewKey] boolValue];
+                                  for (AVAudioPlayer *player in self.avPlayers) {
+                                      player.volume = muted ? 0 : 1;
+                                  }
+                                  
+                                  [self.muteButton setSelected:muted];
+                              }];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(bubbleClicked:)
                                                      name:@"bubbleClicked"
@@ -122,8 +134,7 @@
 {
     [super viewDidLoad];
  
-    self.muted = [[NSUserDefaults standardUserDefaults] boolForKey:@"muted"];
-    self.muteButton.selected = self.muted;
+    self.muteButton.selected = [[HATSettings sharedSettings] soundsMuted];
     
     UINavigationBar *bar = [[UINavigationBar alloc] initWithFrame:self.userView.frame];
     bar.autoresizingMask = self.userView.autoresizingMask;
@@ -151,7 +162,7 @@
     
     BOOL hasUserSeenWelcome = [[NSUserDefaults standardUserDefaults] boolForKey:@"shownWelcome"];
     if (!hasUserSeenWelcome) {
-        self.muted = YES;
+        [[HATSettings sharedSettings] setSoundsMuted:YES];
         [self performBlock:^{
             self.aboutVC = [[UIStoryboard storyboardWithName:@"About"
                                                       bundle:nil]
@@ -192,19 +203,6 @@
 - (NSString *)currentLanguageCode
 {
     return [[NSLocale preferredLanguages] objectAtIndex:0] ?: @"en";
-}
-
-- (void)setMuted:(BOOL)muted
-{
-    _muted = muted;
-    for (AVAudioPlayer *player in self.avPlayers) {
-        player.volume = muted ? 0 : 1;
-    }
-    
-    [self.muteButton setSelected:muted];
-    
-    [[NSUserDefaults standardUserDefaults] setBool:muted forKey:@"muted"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)setMuteButton:(UIButton *)muteButton
@@ -264,7 +262,7 @@
 
 - (void)muteButtonClicked:(UIButton *)sender
 {
-    self.muted = !self.muteButton.selected;
+    [[HATSettings sharedSettings] setSoundsMuted:!self.muteButton.selected];
 }
 
 - (void)newUserViewTapped:(UITapGestureRecognizer *)recognizer
@@ -423,7 +421,7 @@
 #pragma mark - Audio
 - (void)playSoundWithPath:(NSString *)path
 {
-    if (self.muted) {
+    if ([[HATSettings sharedSettings] soundsMuted]) {
         return;
     }
     
@@ -436,7 +434,7 @@
     
     NSError *error;
     AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    player.volume = self.muted ? 0 : 1;
+    player.volume = [[HATSettings sharedSettings] soundsMuted] ? 0 : 1;
     player.delegate = self;
     [self.avPlayers addObject:player];
     [player play];

@@ -10,6 +10,7 @@
 
 #define SettingsKey (@"SettingsKey")
 #define SelectedLanguagesKey (@"SelectedLanguagesKey")
+#define SoundsMutedKey (@"SoundsMutedKey")
 
 @interface HATSettings ()
 @property (strong, nonatomic) NSMutableArray *selectedLanguagesMutable;
@@ -126,6 +127,8 @@
             
             self.selectedLanguagesMutable = [@[englishLanguage] mutableCopy];
         }
+        
+        self.soundsMuted = [self.settings[SoundsMutedKey] boolValue];
     }
     
     return self;
@@ -149,6 +152,7 @@
 - (void)save
 {
     [self.settings setObject:self.selectedLanguagesMutable forKey:SelectedLanguagesKey];
+    [self.settings setObject:@(self.soundsMuted) forKey:SoundsMutedKey];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[self settings]];
     
     [[NSUserDefaults standardUserDefaults] setObject:data
@@ -215,6 +219,16 @@
     }
     
     return [ret sortedArrayUsingSelector:@selector(compare:)];
+}
+
+- (void)setSoundsMuted:(BOOL)soundsMuted
+{
+    if (soundsMuted == _soundsMuted) {
+        return;
+    }
+    
+    _soundsMuted = soundsMuted;
+    [self save];
 }
 
 @end

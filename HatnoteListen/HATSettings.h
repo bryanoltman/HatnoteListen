@@ -12,6 +12,8 @@
 @interface HATSettings : NSObject
 + (instancetype)sharedSettings;
 
+@property (nonatomic) BOOL soundsMuted;
+
 + (NSArray *)availableLanguages;
 - (NSArray *)selectedLanguages;
 - (void)addSelectedLanguage:(HATWikipediaLanguage *)lang;

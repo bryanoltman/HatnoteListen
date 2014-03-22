@@ -13,8 +13,6 @@
 
 @interface HATViewController : UIViewController <AVAudioPlayerDelegate, SRWebSocketDelegate>
 
-@property (nonatomic) BOOL muted;
-
 @property (weak, nonatomic) IBOutlet UIButton *muteButton;
 @property (weak, nonatomic) IBOutlet UIView *userView;
 @property (strong, nonatomic) IBOutlet UILabel *userLabel; // Strong because we juggle this around in its superview and this is less bug-prone than needing to create a strong reference for it every time
