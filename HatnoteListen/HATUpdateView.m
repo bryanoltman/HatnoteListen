@@ -58,7 +58,8 @@
         self.textLabel.adjustsFontSizeToFitWidth = YES;
         self.textLabel.numberOfLines = 1;
         self.textLabel.minimumScaleFactor = kMinFontSize / [self fontSize]; // scale down to the minimum font size
-
+        self.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        
         [self addSubview:self.textLabel];
     }
 }
@@ -97,6 +98,30 @@
     return dotColor;
 }
 
+- (CGFloat)textWidthMultiple
+{
+    CGFloat ret;
+    switch ([[HATSettings sharedSettings] textVolume]) {
+        case HATTextVolumeNone:
+            ret = 0.f;
+            break;
+        case HATTextVolumeSome:
+            ret = 1.f;
+            break;
+        case HATTextVolumeLots:
+            ret = 1.5f;
+            break;
+        case HATTextVolumeAll:
+            ret = 1000.f;
+            break;
+        default:
+            ret = 1.f;
+            break;
+    }
+    
+    return ret;
+}
+
 - (BOOL)showsText
 {
     if (!self.info) {
@@ -105,7 +130,7 @@
     
     NSString *text = [self.info objectForKey:@"page_title"];
     CGSize size = [text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:kMinFontSize]}];
-    return size.width <= CGRectGetWidth([self textViewFrame]);
+    return size.width <= CGRectGetWidth([self textViewFrame]) * [self textWidthMultiple];
 }
 
 - (CGRect)currentFrame

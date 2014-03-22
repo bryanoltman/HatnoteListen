@@ -43,7 +43,9 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (actionSheet.tag == kTextVolumeSheet) {
-        [[HATSettings sharedSettings] setTextVolume:buttonIndex];
+        if (buttonIndex != actionSheet.cancelButtonIndex) {
+            [[HATSettings sharedSettings] setTextVolume:buttonIndex];
+        }
     }
 }
 
@@ -162,6 +164,9 @@
                     [actionSheet addButtonWithTitle:[self displayStringForHATTextVolume:i
                                                                            showSelected:YES]];
                 }
+                
+                [actionSheet addButtonWithTitle:@"Cancel"];
+                actionSheet.cancelButtonIndex = HATTextVolumeCount;
                 
                 [actionSheet showInView:self.view];
             }
