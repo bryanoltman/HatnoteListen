@@ -13,6 +13,7 @@
 
 @interface HATAboutViewController () <TTTAttributedLabelDelegate>
 @property (strong, nonatomic) NSMutableArray *pages;
+@property (strong, nonatomic) NSIndexPath *visibleIndexPath;
 @end
 
 @implementation HATAboutViewController
@@ -25,9 +26,26 @@
     
     self.backgroundView = [[UINavigationBar alloc] initWithFrame:self.view.bounds];
     self.backgroundView.alpha = 0;
+    self.backgroundView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     [self.view insertSubview:self.backgroundView atIndex:0];
     
     self.collectionView.alpha = 0;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    UICollectionViewCell *visibleCell = [[self.collectionView visibleCells] first];
+    self.visibleIndexPath = [self.collectionView indexPathForCell:visibleCell];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [self.collectionView reloadData];
+    [self.collectionView scrollToItemAtIndexPath:self.visibleIndexPath
+                                atScrollPosition:UICollectionViewScrollPositionNone
+                                        animated:NO];
 }
 
 - (void)readAboutText:(NSString *)fileName
@@ -103,7 +121,8 @@
     ret.delegate = self;
     [ret setLinkAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithWhite:0.5 alpha:1] }];
     ret.numberOfLines = 0;
-    
+    ret.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+   
     ret.attributedText = [self pageForIndex:index];
     
     NSRange range = [ret.attributedText.string rangeOfString:@"Bryan Oltman"];
@@ -257,7 +276,9 @@
     return self.pages.count;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return self.collectionView.bounds.size;
 }

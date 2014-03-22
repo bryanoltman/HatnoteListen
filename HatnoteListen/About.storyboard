@@ -10,7 +10,7 @@
                 <viewController id="AHe-Cb-hTM" customClass="HATAboutViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="M4Z-gh-cl8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="zou-ye-hYL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>

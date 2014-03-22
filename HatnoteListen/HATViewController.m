@@ -340,10 +340,11 @@
     self.aboutVC = [[UIStoryboard storyboardWithName:@"About"
                                               bundle:nil]
                     instantiateInitialViewController];
+    self.aboutVC.view.frame = [appDelegate container].centerPanelContainer.frame;
+    
     [[appDelegate container] addChildViewController:self.aboutVC];
-    self.aboutVC.view.frame = [[appDelegate container].view convertRect:self.aboutVC.view.frame
-                                                               fromView:[appDelegate container].centerPanelContainer];
     [[appDelegate container].view addSubview:self.aboutVC.view];
+    
     [self.aboutVC show:content];
 }
 
