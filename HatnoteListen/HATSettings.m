@@ -129,8 +129,8 @@
             self.selectedLanguagesMutable = [@[englishLanguage] mutableCopy];
         }
         
-        self.soundsMuted = [self.settings[SoundsMutedKey] boolValue];
-        self.textVolume = [self.settings[TextVolumeKey] intValue];
+        self.soundsMuted = [self.settings[SoundsMutedKey] boolValue] ?: NO;
+        self.textVolume = [self.settings[TextVolumeKey] intValue] ?: HATTextVolumeLots;
     }
     
     return self;
@@ -153,7 +153,7 @@
 
 - (void)save
 {
-    NSLog(@"saving settings: %@", [self settings]);
+//    NSLog(@"saving settings: %@", [self settings]);
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[self settings]];
     [[NSUserDefaults standardUserDefaults] setObject:data
                                               forKey:SettingsKey];
