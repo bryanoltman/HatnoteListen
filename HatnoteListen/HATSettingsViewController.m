@@ -135,7 +135,7 @@
         case HATTextVolumeAll:
             ret = @"All Text";
             break;
-        case HATTextVolumeMAX:
+        case HATTextVolumeCount:
             ret = @"!!!MAX!!!";
             break;
         default:
@@ -158,7 +158,7 @@
                 UIActionSheet *actionSheet = [UIActionSheet new];
                 actionSheet.tag = kTextVolumeSheet;
                 actionSheet.delegate = self;
-                for (int i = 0; i < HATTextVolumeMAX; i++) {
+                for (int i = 0; i < HATTextVolumeCount; i++) {
                     [actionSheet addButtonWithTitle:[self displayStringForHATTextVolume:i
                                                                            showSelected:YES]];
                 }

@@ -14,7 +14,7 @@ typedef NS_OPTIONS(NSUInteger, HATTextVolume) {
     HATTextVolumeSome,
     HATTextVolumeLots,
     HATTextVolumeAll,
-    HATTextVolumeMAX
+    HATTextVolumeCount
 };
 
 @interface HATSettings : NSObject
