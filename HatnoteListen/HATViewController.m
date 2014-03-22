@@ -150,7 +150,6 @@
     [self hideWikiView:NO];
     
     BOOL hasUserSeenWelcome = [[NSUserDefaults standardUserDefaults] boolForKey:@"shownWelcome"];
-    hasUserSeenWelcome = NO;
     if (!hasUserSeenWelcome) {
         self.muted = YES;
         [self performBlock:^{
