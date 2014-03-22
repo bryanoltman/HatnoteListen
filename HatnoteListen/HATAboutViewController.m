@@ -17,15 +17,6 @@
 
 @implementation HATAboutViewController
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-    }
-    
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -140,6 +131,8 @@
 
 - (void)show:(HATAboutScreenContent)content
 {
+    self.contentType = content;
+    
     switch (content) {
         case HATAboutScreenContentWelcome:
             [self readAboutText:@"welcome"];
@@ -156,24 +149,6 @@
     
     [self show];
 }
-//
-//- (void)showWelcome
-//{
-//    [self readAboutText:@"welcome"];
-//    [self show:nil];
-//}
-//
-//- (void)showAbout
-//{
-//    [self readAboutText:@"about"];
-//    [self show:nil];
-//}
-//
-//- (void)showTutorial
-//{
-//    [self readAboutText:@"tutorial"];
-//    [self show:nil];
-//}
 
 - (void)show
 {
@@ -221,7 +196,7 @@
         case UIGestureRecognizerStateFailed: {
             CGPoint trans = [sender translationInView:self.collectionView];
             
-            if (fabsf(trans.x) > 150) {
+            if (fabsf(trans.x) > 100) {
                 [self hide:nil];
             }
             else {
@@ -252,6 +227,21 @@
     }
     
     [cell addSubview:[self labelForIndex:indexPath.row]];
+    
+    if (self.contentType == HATAboutScreenContentWelcome && indexPath.row == self.pages.count - 1) {
+        // bounce menu
+        [UIView animateKeyframesWithDuration:0.3
+                                       delay:1
+                                     options:UIViewKeyframeAnimationOptionAutoreverse
+                                  animations:^{
+                                      [UIView addKeyframeWithRelativeStartTime:0
+                                                              relativeDuration:1
+                                                                    animations:^{
+                                                                        [[[appDelegate container] centerPanelContainer] setTransform:CGAffineTransformMakeTranslation(30, 0)];
+                                                                    }];
+                                  } completion:nil];
+        [[[appDelegate container] centerPanelContainer] setTransform:CGAffineTransformIdentity];
+    }
     
     return cell;
 }

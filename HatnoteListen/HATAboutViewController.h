@@ -19,6 +19,7 @@ typedef NS_OPTIONS(NSUInteger, HATAboutScreenContent) {
 @interface HATAboutViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UIView *backgroundView;
+@property (nonatomic) HATAboutScreenContent contentType;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet HATHorizontalPanGestureRecognizer *dismissRecognizer;
 

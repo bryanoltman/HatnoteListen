@@ -1,6 +1,6 @@
 Welcome!
 	This is app shows edits to Wikipedia as they happen, so you can watch the encyclopedia grow and change.
-	Scroll down to learn a little bit more about the app.
+	Scroll down for an explanation of what everything means.
  
 Each bubble represents an update to Wikipedia
  
@@ -20,4 +20,6 @@ Purple circles represent edits made by bots
  
 New users are welcomed with a blue banner at the top of the screen
  
-That's it! Slide to either side to get started
+That's all!
+	Slide to either side to get started.
+	Don't worry about remembering all of this – you can access this from the menu
