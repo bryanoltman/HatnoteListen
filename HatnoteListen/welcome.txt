@@ -2,7 +2,7 @@ Welcome!
 	This app shows edits to Wikipedia as they happen, so you can watch as the encyclopedia grows and changes.
 	Scroll down for an explanation of what everything means.
  
-Each bubble represents an update to Wikipedia
+Each bubble represents a change to Wikipedia that was just made
  
 You can tap on the bubble to get more information about its article
  

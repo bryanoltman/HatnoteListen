@@ -1,4 +1,4 @@
-Each bubble represents an update to Wikipedia
+Each bubble represents a change to Wikipedia that was just made
  
 You can tap on the bubble to get more information about its article
  
