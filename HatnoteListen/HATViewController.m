@@ -377,11 +377,8 @@
                                                                              radius,
                                                                              radius)
                                                           andInfo:info];
-//    NSLog(@"showing dot view with frame %@", NSStringFromCGRect(dotView.frame));
-    
     [self.view insertSubview:dotView atIndex:0];
     dotView.transform = CGAffineTransformMakeScale(0.1, 0.1);
-//    [self.viewsCache setObject:dotView forKey:dotView.info[@"page_title"]];
     
     [UIView animateWithDuration:0.6 + (fmodf(arc4random(), 50) / 100) // 0.6 + 0 to 0.5 seconds
                           delay:0
