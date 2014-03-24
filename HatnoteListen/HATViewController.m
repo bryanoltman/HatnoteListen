@@ -464,14 +464,17 @@
             return;
         }
         
+        int index = MIN(MAX(1, (fabsf(changeSize.floatValue) / 250.f) * kNumCelesta), kNumCelesta);
+        index = kNumCelesta - index + 1;
+
 //        so the clav is the bell sound, that's for additions
 //        and the celesta is the string sound, that's for subtractions
         BOOL isAddition = [changeSize intValue] > 0;
         if (isAddition) {
-            soundPath = [NSString stringWithFormat:@"clav%03d", (rand() % kNumClav) + 1];
+            soundPath = [NSString stringWithFormat:@"clav%03d", index];
         }
         else {
-            soundPath = [NSString stringWithFormat:@"cel%03d", (rand() % kNumCelesta) + 1];
+            soundPath = [NSString stringWithFormat:@"cel%03d", index];
         }
         
         CGFloat dotMin = arc4random() % 100 + 35;
