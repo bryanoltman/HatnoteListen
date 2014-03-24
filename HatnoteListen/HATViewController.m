@@ -370,7 +370,7 @@
                     andInfo:(NSDictionary *)info
 {
     CGFloat magMultiple = 0.5;
-    CGFloat radius = MAX(0, MIN(magMultiple * magnitude, CGRectGetHeight(self.view.bounds)));
+    CGFloat radius = CLAMP(0, magMultiple * magnitude, CGRectGetHeight(self.view.bounds));
 
     HATUpdateView *dotView = [[HATUpdateView alloc] initWithFrame:CGRectMake(point.x - radius / 2,
                                                                              point.y - radius / 2,
@@ -464,7 +464,7 @@
             return;
         }
         
-        int index = MIN(MAX(1, (fabsf(changeSize.floatValue) / 250.f) * kNumCelesta), kNumCelesta);
+        int index = CLAMP(1, (fabsf(changeSize.floatValue) / 500.f) * kNumCelesta, kNumCelesta);
         index = kNumCelesta - index + 1;
 
 //        so the clav is the bell sound, that's for additions
