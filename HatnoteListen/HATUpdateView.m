@@ -172,10 +172,10 @@
     UIColor *highlightColor, *bgColor;
     if (self.highlighted) {
         highlightColor = self.color;
-        bgColor = [UIColor blackColor];
+        bgColor = [self.color wayDarkerColor];
     }
     else {
-        highlightColor = [UIColor blackColor];
+        highlightColor = [self.color wayDarkerColor];
         bgColor = self.color;
     }
     
