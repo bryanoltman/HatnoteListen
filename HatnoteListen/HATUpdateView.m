@@ -190,10 +190,8 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     [highlightColor setStroke];
     [bgColor setFill];
-    CGContextSetLineWidth(context, 0.5);
     CGRect bounds = CGRectInset(rect, 3, 3);
     CGContextFillEllipseInRect (context, bounds);
-    CGContextStrokeEllipseInRect(context, bounds);
     CGContextFillPath(context);
 }
 
