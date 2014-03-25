@@ -334,11 +334,11 @@
                      } completion:nil];
     
     [self.wikiHideTimer invalidate];
-    self.wikiHideTimer = [NSTimer scheduledTimerWithTimeInterval:5
-                                                      target:self
-                                                    selector:@selector(removeTimerTicked:)
-                                                    userInfo:nil
-                                                     repeats:NO];
+    self.wikiHideTimer = [NSTimer scheduledTimerWithTimeInterval:9
+                                                          target:self
+                                                        selector:@selector(removeTimerTicked:)
+                                                        userInfo:nil
+                                                         repeats:NO];
 }
 
 - (void)removeTimerTicked:(NSTimer *)timer
