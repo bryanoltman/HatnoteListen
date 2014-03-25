@@ -12,7 +12,7 @@
 
 + (UIColor *)backgroundColor
 {
-    return [UIColor colorFromHex:0x1A1E24];
+    return [UIColor colorFromHex:0x1B2024];
 }
 
 + (UIColor *)purpleDotColor
@@ -22,7 +22,7 @@
 
 + (UIColor *)greenDotColor
 {
-    return [UIColor colorFromHex:0x4DB88A];
+    return [UIColor colorFromHex:0x30DA80];
 }
 
 + (UIColor *)whiteDotColor
