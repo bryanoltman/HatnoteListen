@@ -80,19 +80,13 @@
     // purple is bot
     // white is registered
     if ([isAnon boolValue]) {
-        dotColor = [UIColor colorWithRed:46.0/255.0
-                                   green:204.0/255.0
-                                    blue:113.0/255.0
-                                   alpha:1];
+        dotColor = [UIColor greenDotColor];
     }
     else if ([isBot boolValue]) {
-        dotColor = [UIColor colorWithRed:155.0/255.0
-                                   green:89.0/255.0
-                                    blue:182.0/255.0
-                                   alpha:1];
+        dotColor = [UIColor purpleDotColor];
     }
     else {
-        dotColor = [UIColor whiteColor];
+        dotColor = [UIColor whiteDotColor];
     }
     
     return dotColor;

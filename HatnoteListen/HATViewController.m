@@ -134,14 +134,13 @@
 {
     [super viewDidLoad];
  
+    self.view.backgroundColor = [UIColor backgroundColor];
+    
     self.muteButton.selected = [[HATSettings sharedSettings] soundsMuted];
     
     UINavigationBar *bar = [[UINavigationBar alloc] initWithFrame:self.userView.frame];
     bar.autoresizingMask = self.userView.autoresizingMask;
-    bar.barTintColor = [UIColor colorWithRed:0.f/255.f
-                                       green:133.f/255.f
-                                        blue:230.f/200.f
-                                       alpha:0.75];
+    bar.barTintColor = [UIColor bannerTintColor];
     [self.userView removeFromSuperview];
     self.userView = bar;
     [self.userView addSubview:self.userLabel];
