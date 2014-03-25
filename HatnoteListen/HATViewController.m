@@ -431,7 +431,8 @@
                                           animations:^{
                                               dotView.showTime = [NSDate date];
                                               dotView.duration = floatDuration;
-                                              CGAffineTransform trans = CGAffineTransformMakeScale(0.75, 0.75);
+                                              CGFloat scale = .88;
+                                              CGAffineTransform trans = CGAffineTransformMakeScale(scale, scale);;
                                               trans = CGAffineTransformTranslate(trans, 0, -100 - 1.0f * fmodf(arc4random(), 200));
                                               dotView.transform = trans;
                                           } completion:^(BOOL finished) {
