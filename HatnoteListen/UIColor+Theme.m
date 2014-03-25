@@ -17,12 +17,12 @@
 
 + (UIColor *)purpleDotColor
 {
-    return [UIColor colorFromHex:0x903DCE];
+    return [UIColor colorFromHex:0xB45BB3];
 }
 
 + (UIColor *)greenDotColor
 {
-    return [UIColor colorFromHex:0x7FD491];
+    return [UIColor colorFromHex:0x78B873];
 }
 
 + (UIColor *)whiteDotColor
