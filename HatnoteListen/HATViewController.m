@@ -136,6 +136,7 @@
  
     self.view.backgroundColor = [UIColor backgroundColor];
     
+    self.muteButton.alpha = 0;
     self.muteButton.selected = [[HATSettings sharedSettings] soundsMuted];
     
     UINavigationBar *bar = [[UINavigationBar alloc] initWithFrame:self.userView.frame];
@@ -263,9 +264,37 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
+- (void)backgroundTapped:(id)sender
+{
+    static NSTimer *timer = nil;
+    if (timer) {
+        [timer invalidate];
+    }
+
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         self.muteButton.alpha = 1.f;
+                     }];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:2
+                                             target:self
+                                           selector:@selector(muteButtonTimerTicked:)
+                                           userInfo:nil
+                                            repeats:NO];
+}
+
+- (void)muteButtonTimerTicked:(NSTimer *)timer
+{
+    [UIView animateWithDuration:0.2
+                     animations:^{
+                         self.muteButton.alpha = 0;
+                     }];
+}
+
 #pragma mark - Auxiliary Views
 - (void)showNewUserView:(BOOL)animated
 {
+
     self.userView.alpha = 1;
     [UIView animateWithDuration:animated ? 0.3 : 0
                           delay:0

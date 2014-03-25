@@ -52,6 +52,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.10980392156862745" green="0.15294117647058825" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="bzd-h1-WCd" appends="YES" id="Fbd-sk-xgK"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="YZp-6R-JyY"/>
                     <connections>
@@ -64,6 +67,11 @@
                 <tapGestureRecognizer id="tKe-nP-sKr">
                     <connections>
                         <action selector="newUserViewTapped:" destination="vXZ-lx-hvc" id="aV6-HX-PF9"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer cancelsTouchesInView="NO" id="bzd-h1-WCd">
+                    <connections>
+                        <action selector="backgroundTapped:" destination="vXZ-lx-hvc" id="vLX-wO-nKx"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

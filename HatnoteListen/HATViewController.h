@@ -20,6 +20,7 @@
 
 - (IBAction)muteButtonClicked:(id)sender;
 - (IBAction)newUserViewTapped:(id)sender;
+- (IBAction)backgroundTapped:(id)sender;
 
 - (void)showAboutView:(HATAboutScreenContent)content;
 - (void)hideAboutView;
