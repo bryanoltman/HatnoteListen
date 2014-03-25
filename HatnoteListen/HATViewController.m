@@ -405,7 +405,7 @@
                                               dotView.duration = floatDuration;
                                               dotView.transform = CGAffineTransformTranslate(dotView.transform,
                                                                                              0,
-                                                                                             -1.0f * fmodf(arc4random(), 200));
+                                                                                             -100 - 1.0f * fmodf(arc4random(), 200));
                                           } completion:^(BOOL finished) {
                                               [dotView removeFromSuperview];
                                           }];
