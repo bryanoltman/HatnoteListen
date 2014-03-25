@@ -388,22 +388,26 @@
                      animations:^{
                          dotView.transform = CGAffineTransformMakeScale(1, 1);
                      } completion:^(BOOL finished) {
-                         [UIView animateWithDuration:8
+                         CGFloat floatDuration = 12;
+                         CGFloat fadeDuration = 7;
+                         [UIView animateWithDuration:fadeDuration
+                                               delay:floatDuration - fadeDuration
+                                             options:UIViewAnimationOptionCurveEaseIn
+                                          animations:^{
+                                              dotView.alpha = 0;
+                                          } completion:nil];
+                         
+                         [UIView animateWithDuration:floatDuration
                                                delay:0
                                              options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionCurveEaseIn
                                           animations:^{
                                               dotView.showTime = [NSDate date];
-                                              dotView.duration = 8;
-                                              dotView.transform = CGAffineTransformTranslate(dotView.transform, 0, -1.0f * fmodf(arc4random(), 150));
+                                              dotView.duration = floatDuration;
+                                              dotView.transform = CGAffineTransformTranslate(dotView.transform,
+                                                                                             0,
+                                                                                             -1.0f * fmodf(arc4random(), 200));
                                           } completion:^(BOOL finished) {
-                                              [UIView animateWithDuration:0.2
-                                                               animations:^{
-                                                                   dotView.alpha = 0;
-                                                                   dotView.transform = CGAffineTransformScale(dotView.transform,
-                                                                                                              0.1, 0.1);
-                                                               } completion:^(BOOL finished) {
-                                                                   [dotView removeFromSuperview];
-                                                               }];
+                                              [dotView removeFromSuperview];
                                           }];
                      }];
 }
