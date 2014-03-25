@@ -17,6 +17,7 @@
     #import <AVFoundation/AVFoundation.h>
     #import <CAAnimation+EasingEquations.h>
     #import <JASidePanels/JASidePanelController.h>
+    #import <Flurry.h>
     #import "SRWebSocket.h"
     #import "JSONKit.h"
     #import "NSObject+Util.h"
