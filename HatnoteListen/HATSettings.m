@@ -141,7 +141,9 @@
     static NSMutableDictionary *settings = nil;
     if (!settings) {
         NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SettingsKey];
-        settings = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (data) {
+            settings = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        }
     }
     
     if (!settings) {
