@@ -410,8 +410,8 @@
     
     [UIView animateWithDuration:0.6 + (fmodf(arc4random(), 50) / 100) // 0.6 + 0 to 0.5 seconds
                           delay:0
-         usingSpringWithDamping:0.6
-          initialSpringVelocity:0.75
+         usingSpringWithDamping:0.3
+          initialSpringVelocity:0.85
                         options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction
                      animations:^{
                          dotView.transform = CGAffineTransformMakeScale(1, 1);
@@ -431,9 +431,9 @@
                                           animations:^{
                                               dotView.showTime = [NSDate date];
                                               dotView.duration = floatDuration;
-                                              dotView.transform = CGAffineTransformTranslate(dotView.transform,
-                                                                                             0,
-                                                                                             -100 - 1.0f * fmodf(arc4random(), 200));
+                                              CGAffineTransform trans = CGAffineTransformMakeScale(0.75, 0.75);
+                                              trans = CGAffineTransformTranslate(trans, 0, -100 - 1.0f * fmodf(arc4random(), 200));
+                                              dotView.transform = trans;
                                           } completion:^(BOOL finished) {
                                               [dotView removeFromSuperview];
                                           }];
