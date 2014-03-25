@@ -56,7 +56,7 @@
 
         self.textLabel.font = [UIFont systemFontOfSize:[self fontSize]];
         self.textLabel.adjustsFontSizeToFitWidth = YES;
-        self.textLabel.numberOfLines = 1;
+        self.textLabel.numberOfLines = 0;
         self.textLabel.minimumScaleFactor = kMinFontSize / [self fontSize]; // scale down to the minimum font size
         self.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         
