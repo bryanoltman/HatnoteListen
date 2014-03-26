@@ -22,7 +22,7 @@
 
 + (UIColor *)greenDotColor
 {
-    return [UIColor colorFromHex:0x30DA80];
+    return [UIColor colorFromHex:0x30DA59];
 }
 
 + (UIColor *)whiteDotColor
