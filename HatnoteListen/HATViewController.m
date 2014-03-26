@@ -162,7 +162,6 @@
     
     BOOL hasUserSeenWelcome = [[NSUserDefaults standardUserDefaults] boolForKey:@"shownWelcome"];
     if (!hasUserSeenWelcome) {
-        [[HATSettings sharedSettings] setSoundsMuted:YES];
         [self performBlock:^{
             [self showAboutView:HATAboutScreenContentWelcome];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shownWelcome"];
