@@ -2,7 +2,7 @@ Welcome!
 	This app shows edits to Wikipedia as they happen, so you can watch as the encyclopedia grows and changes.
 	Scroll down for an explanation of what everything means.
  
-See and hear every change to every article on Wikipedia in real-time
+Each bubble represents a real-time change to Wikipedia
  
 You can tap on the bubble to get more information about its article
  
