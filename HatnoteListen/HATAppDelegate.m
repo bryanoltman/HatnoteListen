@@ -12,10 +12,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[AVAudioSession sharedInstance]
-     setCategory:AVAudioSessionCategoryPlayback
-     error:nil];
-    
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     
     [Flurry setCrashReportingEnabled:YES];
