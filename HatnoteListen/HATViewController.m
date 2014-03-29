@@ -194,7 +194,10 @@
 #pragma mark - Socket
 - (void)openSocketForLanguage:(HATWikipediaLanguage *)language
 {
+#ifdef DEBUG
     NSLog(@"opening socket for %@", language.name);
+#endif
+    
     SRWebSocket *socket = self.sockets[language.code];
     if (socket && (socket.readyState == SR_OPEN || socket.readyState == SR_CONNECTING)) {
         return;
