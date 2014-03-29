@@ -11,37 +11,6 @@
 
 @implementation UIImage (Util)
 
-+ (void)load
-{
-    if (SYSTEM_VERSION_LESS_THAN(@"7")) {
-        method_exchangeImplementations(class_getClassMethod(self, @selector(imageNamed:)),
-                                       class_getClassMethod(self, @selector(ios6ImageNamed:)));
-    }
-}
-
-+ (UIImage *)ios7ImageNamed:(NSString *)imageName
-{
-    UIImage *ret = [UIImage ios7ImageNamed:imageName];
-    if (!ret) {
-//        ERROR(@"no image found for %@", imageName);
-    }
-    
-    return ret;
-}
-
-+ (UIImage *)ios6ImageNamed:(NSString *)imageName
-{
-    NSString *realImageName = [NSString stringWithFormat:@"ios6_%@", imageName];
-    UIImage *ret = [UIImage ios6ImageNamed:realImageName];
-    if (!ret) {
-//        ERROR(@"no image found for %@", realImageName);
-        ret = [UIImage ios6ImageNamed:imageName];
-        return ret;
-    }
-    
-    return ret;
-}
-
 + (UIImage *)imageNamed:(NSString *)name withColor:(UIColor *)color
 {
     UIImage *img = [UIImage imageNamed:name];
