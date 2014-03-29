@@ -91,9 +91,7 @@
                                   for (AVAudioPlayer *player in self.avPlayers) {
                                       player.volume = muted ? 0 : 1;
                                   }
-                                  
-                                  [self.muteButton setSelected:muted];
-                              }];
+                            }];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(bubbleClicked:)
@@ -135,9 +133,6 @@
     [super viewDidLoad];
  
     self.view.backgroundColor = [UIColor backgroundColor];
-    
-    self.muteButton.alpha = 0;
-    self.muteButton.selected = [[HATSettings sharedSettings] soundsMuted];
     
     UINavigationBar *bar = [[UINavigationBar alloc] initWithFrame:self.userView.frame];
     bar.autoresizingMask = self.userView.autoresizingMask;
@@ -196,13 +191,6 @@
     return [[NSLocale preferredLanguages] objectAtIndex:0] ?: @"en";
 }
 
-- (void)setMuteButton:(UIButton *)muteButton
-{
-    _muteButton = muteButton;
-    UIImage *image = [UIImage imageNamed:@"speaker-down"];
-    [muteButton setImage:image forState:(UIControlStateHighlighted | UIControlStateSelected)];
-}
-
 #pragma mark - Socket
 - (void)openSocketForLanguage:(HATWikipediaLanguage *)language
 {
@@ -251,43 +239,11 @@
     [self showWikiView:YES];
 }
 
-- (void)muteButtonClicked:(UIButton *)sender
-{
-    [[HATSettings sharedSettings] setSoundsMuted:!self.muteButton.selected];
-}
-
 - (void)newUserViewTapped:(UITapGestureRecognizer *)recognizer
 {
     NSString *urlString = [NSString stringWithFormat:@"http://%@.wikipedia.org/w/index.php?title=User_talk:%@&action=edit&section=new",
                            self.currentLanguageCode, self.newestUserName];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-}
-
-- (void)backgroundTapped:(id)sender
-{
-    static NSTimer *timer = nil;
-    if (timer) {
-        [timer invalidate];
-    }
-
-    [UIView animateWithDuration:0.2
-                     animations:^{
-                         self.muteButton.alpha = 1.f;
-                     }];
-    
-    timer = [NSTimer scheduledTimerWithTimeInterval:2
-                                             target:self
-                                           selector:@selector(muteButtonTimerTicked:)
-                                           userInfo:nil
-                                            repeats:NO];
-}
-
-- (void)muteButtonTimerTicked:(NSTimer *)timer
-{
-    [UIView animateWithDuration:0.2
-                     animations:^{
-                         self.muteButton.alpha = 0;
-                     }];
 }
 
 #pragma mark - Auxiliary Views
@@ -329,7 +285,6 @@
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          self.wikiVC.view.transform = CGAffineTransformIdentity;
-                         self.muteButton.transform = CGAffineTransformMakeTranslation(0, -CGRectGetHeight(self.wikiVC.view.frame));
                      } completion:nil];
     
     [self.wikiHideTimer invalidate];
@@ -357,7 +312,6 @@
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          self.wikiVC.view.transform = CGAffineTransformMakeTranslation(0, CGRectGetHeight(self.wikiVC.view.frame));
-                         self.muteButton.transform = CGAffineTransformIdentity;
                      } completion:nil];
 }
 

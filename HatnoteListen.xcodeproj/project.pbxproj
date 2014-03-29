@@ -98,8 +98,6 @@
 		EDCE382918CBC004006C3B6F /* HATContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE382818CBC004006C3B6F /* HATContainerView.m */; };
 		EDDD564118BEDE8400D7AD6F /* NSObject+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */; };
 		EDDD564318BEE7B700D7AD6F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDD564218BEE7B700D7AD6F /* AVFoundation.framework */; };
-		EDDD564718BEEDB300D7AD6F /* speaker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDDD564518BEEDB300D7AD6F /* speaker@2x.png */; };
-		EDDD564818BEEDB300D7AD6F /* speaker-muted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDDD564618BEEDB300D7AD6F /* speaker-muted@2x.png */; };
 		EDE5A5AD18DD3E4C0042F5D0 /* tutorial.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDE5A5AB18DD3E4C0042F5D0 /* tutorial.txt */; };
 		EDE5A5AE18DD3E4C0042F5D0 /* welcome.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDE5A5AC18DD3E4C0042F5D0 /* welcome.txt */; };
 		EDEFBEA318C3F8F6002AE9C6 /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBEA218C3F8F6002AE9C6 /* UIColor+Util.m */; };
@@ -230,8 +228,6 @@
 		EDDD563F18BEDE8400D7AD6F /* NSObject+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Util.h"; sourceTree = "<group>"; };
 		EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Util.m"; sourceTree = "<group>"; };
 		EDDD564218BEE7B700D7AD6F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		EDDD564518BEEDB300D7AD6F /* speaker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speaker@2x.png"; sourceTree = "<group>"; };
-		EDDD564618BEEDB300D7AD6F /* speaker-muted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speaker-muted@2x.png"; sourceTree = "<group>"; };
 		EDE5A5AB18DD3E4C0042F5D0 /* tutorial.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tutorial.txt; sourceTree = "<group>"; };
 		EDE5A5AC18DD3E4C0042F5D0 /* welcome.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = welcome.txt; sourceTree = "<group>"; };
 		EDEFBEA118C3F8F6002AE9C6 /* UIColor+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Util.h"; sourceTree = "<group>"; };
@@ -489,8 +485,6 @@
 		EDDD564418BEED9F00D7AD6F /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				EDDD564618BEEDB300D7AD6F /* speaker-muted@2x.png */,
-				EDDD564518BEEDB300D7AD6F /* speaker@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -607,7 +601,6 @@
 				EDCBD04118D51FF800EC2892 /* Settings.storyboard in Resources */,
 				ED9182DA18C4163E003D91A0 /* cel020.mp3 in Resources */,
 				ED91830318C41648003D91A0 /* clav007.mp3 in Resources */,
-				EDDD564718BEEDB300D7AD6F /* speaker@2x.png in Resources */,
 				ED9182DC18C4163E003D91A0 /* cel022.mp3 in Resources */,
 				ED91831218C41648003D91A0 /* clav022.mp3 in Resources */,
 				EDE5A5AD18DD3E4C0042F5D0 /* tutorial.txt in Resources */,
@@ -625,7 +618,6 @@
 				ED9182DF18C4163E003D91A0 /* cel025.mp3 in Resources */,
 				ED5B867B18BACA6500932430 /* InfoPlist.strings in Resources */,
 				ED91830B18C41648003D91A0 /* clav015.mp3 in Resources */,
-				EDDD564818BEEDB300D7AD6F /* speaker-muted@2x.png in Resources */,
 				ED91830E18C41648003D91A0 /* clav018.mp3 in Resources */,
 				ED9182D918C4163E003D91A0 /* cel019.mp3 in Resources */,
 				ED9182FD18C41648003D91A0 /* clav001.mp3 in Resources */,
