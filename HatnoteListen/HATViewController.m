@@ -49,19 +49,19 @@
         self.avPlayers = [NSMutableArray new];
         self.sockets = [NSMutableDictionary new];
         self.KVOController = [FBKVOController controllerWithObserver:self];
-
+        
         __weak HATViewController *weakSelf = self;
         [self.KVOController observe:[HATSettings sharedSettings]
                             keyPath:@"selectedLanguages"
                             options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                               block:^(id observer, HATSettings *settings, NSDictionary *change) {
                                   NSKeyValueChange kind = [change[NSKeyValueChangeKindKey] integerValue];
-                                  if (kind & (NSKeyValueChangeInsertion|NSKeyValueChangeSetting)) {
+                                  if (kind == NSKeyValueChangeInsertion || kind == NSKeyValueChangeSetting) {
                                       [change[NSKeyValueChangeNewKey] each:^(HATWikipediaLanguage *lang) {
                                           [weakSelf openSocketForLanguage:lang];
                                       }];
                                   }
-                                  else if (kind & NSKeyValueChangeRemoval) {
+                                  else if (kind == NSKeyValueChangeRemoval) {
                                       [change[NSKeyValueChangeOldKey] each:^(HATWikipediaLanguage *lang) {
                                           [weakSelf closeSocketForLanguage:lang];
                                       }];
