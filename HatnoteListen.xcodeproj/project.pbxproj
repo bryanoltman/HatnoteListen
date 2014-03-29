@@ -13,6 +13,7 @@
 		ED075D2618D7EDAC00581187 /* NSString+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ED075D2518D7EDAC00581187 /* NSString+Util.m */; };
 		ED36591718E760920071140A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = ED36591618E760920071140A /* UIImage+ImageEffects.m */; };
 		ED36591A18E760C80071140A /* UIImage+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ED36591918E760C80071140A /* UIImage+Util.m */; };
+		ED36591C18E767AF0071140A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED36591B18E767AF0071140A /* CoreMotion.framework */; };
 		ED3C834218E12B100018190A /* UIColor+Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3C834118E12B100018190A /* UIColor+Theme.m */; };
 		ED3E7A5818DBE29600CADCCC /* about.txt in Resources */ = {isa = PBXBuildFile; fileRef = ED3E7A5718DBE29600CADCCC /* about.txt */; };
 		ED3E7A5B18DBEA4800CADCCC /* HATHorizontalPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3E7A5A18DBEA4800CADCCC /* HATHorizontalPanGestureRecognizer.m */; };
@@ -128,6 +129,7 @@
 		ED36591618E760920071140A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		ED36591818E760C80071140A /* UIImage+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Util.h"; sourceTree = "<group>"; };
 		ED36591918E760C80071140A /* UIImage+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Util.m"; sourceTree = "<group>"; };
+		ED36591B18E767AF0071140A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		ED3C834018E12B100018190A /* UIColor+Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Theme.h"; sourceTree = "<group>"; };
 		ED3C834118E12B100018190A /* UIColor+Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Theme.m"; sourceTree = "<group>"; };
 		ED3E7A5718DBE29600CADCCC /* about.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = about.txt; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED36591C18E767AF0071140A /* CoreMotion.framework in Frameworks */,
 				EDDD564318BEE7B700D7AD6F /* AVFoundation.framework in Frameworks */,
 				ED5B867318BACA6500932430 /* CoreGraphics.framework in Frameworks */,
 				ED5B867518BACA6500932430 /* UIKit.framework in Frameworks */,
@@ -312,6 +315,7 @@
 		ED5B866F18BACA6500932430 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED36591B18E767AF0071140A /* CoreMotion.framework */,
 				EDDD564218BEE7B700D7AD6F /* AVFoundation.framework */,
 				ED755D3718BB071A00E7AC88 /* AudioToolbox.framework */,
 				ED5B867018BACA6500932430 /* Foundation.framework */,
