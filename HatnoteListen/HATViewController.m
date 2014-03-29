@@ -44,6 +44,25 @@
     return ret;
 }
 
+- (CGFloat)adjustAngleForInterfaceOrientation:(CGFloat)angle
+{
+    switch (self.interfaceOrientation) {
+        case UIInterfaceOrientationLandscapeLeft:
+            angle += M_PI_2;
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            angle += -M_PI_2;
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            angle += M_PI_2;
+            break;
+        default:
+            break;
+    }
+    
+    return angle;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -56,25 +75,14 @@
         __weak HATViewController *weakSelf = self;
         [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue]
                                                 withHandler:^(CMDeviceMotion *motion, NSError *error) {
-                                                    weakSelf.gravityBehavior.angle = atan2(motion.gravity.y, -motion.gravity.x);
+                                                    CGFloat angle = atan2(motion.gravity.y, -motion.gravity.x);
+                                                    weakSelf.gravityBehavior.angle = [self adjustAngleForInterfaceOrientation:angle];
                                                     CGFloat textAngle;
                                                     if (fabsf(motion.gravity.y) < 0.1 && fabsf(motion.gravity.x) < 0.1) {
                                                         textAngle = 0;
                                                     } else {
                                                         textAngle = atan2(motion.gravity.y, -motion.gravity.x) + M_PI_2;
-                                                        switch (self.interfaceOrientation) {
-                                                            case UIInterfaceOrientationLandscapeLeft:
-                                                                textAngle += M_PI_2;
-                                                                break;
-                                                            case UIInterfaceOrientationLandscapeRight:
-                                                                textAngle += -M_PI_2;
-                                                                break;
-                                                            case UIInterfaceOrientationPortraitUpsideDown:
-                                                                textAngle += M_PI_2;
-                                                                break;
-                                                            default:
-                                                                break;
-                                                        }
+                                                        textAngle = [self adjustAngleForInterfaceOrientation:textAngle];
                                                     }
                                                     
                                                     for (UIView *subview in weakSelf.view.subviews) {
