@@ -26,7 +26,7 @@
         }
         
         HATUpdateView *view = (HATUpdateView *)subview;
-        if (CGRectContainsPoint([view currentFrame], point)) {
+        if (CGRectContainsPoint([view frame], point)) {
             [hitViews addObject:view];
         }
     }
@@ -50,7 +50,7 @@
         return;
     }
 
-    if (!CGRectContainsPoint([self.highlightedView currentFrame], point)) {
+    if (!CGRectContainsPoint(self.highlightedView.frame, point)) {
         self.highlightedView.highlighted = NO;
         self.highlightedView = nil;
     }
@@ -61,7 +61,7 @@
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint point = [touch locationInView:self];
 
-    if (self.highlightedView && CGRectContainsPoint([self.highlightedView currentFrame], point)) {
+    if (self.highlightedView && CGRectContainsPoint(self.highlightedView.frame, point)) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"bubbleClicked"
                                                             object:self.highlightedView.info];
     }

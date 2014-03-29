@@ -25,6 +25,9 @@
 @property (strong, nonatomic) NSTimer *userHideTimer;
 @property (strong, nonatomic) NSString *newestUserName;
 @property (strong, nonatomic) NSDate *startTime;
+@property (strong, nonatomic) UIDynamicAnimator *animator;
+@property (strong, nonatomic) UIGravityBehavior *gravityBehavior;
+@property (strong, nonatomic) CMMotionManager *motionManager;
 @end
 
 @implementation HATViewController
@@ -48,9 +51,48 @@
         self.startTime = [NSDate date];
         self.avPlayers = [NSMutableArray new];
         self.sockets = [NSMutableDictionary new];
-        self.KVOController = [FBKVOController controllerWithObserver:self];
-        
+        self.motionManager = [CMMotionManager new];
+        self.motionManager.deviceMotionUpdateInterval = 0.1f;
         __weak HATViewController *weakSelf = self;
+        [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue]
+                                                withHandler:^(CMDeviceMotion *motion, NSError *error) {
+                                                    weakSelf.gravityBehavior.angle = atan2(motion.gravity.y, -motion.gravity.x);
+                                                    CGFloat textAngle;
+                                                    if (fabsf(motion.gravity.y) < 0.1 && fabsf(motion.gravity.x) < 0.1) {
+                                                        textAngle = 0;
+                                                    } else {
+                                                        textAngle = atan2(motion.gravity.y, -motion.gravity.x) + M_PI_2;
+                                                        switch (self.interfaceOrientation) {
+                                                            case UIInterfaceOrientationLandscapeLeft:
+                                                                textAngle += M_PI_2;
+                                                                break;
+                                                            case UIInterfaceOrientationLandscapeRight:
+                                                                textAngle += -M_PI_2;
+                                                                break;
+                                                            case UIInterfaceOrientationPortraitUpsideDown:
+                                                                textAngle += M_PI_2;
+                                                                break;
+                                                            default:
+                                                                break;
+                                                        }
+                                                    }
+                                                    
+                                                    for (UIView *subview in weakSelf.view.subviews) {
+                                                        if (![subview isKindOfClass:[HATUpdateView class]]) {
+                                                            continue;
+                                                        }
+                                                        
+                                                        HATUpdateView *dotView = (HATUpdateView *)subview;
+                                                        [UIView animateWithDuration:weakSelf.motionManager.deviceMotionUpdateInterval
+                                                                              delay:0
+                                                                            options:UIViewAnimationOptionCurveEaseOut
+                                                                         animations:^{
+                                                                             dotView.textLabel.transform = CGAffineTransformMakeRotation(textAngle);
+                                                                         } completion:nil];
+                                                    }
+                                                }];
+        
+        self.KVOController = [FBKVOController controllerWithObserver:self];
         [self.KVOController observe:[HATSettings sharedSettings]
                             keyPath:@"selectedLanguages"
                             options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
@@ -141,6 +183,12 @@
     self.userView = bar;
     [self.userView addSubview:self.userLabel];
     [self.view addSubview:self.userView];
+    
+    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    self.gravityBehavior = [UIGravityBehavior new];
+    self.gravityBehavior.gravityDirection = CGVectorMake(0, -1);
+    self.gravityBehavior.magnitude = 0.01;
+    [self.animator addBehavior:self.gravityBehavior];
     
     self.wikiVC = [self.childViewControllers find:^BOOL(id vc) {
         return [vc isKindOfClass:[HATWikipediaViewController class]];
@@ -381,20 +429,16 @@
                                           animations:^{
                                               dotView.alpha = 0;
                                           } completion:nil];
+
+                         [self.gravityBehavior addItem:dotView];
+//                         UICollisionBehavior* collisionBehavior = [[UICollisionBehavior alloc] initWithItems:@[dotView]];
+//                         collisionBehavior.translatesReferenceBoundsIntoBoundary = YES;
+//                         [animator addBehavior:collisionBehavior];
                          
-                         [UIView animateWithDuration:floatDuration
-                                               delay:0
-                                             options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionCurveEaseIn
-                                          animations:^{
-                                              dotView.showTime = [NSDate date];
-                                              dotView.duration = floatDuration;
-                                              CGFloat scale = .88;
-                                              CGAffineTransform trans = CGAffineTransformMakeScale(scale, scale);;
-                                              trans = CGAffineTransformTranslate(trans, 0, -100 - 1.0f * fmodf(arc4random(), 200));
-                                              dotView.transform = trans;
-                                          } completion:^(BOOL finished) {
-                                              [dotView removeFromSuperview];
-                                          }];
+                         [self performBlock:^{
+                             [self.gravityBehavior removeItem:dotView];
+                             [dotView removeFromSuperview];
+                         } afterDelay:floatDuration];
                      }];
 }
 
