@@ -8,9 +8,12 @@
 
 #import "HATSettingsViewController.h"
 
-#define kLanguageSection 0
-#define kSettingsSection 1
+#define kSettingsSection 0
 #define kSettingsSectionTextVolume 0
+#define kSettingsSectionSounds 1
+
+#define kLanguageSection 1
+
 #define kAboutSection 2
 #define kAboutSectionTutorial 0
 #define kAboutSectionAbout 1
@@ -39,6 +42,11 @@
                           }];
 }
 
+- (void)soundSwitchToggled:(UISwitch *)sender
+{
+    [[HATSettings sharedSettings] setSoundsMuted:!sender.on];
+}
+
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -61,7 +69,7 @@
         case kLanguageSection:
             return [[HATSettings availableLanguages] count];
         case kSettingsSection:
-            return 1;
+            return 2;
         case kAboutSection:
             return 2;
     }
@@ -94,16 +102,29 @@
         }
     }
     else if (indexPath.section == kSettingsSection) {
-        static NSString *reuseId = @"SettingsCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
         
         switch (indexPath.row) {
-            case kSettingsSectionTextVolume:
+            case kSettingsSectionTextVolume: {
+                static NSString *reuseId = @"SettingsCell";
+                cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
                 cell.textLabel.text = @"Text Volume";
                 cell.detailTextLabel.text = [self displayStringForHATTextVolume:[[HATSettings sharedSettings] textVolume]
                                                                    showSelected:NO];
+            }
                 break;
+            case kSettingsSectionSounds: {
+                static NSString *reuseId = @"SoundsCell";
+                cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+                UISwitch *switchView = [cell.contentView.subviews find:^BOOL(UIView *subview) {
+                    return [subview isKindOfClass:[UISwitch class]];
+                }];
                 
+                switchView.on = ![[HATSettings sharedSettings] soundsMuted];
+                [switchView addTarget:self
+                               action:@selector(soundSwitchToggled:)
+                     forControlEvents:UIControlEventValueChanged];
+            }
+                break;
             default:
                 break;
         }
