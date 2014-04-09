@@ -195,6 +195,10 @@
 
 - (void)removeSelectedLanguage:(HATWikipediaLanguage *)lang
 {
+    if (![self.selectedLanguagesMutable containsObject:lang]) {
+        return;
+    }
+    
     NSIndexSet *index = [NSIndexSet indexSetWithIndex:[self.selectedLanguagesMutable indexOfObject:lang]];
     [self willChange:NSKeyValueChangeRemoval
      valuesAtIndexes:index
