@@ -36,6 +36,7 @@
 		ED755D3618BB065500E7AC88 /* HATWikipediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED755D3518BB065500E7AC88 /* HATWikipediaViewController.m */; };
 		ED755DAC18BB084600E7AC88 /* swell2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7318BB084600E7AC88 /* swell2.mp3 */; };
 		ED755DAD18BB084600E7AC88 /* swell3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7418BB084600E7AC88 /* swell3.mp3 */; };
+		ED764676193FF7B20005751B /* CALayer+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ED764675193FF7B20005751B /* CALayer+Util.m */; };
 		ED7BB69718CCD0B400ED30F2 /* swell1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7218BB084600E7AC88 /* swell1.mp3 */; };
 		ED9182C718C4163E003D91A0 /* cel001.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED9182AC18C4163E003D91A0 /* cel001.mp3 */; };
 		ED9182C818C4163E003D91A0 /* cel002.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED9182AD18C4163E003D91A0 /* cel002.mp3 */; };
@@ -162,6 +163,8 @@
 		ED755D7218BB084600E7AC88 /* swell1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swell1.mp3; sourceTree = "<group>"; };
 		ED755D7318BB084600E7AC88 /* swell2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swell2.mp3; sourceTree = "<group>"; };
 		ED755D7418BB084600E7AC88 /* swell3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swell3.mp3; sourceTree = "<group>"; };
+		ED764674193FF7B20005751B /* CALayer+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Util.h"; sourceTree = "<group>"; };
+		ED764675193FF7B20005751B /* CALayer+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Util.m"; sourceTree = "<group>"; };
 		ED9182AC18C4163E003D91A0 /* cel001.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cel001.mp3; sourceTree = "<group>"; };
 		ED9182AD18C4163E003D91A0 /* cel002.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cel002.mp3; sourceTree = "<group>"; };
 		ED9182AE18C4163E003D91A0 /* cel003.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cel003.mp3; sourceTree = "<group>"; };
@@ -496,6 +499,8 @@
 		EDEFBEA418C3F8FF002AE9C6 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				ED764674193FF7B20005751B /* CALayer+Util.h */,
+				ED764675193FF7B20005751B /* CALayer+Util.m */,
 				ED5A04A218CEA87F0068D325 /* NSArray+FunctionalHelper.h */,
 				ED5A04A318CEA87F0068D325 /* NSArray+FunctionalHelper.m */,
 				EDEFBEA518C3FE1E002AE9C6 /* NSArray+Util.h */,
@@ -727,6 +732,7 @@
 				EDB7D08218D94A6A0025D63C /* UIDevice+Util.m in Sources */,
 				ED755D3618BB065500E7AC88 /* HATWikipediaViewController.m in Sources */,
 				ED5B868718BACA6500932430 /* HATViewController.m in Sources */,
+				ED764676193FF7B20005751B /* CALayer+Util.m in Sources */,
 				ED5A04A718CEB5CB0068D325 /* HATSettings.m in Sources */,
 				ED5A04A418CEA87F0068D325 /* NSArray+FunctionalHelper.m in Sources */,
 			);
@@ -854,12 +860,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Michael Oltman (846PZ68MD3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
 				INFOPLIST_FILE = "HatnoteListen/HatnoteListen-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HatnoteListen/HatnoteListen-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -871,12 +881,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Michael Oltman (9422A6P5N6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
 				INFOPLIST_FILE = "HatnoteListen/HatnoteListen-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HatnoteListen/HatnoteListen-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
