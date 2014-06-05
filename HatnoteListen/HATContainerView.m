@@ -26,7 +26,10 @@
         }
         
         HATUpdateView *view = (HATUpdateView *)subview;
-        if (CGRectContainsPoint([view frame], point)) {
+        CGFloat xDist = (point.x - view.center.x);
+        CGFloat yDist = (point.y - view.center.y);
+        CGFloat distance = sqrt((xDist * xDist) + (yDist * yDist));
+        if (distance < view.frame.size.width / 2) {
             [hitViews addObject:view];
         }
     }
