@@ -34,6 +34,11 @@
         }
     }
     
+    if (!hitViews.count) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"backgroundClicked"
+                                                            object:nil];
+    }
+    
     self.highlightedView = [hitViews minimum:^id(HATUpdateView *view) {
         return view.lastTouchDate;
     }];
@@ -66,7 +71,7 @@
 
     if (self.highlightedView && CGRectContainsPoint(self.highlightedView.frame, point)) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"bubbleClicked"
-                                                            object:self.highlightedView.info];
+                                                            object:self.highlightedView];
     }
     
     self.highlightedView.highlighted = NO;

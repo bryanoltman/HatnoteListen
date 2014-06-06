@@ -23,11 +23,14 @@
 @property (strong, nonatomic) NSMutableArray *avPlayers;
 @property (strong, nonatomic) NSTimer *wikiHideTimer;
 @property (strong, nonatomic) NSTimer *userHideTimer;
+@property (strong, nonatomic) NSTimer *pushBehaviorTimer;
 @property (strong, nonatomic) NSString *newestUserName;
 @property (strong, nonatomic) NSDate *startTime;
 @property (strong, nonatomic) UIDynamicAnimator *animator;
 @property (strong, nonatomic) UIGravityBehavior *gravityBehavior;
 @property (strong, nonatomic) CMMotionManager *motionManager;
+
+@property (strong, nonatomic) HATUpdateView *selectedView;
 @end
 
 @implementation HATViewController
@@ -71,7 +74,7 @@
         self.avPlayers = [NSMutableArray new];
         self.sockets = [NSMutableDictionary new];
         self.motionManager = [CMMotionManager new];
-        self.motionManager.deviceMotionUpdateInterval = 0.1f;
+        self.motionManager.deviceMotionUpdateInterval = 1.f/60.f;
         __weak HATViewController *weakSelf = self;
         [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue]
                                                 withHandler:^(CMDeviceMotion *motion, NSError *error) {
@@ -91,12 +94,12 @@
                                                         }
                                                         
                                                         HATUpdateView *dotView = (HATUpdateView *)subview;
-                                                        [UIView animateWithDuration:weakSelf.motionManager.deviceMotionUpdateInterval
-                                                                              delay:0
-                                                                            options:UIViewAnimationOptionCurveEaseOut
-                                                                         animations:^{
-                                                                             dotView.textLabel.transform = CGAffineTransformMakeRotation(textAngle);
-                                                                         } completion:nil];
+                                                        if (dotView.textLabel.text && ![dotView.textLabel.text isEqualToString:@""]) {
+                                                            [UIView animateWithDuration:(textAngle == 0) ? .2 : 0
+                                                                             animations:^{
+                                                                                 dotView.textLabel.transform = CGAffineTransformMakeRotation(textAngle);
+                                                                             }];
+                                                        }
                                                     }
                                                 }];
         
@@ -148,6 +151,10 @@
                                                      name:@"bubbleClicked"
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(backgroundClicked:)
+                                                     name:@"backgroundClicked"
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didBecomeActive)
                                                      name:UIApplicationDidBecomeActiveNotification
                                                    object:nil];
@@ -166,6 +173,9 @@
                                                     name:@"bubbleClicked"
                                                   object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"backgroundClicked"
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -178,17 +188,28 @@
     return UIStatusBarStyleLightContent;
 }
 
+- (void)setSelectedView:(HATUpdateView *)selectedView
+{
+    HATUpdateView *previousView = _selectedView;
+    _selectedView = selectedView;
+    self.wikiVC.info = _selectedView.info;
+    if (_selectedView) {
+        [self showWikiView:YES];
+    } else {
+        [self hideWikiView:YES];
+    }
+
+    [self animateSelectionChangeFromView:previousView
+                                  toView:selectedView];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
  
     self.view.backgroundColor = [UIColor backgroundColor];
     
-    UINavigationBar *bar = [[UINavigationBar alloc] initWithFrame:self.userView.frame];
-    bar.autoresizingMask = self.userView.autoresizingMask;
-    bar.barTintColor = [UIColor bannerTintColor];
-    [self.userView removeFromSuperview];
-    self.userView = bar;
+    self.userView.backgroundColor = [UIColor bannerTintColor];
     [self.userView addSubview:self.userLabel];
     [self.view addSubview:self.userView];
     
@@ -197,7 +218,7 @@
     self.gravityBehavior.gravityDirection = CGVectorMake(0, -1);
     self.gravityBehavior.magnitude = 0.01;
     [self.animator addBehavior:self.gravityBehavior];
-    
+        
     self.wikiVC = [self.childViewControllers find:^BOOL(id vc) {
         return [vc isKindOfClass:[HATWikipediaViewController class]];
     }];
@@ -219,6 +240,12 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         } afterDelay:0.2];
     }
+    
+    self.pushBehaviorTimer = [NSTimer scheduledTimerWithTimeInterval:1
+                                                              target:self
+                                                            selector:@selector(pushBehaviorTimerTicked:)
+                                                            userInfo:nil
+                                                             repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -227,10 +254,12 @@
     
     for (UIView *subview in self.view.subviews) {
         if (![subview isKindOfClass:[HATUpdateView class]]) {
-            break;
+            continue;
         }
         
+        self.selectedView = nil;
         HATUpdateView *dotView = (HATUpdateView *)subview;
+        [self.gravityBehavior removeItem:dotView];
         [UIView animateWithDuration:0.4
                          animations:^{
                              dotView.alpha = 0;
@@ -245,6 +274,52 @@
 - (NSString *)currentLanguageCode
 {
     return [[NSLocale preferredLanguages] objectAtIndex:0] ?: @"en";
+}
+
+- (void)animateSelectionChangeFromView:(HATUpdateView *)fromView toView:(HATUpdateView *)toView
+{
+    static CGPoint previousLocation = {0,0};
+    if (fromView == toView) {
+        return;
+    }
+    
+    if (fromView) {
+        fromView.alpha = 0.6;
+        fromView.layer.shadowOpacity = 0;
+        UISnapBehavior *snapBehavior = [[UISnapBehavior alloc] initWithItem:fromView
+                                                                snapToPoint:previousLocation];
+        [self.animator addBehavior:snapBehavior];
+        [self performBlock:^{
+            [self.animator removeBehavior:snapBehavior];
+            [fromView.layer restartAnimations];
+            if (![self.gravityBehavior.items containsObject:fromView]) {
+                [self.gravityBehavior addItem:fromView];
+            }
+        } afterDelay:0.5];
+    }
+    
+    if (toView) {
+        previousLocation = toView.center;
+        
+        [toView.layer pauseAnimations];
+        toView.alpha = 0.85;
+        toView.layer.shadowOpacity = 1;
+        toView.layer.shadowRadius = 3;
+        toView.layer.shadowOffset = CGSizeZero;
+
+        [self.view insertSubview:toView
+                    belowSubview:self.wikiVC.view.superview];
+        
+        [self.gravityBehavior removeItem:toView];
+        CGPoint toPoint = self.view.center;
+        toPoint.y = CGRectGetMinY(self.wikiVC.view.superview.frame) - toView.frame.size.height / 2;
+        UISnapBehavior *snapBehavior = [[UISnapBehavior alloc] initWithItem:toView
+                                                                snapToPoint:toPoint];
+        [self.animator addBehavior:snapBehavior];
+        [self performBlock:^{
+            [self.animator removeBehavior:snapBehavior];
+        } afterDelay:0.5];
+    }
 }
 
 #pragma mark - Socket
@@ -272,6 +347,7 @@
     [self.sockets removeObjectForKey:language.code];
 }
 
+#pragma mark - Notifications
 - (void)didEnterBackground
 {
     [self.sockets enumerateKeysAndObjectsUsingBlock:^(id key, SRWebSocket *socket, BOOL *stop) {
@@ -279,6 +355,7 @@
     }];
     
     [self.sockets removeAllObjects];
+    self.selectedView = nil;
 }
 
 - (void)didBecomeActive
@@ -291,11 +368,14 @@
 }
 
 #pragma mark - Events
+- (void)backgroundClicked:(NSNotification *)notification
+{
+    self.selectedView = nil;
+}
+
 - (void)bubbleClicked:(NSNotification *)notification
 {
-    NSDictionary *info = notification.object;
-    self.wikiVC.info = info;
-    [self showWikiView:YES];
+    self.selectedView = notification.object;
 }
 
 - (void)newUserViewTapped:(UITapGestureRecognizer *)recognizer
@@ -308,7 +388,6 @@
 #pragma mark - Auxiliary Views
 - (void)showNewUserView:(BOOL)animated
 {
-
     self.userView.alpha = 1;
     [UIView animateWithDuration:animated ? 0.3 : 0
                           delay:0
@@ -362,6 +441,28 @@
     else if (timer == self.wikiHideTimer) {
         [self hideWikiView:YES];
     }
+}
+
+- (void)pushBehaviorTimerTicked:(NSTimer *)timer
+{
+    // TODO
+//    NSUInteger index = arc4random() % self.view.subviews.count;
+//    UIView *subview = self.view.subviews[index];
+//    if (![subview isKindOfClass:[HATUpdateView class]]) {
+//        return;
+//    }
+//    
+//    HATUpdateView *dotView = (HATUpdateView *)subview;
+//    
+//    UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[dotView]
+//                                                                    mode:UIPushBehaviorModeInstantaneous];
+//    pushBehavior.angle = drand48() * M_PI * 2;
+//    pushBehavior.magnitude = drand48() * 0.1;
+//    NSLog(@"push direction is %f,%f", pushBehavior.pushDirection.dx, pushBehavior.pushDirection.dy);
+//    [self.animator addBehavior:pushBehavior];
+//    [self performBlock:^{
+//        [self.animator removeBehavior:pushBehavior];
+//    } afterDelay:0.001];
 }
 
 - (void)hideWikiView:(BOOL)animated
@@ -429,24 +530,23 @@
                      animations:^{
                          dotView.transform = CGAffineTransformMakeScale(1, 1);
                      } completion:^(BOOL finished) {
-                         CGFloat floatDuration = 12;
-                         CGFloat fadeDuration = 7;
-                         [UIView animateWithDuration:fadeDuration
-                                               delay:floatDuration - fadeDuration
-                                             options:UIViewAnimationOptionCurveEaseIn
-                                          animations:^{
-                                              dotView.alpha = 0;
-                                          } completion:nil];
-
                          [self.gravityBehavior addItem:dotView];
-//                         UICollisionBehavior* collisionBehavior = [[UICollisionBehavior alloc] initWithItems:@[dotView]];
-//                         collisionBehavior.translatesReferenceBoundsIntoBoundary = YES;
-//                         [animator addBehavior:collisionBehavior];
-                         
-                         [self performBlock:^{
-                             [self.gravityBehavior removeItem:dotView];
-                             [dotView removeFromSuperview];
-                         } afterDelay:floatDuration];
+                         [self animateViewOut:dotView];
+                     }];
+}
+
+- (void)animateViewOut:(HATUpdateView *)dotView
+{
+    CGFloat floatDuration = 12;
+    CGFloat fadeDuration = 1;
+    [UIView animateWithDuration:fadeDuration
+                          delay:floatDuration - fadeDuration
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         dotView.alpha = 0;
+                     } completion:^(BOOL finished) {
+                         [self.gravityBehavior removeItem:dotView];
+                         [dotView removeFromSuperview];
                      }];
 }
 

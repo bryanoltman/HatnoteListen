@@ -20,15 +20,6 @@
     self.textLabel.text = info[@"page_title"];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    UINavigationBar *bar = [[UINavigationBar alloc] initWithFrame:self.view.bounds];
-    bar.barStyle = UIBarStyleBlack;
-    bar.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-    [self.view insertSubview:bar atIndex:0];
-}
-
 - (IBAction)viewTapped:(id)sender
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.info[@"url"]]];
