@@ -283,14 +283,19 @@
         return;
     }
     
-    if (fromView) {
+    if (fromView && fromView.superview) {
         fromView.alpha = 0.6;
         fromView.layer.shadowOpacity = 0;
         UISnapBehavior *snapBehavior = [[UISnapBehavior alloc] initWithItem:fromView
                                                                 snapToPoint:previousLocation];
+        snapBehavior.damping = 0.85;
         [self.animator addBehavior:snapBehavior];
         [self performBlock:^{
             [self.animator removeBehavior:snapBehavior];
+            if (!fromView.superview) {
+                return;
+            }
+            
             [fromView.layer restartAnimations];
             if (![self.gravityBehavior.items containsObject:fromView]) {
                 [self.gravityBehavior addItem:fromView];
@@ -298,15 +303,15 @@
         } afterDelay:0.5];
     }
     
-    if (toView) {
+    if (toView && toView.superview) {
         previousLocation = toView.center;
         
         [toView.layer pauseAnimations];
-        toView.alpha = 0.85;
         toView.layer.shadowOpacity = 1;
-        toView.layer.shadowRadius = 3;
+        toView.layer.shadowRadius = 6;
         toView.layer.shadowOffset = CGSizeZero;
-
+        toView.alpha = 0.85;
+        
         [self.view insertSubview:toView
                     belowSubview:self.wikiVC.view.superview];
         
@@ -315,6 +320,7 @@
         toPoint.y = CGRectGetMinY(self.wikiVC.view.superview.frame) - toView.frame.size.height / 2;
         UISnapBehavior *snapBehavior = [[UISnapBehavior alloc] initWithItem:toView
                                                                 snapToPoint:toPoint];
+        snapBehavior.damping = 0.85;
         [self.animator addBehavior:snapBehavior];
         [self performBlock:^{
             [self.animator removeBehavior:snapBehavior];
@@ -537,11 +543,11 @@
 
 - (void)animateViewOut:(HATUpdateView *)dotView
 {
-    CGFloat floatDuration = 12;
+    CGFloat floatDuration = 8;
     CGFloat fadeDuration = 1;
     [UIView animateWithDuration:fadeDuration
                           delay:floatDuration - fadeDuration
-                        options:UIViewAnimationOptionCurveEaseIn
+                        options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          dotView.alpha = 0;
                      } completion:^(BOOL finished) {
