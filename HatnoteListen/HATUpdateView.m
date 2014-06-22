@@ -27,6 +27,10 @@
         self.initialFrame = frame;
         self.userInteractionEnabled = NO;
         self.lastTouchDate = [NSDate distantPast];
+        
+        self.layer.shadowOpacity = 0;
+        self.layer.shadowRadius = 6;
+        self.layer.shadowOffset = CGSizeZero;
     }
     
     return self;
@@ -62,6 +66,12 @@
         
         [self addSubview:self.textLabel];
     }
+}
+
+- (void)setTextAngle:(CGFloat)textAngle
+{
+    _textAngle = fmodf(textAngle, 2*M_PI);
+    self.textLabel.transform = CGAffineTransformMakeRotation(textAngle);
 }
 
 - (void)setHighlighted:(BOOL)highlighted

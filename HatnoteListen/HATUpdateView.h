@@ -15,7 +15,9 @@
 @property (strong, nonatomic) NSDictionary *info;
 @property (strong, nonatomic) UILabel *textLabel;
 @property (nonatomic) NSDate *lastTouchDate;
+@property (nonatomic) CGFloat textAngle;
 
+- (BOOL)showsText;
 - (instancetype)initWithFrame:(CGRect)frame andInfo:(NSDictionary *)info;
 
 @end

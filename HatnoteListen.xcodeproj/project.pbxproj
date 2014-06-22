@@ -11,6 +11,7 @@
 		ED075D1E18D7E0F900581187 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED075D1D18D7E0F900581187 /* About.storyboard */; };
 		ED075D2118D7E10100581187 /* HATAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED075D2018D7E10100581187 /* HATAboutViewController.m */; };
 		ED075D2618D7EDAC00581187 /* NSString+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ED075D2518D7EDAC00581187 /* NSString+Util.m */; };
+		ED2E1F6E194301B40054229F /* CGVectorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2E1F6D194301B40054229F /* CGVectorUtils.m */; };
 		ED36591C18E767AF0071140A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED36591B18E767AF0071140A /* CoreMotion.framework */; };
 		ED3C834218E12B100018190A /* UIColor+Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3C834118E12B100018190A /* UIColor+Theme.m */; };
 		ED3E7A5818DBE29600CADCCC /* about.txt in Resources */ = {isa = PBXBuildFile; fileRef = ED3E7A5718DBE29600CADCCC /* about.txt */; };
@@ -124,6 +125,8 @@
 		ED075D2018D7E10100581187 /* HATAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATAboutViewController.m; sourceTree = "<group>"; };
 		ED075D2418D7EDAC00581187 /* NSString+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Util.h"; sourceTree = "<group>"; };
 		ED075D2518D7EDAC00581187 /* NSString+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Util.m"; sourceTree = "<group>"; };
+		ED2E1F6C194301B40054229F /* CGVectorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGVectorUtils.h; sourceTree = "<group>"; };
+		ED2E1F6D194301B40054229F /* CGVectorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGVectorUtils.m; sourceTree = "<group>"; };
 		ED36591B18E767AF0071140A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		ED3C834018E12B100018190A /* UIColor+Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Theme.h"; sourceTree = "<group>"; };
 		ED3C834118E12B100018190A /* UIColor+Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Theme.m"; sourceTree = "<group>"; };
@@ -515,6 +518,8 @@
 				EDEFBEA218C3F8F6002AE9C6 /* UIColor+Util.m */,
 				EDB7D08018D94A6A0025D63C /* UIDevice+Util.h */,
 				EDB7D08118D94A6A0025D63C /* UIDevice+Util.m */,
+				ED2E1F6C194301B40054229F /* CGVectorUtils.h */,
+				ED2E1F6D194301B40054229F /* CGVectorUtils.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -734,6 +739,7 @@
 				ED5B868718BACA6500932430 /* HATViewController.m in Sources */,
 				ED764676193FF7B20005751B /* CALayer+Util.m in Sources */,
 				ED5A04A718CEB5CB0068D325 /* HATSettings.m in Sources */,
+				ED2E1F6E194301B40054229F /* CGVectorUtils.m in Sources */,
 				ED5A04A418CEA87F0068D325 /* NSArray+FunctionalHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

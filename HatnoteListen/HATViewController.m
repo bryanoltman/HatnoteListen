@@ -28,6 +28,7 @@
 @property (strong, nonatomic) NSDate *startTime;
 @property (strong, nonatomic) UIDynamicAnimator *animator;
 @property (strong, nonatomic) UIGravityBehavior *gravityBehavior;
+@property (strong, nonatomic) NSMutableDictionary *viewsToPoints;
 @property (strong, nonatomic) CMMotionManager *motionManager;
 
 @property (strong, nonatomic) HATUpdateView *selectedView;
@@ -73,34 +74,20 @@
         self.startTime = [NSDate date];
         self.avPlayers = [NSMutableArray new];
         self.sockets = [NSMutableDictionary new];
+        self.viewsToPoints = [NSMutableDictionary new];
         self.motionManager = [CMMotionManager new];
         self.motionManager.deviceMotionUpdateInterval = 1.f/60.f;
+        
+        CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self
+                                                                 selector:@selector(displayLinkTriggered:)];
+        [displayLink addToRunLoop:[NSRunLoop mainRunLoop]
+                          forMode:NSDefaultRunLoopMode];
+        
         __weak HATViewController *weakSelf = self;
         [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue currentQueue]
                                                 withHandler:^(CMDeviceMotion *motion, NSError *error) {
                                                     CGFloat angle = atan2(motion.gravity.y, -motion.gravity.x);
                                                     weakSelf.gravityBehavior.angle = [self adjustAngleForInterfaceOrientation:angle];
-                                                    CGFloat textAngle;
-                                                    if (fabsf(motion.gravity.y) < 0.1 && fabsf(motion.gravity.x) < 0.1) {
-                                                        textAngle = 0;
-                                                    } else {
-                                                        textAngle = atan2(motion.gravity.y, -motion.gravity.x) + M_PI_2;
-                                                        textAngle = [self adjustAngleForInterfaceOrientation:textAngle];
-                                                    }
-                                                    
-                                                    for (UIView *subview in weakSelf.view.subviews) {
-                                                        if (![subview isKindOfClass:[HATUpdateView class]]) {
-                                                            continue;
-                                                        }
-                                                        
-                                                        HATUpdateView *dotView = (HATUpdateView *)subview;
-                                                        if (dotView.textLabel.text && ![dotView.textLabel.text isEqualToString:@""]) {
-                                                            [UIView animateWithDuration:(textAngle == 0) ? .2 : 0
-                                                                             animations:^{
-                                                                                 dotView.textLabel.transform = CGAffineTransformMakeRotation(textAngle);
-                                                                             }];
-                                                        }
-                                                    }
                                                 }];
         
         self.KVOController = [FBKVOController controllerWithObserver:self];
@@ -167,6 +154,44 @@
     return self;
 }
 
+- (void)displayLinkTriggered:(CADisplayLink *)link
+{
+    for (HATUpdateView *view in self.view.subviews) {
+        if (![view isKindOfClass:[HATUpdateView class]]) {
+            continue;
+        }
+        
+        if (view == _selectedView) {
+            view.textAngle = [self adjustAngleForInterfaceOrientation:self.gravityBehavior.angle + M_PI_2];
+            continue;
+        }
+        
+        if (![view showsText]) {
+            continue;
+        }
+        
+        CGPoint currentPoint = ((CALayer *)view.layer.presentationLayer).frame.origin;
+        NSMutableArray *points = [self.viewsToPoints objectForKey:view.info[@"page_title"]];
+        if (points) {
+            CGPoint lastPoint = [[points firstObject] CGPointValue];
+            CGVector direction = CGVectorMake(currentPoint.x - lastPoint.x, currentPoint.y - lastPoint.y);
+            if (CGVectorLength(direction) > 5) {
+                [points removeObjectAtIndex:0];
+                CGFloat textAngle = atan2(direction.dy, direction.dx) + M_PI_2;
+                textAngle = [self adjustAngleForInterfaceOrientation:textAngle];
+                view.textAngle = textAngle;
+            }
+        } else if (!points) {
+            points = [NSMutableArray new];
+            [self.viewsToPoints setObject:points
+                                   forKey:view.info[@"page_title"]];
+            view.textAngle = self.gravityBehavior.angle + M_PI_2;
+        }
+        
+        [points addObject:[NSValue valueWithCGPoint:currentPoint]];
+    }
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -192,6 +217,7 @@
 {
     HATUpdateView *previousView = _selectedView;
     _selectedView = selectedView;
+    selectedView.textAngle = 0;
     self.wikiVC.info = _selectedView.info;
     if (_selectedView) {
         [self showWikiView:YES];
@@ -214,11 +240,12 @@
     [self.view addSubview:self.userView];
     
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    
     self.gravityBehavior = [UIGravityBehavior new];
     self.gravityBehavior.gravityDirection = CGVectorMake(0, -1);
     self.gravityBehavior.magnitude = 0.01;
     [self.animator addBehavior:self.gravityBehavior];
-        
+    
     self.wikiVC = [self.childViewControllers find:^BOOL(id vc) {
         return [vc isKindOfClass:[HATWikipediaViewController class]];
     }];
@@ -266,6 +293,7 @@
                              dotView.transform = CGAffineTransformScale(dotView.transform,
                                                                         0.1, 0.1);
                          } completion:^(BOOL finished) {
+                             [self.viewsToPoints removeObjectForKey:dotView.info[@"page_title"]];
                              [dotView removeFromSuperview];
                          }];
     }
@@ -290,16 +318,9 @@
                                                                 snapToPoint:previousLocation];
         snapBehavior.damping = 0.85;
         [self.animator addBehavior:snapBehavior];
+        [self.gravityBehavior addItem:fromView];
         [self performBlock:^{
             [self.animator removeBehavior:snapBehavior];
-            if (!fromView.superview) {
-                return;
-            }
-            
-            [fromView.layer restartAnimations];
-            if (![self.gravityBehavior.items containsObject:fromView]) {
-                [self.gravityBehavior addItem:fromView];
-            }
         } afterDelay:0.5];
     }
     
@@ -536,6 +557,10 @@
                      animations:^{
                          dotView.transform = CGAffineTransformMakeScale(1, 1);
                      } completion:^(BOOL finished) {
+                         if (!finished) {
+                             return;
+                         }
+                         
                          [self.gravityBehavior addItem:dotView];
                          [self animateViewOut:dotView];
                      }];
@@ -551,6 +576,11 @@
                      animations:^{
                          dotView.alpha = 0;
                      } completion:^(BOOL finished) {
+                         if (!finished) {
+                             return;
+                         }
+                         
+                         [self.viewsToPoints removeObjectForKey:dotView.info[@"page_title"]];
                          [self.gravityBehavior removeItem:dotView];
                          [dotView removeFromSuperview];
                      }];
