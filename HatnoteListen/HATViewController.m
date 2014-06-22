@@ -175,7 +175,7 @@
         if (points) {
             CGPoint lastPoint = [[points firstObject] CGPointValue];
             CGVector direction = CGVectorMake(currentPoint.x - lastPoint.x, currentPoint.y - lastPoint.y);
-            if (CGVectorLength(direction) > 5) {
+            if (CGVectorLength(direction) > 2.5) {
                 [points removeObjectAtIndex:0];
                 CGFloat textAngle = atan2(direction.dy, direction.dx) + M_PI_2;
                 textAngle = [self adjustAngleForInterfaceOrientation:textAngle];
