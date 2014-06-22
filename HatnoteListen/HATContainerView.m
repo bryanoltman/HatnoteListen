@@ -26,9 +26,17 @@
         }
         
         HATUpdateView *view = (HATUpdateView *)subview;
-        if (CGRectContainsPoint([view currentFrame], point)) {
+        CGFloat xDist = (point.x - view.center.x);
+        CGFloat yDist = (point.y - view.center.y);
+        CGFloat distance = sqrt((xDist * xDist) + (yDist * yDist));
+        if (distance < view.frame.size.width / 2) {
             [hitViews addObject:view];
         }
+    }
+    
+    if (!hitViews.count) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"backgroundClicked"
+                                                            object:nil];
     }
     
     self.highlightedView = [hitViews minimum:^id(HATUpdateView *view) {
@@ -50,7 +58,7 @@
         return;
     }
 
-    if (!CGRectContainsPoint([self.highlightedView currentFrame], point)) {
+    if (!CGRectContainsPoint(self.highlightedView.frame, point)) {
         self.highlightedView.highlighted = NO;
         self.highlightedView = nil;
     }
@@ -61,9 +69,9 @@
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint point = [touch locationInView:self];
 
-    if (self.highlightedView && CGRectContainsPoint([self.highlightedView currentFrame], point)) {
+    if (self.highlightedView && CGRectContainsPoint(self.highlightedView.frame, point)) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"bubbleClicked"
-                                                            object:self.highlightedView.info];
+                                                            object:self.highlightedView];
     }
     
     self.highlightedView.highlighted = NO;

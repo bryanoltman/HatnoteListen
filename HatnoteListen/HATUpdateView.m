@@ -27,6 +27,10 @@
         self.initialFrame = frame;
         self.userInteractionEnabled = NO;
         self.lastTouchDate = [NSDate distantPast];
+        
+        self.layer.shadowOpacity = 0;
+        self.layer.shadowRadius = 6;
+        self.layer.shadowOffset = CGSizeZero;
     }
     
     return self;
@@ -62,6 +66,12 @@
         
         [self addSubview:self.textLabel];
     }
+}
+
+- (void)setTextAngle:(CGFloat)textAngle
+{
+    _textAngle = fmodf(textAngle, 2*M_PI);
+    self.textLabel.transform = CGAffineTransformMakeRotation(textAngle);
 }
 
 - (void)setHighlighted:(BOOL)highlighted
@@ -125,24 +135,6 @@
     NSString *text = [self.info objectForKey:@"page_title"];
     CGSize size = [text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:kMinFontSize]}];
     return size.width <= CGRectGetWidth([self textViewFrame]) * [self textWidthMultiple];
-}
-
-- (CGRect)currentFrame
-{
-    NSTimeInterval elapsed = -[self.showTime timeIntervalSinceNow];
-    //    NSLog(@"elapsed is %f", elapsed);
-    CGFloat perc = elapsed / self.duration;
-    //    NSLog(@"perc is %f", perc);
-    //    NSLog(@"current frame was %@", NSStringFromCGRect(ret));
-    CGFloat xStep = (self.frame.origin.x - self.initialFrame.origin.x) * perc;
-    CGFloat yStep = (self.frame.origin.y - self.initialFrame.origin.y) * perc;
-    
-    CGRect ret = self.initialFrame;
-    
-    ret.origin.x += -xStep * perc * (perc - 2);
-    ret.origin.y += -yStep * perc * (perc - 2);
-
-    return ret;
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event

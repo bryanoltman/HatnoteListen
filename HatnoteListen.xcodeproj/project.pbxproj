@@ -11,6 +11,7 @@
 		ED075D1E18D7E0F900581187 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED075D1D18D7E0F900581187 /* About.storyboard */; };
 		ED075D2118D7E10100581187 /* HATAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED075D2018D7E10100581187 /* HATAboutViewController.m */; };
 		ED075D2618D7EDAC00581187 /* NSString+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ED075D2518D7EDAC00581187 /* NSString+Util.m */; };
+		ED2E1F6E194301B40054229F /* CGVectorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2E1F6D194301B40054229F /* CGVectorUtils.m */; };
 		ED36591C18E767AF0071140A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED36591B18E767AF0071140A /* CoreMotion.framework */; };
 		ED3C834218E12B100018190A /* UIColor+Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3C834118E12B100018190A /* UIColor+Theme.m */; };
 		ED3E7A5818DBE29600CADCCC /* about.txt in Resources */ = {isa = PBXBuildFile; fileRef = ED3E7A5718DBE29600CADCCC /* about.txt */; };
@@ -36,6 +37,7 @@
 		ED755D3618BB065500E7AC88 /* HATWikipediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED755D3518BB065500E7AC88 /* HATWikipediaViewController.m */; };
 		ED755DAC18BB084600E7AC88 /* swell2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7318BB084600E7AC88 /* swell2.mp3 */; };
 		ED755DAD18BB084600E7AC88 /* swell3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7418BB084600E7AC88 /* swell3.mp3 */; };
+		ED764676193FF7B20005751B /* CALayer+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ED764675193FF7B20005751B /* CALayer+Util.m */; };
 		ED7BB69718CCD0B400ED30F2 /* swell1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7218BB084600E7AC88 /* swell1.mp3 */; };
 		ED9182C718C4163E003D91A0 /* cel001.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED9182AC18C4163E003D91A0 /* cel001.mp3 */; };
 		ED9182C818C4163E003D91A0 /* cel002.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED9182AD18C4163E003D91A0 /* cel002.mp3 */; };
@@ -123,6 +125,8 @@
 		ED075D2018D7E10100581187 /* HATAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATAboutViewController.m; sourceTree = "<group>"; };
 		ED075D2418D7EDAC00581187 /* NSString+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Util.h"; sourceTree = "<group>"; };
 		ED075D2518D7EDAC00581187 /* NSString+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Util.m"; sourceTree = "<group>"; };
+		ED2E1F6C194301B40054229F /* CGVectorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGVectorUtils.h; sourceTree = "<group>"; };
+		ED2E1F6D194301B40054229F /* CGVectorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGVectorUtils.m; sourceTree = "<group>"; };
 		ED36591B18E767AF0071140A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		ED3C834018E12B100018190A /* UIColor+Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Theme.h"; sourceTree = "<group>"; };
 		ED3C834118E12B100018190A /* UIColor+Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Theme.m"; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 		ED755D7218BB084600E7AC88 /* swell1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swell1.mp3; sourceTree = "<group>"; };
 		ED755D7318BB084600E7AC88 /* swell2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swell2.mp3; sourceTree = "<group>"; };
 		ED755D7418BB084600E7AC88 /* swell3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swell3.mp3; sourceTree = "<group>"; };
+		ED764674193FF7B20005751B /* CALayer+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Util.h"; sourceTree = "<group>"; };
+		ED764675193FF7B20005751B /* CALayer+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Util.m"; sourceTree = "<group>"; };
 		ED9182AC18C4163E003D91A0 /* cel001.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cel001.mp3; sourceTree = "<group>"; };
 		ED9182AD18C4163E003D91A0 /* cel002.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cel002.mp3; sourceTree = "<group>"; };
 		ED9182AE18C4163E003D91A0 /* cel003.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cel003.mp3; sourceTree = "<group>"; };
@@ -496,6 +502,8 @@
 		EDEFBEA418C3F8FF002AE9C6 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				ED764674193FF7B20005751B /* CALayer+Util.h */,
+				ED764675193FF7B20005751B /* CALayer+Util.m */,
 				ED5A04A218CEA87F0068D325 /* NSArray+FunctionalHelper.h */,
 				ED5A04A318CEA87F0068D325 /* NSArray+FunctionalHelper.m */,
 				EDEFBEA518C3FE1E002AE9C6 /* NSArray+Util.h */,
@@ -510,6 +518,8 @@
 				EDEFBEA218C3F8F6002AE9C6 /* UIColor+Util.m */,
 				EDB7D08018D94A6A0025D63C /* UIDevice+Util.h */,
 				EDB7D08118D94A6A0025D63C /* UIDevice+Util.m */,
+				ED2E1F6C194301B40054229F /* CGVectorUtils.h */,
+				ED2E1F6D194301B40054229F /* CGVectorUtils.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -727,7 +737,9 @@
 				EDB7D08218D94A6A0025D63C /* UIDevice+Util.m in Sources */,
 				ED755D3618BB065500E7AC88 /* HATWikipediaViewController.m in Sources */,
 				ED5B868718BACA6500932430 /* HATViewController.m in Sources */,
+				ED764676193FF7B20005751B /* CALayer+Util.m in Sources */,
 				ED5A04A718CEB5CB0068D325 /* HATSettings.m in Sources */,
+				ED2E1F6E194301B40054229F /* CGVectorUtils.m in Sources */,
 				ED5A04A418CEA87F0068D325 /* NSArray+FunctionalHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -854,12 +866,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Michael Oltman (846PZ68MD3)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
 				INFOPLIST_FILE = "HatnoteListen/HatnoteListen-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HatnoteListen/HatnoteListen-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -871,12 +887,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Michael Oltman (9422A6P5N6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
 				INFOPLIST_FILE = "HatnoteListen/HatnoteListen-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "HatnoteListen/HatnoteListen-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
