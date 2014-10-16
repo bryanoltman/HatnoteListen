@@ -70,7 +70,7 @@
 
 - (void)setTextAngle:(CGFloat)textAngle
 {
-    _textAngle = fmodf(textAngle, 2*M_PI);
+    _textAngle = fmodf(textAngle, 2 * M_PI);
     self.textLabel.transform = CGAffineTransformMakeRotation(textAngle);
 }
 

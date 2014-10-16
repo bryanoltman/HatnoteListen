@@ -171,7 +171,7 @@
         }
         
         CGPoint currentPoint = ((CALayer *)view.layer.presentationLayer).frame.origin;
-        NSMutableArray *points = [self.viewsToPoints objectForKey:view.info[@"page_title"]];
+        NSMutableArray *points = self.viewsToPoints[view.info[@"page_title"]];
         if (points) {
             CGPoint lastPoint = [[points firstObject] CGPointValue];
             CGVector direction = CGVectorMake(currentPoint.x - lastPoint.x, currentPoint.y - lastPoint.y);
