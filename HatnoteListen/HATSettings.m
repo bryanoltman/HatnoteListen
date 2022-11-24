@@ -234,8 +234,8 @@
         return;
     }
     
-    [Flurry logEvent:@"volume_toggled"
-      withParameters:@{@"on" : @(!soundsMuted)}];
+//    [Flurry logEvent:@"volume_toggled"
+//      withParameters:@{@"on" : @(!soundsMuted)}];
     
     _soundsMuted = soundsMuted;
     [self.settings setObject:@(soundsMuted) forKey:SoundsMutedKey];
@@ -248,8 +248,8 @@
         return;
     }
     
-    [Flurry logEvent:@"text_volume_changed"
-      withParameters:@{@"volume" : @(textVolume)}];
+//    [Flurry logEvent:@"text_volume_changed"
+//      withParameters:@{@"volume" : @(textVolume)}];
     
     _textVolume = textVolume;
     [self.settings setObject:@(textVolume) forKey:TextVolumeKey];

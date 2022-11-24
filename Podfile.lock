@@ -1,0 +1,36 @@
+PODS:
+  - CAAnimation-EasingEquations (1.0.4)
+  - JASidePanels (1.3.2)
+  - JSONKit-NoWarning (1.2)
+  - KVOController (1.2.0)
+  - SocketRocket (0.6.0)
+  - TTTAttributedLabel (2.0.0)
+
+DEPENDENCIES:
+  - CAAnimation-EasingEquations
+  - JASidePanels
+  - JSONKit-NoWarning
+  - KVOController
+  - SocketRocket
+  - TTTAttributedLabel
+
+SPEC REPOS:
+  trunk:
+    - CAAnimation-EasingEquations
+    - JASidePanels
+    - JSONKit-NoWarning
+    - KVOController
+    - SocketRocket
+    - TTTAttributedLabel
+
+SPEC CHECKSUMS:
+  CAAnimation-EasingEquations: b75813a9ab2fbacf87a273240db35335683621cc
+  JASidePanels: c8f5b130e18d51ee3de988d1c1fad2f88e0b0d21
+  JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
+  KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
+  SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
+
+PODFILE CHECKSUM: 55bf10a0f05f13013ff38eee246da683073eb1ca
+
+COCOAPODS: 1.11.3

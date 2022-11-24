@@ -154,15 +154,15 @@
     
     switch (content) {
         case HATAboutScreenContentWelcome:
-            [Flurry logEvent:@"welcome_page_viewed"];
+//            [Flurry logEvent:@"welcome_page_viewed"];
             [self readAboutText:@"welcome"];
             break;
         case HATAboutScreenContentTutorial:
-            [Flurry logEvent:@"tutorial_page_viewed"];
+//            [Flurry logEvent:@"tutorial_page_viewed"];
             [self readAboutText:@"tutorial"];
             break;
         case HATAboutScreenContentAbout:
-            [Flurry logEvent:@"about_page_viewed"];
+//            [Flurry logEvent:@"about_page_viewed"];
             [self readAboutText:@"about"];
             break;
         default:
