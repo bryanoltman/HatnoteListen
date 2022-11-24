@@ -443,7 +443,10 @@
       stringWithFormat:
           @"http://%@.wikipedia.org/w/index.php?title=User_talk:%@&action=edit&section=new",
           self.currentLanguageCode, self.newestUserName];
-  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+  [[UIApplication sharedApplication]
+                openURL:[NSURL URLWithString:urlString]
+                options:@{}
+      completionHandler:nil];
 }
 
 #pragma mark - Auxiliary Views
