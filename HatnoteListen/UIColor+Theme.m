@@ -12,27 +12,27 @@
 
 + (UIColor *)backgroundColor
 {
-    return [UIColor colorFromHex:0x1B2024];
+  return [UIColor colorFromHex:0x1B2024];
 }
 
 + (UIColor *)purpleDotColor
 {
-    return [UIColor colorFromHex:0xCC67CB];
+  return [UIColor colorFromHex:0xCC67CB];
 }
 
 + (UIColor *)greenDotColor
 {
-    return [UIColor colorFromHex:0x30DA59];
+  return [UIColor colorFromHex:0x30DA59];
 }
 
 + (UIColor *)whiteDotColor
 {
-    return [UIColor whiteColor];
+  return [UIColor whiteColor];
 }
 
 + (UIColor *)bannerTintColor
 {
-    return [UIColor colorFromHex:0x339BE5 alpha:0.7];
+  return [UIColor colorFromHex:0x339BE5 alpha:0.7];
 }
 
 @end

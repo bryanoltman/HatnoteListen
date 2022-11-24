@@ -12,12 +12,12 @@
 
 - (BOOL)isPhone
 {
-    return [self userInterfaceIdiom] == UIUserInterfaceIdiomPhone;
+  return [self userInterfaceIdiom] == UIUserInterfaceIdiomPhone;
 }
 
 - (BOOL)isPad
 {
-    return [self userInterfaceIdiom] == UIUserInterfaceIdiomPad;
+  return [self userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 }
 
 @end

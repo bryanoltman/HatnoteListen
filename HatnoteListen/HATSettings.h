@@ -10,11 +10,11 @@
 #import "HATWikipediaLanguage.h"
 
 typedef NS_OPTIONS(NSUInteger, HATTextVolume) {
-    HATTextVolumeNone,
-    HATTextVolumeSome,
-    HATTextVolumeLots,
-    HATTextVolumeAll,
-    HATTextVolumeCount
+  HATTextVolumeNone,
+  HATTextVolumeSome,
+  HATTextVolumeLots,
+  HATTextVolumeAll,
+  HATTextVolumeCount
 };
 
 @interface HATSettings : NSObject

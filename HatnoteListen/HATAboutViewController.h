@@ -7,16 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TTTAttributedLabel.h"
 #import "HATHorizontalPanGestureRecognizer.h"
+#import "TTTAttributedLabel.h"
 
 typedef NS_OPTIONS(NSUInteger, HATAboutScreenContent) {
-    HATAboutScreenContentWelcome,
-    HATAboutScreenContentTutorial,
-    HATAboutScreenContentAbout
+  HATAboutScreenContentWelcome,
+  HATAboutScreenContentTutorial,
+  HATAboutScreenContentAbout
 };
 
-@interface HATAboutViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate>
+@interface HATAboutViewController : UIViewController <UICollectionViewDataSource,
+                                                      UICollectionViewDelegate,
+                                                      UICollectionViewDelegateFlowLayout,
+                                                      UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UIView *backgroundView;
 @property (nonatomic) HATAboutScreenContent contentType;
@@ -25,7 +28,7 @@ typedef NS_OPTIONS(NSUInteger, HATAboutScreenContent) {
 
 - (void)show:(HATAboutScreenContent)content;
 
-- (void)hide:(void(^)(void))complated;
+- (void)hide:(void (^)(void))complated;
 
 - (IBAction)panned:(UIPanGestureRecognizer *)sender;
 

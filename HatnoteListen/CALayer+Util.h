@@ -9,7 +9,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface CALayer (Util)
--(void)pauseAnimations;
--(void)restartAnimations;
--(void)resumeAnimations;
+- (void)pauseAnimations;
+- (void)restartAnimations;
+- (void)resumeAnimations;
 @end

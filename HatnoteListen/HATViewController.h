@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SRWebSocket.h"
 #import "FBKVOController.h"
 #import "HATAboutViewController.h"
+#import "SRWebSocket.h"
 
 @interface HATViewController : UIViewController <AVAudioPlayerDelegate, SRWebSocketDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *userView;
-@property (strong, nonatomic) IBOutlet UILabel *userLabel; // Strong because we juggle this around in its superview and this is less bug-prone than needing to create a strong reference for it every time
+@property (strong, nonatomic) IBOutlet UILabel
+    *userLabel; // Strong because we juggle this around in its superview and this is less bug-prone
+                // than needing to create a strong reference for it every time
 @property (strong, nonatomic) HATAboutViewController *aboutVC;
 
 - (IBAction)newUserViewTapped:(id)sender;

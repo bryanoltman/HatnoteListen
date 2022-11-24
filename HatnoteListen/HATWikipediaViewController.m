@@ -16,13 +16,13 @@
 
 - (void)setInfo:(NSDictionary *)info
 {
-    _info = info;
-    self.textLabel.text = info[@"page_title"];
+  _info = info;
+  self.textLabel.text = info[@"page_title"];
 }
 
 - (IBAction)viewTapped:(id)sender
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.info[@"url"]]];
+  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.info[@"url"]]];
 }
 
 @end

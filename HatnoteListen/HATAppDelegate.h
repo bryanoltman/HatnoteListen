@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HATViewController.h"
 #import "HATSettingsViewController.h"
 #import "HATSidePanelController.h"
+#import "HATViewController.h"
 
 @interface HATAppDelegate : UIResponder <UIApplicationDelegate>
 

@@ -11,6 +11,6 @@
 @implementation NSArray (Util)
 - (id)randomObject
 {
-    return self[arc4random() % [self count]];
+  return self[arc4random() % [self count]];
 }
 @end

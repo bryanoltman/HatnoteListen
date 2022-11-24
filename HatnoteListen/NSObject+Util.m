@@ -11,14 +11,12 @@
 @implementation NSObject (Util)
 - (void)performBlock:(void (^)(void))block afterDelay:(NSTimeInterval)delay
 {
-    block = [block copy];
-    [self performSelector:@selector(fireBlockAfterDelay:)
-               withObject:block
-               afterDelay:delay];
+  block = [block copy];
+  [self performSelector:@selector(fireBlockAfterDelay:) withObject:block afterDelay:delay];
 }
 
 - (void)fireBlockAfterDelay:(void (^)(void))block
 {
-    block();
+  block();
 }
 @end

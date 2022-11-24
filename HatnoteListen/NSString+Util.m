@@ -12,7 +12,7 @@
 
 - (NSRange)range
 {
-    return NSMakeRange(0, self.length - 1);
+  return NSMakeRange(0, self.length - 1);
 }
 
 @end
@@ -21,7 +21,7 @@
 
 - (NSRange)range
 {
-    return NSMakeRange(0, self.length - 1);
+  return NSMakeRange(0, self.length - 1);
 }
 
 @end

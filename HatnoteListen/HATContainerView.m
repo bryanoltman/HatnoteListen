@@ -17,71 +17,78 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint point = [touch locationInView:self];
-    NSMutableArray *hitViews = [NSMutableArray new];
-    for (UIView *subview in self.subviews) {
-        if (![subview isKindOfClass:[HATUpdateView class]]) {
-            continue;
-        }
-        
-        HATUpdateView *view = (HATUpdateView *)subview;
-        CGFloat xDist = (point.x - view.center.x);
-        CGFloat yDist = (point.y - view.center.y);
-        CGFloat distance = sqrt((xDist * xDist) + (yDist * yDist));
-        if (distance < view.frame.size.width / 2) {
-            [hitViews addObject:view];
-        }
+  UITouch *touch = [[event allTouches] anyObject];
+  CGPoint point = [touch locationInView:self];
+  NSMutableArray *hitViews = [NSMutableArray new];
+  for (UIView *subview in self.subviews)
+  {
+    if (![subview isKindOfClass:[HATUpdateView class]])
+    {
+      continue;
     }
-    
-    if (!hitViews.count) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"backgroundClicked"
-                                                            object:nil];
+
+    HATUpdateView *view = (HATUpdateView *)subview;
+    CGFloat xDist = (point.x - view.center.x);
+    CGFloat yDist = (point.y - view.center.y);
+    CGFloat distance = sqrt((xDist * xDist) + (yDist * yDist));
+    if (distance < view.frame.size.width / 2)
+    {
+      [hitViews addObject:view];
     }
-    
-    self.highlightedView = [hitViews minimum:^id(HATUpdateView *view) {
-        return view.lastTouchDate;
-    }];
-    
-    if (self.highlightedView) {
-        self.highlightedView.lastTouchDate = [NSDate date];
-        self.highlightedView.highlighted = YES;
-    }
+  }
+
+  if (!hitViews.count)
+  {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"backgroundClicked" object:nil];
+  }
+
+  self.highlightedView = [hitViews minimum:^id(HATUpdateView *view) {
+    return view.lastTouchDate;
+  }];
+
+  if (self.highlightedView)
+  {
+    self.highlightedView.lastTouchDate = [NSDate date];
+    self.highlightedView.highlighted = YES;
+  }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint point = [touch locationInView:self];
+  UITouch *touch = [[event allTouches] anyObject];
+  CGPoint point = [touch locationInView:self];
 
-    if (!self.highlightedView) {
-        return;
-    }
+  if (!self.highlightedView)
+  {
+    return;
+  }
 
-    if (!CGRectContainsPoint(self.highlightedView.frame, point)) {
-        self.highlightedView.highlighted = NO;
-        self.highlightedView = nil;
-    }
+  if (!CGRectContainsPoint(self.highlightedView.frame, point))
+  {
+    self.highlightedView.highlighted = NO;
+    self.highlightedView = nil;
+  }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint point = [touch locationInView:self];
+  UITouch *touch = [[event allTouches] anyObject];
+  CGPoint point = [touch locationInView:self];
 
-    if (self.highlightedView && CGRectContainsPoint(self.highlightedView.frame, point)) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"bubbleClicked"
-                                                            object:self.highlightedView];
-    }
-    
-    self.highlightedView.highlighted = NO;
-    self.highlightedView = nil;
+  if (self.highlightedView && CGRectContainsPoint(self.highlightedView.frame, point))
+  {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"bubbleClicked"
+                                                        object:self.highlightedView];
+  }
+
+  self.highlightedView.highlighted = NO;
+  self.highlightedView = nil;
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    self.highlightedView.highlighted = NO;
-    self.highlightedView = nil;
+  self.highlightedView.highlighted = NO;
+  self.highlightedView = nil;
 }
 
 @end
