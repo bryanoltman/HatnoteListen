@@ -203,14 +203,14 @@
     switch (sender.state) {
         case UIGestureRecognizerStateChanged: {
             CGPoint trans = [sender translationInView:self.view];
-            if (fabsf(trans.y) > 10 && fabsf(trans.y) > fabsf(trans.x) * 2) {
+            if (fabs(trans.y) > 10 && fabs(trans.y) > fabs(trans.x) * 2) {
                 [sender setEnabled:NO];
                 [sender setEnabled:YES];
                 return;
             }
 
             self.collectionView.transform = CGAffineTransformMakeTranslation(trans.x, 0);
-            self.backgroundView.alpha = self.collectionView.alpha = [self backgroundAlpha] - (fabsf(trans.x) / self.collectionView.frame.size.width);
+            self.backgroundView.alpha = self.collectionView.alpha = [self backgroundAlpha] - (fabs(trans.x) / self.collectionView.frame.size.width);
         }
             break;
         case UIGestureRecognizerStateCancelled:
@@ -218,7 +218,7 @@
         case UIGestureRecognizerStateFailed: {
             CGPoint trans = [sender translationInView:self.collectionView];
             CGFloat xVelocity = [sender velocityInView:self.view].x;
-            if (fabsf(trans.x) > 160 || fabsf(xVelocity) > 750) {
+            if (fabs(trans.x) > 160 || fabs(xVelocity) > 750) {
                 [UIView animateWithDuration:0.2
                                       delay:0
                                     options:UIViewAnimationOptionCurveEaseIn
