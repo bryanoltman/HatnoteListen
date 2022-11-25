@@ -22,7 +22,10 @@
 
 - (IBAction)viewTapped:(id)sender
 {
-  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.info[@"url"]]];
+  [[UIApplication sharedApplication]
+                openURL:[NSURL URLWithString:self.info[@"url"]]
+                options:@{}
+      completionHandler:nil];
 }
 
 @end
