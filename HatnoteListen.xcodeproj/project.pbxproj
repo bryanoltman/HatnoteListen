@@ -107,6 +107,7 @@
 		EDEFBEA318C3F8F6002AE9C6 /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBEA218C3F8F6002AE9C6 /* UIColor+Util.m */; };
 		EDEFBEA718C3FE1E002AE9C6 /* NSArray+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBEA618C3FE1E002AE9C6 /* NSArray+Util.m */; };
 		EDF73D45292FE72D00FDD97F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDF73D44292FE72D00FDD97F /* Launch Screen.storyboard */; };
+		EDF73D492930578A00FDD97F /* HATWikipediaService.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF73D482930578A00FDD97F /* HATWikipediaService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +250,8 @@
 		EDEFBEA518C3FE1E002AE9C6 /* NSArray+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Util.h"; sourceTree = "<group>"; };
 		EDEFBEA618C3FE1E002AE9C6 /* NSArray+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Util.m"; sourceTree = "<group>"; };
 		EDF73D44292FE72D00FDD97F /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		EDF73D472930578A00FDD97F /* HATWikipediaService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HATWikipediaService.h; sourceTree = "<group>"; };
+		EDF73D482930578A00FDD97F /* HATWikipediaService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HATWikipediaService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +353,7 @@
 		ED5B867618BACA6500932430 /* HatnoteListen */ = {
 			isa = PBXGroup;
 			children = (
+				EDF73D462930575D00FDD97F /* Wikipedia */,
 				ED075D1A18D7E0AA00581187 /* About */,
 				EDEFBEA418C3F8FF002AE9C6 /* Categories */,
 				ED5B867F18BACA6500932430 /* HATAppDelegate.h */,
@@ -543,6 +547,15 @@
 				ED2E1F6D194301B40054229F /* CGVectorUtils.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		EDF73D462930575D00FDD97F /* Wikipedia */ = {
+			isa = PBXGroup;
+			children = (
+				EDF73D472930578A00FDD97F /* HATWikipediaService.h */,
+				EDF73D482930578A00FDD97F /* HATWikipediaService.m */,
+			);
+			name = Wikipedia;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -793,6 +806,7 @@
 				EDDD564118BEDE8400D7AD6F /* NSObject+Util.m in Sources */,
 				EDEFBEA718C3FE1E002AE9C6 /* NSArray+Util.m in Sources */,
 				ED9D311B18DA72FB0038DD46 /* HATSidePanelController.m in Sources */,
+				EDF73D492930578A00FDD97F /* HATWikipediaService.m in Sources */,
 				ED075D2618D7EDAC00581187 /* NSString+Util.m in Sources */,
 				EDCE382918CBC004006C3B6F /* HATContainerView.m in Sources */,
 				ED5B867D18BACA6500932430 /* main.m in Sources */,

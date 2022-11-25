@@ -9,15 +9,15 @@
 #import "HATViewController.h"
 #import "HATSettingsViewController.h"
 #import "HATUpdateView.h"
+#import "HATWikipediaService.h"
 #import "HATWikipediaViewController.h"
 
 #define kNumClav 27
 #define kNumCelesta 27
 #define kNumSwells 3
 
-@interface HATViewController ()
+@interface HATViewController () <HATWikipediaServiceDelegate>
 @property (strong, nonatomic) FBKVOController *KVOController;
-@property (strong, nonatomic) NSMutableDictionary *sockets;
 @property (strong, nonatomic) HATWikipediaViewController *wikiVC;
 @property (strong, nonatomic) HATSettingsViewController *settingsVC;
 @property (strong, nonatomic) NSMutableArray *avPlayers;
@@ -30,6 +30,7 @@
 @property (strong, nonatomic) UIGravityBehavior *gravityBehavior;
 @property (strong, nonatomic) NSMutableDictionary *viewsToPoints;
 @property (strong, nonatomic) CMMotionManager *motionManager;
+@property (strong, nonatomic) HATWikipediaService *wikipediaService;
 
 @property (strong, nonatomic) HATUpdateView *selectedView;
 @end
@@ -77,10 +78,11 @@
   {
     self.startTime = [NSDate date];
     self.avPlayers = [NSMutableArray new];
-    self.sockets = [NSMutableDictionary new];
     self.viewsToPoints = [NSMutableDictionary new];
     self.motionManager = [CMMotionManager new];
     self.motionManager.deviceMotionUpdateInterval = 1.f / 60.f;
+    self.wikipediaService = [[HATWikipediaService alloc] init];
+    self.wikipediaService.delegate = self;
 
     CADisplayLink *displayLink =
         [CADisplayLink displayLinkWithTarget:self
@@ -107,13 +109,13 @@
             if (kind == NSKeyValueChangeInsertion || kind == NSKeyValueChangeSetting)
             {
               [change[NSKeyValueChangeNewKey] each:^(HATWikipediaLanguage *lang) {
-                [weakSelf openSocketForLanguage:lang];
+                [weakSelf.wikipediaService openSocketForLanguage:lang];
               }];
             }
             else if (kind == NSKeyValueChangeRemoval)
             {
               [change[NSKeyValueChangeOldKey] each:^(HATWikipediaLanguage *lang) {
-                [weakSelf closeSocketForLanguage:lang];
+                [weakSelf.wikipediaService closeSocketForLanguage:lang];
               }];
             }
           }];
@@ -380,40 +382,10 @@
   }
 }
 
-#pragma mark - Socket
-- (void)openSocketForLanguage:(HATWikipediaLanguage *)language
-{
-#ifdef DEBUG
-  NSLog(@"opening socket for %@", language.name);
-#endif
-
-  SRWebSocket *socket = self.sockets[language.code];
-  if (socket && (socket.readyState == SR_OPEN || socket.readyState == SR_CONNECTING))
-  {
-    return;
-  }
-
-  socket = [[SRWebSocket alloc] initWithURL:language.websocketURL];
-  socket.delegate = self;
-  [socket open];
-  [self.sockets setObject:socket forKey:language.code];
-}
-
-- (void)closeSocketForLanguage:(HATWikipediaLanguage *)language
-{
-  SRWebSocket *socket = self.sockets[language.code];
-  [socket close];
-  [self.sockets removeObjectForKey:language.code];
-}
-
 #pragma mark - Notifications
 - (void)didEnterBackground
 {
-  [self.sockets enumerateKeysAndObjectsUsingBlock:^(id key, SRWebSocket *socket, BOOL *stop) {
-    [socket close];
-  }];
-
-  [self.sockets removeAllObjects];
+  [self.wikipediaService closeAllSockets];
   self.selectedView = nil;
 }
 
@@ -421,9 +393,10 @@
 {
   self.startTime = [NSDate date];
 
-  [[[HATSettings sharedSettings] selectedLanguages] each:^(HATWikipediaLanguage *lang) {
-    [self openSocketForLanguage:lang];
-  }];
+  for (HATWikipediaLanguage *language in [[HATSettings sharedSettings] selectedLanguages])
+  {
+    [self.wikipediaService openSocketForLanguage:language];
+  }
 }
 
 #pragma mark - Events
@@ -661,8 +634,8 @@
   [self.avPlayers removeObject:player];
 }
 
-#pragma mark - SRWebSocketDelegate
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message
+#pragma mark - HATWikipediaServiceDelegate
+- (void)wikipediaServiceDidReceiveMessage:(NSString *)message
 {
   NSDictionary *json = [message objectFromJSONString];
   NSString *soundPath;

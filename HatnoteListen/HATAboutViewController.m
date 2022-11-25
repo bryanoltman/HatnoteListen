@@ -199,7 +199,7 @@
                    completion:nil];
 }
 
-- (void)hide:(void (^)(void))complated
+- (void)hide:(void (^)(void))completed
 {
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   [UIView animateWithDuration:0.2
