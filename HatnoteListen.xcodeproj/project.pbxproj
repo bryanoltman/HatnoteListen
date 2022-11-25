@@ -761,7 +761,6 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HatnoteListen/Pods-HatnoteListen-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CAAnimation-EasingEquations/CAAnimation_EasingEquations.framework",
 				"${BUILT_PRODUCTS_DIR}/JASidePanels/JASidePanels.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONKit-NoWarning/JSONKit_NoWarning.framework",
 				"${BUILT_PRODUCTS_DIR}/KVOController/KVOController.framework",
@@ -770,7 +769,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CAAnimation_EasingEquations.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JASidePanels.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONKit_NoWarning.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KVOController.framework",

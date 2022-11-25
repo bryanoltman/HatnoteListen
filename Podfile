@@ -10,7 +10,6 @@ target 'HatnoteListen' do
   pod 'KVOController'
   # pod 'Reveal-iOS-SDK'
   pod 'TTTAttributedLabel'
-  pod 'CAAnimation-EasingEquations'
   pod 'JASidePanels'
   # pod 'FlurrySDK'
 

@@ -16,7 +16,6 @@
     #import <Foundation/Foundation.h>
     #import <AVFoundation/AVFoundation.h>
     #import <CoreMotion/CoreMotion.h>
-    #import <CAAnimation+EasingEquations.h>
     #import <JASidePanels/JASidePanelController.h>
 //    #import <Flurry.h>
     #import "SRWebSocket.h"
