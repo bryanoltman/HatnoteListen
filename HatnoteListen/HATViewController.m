@@ -397,7 +397,11 @@
 
 - (void)bubbleClicked:(NSNotification *)notification
 {
-  self.selectedView = notification.object;
+  if (self.selectedView == notification.object) {
+    self.selectedView = nil;
+  } else {
+    self.selectedView = notification.object;
+  }
 }
 
 #pragma mark - Auxiliary Views
