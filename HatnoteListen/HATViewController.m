@@ -6,9 +6,12 @@
 //  Copyright (c) 2014 Bryan Oltman. All rights reserved.
 //
 
-#import "HATViewController.h"
+#import <Masonry/Masonry.h>
+
 #import "HATSettingsViewController.h"
 #import "HATUpdateView.h"
+#import "HATUserJoinedBanner.h"
+#import "HATViewController.h"
 #import "HATWikipediaService.h"
 #import "HATWikipediaViewController.h"
 
@@ -16,13 +19,12 @@
 #define kNumCelesta 27
 #define kNumSwells 3
 
-@interface HATViewController () <HATWikipediaServiceDelegate>
+@interface HATViewController () <HATUserJoinedBannerDelegate, HATWikipediaServiceDelegate>
 @property (strong, nonatomic) FBKVOController *KVOController;
 @property (strong, nonatomic) HATWikipediaViewController *wikiVC;
 @property (strong, nonatomic) HATSettingsViewController *settingsVC;
 @property (strong, nonatomic) NSMutableArray *avPlayers;
 @property (strong, nonatomic) NSTimer *wikiHideTimer;
-@property (strong, nonatomic) NSTimer *userHideTimer;
 @property (strong, nonatomic) NSTimer *pushBehaviorTimer;
 @property (strong, nonatomic) NSString *newestUserName;
 @property (strong, nonatomic) NSDate *startTime;
@@ -31,25 +33,12 @@
 @property (strong, nonatomic) NSMutableDictionary *viewsToPoints;
 @property (strong, nonatomic) CMMotionManager *motionManager;
 @property (strong, nonatomic) HATWikipediaService *wikipediaService;
+@property (strong, nonatomic) HATUserJoinedBanner *userJoinedBanner;
 
 @property (strong, nonatomic) HATUpdateView *selectedView;
 @end
 
 @implementation HATViewController
-
-+ (NSArray *)newUserMessages
-{
-  static NSArray *ret = nil;
-  if (!ret)
-  {
-    ret = @[
-      @"Welcome to %@, Wikipedia's newest user!", @"Wikipedia has a new user, %@! Welcome!",
-      @"%@ has joined Wikipedia!"
-    ];
-  }
-
-  return ret;
-}
 
 - (CGFloat)adjustAngleForInterfaceOrientation:(CGFloat)angle
 {
@@ -172,6 +161,7 @@
 
 - (void)displayLinkTriggered:(CADisplayLink *)link
 {
+  return;
   for (HATUpdateView *view in self.view.subviews)
   {
     if (![view isKindOfClass:[HATUpdateView class]])
@@ -257,9 +247,12 @@
 
   self.view.backgroundColor = [UIColor backgroundColor];
 
-  self.userView.backgroundColor = [UIColor bannerTintColor];
-  [self.userView addSubview:self.userLabel];
-  [self.view addSubview:self.userView];
+  self.userJoinedBanner = [[HATUserJoinedBanner alloc] init];
+  self.userJoinedBanner.delegate = self;
+  [self.view addSubview:self.userJoinedBanner];
+  [self.userJoinedBanner mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.leading.top.trailing.equalTo(self.view);
+  }];
 
   self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
 
@@ -410,36 +403,17 @@
   self.selectedView = notification.object;
 }
 
-- (void)newUserViewTapped:(UITapGestureRecognizer *)recognizer
-{
-  NSString *urlString = [NSString
-      stringWithFormat:
-          @"http://%@.wikipedia.org/w/index.php?title=User_talk:%@&action=edit&section=new",
-          self.currentLanguageCode, self.newestUserName];
-  [[UIApplication sharedApplication]
-                openURL:[NSURL URLWithString:urlString]
-                options:@{}
-      completionHandler:nil];
-}
-
 #pragma mark - Auxiliary Views
 - (void)showNewUserView:(BOOL)animated
 {
-  self.userView.alpha = 1;
+  self.userJoinedBanner.alpha = 1;
   [UIView animateWithDuration:animated ? 0.3 : 0
                         delay:0
                       options:UIViewAnimationOptionCurveEaseOut
                    animations:^{
-                     self.userView.transform = CGAffineTransformIdentity;
+                     self.userJoinedBanner.transform = CGAffineTransformIdentity;
                    }
                    completion:nil];
-
-  [self.userHideTimer invalidate];
-  self.userHideTimer = [NSTimer scheduledTimerWithTimeInterval:5
-                                                        target:self
-                                                      selector:@selector(removeTimerTicked:)
-                                                      userInfo:nil
-                                                       repeats:NO];
 }
 
 - (void)hideNewUserView:(BOOL)animated
@@ -448,11 +422,11 @@
       delay:0
       options:UIViewAnimationOptionCurveEaseOut
       animations:^{
-        self.userView.alpha = 0;
+        self.userJoinedBanner.alpha = 0;
       }
       completion:^(BOOL finished) {
-        self.userView.transform =
-            CGAffineTransformMakeTranslation(0, -CGRectGetHeight(self.userView.bounds));
+        self.userJoinedBanner.transform =
+            CGAffineTransformMakeTranslation(0, -CGRectGetHeight(self.userJoinedBanner.bounds));
       }];
 }
 
@@ -476,11 +450,7 @@
 
 - (void)removeTimerTicked:(NSTimer *)timer
 {
-  if (timer == self.userHideTimer)
-  {
-    [self hideNewUserView:YES];
-  }
-  else if (timer == self.wikiHideTimer)
+  if (timer == self.wikiHideTimer)
   {
     [self hideWikiView:YES];
   }
@@ -648,9 +618,8 @@
     }
 
     soundPath = [NSString stringWithFormat:@"swell%d", (rand() % kNumSwells) + 1];
-    NSString *message = [[HATViewController newUserMessages] randomObject];
     self.newestUserName = json[@"user"];
-    self.userLabel.text = [NSString stringWithFormat:message, self.newestUserName];
+    [self.userJoinedBanner welcomeUserWithUsername:self.newestUserName];
     [self showNewUserView:YES];
   }
   else if (![[json[@"ns"] lowercaseString] isEqualToString:@"main"])
@@ -687,6 +656,24 @@
   }
 
   [self playSoundWithPath:soundPath];
+}
+
+#pragma mark - HATUserJoinedBannerDelegate
+- (void)userJoinedBannerWantsDismiss:(HATUserJoinedBanner *)banner
+{
+  [self hideNewUserView:YES];
+}
+
+- (void)userJoinedBannerTapped:(HATUserJoinedBanner *)banner
+{
+  NSString *urlString = [NSString
+      stringWithFormat:
+          @"http://%@.wikipedia.org/w/index.php?title=User_talk:%@&action=edit&section=new",
+          self.currentLanguageCode, banner.currentlyDisplayedUsername];
+  [[UIApplication sharedApplication]
+                openURL:[NSURL URLWithString:urlString]
+                options:@{}
+      completionHandler:nil];
 }
 
 @end

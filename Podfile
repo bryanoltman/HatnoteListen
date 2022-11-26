@@ -8,6 +8,7 @@ target 'HatnoteListen' do
   pod 'SocketRocket'
   pod 'JSONKit-NoWarning'
   pod 'KVOController'
+  pod 'Masonry'
   # pod 'Reveal-iOS-SDK'
   pod 'TTTAttributedLabel'
   pod 'JASidePanels'

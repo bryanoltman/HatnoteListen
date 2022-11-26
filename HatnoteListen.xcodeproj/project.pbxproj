@@ -108,6 +108,7 @@
 		EDEFBEA718C3FE1E002AE9C6 /* NSArray+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEFBEA618C3FE1E002AE9C6 /* NSArray+Util.m */; };
 		EDF73D45292FE72D00FDD97F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDF73D44292FE72D00FDD97F /* Launch Screen.storyboard */; };
 		EDF73D492930578A00FDD97F /* HATWikipediaService.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF73D482930578A00FDD97F /* HATWikipediaService.m */; };
+		EDF73D4D29306E3800FDD97F /* HATUserJoinedBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF73D4C29306E3800FDD97F /* HATUserJoinedBanner.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -252,6 +253,8 @@
 		EDF73D44292FE72D00FDD97F /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		EDF73D472930578A00FDD97F /* HATWikipediaService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HATWikipediaService.h; sourceTree = "<group>"; };
 		EDF73D482930578A00FDD97F /* HATWikipediaService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HATWikipediaService.m; sourceTree = "<group>"; };
+		EDF73D4B29306E3800FDD97F /* HATUserJoinedBanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HATUserJoinedBanner.h; sourceTree = "<group>"; };
+		EDF73D4C29306E3800FDD97F /* HATUserJoinedBanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HATUserJoinedBanner.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -353,6 +356,7 @@
 		ED5B867618BACA6500932430 /* HatnoteListen */ = {
 			isa = PBXGroup;
 			children = (
+				EDF73D4A29306E2300FDD97F /* Views */,
 				EDF73D462930575D00FDD97F /* Wikipedia */,
 				ED075D1A18D7E0AA00581187 /* About */,
 				EDEFBEA418C3F8FF002AE9C6 /* Categories */,
@@ -368,8 +372,6 @@
 				ED946AA618BC239700B4EEAF /* HATUpdateView.m */,
 				ED5B868518BACA6500932430 /* HATViewController.h */,
 				ED5B868618BACA6500932430 /* HATViewController.m */,
-				ED755D3418BB065500E7AC88 /* HATWikipediaViewController.h */,
-				ED755D3518BB065500E7AC88 /* HATWikipediaViewController.m */,
 				EDDD564418BEED9F00D7AD6F /* Images */,
 				ED5B868818BACA6500932430 /* Images.xcassets */,
 				EDF73D44292FE72D00FDD97F /* Launch Screen.storyboard */,
@@ -556,6 +558,17 @@
 				EDF73D482930578A00FDD97F /* HATWikipediaService.m */,
 			);
 			name = Wikipedia;
+			sourceTree = "<group>";
+		};
+		EDF73D4A29306E2300FDD97F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ED755D3418BB065500E7AC88 /* HATWikipediaViewController.h */,
+				ED755D3518BB065500E7AC88 /* HATWikipediaViewController.m */,
+				EDF73D4B29306E3800FDD97F /* HATUserJoinedBanner.h */,
+				EDF73D4C29306E3800FDD97F /* HATUserJoinedBanner.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -777,6 +790,7 @@
 				"${BUILT_PRODUCTS_DIR}/JASidePanels/JASidePanels.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONKit-NoWarning/JSONKit_NoWarning.framework",
 				"${BUILT_PRODUCTS_DIR}/KVOController/KVOController.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 			);
@@ -785,6 +799,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JASidePanels.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONKit_NoWarning.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KVOController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 			);
@@ -812,6 +827,7 @@
 				ED5B867D18BACA6500932430 /* main.m in Sources */,
 				ED3E7A5B18DBEA4800CADCCC /* HATHorizontalPanGestureRecognizer.m in Sources */,
 				ED5A04A118CEA71C0068D325 /* HATSettingsViewController.m in Sources */,
+				EDF73D4D29306E3800FDD97F /* HATUserJoinedBanner.m in Sources */,
 				EDEFBEA318C3F8F6002AE9C6 /* UIColor+Util.m in Sources */,
 				ED946AA718BC239700B4EEAF /* HATUpdateView.m in Sources */,
 				ED075D2118D7E10100581187 /* HATAboutViewController.m in Sources */,
