@@ -281,13 +281,10 @@
   BOOL hasUserSeenWelcome = [[NSUserDefaults standardUserDefaults] boolForKey:@"shownWelcome"];
   if (!hasUserSeenWelcome)
   {
-    [self
-        performBlock:^{
-          [self showAboutView:HATAboutScreenContentWelcome];
-          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shownWelcome"];
-          [[NSUserDefaults standardUserDefaults] synchronize];
-        }
-          afterDelay:0.2];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+      [self showAboutView:HATAboutScreenContentWelcome];
+      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shownWelcome"];
+    });
   }
 }
 
@@ -339,11 +336,9 @@
     snapBehavior.damping = 0.85;
     [self.animator addBehavior:snapBehavior];
     [self.gravityBehavior addItem:fromView];
-    [self
-        performBlock:^{
-          [self.animator removeBehavior:snapBehavior];
-        }
-          afterDelay:0.5];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+      [self.animator removeBehavior:snapBehavior];
+    });
   }
 
   if (toView && toView.superview)
@@ -365,11 +360,9 @@
     UISnapBehavior *snapBehavior = [[UISnapBehavior alloc] initWithItem:toView snapToPoint:toPoint];
     snapBehavior.damping = 0.85;
     [self.animator addBehavior:snapBehavior];
-    [self
-        performBlock:^{
-          [self.animator removeBehavior:snapBehavior];
-        }
-          afterDelay:0.5];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+      [self.animator removeBehavior:snapBehavior];
+    });
   }
 }
 
@@ -397,9 +390,12 @@
 
 - (void)bubbleClicked:(NSNotification *)notification
 {
-  if (self.selectedView == notification.object) {
+  if (self.selectedView == notification.object)
+  {
     self.selectedView = nil;
-  } else {
+  }
+  else
+  {
     self.selectedView = notification.object;
   }
 }

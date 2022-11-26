@@ -100,7 +100,6 @@
 		EDCBD04118D51FF800EC2892 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCBD04018D51FF800EC2892 /* Settings.storyboard */; };
 		EDCBD04518D5206A00EC2892 /* HATLanguageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCBD04418D5206A00EC2892 /* HATLanguageTableViewCell.m */; };
 		EDCE382918CBC004006C3B6F /* HATContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE382818CBC004006C3B6F /* HATContainerView.m */; };
-		EDDD564118BEDE8400D7AD6F /* NSObject+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */; };
 		EDDD564318BEE7B700D7AD6F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDD564218BEE7B700D7AD6F /* AVFoundation.framework */; };
 		EDE5A5AD18DD3E4C0042F5D0 /* tutorial.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDE5A5AB18DD3E4C0042F5D0 /* tutorial.txt */; };
 		EDE5A5AE18DD3E4C0042F5D0 /* welcome.txt in Resources */ = {isa = PBXBuildFile; fileRef = EDE5A5AC18DD3E4C0042F5D0 /* welcome.txt */; };
@@ -241,8 +240,6 @@
 		EDCBD04418D5206A00EC2892 /* HATLanguageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATLanguageTableViewCell.m; sourceTree = "<group>"; };
 		EDCE382718CBC004006C3B6F /* HATContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATContainerView.h; sourceTree = "<group>"; };
 		EDCE382818CBC004006C3B6F /* HATContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATContainerView.m; sourceTree = "<group>"; };
-		EDDD563F18BEDE8400D7AD6F /* NSObject+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Util.h"; sourceTree = "<group>"; };
-		EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Util.m"; sourceTree = "<group>"; };
 		EDDD564218BEE7B700D7AD6F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		EDE5A5AB18DD3E4C0042F5D0 /* tutorial.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tutorial.txt; sourceTree = "<group>"; };
 		EDE5A5AC18DD3E4C0042F5D0 /* welcome.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = welcome.txt; sourceTree = "<group>"; };
@@ -535,8 +532,6 @@
 				ED5A04A318CEA87F0068D325 /* NSArray+FunctionalHelper.m */,
 				EDEFBEA518C3FE1E002AE9C6 /* NSArray+Util.h */,
 				EDEFBEA618C3FE1E002AE9C6 /* NSArray+Util.m */,
-				EDDD563F18BEDE8400D7AD6F /* NSObject+Util.h */,
-				EDDD564018BEDE8400D7AD6F /* NSObject+Util.m */,
 				ED075D2418D7EDAC00581187 /* NSString+Util.h */,
 				ED075D2518D7EDAC00581187 /* NSString+Util.m */,
 				ED3C834018E12B100018190A /* UIColor+Theme.h */,
@@ -818,7 +813,6 @@
 				ED5B868118BACA6500932430 /* HATAppDelegate.m in Sources */,
 				ED3C834218E12B100018190A /* UIColor+Theme.m in Sources */,
 				ED536D4318D67B2400A5827C /* HATWikipediaLanguage.m in Sources */,
-				EDDD564118BEDE8400D7AD6F /* NSObject+Util.m in Sources */,
 				EDEFBEA718C3FE1E002AE9C6 /* NSArray+Util.m in Sources */,
 				ED9D311B18DA72FB0038DD46 /* HATSidePanelController.m in Sources */,
 				EDF73D492930578A00FDD97F /* HATWikipediaService.m in Sources */,
