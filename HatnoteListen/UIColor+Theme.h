@@ -13,5 +13,6 @@
 + (UIColor *)greenDotColor;
 + (UIColor *)whiteDotColor;
 + (UIColor *)backgroundColor;
-+ (UIColor *)bannerTintColor;
++ (UIColor *)articleTitleViewBackgroundColor;
++ (UIColor *)userJoinedBannerColor;
 @end

@@ -30,7 +30,12 @@
   return [UIColor whiteColor];
 }
 
-+ (UIColor *)bannerTintColor
++ (UIColor *)articleTitleViewBackgroundColor
+{
+  return [[UIColor blackColor] colorWithAlphaComponent:0.7];
+}
+
++ (UIColor *)userJoinedBannerColor
 {
   return [UIColor colorFromHex:0x339BE5 alpha:0.7];
 }

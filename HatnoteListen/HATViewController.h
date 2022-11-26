@@ -14,8 +14,6 @@
 
 @property (strong, nonatomic) HATAboutViewController *aboutVC;
 
-- (IBAction)newUserViewTapped:(id)sender;
-
 - (void)showAboutView:(HATAboutScreenContent)content;
 - (void)hideAboutView;
 

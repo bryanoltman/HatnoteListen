@@ -297,7 +297,7 @@
                                 addKeyframeWithRelativeStartTime:0
                                                 relativeDuration:1
                                                       animations:^{
-                                                        [[[appDelegate container]
+                                                        [[[appDelegate sidePanelController]
                                                             centerPanelContainer]
                                                             setTransform:
                                                                 CGAffineTransformMakeTranslation(
@@ -305,7 +305,7 @@
                                                       }];
                           }
                           completion:nil];
-    [[[appDelegate container] centerPanelContainer] setTransform:CGAffineTransformIdentity];
+    [[[appDelegate sidePanelController] centerPanelContainer] setTransform:CGAffineTransformIdentity];
   }
 
   return cell;

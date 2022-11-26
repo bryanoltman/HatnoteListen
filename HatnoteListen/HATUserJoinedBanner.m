@@ -42,7 +42,7 @@
   {
     self.userQueue = [[NSMutableArray alloc] init];
 
-    self.backgroundColor = [UIColor bannerTintColor];
+    self.backgroundColor = [UIColor userJoinedBannerColor];
 
     self.userNameLabel = [[UILabel alloc] init];
     [self addSubview:self.userNameLabel];

@@ -8,24 +8,22 @@
 
 #import <Masonry/Masonry.h>
 
+#import "HATArticleTitleView.h"
 #import "HATSettingsViewController.h"
 #import "HATUpdateView.h"
 #import "HATUserJoinedBanner.h"
 #import "HATViewController.h"
 #import "HATWikipediaService.h"
-#import "HATWikipediaViewController.h"
 
 #define kNumClav 27
 #define kNumCelesta 27
 #define kNumSwells 3
 
-@interface HATViewController () <HATUserJoinedBannerDelegate, HATWikipediaServiceDelegate>
+@interface HATViewController () <HATUserJoinedBannerDelegate, HATWikipediaServiceDelegate, HATArticleTitleViewDelegate>
 @property (strong, nonatomic) FBKVOController *KVOController;
-@property (strong, nonatomic) HATWikipediaViewController *wikiVC;
+@property (strong, nonatomic) HATArticleTitleView *articleTitleView;
 @property (strong, nonatomic) HATSettingsViewController *settingsVC;
 @property (strong, nonatomic) NSMutableArray *avPlayers;
-@property (strong, nonatomic) NSTimer *wikiHideTimer;
-@property (strong, nonatomic) NSTimer *pushBehaviorTimer;
 @property (strong, nonatomic) NSString *newestUserName;
 @property (strong, nonatomic) NSDate *startTime;
 @property (strong, nonatomic) UIDynamicAnimator *animator;
@@ -110,7 +108,7 @@
           }];
 
     [self.KVOController
-        observe:[appDelegate container]
+        observe:[appDelegate sidePanelController]
         keyPath:@"state"
         options:(NSKeyValueObservingOptionNew | NSKeyValueChangeSetting)
           block:^(id observer, id object, NSDictionary *change) {
@@ -228,14 +226,15 @@
   HATUpdateView *previousView = _selectedView;
   _selectedView = selectedView;
   selectedView.textAngle = 0;
-  self.wikiVC.info = _selectedView.info;
   if (_selectedView)
   {
-    [self showWikiView:YES];
+    [self.articleTitleView setText:_selectedView.info[@"page_title"]
+                               url:[NSURL URLWithString:_selectedView.info[@"url"]]];
+    [self showArticleTitleView:YES];
   }
   else
   {
-    [self hideWikiView:YES];
+    [self hideArticleTitleView:YES];
   }
 
   [self animateSelectionChangeFromView:previousView toView:selectedView];
@@ -254,6 +253,13 @@
     make.leading.top.trailing.equalTo(self.view);
   }];
 
+  self.articleTitleView = [[HATArticleTitleView alloc] init];
+  self.articleTitleView.delegate = self;
+  [self.view addSubview:self.articleTitleView];
+  [self.articleTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.leading.bottom.trailing.equalTo(self.view);
+  }];
+
   self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
 
   self.gravityBehavior = [UIGravityBehavior new];
@@ -261,18 +267,16 @@
   self.gravityBehavior.magnitude = 0.01;
   [self.animator addBehavior:self.gravityBehavior];
 
-  self.wikiVC = [self.childViewControllers find:^BOOL(id vc) {
-    return [vc isKindOfClass:[HATWikipediaViewController class]];
-  }];
-
   self.settingsVC = [self.childViewControllers find:^BOOL(id vc) {
     return [vc isKindOfClass:[HATSettingsViewController class]];
   }];
 
   self.settingsVC.view.hidden = YES;
 
+  [self.view layoutIfNeeded];
+
   [self hideNewUserView:NO];
-  [self hideWikiView:NO];
+  [self hideArticleTitleView:NO];
 
   BOOL hasUserSeenWelcome = [[NSUserDefaults standardUserDefaults] boolForKey:@"shownWelcome"];
   if (!hasUserSeenWelcome)
@@ -285,13 +289,6 @@
         }
           afterDelay:0.2];
   }
-
-  self.pushBehaviorTimer =
-      [NSTimer scheduledTimerWithTimeInterval:1
-                                       target:self
-                                     selector:@selector(pushBehaviorTimerTicked:)
-                                     userInfo:nil
-                                      repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -359,11 +356,12 @@
     toView.layer.shadowOffset = CGSizeZero;
     toView.alpha = 0.85;
 
-    [self.view insertSubview:toView belowSubview:self.wikiVC.view.superview];
+    [self.view insertSubview:toView belowSubview:self.articleTitleView];
 
     [self.gravityBehavior removeItem:toView];
-    CGPoint toPoint = self.view.center;
-    toPoint.y = CGRectGetMinY(self.wikiVC.view.superview.frame) - toView.frame.size.height / 2;
+    CGPoint toPoint = CGPointMake(
+        self.view.center.x,
+        CGRectGetHeight(self.view.frame) - self.view.safeAreaInsets.bottom - 34 - toView.frame.size.height / 2);
     UISnapBehavior *snapBehavior = [[UISnapBehavior alloc] initWithItem:toView snapToPoint:toPoint];
     snapBehavior.damping = 0.85;
     [self.animator addBehavior:snapBehavior];
@@ -379,7 +377,6 @@
 - (void)didEnterBackground
 {
   [self.wikipediaService closeAllSockets];
-  self.selectedView = nil;
 }
 
 - (void)didBecomeActive
@@ -430,75 +427,38 @@
       }];
 }
 
-- (void)showWikiView:(BOOL)animated
+- (void)showArticleTitleView:(BOOL)animated
 {
   [UIView animateWithDuration:animated ? 0.3 : 0
                         delay:0
                       options:UIViewAnimationOptionCurveEaseOut
                    animations:^{
-                     self.wikiVC.view.transform = CGAffineTransformIdentity;
+                     self.articleTitleView.transform = CGAffineTransformIdentity;
                    }
                    completion:nil];
-
-  [self.wikiHideTimer invalidate];
-  self.wikiHideTimer = [NSTimer scheduledTimerWithTimeInterval:9
-                                                        target:self
-                                                      selector:@selector(removeTimerTicked:)
-                                                      userInfo:nil
-                                                       repeats:NO];
 }
 
-- (void)removeTimerTicked:(NSTimer *)timer
-{
-  if (timer == self.wikiHideTimer)
-  {
-    [self hideWikiView:YES];
-  }
-}
-
-- (void)pushBehaviorTimerTicked:(NSTimer *)timer
-{
-  // TODO
-  //    NSUInteger index = arc4random() % self.view.subviews.count;
-  //    UIView *subview = self.view.subviews[index];
-  //    if (![subview isKindOfClass:[HATUpdateView class]]) {
-  //        return;
-  //    }
-  //
-  //    HATUpdateView *dotView = (HATUpdateView *)subview;
-  //
-  //    UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[dotView]
-  //                                                                    mode:UIPushBehaviorModeInstantaneous];
-  //    pushBehavior.angle = drand48() * M_PI * 2;
-  //    pushBehavior.magnitude = drand48() * 0.1;
-  //    NSLog(@"push direction is %f,%f", pushBehavior.pushDirection.dx,
-  //    pushBehavior.pushDirection.dy); [self.animator addBehavior:pushBehavior]; [self
-  //    performBlock:^{
-  //        [self.animator removeBehavior:pushBehavior];
-  //    } afterDelay:0.001];
-}
-
-- (void)hideWikiView:(BOOL)animated
+- (void)hideArticleTitleView:(BOOL)animated
 {
   [UIView animateWithDuration:animated ? 0.3 : 0
                         delay:0
                       options:UIViewAnimationOptionCurveEaseOut
                    animations:^{
-                     self.wikiVC.view.transform = CGAffineTransformMakeTranslation(
-                         0, CGRectGetHeight(self.wikiVC.view.frame));
+                     self.articleTitleView.transform = CGAffineTransformMakeTranslation(
+                         0, CGRectGetHeight(self.articleTitleView.frame));
                    }
                    completion:nil];
 }
 
 - (void)showAboutView:(HATAboutScreenContent)content
 {
-  [[appDelegate container] showCenterPanelAnimated:YES];
+  [[appDelegate sidePanelController] showCenterPanelAnimated:YES];
   self.aboutVC = [[UIStoryboard storyboardWithName:@"About"
                                             bundle:nil] instantiateInitialViewController];
-  self.aboutVC.view.frame = [appDelegate container].centerPanelContainer.frame;
+  self.aboutVC.view.frame = [appDelegate sidePanelController].centerPanelContainer.frame;
 
-  [[appDelegate container] addChildViewController:self.aboutVC];
-  [[appDelegate container].view addSubview:self.aboutVC.view];
+  [[appDelegate sidePanelController] addChildViewController:self.aboutVC];
+  [[appDelegate sidePanelController].view addSubview:self.aboutVC.view];
 
   [self.aboutVC show:content];
 }
@@ -668,10 +628,21 @@
 {
   NSString *urlString = [NSString
       stringWithFormat:
-          @"http://%@.wikipedia.org/w/index.php?title=User_talk:%@&action=edit&section=new",
+          @"http://%@.m.wikipedia.org/w/index.php?title=User_talk:%@&action=edit&section=new",
           self.currentLanguageCode, banner.currentlyDisplayedUsername];
   [[UIApplication sharedApplication]
                 openURL:[NSURL URLWithString:urlString]
+                options:@{}
+      completionHandler:nil];
+}
+
+#pragma mark - HATArticleTitleViewDelegate
+
+- (void)articleTitleViewTapped:(HATArticleTitleView *)articleTitleView
+{
+  NSLog(@"articleTitleView.articleURL %@", articleTitleView.articleURL);
+  [[UIApplication sharedApplication]
+                openURL:articleTitleView.articleURL
                 options:@{}
       completionHandler:nil];
 }

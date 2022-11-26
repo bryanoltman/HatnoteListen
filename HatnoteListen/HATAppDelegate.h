@@ -14,7 +14,7 @@
 @interface HATAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) HATSidePanelController *container;
+@property (strong, nonatomic) HATSidePanelController *sidePanelController;
 @property (strong, nonatomic) HATViewController *viewController;
 @property (strong, nonatomic) HATSettingsViewController *settingsViewController;
 

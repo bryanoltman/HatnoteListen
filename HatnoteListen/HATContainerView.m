@@ -7,7 +7,9 @@
 //
 
 #import "HATContainerView.h"
+#import "HATArticleTitleView.h"
 #import "HATUpdateView.h"
+#import "HATUserJoinedBanner.h"
 
 @interface HATContainerView ()
 @property (weak, nonatomic) HATUpdateView *highlightedView;
@@ -20,8 +22,22 @@
   UITouch *touch = [[event allTouches] anyObject];
   CGPoint point = [touch locationInView:self];
   NSMutableArray *hitViews = [NSMutableArray new];
+  BOOL didHitUserJoinedBanner = NO;
+  BOOL didHitArticleTitleView = NO;
   for (UIView *subview in self.subviews)
   {
+    if ([subview isKindOfClass:[HATUserJoinedBanner class]])
+    {
+      didHitUserJoinedBanner = CGRectContainsPoint(subview.frame, point);
+      continue;
+    }
+
+    if ([subview isKindOfClass:[HATArticleTitleView class]])
+    {
+      didHitArticleTitleView = CGRectContainsPoint(subview.frame, point);
+      continue;
+    }
+
     if (![subview isKindOfClass:[HATUpdateView class]])
     {
       continue;
@@ -35,6 +51,11 @@
     {
       [hitViews addObject:view];
     }
+  }
+
+  if (didHitArticleTitleView || didHitUserJoinedBanner)
+  {
+    return;
   }
 
   if (!hitViews.count)

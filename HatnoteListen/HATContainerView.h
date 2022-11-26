@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+// Class for the app's main view
 @interface HATContainerView : UIView
 
 @end

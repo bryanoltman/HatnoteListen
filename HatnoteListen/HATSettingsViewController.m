@@ -29,7 +29,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [[appDelegate container] setLeftFixedWidth:self.tableView.frame.size.width + 5];
+  [[appDelegate sidePanelController] setLeftFixedWidth:self.tableView.frame.size.width + 5];
   self.kvoController = [FBKVOController controllerWithObserver:self];
 
   __weak HATSettingsViewController *weakSelf = self;

@@ -35,7 +35,6 @@
 		ED5B869218BACA6600932430 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5B867418BACA6500932430 /* UIKit.framework */; };
 		ED5B869A18BACA6600932430 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ED5B869818BACA6600932430 /* InfoPlist.strings */; };
 		ED5B869C18BACA6600932430 /* HatnoteListenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5B869B18BACA6600932430 /* HatnoteListenTests.m */; };
-		ED755D3618BB065500E7AC88 /* HATWikipediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED755D3518BB065500E7AC88 /* HATWikipediaViewController.m */; };
 		ED755DAC18BB084600E7AC88 /* swell2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7318BB084600E7AC88 /* swell2.mp3 */; };
 		ED755DAD18BB084600E7AC88 /* swell3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED755D7418BB084600E7AC88 /* swell3.mp3 */; };
 		ED764676193FF7B20005751B /* CALayer+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ED764675193FF7B20005751B /* CALayer+Util.m */; };
@@ -96,6 +95,7 @@
 		ED91831718C41648003D91A0 /* clav027.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED9182FC18C41648003D91A0 /* clav027.mp3 */; };
 		ED946AA718BC239700B4EEAF /* HATUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED946AA618BC239700B4EEAF /* HATUpdateView.m */; };
 		ED9D311B18DA72FB0038DD46 /* HATSidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9D311A18DA72FB0038DD46 /* HATSidePanelController.m */; };
+		EDB697F32931C258000C7BE9 /* HATArticleTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB697F22931C258000C7BE9 /* HATArticleTitleView.m */; };
 		EDB7D08218D94A6A0025D63C /* UIDevice+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB7D08118D94A6A0025D63C /* UIDevice+Util.m */; };
 		EDCBD04118D51FF800EC2892 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCBD04018D51FF800EC2892 /* Settings.storyboard */; };
 		EDCBD04518D5206A00EC2892 /* HATLanguageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCBD04418D5206A00EC2892 /* HATLanguageTableViewCell.m */; };
@@ -168,8 +168,6 @@
 		ED5B869718BACA6600932430 /* HatnoteListenTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HatnoteListenTests-Info.plist"; sourceTree = "<group>"; };
 		ED5B869918BACA6600932430 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ED5B869B18BACA6600932430 /* HatnoteListenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HatnoteListenTests.m; sourceTree = "<group>"; };
-		ED755D3418BB065500E7AC88 /* HATWikipediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATWikipediaViewController.h; sourceTree = "<group>"; };
-		ED755D3518BB065500E7AC88 /* HATWikipediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATWikipediaViewController.m; sourceTree = "<group>"; };
 		ED755D3718BB071A00E7AC88 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		ED755D7218BB084600E7AC88 /* swell1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swell1.mp3; sourceTree = "<group>"; };
 		ED755D7318BB084600E7AC88 /* swell2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swell2.mp3; sourceTree = "<group>"; };
@@ -234,6 +232,8 @@
 		ED946AA618BC239700B4EEAF /* HATUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATUpdateView.m; sourceTree = "<group>"; };
 		ED9D311918DA72FB0038DD46 /* HATSidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATSidePanelController.h; sourceTree = "<group>"; };
 		ED9D311A18DA72FB0038DD46 /* HATSidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATSidePanelController.m; sourceTree = "<group>"; };
+		EDB697F12931C258000C7BE9 /* HATArticleTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HATArticleTitleView.h; sourceTree = "<group>"; };
+		EDB697F22931C258000C7BE9 /* HATArticleTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HATArticleTitleView.m; sourceTree = "<group>"; };
 		EDB7D08018D94A6A0025D63C /* UIDevice+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Util.h"; sourceTree = "<group>"; };
 		EDB7D08118D94A6A0025D63C /* UIDevice+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Util.m"; sourceTree = "<group>"; };
 		EDCBD04018D51FF800EC2892 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -563,8 +563,8 @@
 		EDF73D4A29306E2300FDD97F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				ED755D3418BB065500E7AC88 /* HATWikipediaViewController.h */,
-				ED755D3518BB065500E7AC88 /* HATWikipediaViewController.m */,
+				EDB697F12931C258000C7BE9 /* HATArticleTitleView.h */,
+				EDB697F22931C258000C7BE9 /* HATArticleTitleView.m */,
 				EDF73D4B29306E3800FDD97F /* HATUserJoinedBanner.h */,
 				EDF73D4C29306E3800FDD97F /* HATUserJoinedBanner.m */,
 			);
@@ -833,11 +833,11 @@
 				ED075D2118D7E10100581187 /* HATAboutViewController.m in Sources */,
 				EDCBD04518D5206A00EC2892 /* HATLanguageTableViewCell.m in Sources */,
 				EDB7D08218D94A6A0025D63C /* UIDevice+Util.m in Sources */,
-				ED755D3618BB065500E7AC88 /* HATWikipediaViewController.m in Sources */,
 				ED5B868718BACA6500932430 /* HATViewController.m in Sources */,
 				ED764676193FF7B20005751B /* CALayer+Util.m in Sources */,
 				ED5A04A718CEB5CB0068D325 /* HATSettings.m in Sources */,
 				ED2E1F6E194301B40054229F /* CGVectorUtils.m in Sources */,
+				EDB697F32931C258000C7BE9 /* HATArticleTitleView.m in Sources */,
 				ED5A04A418CEA87F0068D325 /* NSArray+FunctionalHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,17 +20,17 @@
 
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-  self.container = [HATSidePanelController new];
+  self.sidePanelController = [HATSidePanelController new];
   self.viewController = [[UIStoryboard storyboardWithName:@"Main"
                                                    bundle:nil] instantiateInitialViewController];
   self.settingsViewController =
       [[UIStoryboard storyboardWithName:@"Settings" bundle:nil] instantiateInitialViewController];
-  self.container.leftPanel = self.settingsViewController;
-  self.container.centerPanel = self.viewController;
-  self.container.bounceOnSidePanelOpen = NO;
+  self.sidePanelController.leftPanel = self.settingsViewController;
+  self.sidePanelController.centerPanel = self.viewController;
+  self.sidePanelController.bounceOnSidePanelOpen = NO;
 
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  self.window.rootViewController = self.container;
+  self.window.rootViewController = self.sidePanelController;
   [self.window makeKeyAndVisible];
 
   return YES;

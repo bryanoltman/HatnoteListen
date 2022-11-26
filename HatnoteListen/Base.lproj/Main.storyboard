@@ -18,25 +18,8 @@
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="kh9-bI-dsS" customClass="HATContainerView">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVS-jf-gjE">
-                                <rect key="frame" x="0.0" y="768" width="393" height="84"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="84" id="L7u-9p-EAX"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="zh1-Em-DBZ" kind="embed" id="iAb-K4-HzQ"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
                         <color key="backgroundColor" red="0.10980392156862745" green="0.15294117647058825" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="bVS-jf-gjE" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="B89-HT-S1H"/>
-                            <constraint firstItem="bVS-jf-gjE" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ZnR-zj-6u3"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="bVS-jf-gjE" secondAttribute="bottom" constant="-34" id="f6T-Mn-JEp"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="YZp-6R-JyY"/>
                 </viewController>
@@ -48,46 +31,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="17.557251908396946" y="3.5211267605633805"/>
-        </scene>
-        <!--Wikipedia View Controller-->
-        <scene sceneID="uHy-Zd-Cq9">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="zh1-Em-DBZ" customClass="HATWikipediaViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ymQ-qJ-kEN"/>
-                        <viewControllerLayoutGuide type="bottom" id="BdP-sm-fLq"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="9wa-gF-eyv">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="84"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MTs-dK-VSp">
-                                <rect key="frame" x="9" y="24" width="368" height="39"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.60999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                        <gestureRecognizers/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="A3r-gB-LTf" appends="YES" id="CZV-T8-o4s"/>
-                        </connections>
-                    </view>
-                    <toolbarItems/>
-                    <connections>
-                        <outlet property="textLabel" destination="MTs-dK-VSp" id="txk-uw-S4y"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="51T-mm-yU8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="A3r-gB-LTf">
-                    <connections>
-                        <action selector="viewTapped:" destination="zh1-Em-DBZ" id="ENZ-mY-3Yc"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="986.25954198473278" y="428.87323943661971"/>
         </scene>
     </scenes>
 </document>
