@@ -10,7 +10,7 @@
 #import "NSArray+FunctionalHelper.h"
 
 @interface HATWikipediaService () <NSURLSessionWebSocketDelegate>
-@property (strong, nonatomic) NSMutableDictionary *sockets;
+@property (strong, nonatomic) NSMutableDictionary *languageCodesToTasks;
 @end
 
 @implementation HATWikipediaService
@@ -20,7 +20,7 @@
   self = [super init];
   if (self)
   {
-    self.sockets = [[NSMutableDictionary alloc] init];
+    self.languageCodesToTasks = [[NSMutableDictionary alloc] init];
   }
   return self;
 }
@@ -31,7 +31,7 @@
   NSLog(@"opening socket for %@", language.name);
 #endif
 
-  NSURLSessionWebSocketTask *task = self.sockets[language.code];
+  NSURLSessionWebSocketTask *task = self.languageCodesToTasks[language.code];
   if (task && task.state == NSURLSessionTaskStateRunning)
   {
     // A socket is already open, don't need to open a new one.
@@ -43,7 +43,7 @@
   task.delegate = self;
   [self receiveMessageForWebSocketTask:task language:language];
   [task resume];
-  [self.sockets setObject:task forKey:language.code];
+  [self.languageCodesToTasks setObject:task forKey:language.code];
   return;
 }
 
@@ -71,19 +71,19 @@
 
 - (void)closeSocketForLanguage:(HATWikipediaLanguage *)language
 {
-  NSURLSessionWebSocketTask *task = self.sockets[language.code];
+  NSURLSessionWebSocketTask *task = self.languageCodesToTasks[language.code];
   [task cancel];
-  [self.sockets removeObjectForKey:language.code];
+  [self.languageCodesToTasks removeObjectForKey:language.code];
 }
 
 - (void)closeAllSockets
 {
-  for (NSURLSessionWebSocketTask *task in self.sockets)
+  for (NSString *languageCode in self.languageCodesToTasks)
   {
-    [task cancel];
+    [self.languageCodesToTasks[languageCode] cancel];
   }
 
-  [self.sockets removeAllObjects];
+  [self.languageCodesToTasks removeAllObjects];
 }
 
 #pragma mark - NSURLSessionWebSocketDelegate
