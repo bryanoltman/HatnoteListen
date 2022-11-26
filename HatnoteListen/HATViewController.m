@@ -632,7 +632,7 @@
 {
   NSString *urlString = [NSString
       stringWithFormat:
-          @"http://%@.m.wikipedia.org/w/index.php?title=User_talk:%@&action=edit&section=new",
+          @"http://%@.wikipedia.org/w/index.php?title=User_talk:%@&action=edit&section=new",
           self.currentLanguageCode, banner.currentlyDisplayedUsername];
   [[UIApplication sharedApplication]
                 openURL:[NSURL URLWithString:urlString]
