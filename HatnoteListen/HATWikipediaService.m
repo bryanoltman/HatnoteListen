@@ -10,6 +10,7 @@
 #import "NSArray+FunctionalHelper.h"
 
 @interface HATWikipediaService () <NSURLSessionWebSocketDelegate>
+@property (strong, nonatomic) NSMutableDictionary *sockets;
 @end
 
 @implementation HATWikipediaService

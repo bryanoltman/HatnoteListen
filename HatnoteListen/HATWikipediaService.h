@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HATWikipediaService : NSObject
 
-@property (strong, nonatomic) NSMutableDictionary *sockets;
 @property (weak, nonatomic) id<HATWikipediaServiceDelegate> delegate;
 
 - (void)openSocketForLanguage:(HATWikipediaLanguage *)language;
