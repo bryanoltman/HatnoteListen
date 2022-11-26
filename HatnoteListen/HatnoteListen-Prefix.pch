@@ -21,7 +21,6 @@
     #import "SRWebSocket.h"
     #import "JSONKit.h"
     #import "NSArray+Util.h"
-    #import "NSString+Util.h"
     #import "UIColor+Util.h"
     #import "UIDevice+Util.h"
     #import "NSArray+FunctionalHelper.h"

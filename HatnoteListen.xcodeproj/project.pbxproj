@@ -11,7 +11,6 @@
 		E55F954DA836C9FDE0B98E74 /* Pods_HatnoteListenTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB684EE0E8572B84067568D /* Pods_HatnoteListenTests.framework */; };
 		ED075D1E18D7E0F900581187 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED075D1D18D7E0F900581187 /* About.storyboard */; };
 		ED075D2118D7E10100581187 /* HATAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED075D2018D7E10100581187 /* HATAboutViewController.m */; };
-		ED075D2618D7EDAC00581187 /* NSString+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ED075D2518D7EDAC00581187 /* NSString+Util.m */; };
 		ED2E1F6E194301B40054229F /* CGVectorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2E1F6D194301B40054229F /* CGVectorUtils.m */; };
 		ED36591C18E767AF0071140A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED36591B18E767AF0071140A /* CoreMotion.framework */; };
 		ED3C834218E12B100018190A /* UIColor+Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3C834118E12B100018190A /* UIColor+Theme.m */; };
@@ -130,8 +129,6 @@
 		ED075D1D18D7E0F900581187 /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
 		ED075D1F18D7E10100581187 /* HATAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATAboutViewController.h; sourceTree = "<group>"; };
 		ED075D2018D7E10100581187 /* HATAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATAboutViewController.m; sourceTree = "<group>"; };
-		ED075D2418D7EDAC00581187 /* NSString+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Util.h"; sourceTree = "<group>"; };
-		ED075D2518D7EDAC00581187 /* NSString+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Util.m"; sourceTree = "<group>"; };
 		ED2E1F6C194301B40054229F /* CGVectorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGVectorUtils.h; sourceTree = "<group>"; };
 		ED2E1F6D194301B40054229F /* CGVectorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGVectorUtils.m; sourceTree = "<group>"; };
 		ED36591B18E767AF0071140A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -532,8 +529,6 @@
 				ED5A04A318CEA87F0068D325 /* NSArray+FunctionalHelper.m */,
 				EDEFBEA518C3FE1E002AE9C6 /* NSArray+Util.h */,
 				EDEFBEA618C3FE1E002AE9C6 /* NSArray+Util.m */,
-				ED075D2418D7EDAC00581187 /* NSString+Util.h */,
-				ED075D2518D7EDAC00581187 /* NSString+Util.m */,
 				ED3C834018E12B100018190A /* UIColor+Theme.h */,
 				ED3C834118E12B100018190A /* UIColor+Theme.m */,
 				EDEFBEA118C3F8F6002AE9C6 /* UIColor+Util.h */,
@@ -816,7 +811,6 @@
 				EDEFBEA718C3FE1E002AE9C6 /* NSArray+Util.m in Sources */,
 				ED9D311B18DA72FB0038DD46 /* HATSidePanelController.m in Sources */,
 				EDF73D492930578A00FDD97F /* HATWikipediaService.m in Sources */,
-				ED075D2618D7EDAC00581187 /* NSString+Util.m in Sources */,
 				EDCE382918CBC004006C3B6F /* HATContainerView.m in Sources */,
 				ED5B867D18BACA6500932430 /* main.m in Sources */,
 				ED3E7A5B18DBEA4800CADCCC /* HATHorizontalPanGestureRecognizer.m in Sources */,
