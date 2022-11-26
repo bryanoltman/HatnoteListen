@@ -5,7 +5,6 @@ target 'HatnoteListen' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'SocketRocket'
   pod 'JSONKit-NoWarning'
   pod 'KVOController'
   pod 'Masonry'

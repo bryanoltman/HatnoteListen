@@ -12,6 +12,10 @@
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *code;
-@property (strong, nonatomic) NSURL *websocketURL;
+
++ (NSDictionary *)languageNamesToCodes;
++ (NSURL *)websocketURLForLanguageCode:(NSString *)languageCode;
+
+- (NSURL *)websocketURL;
 
 @end

@@ -95,9 +95,10 @@
             NSKeyValueChange kind = [change[NSKeyValueChangeKindKey] integerValue];
             if (kind == NSKeyValueChangeInsertion || kind == NSKeyValueChangeSetting)
             {
-              [change[NSKeyValueChangeNewKey] each:^(HATWikipediaLanguage *lang) {
+              for (HATWikipediaLanguage *lang in change[NSKeyValueChangeNewKey])
+              {
                 [weakSelf.wikipediaService openSocketForLanguage:lang];
-              }];
+              }
             }
             else if (kind == NSKeyValueChangeRemoval)
             {

@@ -18,7 +18,6 @@
     #import <CoreMotion/CoreMotion.h>
     #import <JASidePanels/JASidePanelController.h>
 //    #import <Flurry.h>
-    #import "SRWebSocket.h"
     #import "JSONKit.h"
     #import "NSArray+Util.h"
     #import "UIColor+Util.h"
