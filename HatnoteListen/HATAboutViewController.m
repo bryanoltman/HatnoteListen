@@ -6,14 +6,27 @@
 //  Copyright (c) 2014 Bryan Oltman. All rights reserved.
 //
 
+#import <Masonry/Masonry.h>
+#import <TTTAttributedLabel/TTTAttributedLabel.h>
+
 #import "HATAboutViewController.h"
+#import "HATHorizontalPanGestureRecognizer.h"
 
 #define kAboutViews 2
 #define kTextPadding 20
 
-@interface HATAboutViewController () <TTTAttributedLabelDelegate>
+@interface HATAboutViewController () <TTTAttributedLabelDelegate,
+                                      UICollectionViewDataSource,
+                                      UICollectionViewDelegate,
+                                      UICollectionViewDelegateFlowLayout,
+                                      UIGestureRecognizerDelegate>
 @property (strong, nonatomic) NSMutableArray *pages;
 @property (strong, nonatomic) NSIndexPath *visibleIndexPath;
+@property (strong, nonatomic) UIView *backgroundView;
+@property (strong, nonatomic) UICollectionViewFlowLayout *collectionViewFlowLayout;
+@property (strong, nonatomic) UICollectionView *collectionView;
+@property (strong, nonatomic) HATHorizontalPanGestureRecognizer *dismissRecognizer;
+
 @end
 
 @implementation HATAboutViewController
@@ -22,15 +35,40 @@
 {
   [super viewDidLoad];
 
-  self.dismissRecognizer.direction = DirectionPanGestureRecognizerHorizontal;
+  self.view.backgroundColor = [UIColor clearColor];
 
-  self.backgroundView = [[UINavigationBar alloc] initWithFrame:self.view.bounds];
+  self.backgroundView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
   self.backgroundView.alpha = 0;
-  self.backgroundView.autoresizingMask =
-      UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-  [self.view insertSubview:self.backgroundView atIndex:0];
+  [self.view addSubview:self.backgroundView];
+  [self.backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.edges.equalTo(self.view);
+  }];
 
+  self.collectionViewFlowLayout = [[UICollectionViewFlowLayout alloc] init];
+  self.collectionViewFlowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+
+  self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
+                                           collectionViewLayout:self.collectionViewFlowLayout];
+  self.collectionView.showsVerticalScrollIndicator = NO;
+  self.collectionView.pagingEnabled = YES;
+  self.collectionView.backgroundColor = [UIColor clearColor];
+  self.collectionView.delegate = self;
+  self.collectionView.dataSource = self;
+  [self.collectionView registerClass:[UICollectionViewCell class]
+          forCellWithReuseIdentifier:@"AboutCell"];
   self.collectionView.alpha = 0;
+  [self.view addSubview:self.collectionView];
+  [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+    make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+    make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+    make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+  }];
+
+  self.dismissRecognizer = [[HATHorizontalPanGestureRecognizer alloc] initWithTarget:self
+                                                                              action:@selector(panned:)];
+  self.dismissRecognizer.direction = DirectionPanGestureRecognizerHorizontal;
+  [self.collectionView addGestureRecognizer:self.dismissRecognizer];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -133,7 +171,6 @@
   ret.delegate = self;
   [ret setLinkAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithWhite:0.5 alpha:1]}];
   ret.numberOfLines = 0;
-  ret.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
   ret.attributedText = [self pageForIndex:index];
 
@@ -278,12 +315,16 @@
 {
   UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AboutCell"
                                                                          forIndexPath:indexPath];
-  for (UIView *subview in [cell subviews])
+  for (UIView *subview in [cell.contentView subviews])
   {
     [subview removeFromSuperview];
   }
 
-  [cell addSubview:[self labelForIndex:indexPath.row]];
+  UIView *label = [self labelForIndex:indexPath.row];
+  [cell.contentView addSubview:label];
+  [label mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.edges.equalTo(cell.contentView).inset(16);
+  }];
 
   if (self.contentType == HATAboutScreenContentWelcome && indexPath.row == self.pages.count - 1)
   {
@@ -321,7 +362,7 @@
                     layout:(UICollectionViewLayout *)collectionViewLayout
     sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  return self.collectionView.bounds.size;
+  return collectionView.bounds.size;
 }
 
 #pragma mark - TTTAttributedLabelDelegate

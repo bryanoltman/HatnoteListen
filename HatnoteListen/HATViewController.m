@@ -454,8 +454,7 @@
 - (void)showAboutView:(HATAboutScreenContent)content
 {
   [[appDelegate sidePanelController] showCenterPanelAnimated:YES];
-  self.aboutVC = [[UIStoryboard storyboardWithName:@"About"
-                                            bundle:nil] instantiateInitialViewController];
+  self.aboutVC = [[HATAboutViewController alloc] init];
   self.aboutVC.view.frame = [appDelegate sidePanelController].centerPanelContainer.frame;
 
   [[appDelegate sidePanelController] addChildViewController:self.aboutVC];

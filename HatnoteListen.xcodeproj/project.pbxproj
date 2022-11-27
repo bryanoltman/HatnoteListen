@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1F63983F7DBD32DAD980D712 /* Pods_HatnoteListen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67AE027971F834349C29A1AE /* Pods_HatnoteListen.framework */; };
 		E55F954DA836C9FDE0B98E74 /* Pods_HatnoteListenTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB684EE0E8572B84067568D /* Pods_HatnoteListenTests.framework */; };
-		ED075D1E18D7E0F900581187 /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED075D1D18D7E0F900581187 /* About.storyboard */; };
 		ED075D2118D7E10100581187 /* HATAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED075D2018D7E10100581187 /* HATAboutViewController.m */; };
 		ED2E1F6E194301B40054229F /* CGVectorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2E1F6D194301B40054229F /* CGVectorUtils.m */; };
 		ED36591C18E767AF0071140A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED36591B18E767AF0071140A /* CoreMotion.framework */; };
@@ -126,7 +125,6 @@
 		67AE027971F834349C29A1AE /* Pods_HatnoteListen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HatnoteListen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C7A6BB7B4D9856FDDCADA13 /* Pods-HatnoteListenTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HatnoteListenTests.debug.xcconfig"; path = "Target Support Files/Pods-HatnoteListenTests/Pods-HatnoteListenTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E2B66C90A82CA5EF7089ED32 /* Pods-HatnoteListen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HatnoteListen.release.xcconfig"; path = "Target Support Files/Pods-HatnoteListen/Pods-HatnoteListen.release.xcconfig"; sourceTree = "<group>"; };
-		ED075D1D18D7E0F900581187 /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
 		ED075D1F18D7E10100581187 /* HATAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATAboutViewController.h; sourceTree = "<group>"; };
 		ED075D2018D7E10100581187 /* HATAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATAboutViewController.m; sourceTree = "<group>"; };
 		ED2E1F6C194301B40054229F /* CGVectorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGVectorUtils.h; sourceTree = "<group>"; };
@@ -293,7 +291,6 @@
 		ED075D1A18D7E0AA00581187 /* About */ = {
 			isa = PBXGroup;
 			children = (
-				ED075D1D18D7E0F900581187 /* About.storyboard */,
 				ED075D1F18D7E10100581187 /* HATAboutViewController.h */,
 				ED075D2018D7E10100581187 /* HATAboutViewController.m */,
 			);
@@ -649,7 +646,6 @@
 				EDE5A5AE18DD3E4C0042F5D0 /* welcome.txt in Resources */,
 				ED9182C718C4163E003D91A0 /* cel001.mp3 in Resources */,
 				ED5B868918BACA6500932430 /* Images.xcassets in Resources */,
-				ED075D1E18D7E0F900581187 /* About.storyboard in Resources */,
 				ED9182D618C4163E003D91A0 /* cel016.mp3 in Resources */,
 				ED9182D218C4163E003D91A0 /* cel012.mp3 in Resources */,
 				EDF73D45292FE72D00FDD97F /* Launch Screen.storyboard in Resources */,
