@@ -45,10 +45,12 @@
   }];
 
   self.collectionViewFlowLayout = [[UICollectionViewFlowLayout alloc] init];
+  self.collectionViewFlowLayout.minimumLineSpacing = 0;
   self.collectionViewFlowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
 
   self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero
                                            collectionViewLayout:self.collectionViewFlowLayout];
+  self.collectionView.clipsToBounds = NO;
   self.collectionView.showsVerticalScrollIndicator = NO;
   self.collectionView.pagingEnabled = YES;
   self.collectionView.backgroundColor = [UIColor clearColor];
@@ -164,10 +166,7 @@
 
 - (TTTAttributedLabel *)labelForIndex:(NSUInteger)index
 {
-  TTTAttributedLabel *ret = [[TTTAttributedLabel alloc]
-      initWithFrame:CGRectMake(kTextPadding, kTextPadding,
-                               self.view.frame.size.width - 2 * kTextPadding,
-                               self.view.frame.size.height - 2 * kTextPadding)];
+  TTTAttributedLabel *ret = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
   ret.delegate = self;
   [ret setLinkAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithWhite:0.5 alpha:1]}];
   ret.numberOfLines = 0;
@@ -323,7 +322,8 @@
   UIView *label = [self labelForIndex:indexPath.row];
   [cell.contentView addSubview:label];
   [label mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.edges.equalTo(cell.contentView).inset(16);
+    make.leading.trailing.equalTo(cell.contentView).inset(kTextPadding);
+    make.top.bottom.equalTo(cell.contentView);
   }];
 
   if (self.contentType == HATAboutScreenContentWelcome && indexPath.row == self.pages.count - 1)
