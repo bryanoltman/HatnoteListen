@@ -20,6 +20,13 @@
 
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
+  NSError *error = nil;
+  [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
+  [[AVAudioSession sharedInstance] setActive:YES error:&error];
+  if (error) {
+    NSLog(@"Error configuring AVAudioSession: %@", error);
+  }
+
   self.sidePanelController = [HATSidePanelController new];
   self.viewController = [[UIStoryboard storyboardWithName:@"Main"
                                                    bundle:nil] instantiateInitialViewController];
