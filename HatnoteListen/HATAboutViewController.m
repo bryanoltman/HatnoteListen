@@ -371,13 +371,16 @@
 #pragma mark - TTTAttributedLabelDelegate
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
-  if ([url.scheme isEqualToString:@"hatnote"]) {
+  if ([url.scheme isEqualToString:@"hatnote"])
+  {
     [self hide:nil];
-  } else {
+  }
+  else
+  {
     [[UIApplication sharedApplication]
-     openURL:url
-     options:@{}
-     completionHandler:nil];
+                  openURL:url
+                  options:@{}
+        completionHandler:nil];
   }
 }
 
