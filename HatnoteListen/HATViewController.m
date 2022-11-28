@@ -680,11 +680,11 @@ int indexForChangeSize(double changeSize)
     BOOL isAddition = [changeSize intValue] > 0;
     if (isAddition)
     {
-      soundPath = [NSString stringWithFormat:@"clav%03d", index];
+      soundPath = [NSString stringWithFormat:@"cel%03d", index];
     }
     else
     {
-      soundPath = [NSString stringWithFormat:@"cel%03d", index];
+      soundPath = [NSString stringWithFormat:@"clav%03d", index];
     }
 
     CGFloat dotMin = arc4random() % 100 + 35;
