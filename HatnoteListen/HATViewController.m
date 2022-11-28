@@ -262,8 +262,12 @@ int indexForChangeSize(double changeSize)
   selectedView.textAngle = 0;
   if (_selectedView)
   {
+    NSString *urlString = _selectedView.info[@"url"];
+    // Convert the article URL to a mobile URL.
+    urlString = [urlString stringByReplacingOccurrencesOfString:@".wikipedia.org/"
+                                                     withString:@".m.wikipedia.org/"];
     [self.articleTitleView setText:_selectedView.info[@"page_title"]
-                               url:[NSURL URLWithString:_selectedView.info[@"url"]]];
+                               url:[NSURL URLWithString:urlString]];
     [self showArticleTitleView:YES];
   }
   else
