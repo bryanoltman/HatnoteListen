@@ -179,6 +179,9 @@
   range = [ret.attributedText.string rangeOfString:@"Hatnote's Listen to Wikipedia"];
   [ret addLinkToURL:[NSURL URLWithString:@"http://listen.hatnote.com"] withRange:range];
 
+  range = [ret.attributedText.string rangeOfString:@"Start Listening"];
+  [ret addLinkToURL:[NSURL URLWithString:@"hatnote://dismissAbout"] withRange:range];
+
   return ret;
 }
 
@@ -368,10 +371,14 @@
 #pragma mark - TTTAttributedLabelDelegate
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
-  [[UIApplication sharedApplication]
-                openURL:url
-                options:@{}
-      completionHandler:nil];
+  if ([url.scheme isEqualToString:@"hatnote"]) {
+    [self hide:nil];
+  } else {
+    [[UIApplication sharedApplication]
+     openURL:url
+     options:@{}
+     completionHandler:nil];
+  }
 }
 
 @end
