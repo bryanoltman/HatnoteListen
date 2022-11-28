@@ -15,9 +15,40 @@
 #import "HATViewController.h"
 #import "HATWikipediaService.h"
 
-#define kNumClav 27
-#define kNumCelesta 27
+#define kNumClav 24
+#define kNumCelesta 24
 #define kNumSwells 3
+#define kMaxSimultaneousSounds 15
+
+int indexForChangeSize(double changeSize)
+{
+  // listen.hatnote.com logic:
+  //  var max_pitch = 100.0;
+  //  var log_used = 1.0715307808111486871978099;
+  //  var pitch = 100 - Math.min(max_pitch, Math.log(size + log_used) / Math.log(log_used));
+  //  var index = Math.floor(pitch / 100.0 * Object.keys(celesta).length);
+  //  var fuzz = Math.floor(Math.random() * 4) - 2;
+  //  index += fuzz;
+  //  index = Math.min(Object.keys(celesta).length - 1, index);
+  //  index = Math.max(1, index);
+  //  if (current_notes < note_overlap) {
+  //      current_notes++;
+  //      if (type == 'add') {
+  //          celesta[index].play();
+  //      } else {
+  //          clav[index].play();
+  //      }
+  //      setTimeout(function() {
+  //          current_notes--;
+  //      }, note_timeout);
+  //  }
+  //
+  static CGFloat maxPitch = 100.0;
+  static CGFloat logBase = 1.0715307808111486871978099;
+  CGFloat pitch = maxPitch - MIN(maxPitch, log(fabs(changeSize) + logBase) / log(logBase));
+  int index = CLAMP(1, floor(pitch / 100 * kNumCelesta), kNumCelesta);
+  return index;
+}
 
 @interface HATViewController () <HATUserJoinedBannerDelegate, HATWikipediaServiceDelegate, HATArticleTitleViewDelegate>
 @property (strong, nonatomic) FBKVOController *KVOController;
@@ -538,7 +569,14 @@
 #pragma mark - Audio
 - (void)playSoundWithPath:(NSString *)path
 {
+  static int numCurrentlyPlayingSounds = 0;
+
   if ([[HATSettings sharedSettings] soundsMuted])
+  {
+    return;
+  }
+
+  if (numCurrentlyPlayingSounds > kMaxSimultaneousSounds)
   {
     return;
   }
@@ -546,6 +584,7 @@
   NSString *soundPath = [[NSBundle mainBundle] pathForResource:path ofType:@"mp3"];
   if (!soundPath)
   {
+    NSLog(@"Could not find sound file at path %@", soundPath);
     return;
   }
 
@@ -553,10 +592,20 @@
 
   NSError *error;
   AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-  player.volume = [[HATSettings sharedSettings] soundsMuted] ? 0 : 1;
+  if (error)
+  {
+    NSLog(@"error creating audio player with contents of %@: %@", url, error);
+    return;
+  }
+
   player.delegate = self;
   [self.avPlayers addObject:player];
   [player play];
+  numCurrentlyPlayingSounds++;
+
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    numCurrentlyPlayingSounds--;
+  });
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
@@ -594,9 +643,7 @@
       return;
     }
 
-    int index = CLAMP(1, (fabsf(changeSize.floatValue) / 500.f) * kNumCelesta, kNumCelesta);
-    index = kNumCelesta - index + 1;
-
+    int index = indexForChangeSize(changeSize.doubleValue);
     //        so the clav is the bell sound, that's for additions
     //        and the celesta is the string sound, that's for subtractions
     BOOL isAddition = [changeSize intValue] > 0;

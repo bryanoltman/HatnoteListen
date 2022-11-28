@@ -10,6 +10,8 @@
 #import "FBKVOController.h"
 #import "HATAboutViewController.h"
 
+int indexForChangeSize(double changeSize);
+
 @interface HATViewController : UIViewController <AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) HATAboutViewController *aboutVC;
