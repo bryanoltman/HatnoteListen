@@ -392,7 +392,7 @@ int indexForChangeSize(double changeSize)
     toView.layer.shadowOffset = CGSizeZero;
     toView.alpha = 0.85;
 
-    [self.view insertSubview:toView belowSubview:self.articleTitleView];
+    [self.view insertSubview:toView belowSubview:self.userJoinedBanner];
 
     [self.gravityBehavior removeItem:toView];
     CGPoint toPoint = CGPointMake(
