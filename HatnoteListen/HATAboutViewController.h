@@ -20,6 +20,6 @@ typedef NS_OPTIONS(NSUInteger, HATAboutScreenContent) {
 
 - (void)show:(HATAboutScreenContent)content;
 
-- (void)hide:(void (^)(void))complated;
+- (void)hide:(void (^)(void))completed;
 
 @end
