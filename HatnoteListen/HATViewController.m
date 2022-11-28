@@ -65,8 +65,8 @@ int indexForChangeSize(double changeSize)
 @property (strong, nonatomic) HATWikipediaService *wikipediaService;
 @property (strong, nonatomic) HATUserJoinedBanner *userJoinedBanner;
 @property (strong, nonatomic) HATControlOverlayView *controlOverlayView;
-
 @property (strong, nonatomic) HATUpdateView *selectedView;
+@property (nonatomic) BOOL isDisplayingNewUserBanner;
 @end
 
 @implementation HATViewController
@@ -274,6 +274,21 @@ int indexForChangeSize(double changeSize)
   [self animateSelectionChangeFromView:previousView toView:selectedView];
 }
 
+- (void)updateControlOverlayConstraints
+{
+  [self.controlOverlayView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    if (self.isDisplayingNewUserBanner)
+    {
+      make.top.equalTo(self.userJoinedBanner.mas_bottom).inset(12);
+    }
+    else
+    {
+      make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).inset(8);
+    }
+    make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).inset(12);
+  }];
+}
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -296,10 +311,7 @@ int indexForChangeSize(double changeSize)
 
   self.controlOverlayView = [[HATControlOverlayView alloc] init];
   [self.view addSubview:self.controlOverlayView];
-  [self.controlOverlayView mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).inset(8);
-    make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).inset(12);
-  }];
+  [self updateControlOverlayConstraints];
 
   self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
 
@@ -445,10 +457,13 @@ int indexForChangeSize(double changeSize)
 - (void)showNewUserView:(BOOL)animated
 {
   self.userJoinedBanner.alpha = 1;
+  self.isDisplayingNewUserBanner = YES;
   [UIView animateWithDuration:animated ? 0.3 : 0
                         delay:0
                       options:UIViewAnimationOptionCurveEaseOut
                    animations:^{
+                     [self updateControlOverlayConstraints];
+                     [self.view layoutIfNeeded];
                      self.userJoinedBanner.transform = CGAffineTransformIdentity;
                    }
                    completion:nil];
@@ -456,10 +471,13 @@ int indexForChangeSize(double changeSize)
 
 - (void)hideNewUserView:(BOOL)animated
 {
+  self.isDisplayingNewUserBanner = NO;
   [UIView animateWithDuration:animated ? 0.3 : 0
       delay:0
       options:UIViewAnimationOptionCurveEaseOut
       animations:^{
+        [self updateControlOverlayConstraints];
+        [self.view layoutIfNeeded];
         self.userJoinedBanner.alpha = 0;
       }
       completion:^(BOOL finished) {
