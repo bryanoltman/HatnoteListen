@@ -23,7 +23,8 @@
   NSError *error = nil;
   [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
   [[AVAudioSession sharedInstance] setActive:YES error:&error];
-  if (error) {
+  if (error)
+  {
     NSLog(@"Error configuring AVAudioSession: %@", error);
   }
 

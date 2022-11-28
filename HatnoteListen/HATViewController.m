@@ -9,6 +9,7 @@
 #import <Masonry/Masonry.h>
 
 #import "HATArticleTitleView.h"
+#import "HATControlOverlayView.h"
 #import "HATSettingsViewController.h"
 #import "HATUpdateView.h"
 #import "HATUserJoinedBanner.h"
@@ -63,6 +64,7 @@ int indexForChangeSize(double changeSize)
 @property (strong, nonatomic) CMMotionManager *motionManager;
 @property (strong, nonatomic) HATWikipediaService *wikipediaService;
 @property (strong, nonatomic) HATUserJoinedBanner *userJoinedBanner;
+@property (strong, nonatomic) HATControlOverlayView *controlOverlayView;
 
 @property (strong, nonatomic) HATUpdateView *selectedView;
 @end
@@ -290,6 +292,13 @@ int indexForChangeSize(double changeSize)
   [self.view addSubview:self.articleTitleView];
   [self.articleTitleView mas_makeConstraints:^(MASConstraintMaker *make) {
     make.leading.bottom.trailing.equalTo(self.view);
+  }];
+
+  self.controlOverlayView = [[HATControlOverlayView alloc] init];
+  [self.view addSubview:self.controlOverlayView];
+  [self.controlOverlayView mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).inset(8);
+    make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).inset(12);
   }];
 
   self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];

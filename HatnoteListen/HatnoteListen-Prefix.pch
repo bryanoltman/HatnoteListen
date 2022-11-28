@@ -17,6 +17,7 @@
     #import <AVFoundation/AVFoundation.h>
     #import <CoreMotion/CoreMotion.h>
     #import <JASidePanels/JASidePanelController.h>
+    #import <Masonry/Masonry.h>
 //    #import <Flurry.h>
     #import "JSONKit.h"
     #import "NSArray+Util.h"
