@@ -118,7 +118,7 @@
       {
         static NSString *reuseId = @"SettingsCell";
         cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
-        cell.textLabel.text = @"Text Volume";
+        cell.textLabel.text = @"Text";
         cell.detailTextLabel.text =
             [self displayStringForHATTextVolume:[[HATSettings sharedSettings] textVolume]
                                    showSelected:NO];
