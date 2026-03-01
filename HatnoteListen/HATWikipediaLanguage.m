@@ -9,11 +9,9 @@
 #import "HATWikipediaLanguage.h"
 
 @implementation HATWikipediaLanguage
-+ (NSDictionary *)languageUrlMap
-{
-  static NSDictionary *langs = nil;
-  if (!langs)
-  {
++ (NSDictionary*)languageUrlMap {
+  static NSDictionary* langs = nil;
+  if (!langs) {
     langs = @{
       @"en" : @"ws://wikimon.hatnote.com:9000",
       @"de" : @"ws://wikimon.hatnote.com:9010",
@@ -54,11 +52,9 @@
   return langs;
 }
 
-+ (NSDictionary *)languageNamesToCodes
-{
-  NSDictionary *langs = nil;
-  if (!langs)
-  {
++ (NSDictionary*)languageNamesToCodes {
+  NSDictionary* langs = nil;
+  if (!langs) {
     langs = @{
       @"English" : @"en",
       @"German" : @"de",
@@ -98,21 +94,17 @@
   return langs;
 }
 
-+ (NSURL *)websocketURLForLanguageCode:(NSString *)languageCode
-{
-  NSString *urlString = [self languageUrlMap][languageCode];
-  if (!urlString)
-  {
++ (NSURL*)websocketURLForLanguageCode:(NSString*)languageCode {
+  NSString* urlString = [self languageUrlMap][languageCode];
+  if (!urlString) {
     return nil;
   }
   return [NSURL URLWithString:urlString];
 }
 
-- (id)initWithCoder:(NSCoder *)decoder
-{
+- (id)initWithCoder:(NSCoder*)decoder {
   self = [super init];
-  if (!self)
-  {
+  if (!self) {
     return nil;
   }
 
@@ -122,32 +114,26 @@
   return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)encoder
-{
+- (void)encodeWithCoder:(NSCoder*)encoder {
   [encoder encodeObject:self.name forKey:@"name"];
   [encoder encodeObject:self.code forKey:@"code"];
   [encoder encodeObject:self.websocketURL forKey:@"websocketURL"];
 }
 
-- (NSComparisonResult)compare:(HATWikipediaLanguage *)other
-{
+- (NSComparisonResult)compare:(HATWikipediaLanguage*)other {
   return [self.name compare:other.name];
 }
 
-- (NSString *)description
-{
+- (NSString*)description {
   return [NSString stringWithFormat:@"%@ (%@)", self.name, self.websocketURL];
 }
 
-- (NSURL *)websocketURL
-{
+- (NSURL*)websocketURL {
   return [HATWikipediaLanguage websocketURLForLanguageCode:self.code];
 }
 
-- (BOOL)isEqual:(HATWikipediaLanguage *)other
-{
-  if (![other isKindOfClass:[self class]])
-  {
+- (BOOL)isEqual:(HATWikipediaLanguage*)other {
+  if (![other isKindOfClass:[self class]]) {
     return NO;
   }
 

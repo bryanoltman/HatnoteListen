@@ -16,7 +16,7 @@ typedef NS_OPTIONS(NSUInteger, HATAboutScreenContent) {
 
 @interface HATAboutViewController : UIViewController
 
-@property (nonatomic) HATAboutScreenContent contentType;
+@property(nonatomic) HATAboutScreenContent contentType;
 
 - (void)show:(HATAboutScreenContent)content;
 

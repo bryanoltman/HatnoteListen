@@ -14,7 +14,7 @@ int indexForChangeSize(double changeSize);
 
 @interface HATViewController : UIViewController <AVAudioPlayerDelegate>
 
-@property (strong, nonatomic) HATAboutViewController *aboutVC;
+@property(strong, nonatomic) HATAboutViewController* aboutVC;
 
 - (void)showAboutView:(HATAboutScreenContent)content;
 - (void)hideAboutView;

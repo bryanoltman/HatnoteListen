@@ -10,13 +10,11 @@
 
 @implementation HATSidePanelController
 
-- (void)styleContainer:(UIView *)container animate:(BOOL)animate duration:(NSTimeInterval)duration
-{
-  UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRoundedRect:container.bounds
+- (void)styleContainer:(UIView*)container animate:(BOOL)animate duration:(NSTimeInterval)duration {
+  UIBezierPath* shadowPath = [UIBezierPath bezierPathWithRoundedRect:container.bounds
                                                         cornerRadius:0.0f];
-  if (animate)
-  {
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"shadowPath"];
+  if (animate) {
+    CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"shadowPath"];
     animation.fromValue = (id)container.layer.shadowPath;
     animation.toValue = (id)shadowPath.CGPath;
     animation.duration = duration;

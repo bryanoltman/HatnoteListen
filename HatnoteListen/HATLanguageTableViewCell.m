@@ -10,30 +10,24 @@
 
 @implementation HATLanguageTableViewCell
 
-+ (NSString *)reuseId
-{
-  static NSString *ret = @"HATLanguageTableViewCell";
++ (NSString*)reuseId {
+  static NSString* ret = @"HATLanguageTableViewCell";
   return ret;
 }
 
-- (void)setLanguage:(HATWikipediaLanguage *)language
-{
+- (void)setLanguage:(HATWikipediaLanguage*)language {
   _language = language;
   self.languageNameLabel.text = language.name;
   self.toggleSwitch.on =
-      [[[HATSettings sharedSettings] selectedLanguages] any:^BOOL(HATWikipediaLanguage *lang) {
+      [[[HATSettings sharedSettings] selectedLanguages] any:^BOOL(HATWikipediaLanguage* lang) {
         return [lang isEqual:language];
       }];
 }
 
-- (void)toggleSwitchToggled
-{
-  if (self.toggleSwitch.on)
-  {
+- (void)toggleSwitchToggled {
+  if (self.toggleSwitch.on) {
     [[HATSettings sharedSettings] addSelectedLanguage:self.language];
-  }
-  else
-  {
+  } else {
     [[HATSettings sharedSettings] removeSelectedLanguage:self.language];
   }
 }

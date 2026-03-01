@@ -10,33 +10,27 @@
 
 @implementation UIColor (Theme)
 
-+ (UIColor *)backgroundColor
-{
++ (UIColor*)backgroundColor {
   return [UIColor colorFromHex:0x1B2024];
 }
 
-+ (UIColor *)purpleDotColor
-{
++ (UIColor*)purpleDotColor {
   return [UIColor colorFromHex:0xCC67CB];
 }
 
-+ (UIColor *)greenDotColor
-{
++ (UIColor*)greenDotColor {
   return [UIColor colorFromHex:0x30DA59];
 }
 
-+ (UIColor *)whiteDotColor
-{
++ (UIColor*)whiteDotColor {
   return [UIColor whiteColor];
 }
 
-+ (UIColor *)articleTitleViewBackgroundColor
-{
++ (UIColor*)articleTitleViewBackgroundColor {
   return [[UIColor blackColor] colorWithAlphaComponent:0.7];
 }
 
-+ (UIColor *)userJoinedBannerColor
-{
++ (UIColor*)userJoinedBannerColor {
   return [UIColor colorFromHex:0x339BE5 alpha:0.7];
 }
 

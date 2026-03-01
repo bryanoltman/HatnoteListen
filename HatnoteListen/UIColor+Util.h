@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (Util)
-+ (UIColor *)colorFromHex:(uint32_t)aHexValue;
-+ (UIColor *)colorFromHex:(uint32_t)aHexValue alpha:(CGFloat)aAlpha;
-- (UIColor *)lighterColor;
-- (UIColor *)darkerColor;
-- (UIColor *)wayDarkerColor;
++ (UIColor*)colorFromHex:(uint32_t)aHexValue;
++ (UIColor*)colorFromHex:(uint32_t)aHexValue alpha:(CGFloat)aAlpha;
+- (UIColor*)lighterColor;
+- (UIColor*)darkerColor;
+- (UIColor*)wayDarkerColor;
 @end

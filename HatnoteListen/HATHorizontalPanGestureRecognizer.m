@@ -10,8 +10,7 @@
 
 @implementation HATHorizontalPanGestureRecognizer
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
   [super touchesMoved:touches withEvent:event];
   if (self.state == UIGestureRecognizerStateFailed)
     return;
@@ -19,35 +18,24 @@
   CGPoint prevPoint = [[touches anyObject] previousLocationInView:self.view];
   _moveX += prevPoint.x - nowPoint.x;
   _moveY += prevPoint.y - nowPoint.y;
-  if (!_drag)
-  {
-    if (abs(_moveX) > abs(_moveY))
-    {
-      if (_direction == DirectionPangestureRecognizerVertical)
-      {
+  if (!_drag) {
+    if (abs(_moveX) > abs(_moveY)) {
+      if (_direction == DirectionPangestureRecognizerVertical) {
         self.state = UIGestureRecognizerStateFailed;
-      }
-      else
-      {
+      } else {
         _drag = YES;
       }
-    }
-    else if (abs(_moveY) > abs(_moveX))
-    {
-      if (_direction == DirectionPanGestureRecognizerHorizontal)
-      {
+    } else if (abs(_moveY) > abs(_moveX)) {
+      if (_direction == DirectionPanGestureRecognizerHorizontal) {
         self.state = UIGestureRecognizerStateFailed;
-      }
-      else
-      {
+      } else {
         _drag = YES;
       }
     }
   }
 }
 
-- (void)reset
-{
+- (void)reset {
   [super reset];
   _drag = NO;
   _moveX = 0;

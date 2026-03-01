@@ -10,14 +10,14 @@
 
 @interface HATUpdateView : UIView
 
-@property (strong, nonatomic) UIColor *color;
-@property (nonatomic) BOOL highlighted;
-@property (strong, nonatomic) NSDictionary *info;
-@property (strong, nonatomic) UILabel *textLabel;
-@property (nonatomic) NSDate *lastTouchDate;
-@property (nonatomic) CGFloat textAngle;
+@property(strong, nonatomic) UIColor* color;
+@property(nonatomic) BOOL highlighted;
+@property(strong, nonatomic) NSDictionary* info;
+@property(strong, nonatomic) UILabel* textLabel;
+@property(nonatomic) NSDate* lastTouchDate;
+@property(nonatomic) CGFloat textAngle;
 
 - (BOOL)showsText;
-- (instancetype)initWithFrame:(CGRect)frame andInfo:(NSDictionary *)info;
+- (instancetype)initWithFrame:(CGRect)frame andInfo:(NSDictionary*)info;
 
 @end

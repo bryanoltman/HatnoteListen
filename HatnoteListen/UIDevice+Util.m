@@ -10,13 +10,11 @@
 
 @implementation UIDevice (Util)
 
-- (BOOL)isPhone
-{
+- (BOOL)isPhone {
   return [self userInterfaceIdiom] == UIUserInterfaceIdiomPhone;
 }
 
-- (BOOL)isPad
-{
+- (BOOL)isPad {
   return [self userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 }
 

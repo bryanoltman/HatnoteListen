@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (Theme)
-+ (UIColor *)purpleDotColor;
-+ (UIColor *)greenDotColor;
-+ (UIColor *)whiteDotColor;
-+ (UIColor *)backgroundColor;
-+ (UIColor *)articleTitleViewBackgroundColor;
-+ (UIColor *)userJoinedBannerColor;
++ (UIColor*)purpleDotColor;
++ (UIColor*)greenDotColor;
++ (UIColor*)whiteDotColor;
++ (UIColor*)backgroundColor;
++ (UIColor*)articleTitleViewBackgroundColor;
++ (UIColor*)userJoinedBannerColor;
 @end

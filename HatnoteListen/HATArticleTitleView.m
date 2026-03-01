@@ -13,19 +13,18 @@
 
 @interface HATArticleTitleView ()
 
-@property (nonatomic, copy) NSURL *articleURL;
-@property (strong, nonatomic) UILabel *textLabel;
+@property(nonatomic, copy) NSURL* articleURL;
+@property(strong, nonatomic) UILabel* textLabel;
 
 @end
 
 @implementation HATArticleTitleView
 
-- (instancetype)init
-{
+- (instancetype)init {
   self = [super init];
-  if (self)
-  {
-    CGFloat bottomSafeAreaInset = UIApplication.sharedApplication.windows.firstObject.safeAreaInsets.bottom;
+  if (self) {
+    CGFloat bottomSafeAreaInset =
+        UIApplication.sharedApplication.windows.firstObject.safeAreaInsets.bottom;
 
     self.backgroundColor = [UIColor articleTitleViewBackgroundColor];
     self.userInteractionEnabled = YES;
@@ -35,24 +34,23 @@
     self.textLabel.textColor = [UIColor whiteColor];
     self.textLabel.numberOfLines = 0;
     [self addSubview:self.textLabel];
-    [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.textLabel mas_makeConstraints:^(MASConstraintMaker* make) {
       make.leading.top.trailing.equalTo(self).inset(8.0);
       make.bottom.equalTo(self).inset(8 + bottomSafeAreaInset);
     }];
 
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    UITapGestureRecognizer* tapRecognizer =
+        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
     [self addGestureRecognizer:tapRecognizer];
   }
   return self;
 }
 
-- (void)onTap:(UITapGestureRecognizer *)recognizer
-{
+- (void)onTap:(UITapGestureRecognizer*)recognizer {
   [self.delegate articleTitleViewTapped:self];
 }
 
-- (void)setText:(NSString *)text url:(NSURL *)url
-{
+- (void)setText:(NSString*)text url:(NSURL*)url {
   self.textLabel.text = text;
   self.articleURL = url;
 }

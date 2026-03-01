@@ -13,15 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 @class HATArticleTitleView;
 
 @protocol HATArticleTitleViewDelegate <NSObject>
-- (void)articleTitleViewTapped:(HATArticleTitleView *)articleTitleView;
+- (void)articleTitleViewTapped:(HATArticleTitleView*)articleTitleView;
 @end
 
 @interface HATArticleTitleView : UIView
 
-@property (weak, nonatomic) id<HATArticleTitleViewDelegate> delegate;
-@property (readonly, nonatomic, copy) NSURL *articleURL;
+@property(weak, nonatomic) id<HATArticleTitleViewDelegate> delegate;
+@property(readonly, nonatomic, copy) NSURL* articleURL;
 
-- (void)setText:(NSString *)text url:(NSURL *)url;
+- (void)setText:(NSString*)text url:(NSURL*)url;
 
 @end
 

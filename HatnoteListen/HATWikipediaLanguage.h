@@ -10,12 +10,12 @@
 
 @interface HATWikipediaLanguage : NSObject
 
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *code;
+@property(strong, nonatomic) NSString* name;
+@property(strong, nonatomic) NSString* code;
 
-+ (NSDictionary *)languageNamesToCodes;
-+ (NSURL *)websocketURLForLanguageCode:(NSString *)languageCode;
++ (NSDictionary*)languageNamesToCodes;
++ (NSURL*)websocketURLForLanguageCode:(NSString*)languageCode;
 
-- (NSURL *)websocketURL;
+- (NSURL*)websocketURL;
 
 @end

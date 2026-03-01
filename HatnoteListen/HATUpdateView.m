@@ -11,17 +11,15 @@
 #define kMinFontSize 10.0f
 
 @interface HATUpdateView ()
-@property (nonatomic) CGRect initialFrame;
-@property (nonatomic) BOOL invert;
+@property(nonatomic) CGRect initialFrame;
+@property(nonatomic) BOOL invert;
 @end
 
 @implementation HATUpdateView
 
-- (instancetype)initWithFrame:(CGRect)frame andInfo:(NSDictionary *)info
-{
+- (instancetype)initWithFrame:(CGRect)frame andInfo:(NSDictionary*)info {
   self = [super initWithFrame:frame];
-  if (self)
-  {
+  if (self) {
     self.alpha = 0.6;
     self.backgroundColor = [UIColor clearColor];
     self.info = info;
@@ -37,25 +35,21 @@
   return self;
 }
 
-- (CGFloat)fontSize
-{
+- (CGFloat)fontSize {
   return MAX(kMinFontSize, self.frame.size.width / 15);
 }
 
-- (CGRect)textViewFrame
-{
+- (CGRect)textViewFrame {
   return CGRectInset(self.bounds, 5, 0);
 }
 
-- (void)setInfo:(NSDictionary *)info
-{
+- (void)setInfo:(NSDictionary*)info {
   _info = info;
 
   self.color = [self displayColor];
   self.invert = [info[@"change_size"] integerValue] < 0;
 
-  if ([self showsText])
-  {
+  if ([self showsText]) {
     self.textLabel = [[UILabel alloc] initWithFrame:[self textViewFrame]];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.text = [info objectForKey:@"page_title"];
@@ -64,55 +58,45 @@
     self.textLabel.adjustsFontSizeToFitWidth = YES;
     self.textLabel.numberOfLines = 0;
     self.textLabel.minimumScaleFactor =
-        kMinFontSize / [self fontSize]; // scale down to the minimum font size
+        kMinFontSize / [self fontSize];  // scale down to the minimum font size
     self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
 
     [self addSubview:self.textLabel];
   }
 }
 
-- (void)setTextAngle:(CGFloat)textAngle
-{
+- (void)setTextAngle:(CGFloat)textAngle {
   _textAngle = fmodf(textAngle, 2 * M_PI);
   self.textLabel.transform = CGAffineTransformMakeRotation(textAngle);
 }
 
-- (void)setHighlighted:(BOOL)highlighted
-{
+- (void)setHighlighted:(BOOL)highlighted {
   _highlighted = highlighted;
   [self setNeedsDisplay];
 }
 
-- (UIColor *)displayColor
-{
-  UIColor *dotColor;
-  NSNumber *isAnon = self.info[@"is_anon"];
-  NSNumber *isBot = self.info[@"is_bot"];
+- (UIColor*)displayColor {
+  UIColor* dotColor;
+  NSNumber* isAnon = self.info[@"is_anon"];
+  NSNumber* isBot = self.info[@"is_bot"];
 
   // green is anon
   // purple is bot
   // white is registered
-  if ([isAnon boolValue])
-  {
+  if ([isAnon boolValue]) {
     dotColor = [UIColor greenDotColor];
-  }
-  else if ([isBot boolValue])
-  {
+  } else if ([isBot boolValue]) {
     dotColor = [UIColor purpleDotColor];
-  }
-  else
-  {
+  } else {
     dotColor = [UIColor whiteDotColor];
   }
 
   return dotColor;
 }
 
-- (CGFloat)textWidthMultiple
-{
+- (CGFloat)textWidthMultiple {
   CGFloat ret;
-  switch ([[HATSettings sharedSettings] textVolume])
-  {
+  switch ([[HATSettings sharedSettings] textVolume]) {
     case HATTextVolumeNone:
       ret = 0.f;
       break;
@@ -133,55 +117,43 @@
   return ret;
 }
 
-- (BOOL)showsText
-{
-  if (!self.info)
-  {
+- (BOOL)showsText {
+  if (!self.info) {
     return YES;
   }
 
-  NSString *text = [self.info objectForKey:@"page_title"];
+  NSString* text = [self.info objectForKey:@"page_title"];
   CGSize size =
       [text sizeWithAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:kMinFontSize]}];
   return size.width <= CGRectGetWidth([self textViewFrame]) * [self textWidthMultiple];
 }
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-{
-  if (![self pointInside:point withEvent:event])
-  {
+- (UIView*)hitTest:(CGPoint)point withEvent:(UIEvent*)event {
+  if (![self pointInside:point withEvent:event]) {
     return nil;
   }
 
   CGPoint center = CGPointMake(CGRectGetWidth(self.bounds) / 2, CGRectGetHeight(self.bounds) / 2);
   double distance = sqrt(pow((point.x - center.x), 2.0) + pow((point.y - center.y), 2.0));
-  if (distance > CGRectGetHeight(self.frame) / 2)
-  {
+  if (distance > CGRectGetHeight(self.frame) / 2) {
     return nil;
-  }
-  else
-  {
+  } else {
     return [super hitTest:point withEvent:event];
   }
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
   UIColor *highlightColor, *bgColor;
-  if (self.highlighted)
-  {
+  if (self.highlighted) {
     highlightColor = self.color;
     bgColor = [self.color wayDarkerColor];
-  }
-  else
-  {
+  } else {
     highlightColor = [self.color wayDarkerColor];
     bgColor = self.color;
   }
 
-  if (self.invert)
-  {
-    UIColor *swap = bgColor;
+  if (self.invert) {
+    UIColor* swap = bgColor;
     bgColor = highlightColor;
     highlightColor = swap;
   }

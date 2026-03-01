@@ -20,11 +20,11 @@ typedef NS_OPTIONS(NSUInteger, HATTextVolume) {
 @interface HATSettings : NSObject
 + (instancetype)sharedSettings;
 
-@property (nonatomic) BOOL soundsMuted;
-@property (nonatomic) HATTextVolume textVolume;
+@property(nonatomic) BOOL soundsMuted;
+@property(nonatomic) HATTextVolume textVolume;
 
-+ (NSArray *)availableLanguages;
-- (NSArray *)selectedLanguages;
-- (void)addSelectedLanguage:(HATWikipediaLanguage *)lang;
-- (void)removeSelectedLanguage:(HATWikipediaLanguage *)lang;
++ (NSArray*)availableLanguages;
+- (NSArray*)selectedLanguages;
+- (void)addSelectedLanguage:(HATWikipediaLanguage*)lang;
+- (void)removeSelectedLanguage:(HATWikipediaLanguage*)lang;
 @end

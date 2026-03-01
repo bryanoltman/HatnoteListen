@@ -13,16 +13,16 @@ NS_ASSUME_NONNULL_BEGIN
 @class HATUserJoinedBanner;
 
 @protocol HATUserJoinedBannerDelegate <NSObject>
-- (void)userJoinedBannerTapped:(HATUserJoinedBanner *)banner;
-- (void)userJoinedBannerWantsDismiss:(HATUserJoinedBanner *)banner;
+- (void)userJoinedBannerTapped:(HATUserJoinedBanner*)banner;
+- (void)userJoinedBannerWantsDismiss:(HATUserJoinedBanner*)banner;
 @end
 
 @interface HATUserJoinedBanner : UIView
 
-@property (weak, nonatomic, nullable) id<HATUserJoinedBannerDelegate> delegate;
-@property (strong, nonatomic, nullable) NSString *currentlyDisplayedUsername;
+@property(weak, nonatomic, nullable) id<HATUserJoinedBannerDelegate> delegate;
+@property(strong, nonatomic, nullable) NSString* currentlyDisplayedUsername;
 
-- (void)welcomeUserWithUsername:(NSString *)username;
+- (void)welcomeUserWithUsername:(NSString*)username;
 
 @end
 

@@ -13,19 +13,17 @@
 
 @interface HATUserJoinedBanner ()
 
-@property (strong, nonatomic) NSTimer *messageTimer;
-@property (strong, nonatomic) UILabel *userNameLabel;
-@property (strong, nonatomic) NSMutableArray<NSString *> *userQueue;
+@property(strong, nonatomic) NSTimer* messageTimer;
+@property(strong, nonatomic) UILabel* userNameLabel;
+@property(strong, nonatomic) NSMutableArray<NSString*>* userQueue;
 
 @end
 
 @implementation HATUserJoinedBanner
 
-- (NSString *)welcomeMessageForUsername:(NSString *)username
-{
-  static NSArray *welcomeMessageTemplates = nil;
-  if (!welcomeMessageTemplates)
-  {
+- (NSString*)welcomeMessageForUsername:(NSString*)username {
+  static NSArray* welcomeMessageTemplates = nil;
+  if (!welcomeMessageTemplates) {
     welcomeMessageTemplates = @[
       @"Welcome to %@, Wikipedia's newest user!", @"Wikipedia has a new user, %@! Welcome!",
       @"%@ has joined Wikipedia!"
@@ -35,11 +33,9 @@
   return [NSString stringWithFormat:[welcomeMessageTemplates randomObject], username];
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
   self = [super init];
-  if (self)
-  {
+  if (self) {
     self.userQueue = [[NSMutableArray alloc] init];
 
     self.backgroundColor = [UIColor userJoinedBannerColor];
@@ -50,41 +46,38 @@
     self.userNameLabel.numberOfLines = 0;
     self.userNameLabel.textAlignment = NSTextAlignmentCenter;
 
-    CGFloat topSafeAreaInset = UIApplication.sharedApplication.windows.firstObject.safeAreaInsets.top;
+    CGFloat topSafeAreaInset =
+        UIApplication.sharedApplication.windows.firstObject.safeAreaInsets.top;
 
-    [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker* make) {
       make.top.equalTo(self).offset(8.0 + topSafeAreaInset);
       make.leading.trailing.bottom.equalTo(self).inset(8.0);
     }];
 
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    UITapGestureRecognizer* tapRecognizer =
+        [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
     [self addGestureRecognizer:tapRecognizer];
   }
   return self;
 }
 
-- (void)onTap:(UITapGestureRecognizer *)recognizer
-{
+- (void)onTap:(UITapGestureRecognizer*)recognizer {
   [self.delegate userJoinedBannerTapped:self];
 }
 
-- (void)welcomeUserWithUsername:(NSString *)username
-{
+- (void)welcomeUserWithUsername:(NSString*)username {
   [self.userQueue addObject:username];
 
-  if (self.messageTimer.isValid)
-  {
+  if (self.messageTimer.isValid) {
     return;
   }
 
   [self welcomeNextUserInQueue];
 }
 
-- (void)welcomeNextUserInQueue
-{
+- (void)welcomeNextUserInQueue {
   self.currentlyDisplayedUsername = [self.userQueue firstObject];
-  if (!self.currentlyDisplayedUsername)
-  {
+  if (!self.currentlyDisplayedUsername) {
     // If we have no more users to welcome, ask our delegate to dismiss us.
     [self.delegate userJoinedBannerWantsDismiss:self];
     return;
@@ -94,7 +87,7 @@
   self.userNameLabel.text = [self welcomeMessageForUsername:self.currentlyDisplayedUsername];
   self.messageTimer = [NSTimer scheduledTimerWithTimeInterval:kBannerDuration
                                                       repeats:NO
-                                                        block:^(NSTimer *_Nonnull timer) {
+                                                        block:^(NSTimer* _Nonnull timer) {
                                                           [self welcomeNextUserInQueue];
                                                         }];
 }

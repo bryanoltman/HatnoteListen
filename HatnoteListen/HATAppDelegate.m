@@ -10,18 +10,16 @@
 
 @implementation HATAppDelegate
 
-- (BOOL)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication*)application
+    didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
   [UIApplication sharedApplication].idleTimerDisabled = YES;
 
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-  NSError *error = nil;
+  NSError* error = nil;
   [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
   [[AVAudioSession sharedInstance] setActive:YES error:&error];
-  if (error)
-  {
+  if (error) {
     NSLog(@"Error configuring AVAudioSession: %@", error);
   }
 

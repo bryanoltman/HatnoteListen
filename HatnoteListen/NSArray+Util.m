@@ -9,8 +9,7 @@
 #import "NSArray+Util.h"
 
 @implementation NSArray (Util)
-- (id)randomObject
-{
+- (id)randomObject {
   return self[arc4random() % [self count]];
 }
 @end

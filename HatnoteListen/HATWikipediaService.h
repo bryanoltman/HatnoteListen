@@ -12,16 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol HATWikipediaServiceDelegate <NSObject>
 
-- (void)wikipediaServiceDidReceiveMessage:(NSString *)message;
+- (void)wikipediaServiceDidReceiveMessage:(NSString*)message;
 
 @end
 
 @interface HATWikipediaService : NSObject
 
-@property (weak, nonatomic) id<HATWikipediaServiceDelegate> delegate;
+@property(weak, nonatomic) id<HATWikipediaServiceDelegate> delegate;
 
-- (void)openSocketForLanguage:(HATWikipediaLanguage *)language;
-- (void)closeSocketForLanguage:(HATWikipediaLanguage *)language;
+- (void)openSocketForLanguage:(HATWikipediaLanguage*)language;
+- (void)closeSocketForLanguage:(HATWikipediaLanguage*)language;
 - (void)closeAllSockets;
 
 @end

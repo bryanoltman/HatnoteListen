@@ -9,20 +9,18 @@
 #import <UIKit/UIGestureRecognizerSubclass.h>
 #import <UIKit/UIKit.h>
 
-typedef enum
-{
+typedef enum {
   DirectionPangestureRecognizerVertical,
   DirectionPanGestureRecognizerHorizontal
 } DirectionPangestureRecognizerDirection;
 
-@interface HATHorizontalPanGestureRecognizer : UIPanGestureRecognizer
-{
+@interface HATHorizontalPanGestureRecognizer : UIPanGestureRecognizer {
   BOOL _drag;
   int _moveX;
   int _moveY;
   DirectionPangestureRecognizerDirection _direction;
 }
 
-@property (nonatomic, assign) DirectionPangestureRecognizerDirection direction;
+@property(nonatomic, assign) DirectionPangestureRecognizerDirection direction;
 
 @end

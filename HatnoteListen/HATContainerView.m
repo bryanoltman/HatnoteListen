@@ -12,92 +12,78 @@
 #import "HATUserJoinedBanner.h"
 
 @interface HATContainerView ()
-@property (weak, nonatomic) HATUpdateView *highlightedView;
+@property(weak, nonatomic) HATUpdateView* highlightedView;
 @end
 
 @implementation HATContainerView
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-  UITouch *touch = [[event allTouches] anyObject];
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
+  UITouch* touch = [[event allTouches] anyObject];
   CGPoint point = [touch locationInView:self];
-  NSMutableArray *hitViews = [NSMutableArray new];
+  NSMutableArray* hitViews = [NSMutableArray new];
   BOOL didHitUserJoinedBanner = NO;
   BOOL didHitArticleTitleView = NO;
-  for (UIView *subview in self.subviews)
-  {
-    if ([subview isKindOfClass:[HATUserJoinedBanner class]])
-    {
+  for (UIView* subview in self.subviews) {
+    if ([subview isKindOfClass:[HATUserJoinedBanner class]]) {
       didHitUserJoinedBanner = CGRectContainsPoint(subview.frame, point);
       continue;
     }
 
-    if ([subview isKindOfClass:[HATArticleTitleView class]])
-    {
+    if ([subview isKindOfClass:[HATArticleTitleView class]]) {
       didHitArticleTitleView = CGRectContainsPoint(subview.frame, point);
       continue;
     }
 
-    if (![subview isKindOfClass:[HATUpdateView class]])
-    {
+    if (![subview isKindOfClass:[HATUpdateView class]]) {
       continue;
     }
 
-    HATUpdateView *view = (HATUpdateView *)subview;
+    HATUpdateView* view = (HATUpdateView*)subview;
     CGFloat xDist = (point.x - view.center.x);
     CGFloat yDist = (point.y - view.center.y);
     CGFloat distance = sqrt((xDist * xDist) + (yDist * yDist));
-    if (distance < view.frame.size.width / 2)
-    {
+    if (distance < view.frame.size.width / 2) {
       [hitViews addObject:view];
     }
   }
 
-  if (didHitArticleTitleView || didHitUserJoinedBanner)
-  {
+  if (didHitArticleTitleView || didHitUserJoinedBanner) {
     return;
   }
 
-  if (!hitViews.count)
-  {
+  if (!hitViews.count) {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"backgroundClicked" object:nil];
   }
 
-  self.highlightedView = [hitViews minimum:^id(HATUpdateView *view) {
+  self.highlightedView = [hitViews minimum:^id(HATUpdateView* view) {
     return view.lastTouchDate;
   }];
 
-  if (self.highlightedView)
-  {
+  if (self.highlightedView) {
     self.highlightedView.lastTouchDate = [NSDate date];
     self.highlightedView.highlighted = YES;
   }
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-  UITouch *touch = [[event allTouches] anyObject];
+- (void)touchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
+  UITouch* touch = [[event allTouches] anyObject];
   CGPoint point = [touch locationInView:self];
 
-  if (!self.highlightedView)
-  {
+  if (!self.highlightedView) {
     return;
   }
 
-  if (!CGRectContainsPoint(self.highlightedView.frame, point))
-  {
+  if (!CGRectContainsPoint(self.highlightedView.frame, point)) {
     self.highlightedView.highlighted = NO;
     self.highlightedView = nil;
   }
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-  UITouch *touch = [[event allTouches] anyObject];
+- (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
+  UITouch* touch = [[event allTouches] anyObject];
   CGPoint point = [touch locationInView:self];
 
-  if (self.highlightedView && CGRectContainsPoint(self.highlightedView.frame, point))
-  {
+  if (self.highlightedView && CGRectContainsPoint(self.highlightedView.frame, point)) {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"bubbleClicked"
                                                         object:self.highlightedView];
   }
@@ -106,8 +92,7 @@
   self.highlightedView = nil;
 }
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesCancelled:(NSSet*)touches withEvent:(UIEvent*)event {
   self.highlightedView.highlighted = NO;
   self.highlightedView = nil;
 }

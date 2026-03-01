@@ -8,13 +8,11 @@
 
 #import "CGVectorUtils.h"
 
-CGFloat CGVectorLength(CGVector vector)
-{
+CGFloat CGVectorLength(CGVector vector) {
   return sqrtf(vector.dx * vector.dx + vector.dy * vector.dy);
 }
 
-CGVector CGVectorDirection(CGVector vector)
-{
+CGVector CGVectorDirection(CGVector vector) {
   CGFloat length = CGVectorLength(vector);
   return CGVectorMake(vector.dx / length, vector.dy / length);
 }

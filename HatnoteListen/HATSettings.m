@@ -14,32 +14,27 @@
 #define TextVolumeKey (@"TextVolumeKey")
 
 @interface HATSettings ()
-@property (strong, nonatomic) NSMutableArray *selectedLanguagesMutable;
+@property(strong, nonatomic) NSMutableArray* selectedLanguagesMutable;
 @end
 
 @implementation HATSettings
 
-+ (instancetype)sharedSettings
-{
-  static HATSettings *instance = nil;
-  if (!instance)
-  {
++ (instancetype)sharedSettings {
+  static HATSettings* instance = nil;
+  if (!instance) {
     instance = [[HATSettings alloc] init];
   }
 
   return instance;
 }
 
-- (id)init
-{
+- (id)init {
   self = [super init];
-  if (self)
-  {
+  if (self) {
     self.selectedLanguagesMutable = self.settings[SelectedLanguagesKey];
-    if (!self.selectedLanguages)
-    {
-      HATWikipediaLanguage *englishLanguage =
-          [[HATSettings availableLanguages] find:^BOOL(HATWikipediaLanguage *lang) {
+    if (!self.selectedLanguages) {
+      HATWikipediaLanguage* englishLanguage =
+          [[HATSettings availableLanguages] find:^BOOL(HATWikipediaLanguage* lang) {
             return [lang.code isEqualToString:@"en"];
           }];
 
@@ -53,42 +48,35 @@
   return self;
 }
 
-- (NSMutableDictionary *)settings
-{
-  static NSMutableDictionary *settings = nil;
-  if (!settings)
-  {
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SettingsKey];
-    if (data)
-    {
+- (NSMutableDictionary*)settings {
+  static NSMutableDictionary* settings = nil;
+  if (!settings) {
+    NSData* data = [[NSUserDefaults standardUserDefaults] objectForKey:SettingsKey];
+    if (data) {
       settings = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
   }
 
-  if (!settings)
-  {
+  if (!settings) {
     settings = [[NSMutableDictionary alloc] init];
   }
 
   return settings;
 }
 
-- (void)save
-{
+- (void)save {
   //    NSLog(@"saving settings: %@", [self settings]);
-  NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[self settings]];
+  NSData* data = [NSKeyedArchiver archivedDataWithRootObject:[self settings]];
   [[NSUserDefaults standardUserDefaults] setObject:data forKey:SettingsKey];
   [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (NSArray *)selectedLanguages
-{
+- (NSArray*)selectedLanguages {
   return self.selectedLanguagesMutable;
 }
 
-- (void)addSelectedLanguage:(HATWikipediaLanguage *)lang
-{
-  NSIndexSet *index = [NSIndexSet indexSetWithIndex:[self.selectedLanguagesMutable count]];
+- (void)addSelectedLanguage:(HATWikipediaLanguage*)lang {
+  NSIndexSet* index = [NSIndexSet indexSetWithIndex:[self.selectedLanguagesMutable count]];
   [self willChange:NSKeyValueChangeInsertion valuesAtIndexes:index forKey:@"selectedLanguages"];
   [self.selectedLanguagesMutable addObject:lang];
   [self didChange:NSKeyValueChangeInsertion valuesAtIndexes:index forKey:@"selectedLanguages"];
@@ -97,14 +85,12 @@
   [self save];
 }
 
-- (void)removeSelectedLanguage:(HATWikipediaLanguage *)lang
-{
-  if (![self.selectedLanguagesMutable containsObject:lang])
-  {
+- (void)removeSelectedLanguage:(HATWikipediaLanguage*)lang {
+  if (![self.selectedLanguagesMutable containsObject:lang]) {
     return;
   }
 
-  NSIndexSet *index =
+  NSIndexSet* index =
       [NSIndexSet indexSetWithIndex:[self.selectedLanguagesMutable indexOfObject:lang]];
   [self willChange:NSKeyValueChangeRemoval valuesAtIndexes:index forKey:@"selectedLanguages"];
   [self.selectedLanguagesMutable removeObject:lang];
@@ -113,15 +99,14 @@
   [self save];
 }
 
-+ (NSArray *)availableLanguages
-{
-  static NSMutableArray *ret = nil;
-  if (!ret)
-  {
++ (NSArray*)availableLanguages {
+  static NSMutableArray* ret = nil;
+  if (!ret) {
     ret = [NSMutableArray new];
     [[HATWikipediaLanguage languageNamesToCodes]
-        enumerateKeysAndObjectsUsingBlock:^(NSString *languageName, NSString *languageCode, BOOL *stop) {
-          HATWikipediaLanguage *lang = [HATWikipediaLanguage new];
+        enumerateKeysAndObjectsUsingBlock:^(NSString* languageName, NSString* languageCode,
+                                            BOOL* stop) {
+          HATWikipediaLanguage* lang = [HATWikipediaLanguage new];
           lang.name = languageName;
           lang.code = languageCode;
           [ret addObject:lang];
@@ -131,10 +116,8 @@
   return [ret sortedArrayUsingSelector:@selector(compare:)];
 }
 
-- (void)setSoundsMuted:(BOOL)soundsMuted
-{
-  if (soundsMuted == _soundsMuted)
-  {
+- (void)setSoundsMuted:(BOOL)soundsMuted {
+  if (soundsMuted == _soundsMuted) {
     return;
   }
 
@@ -143,10 +126,8 @@
   [self save];
 }
 
-- (void)setTextVolume:(HATTextVolume)textVolume
-{
-  if (textVolume == _textVolume)
-  {
+- (void)setTextVolume:(HATTextVolume)textVolume {
+  if (textVolume == _textVolume) {
     return;
   }
 
