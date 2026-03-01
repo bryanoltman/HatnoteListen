@@ -619,6 +619,7 @@
 						ProvisioningStyle = Automatic;
 					};
 					ED5B868D18BACA6600932430 = {
+						DevelopmentTeam = 9422A6P5N6;
 						TestTargetID = ED5B866C18BACA6500932430;
 					};
 				};
@@ -1002,6 +1003,7 @@
 			baseConfigurationReference = 9C7A6BB7B4D9856FDDCADA13 /* Pods-HatnoteListenTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HatnoteListen.app/HatnoteListen";
+				DEVELOPMENT_TEAM = 9422A6P5N6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1014,6 +1016,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "HatnoteListenTests/HatnoteListenTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -1025,6 +1028,7 @@
 			baseConfigurationReference = 22E944306D5E915B63686201 /* Pods-HatnoteListenTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HatnoteListen.app/HatnoteListen";
+				DEVELOPMENT_TEAM = 9422A6P5N6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1033,6 +1037,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
 				INFOPLIST_FILE = "HatnoteListenTests/HatnoteListenTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
