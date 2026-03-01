@@ -11,7 +11,6 @@ target 'HatnoteListen' do
   # pod 'Reveal-iOS-SDK'
   pod 'TTTAttributedLabel'
   pod 'JASidePanels'
-  # pod 'FlurrySDK'
 
   target 'HatnoteListenTests' do
     inherit! :search_paths

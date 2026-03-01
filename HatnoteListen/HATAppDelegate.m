@@ -15,9 +15,6 @@
 {
   [UIApplication sharedApplication].idleTimerDisabled = YES;
 
-  //    [Flurry setCrashReportingEnabled:YES];
-  //    [Flurry startSession:@"393H7GGNJSBGMS64K6T9"];
-
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
   NSError *error = nil;
