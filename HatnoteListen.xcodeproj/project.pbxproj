@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -96,6 +96,10 @@
 		EDA00D542934510400541A10 /* HATControlOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDA00D532934510400541A10 /* HATControlOverlayView.m */; };
 		EDB697F32931C258000C7BE9 /* HATArticleTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB697F22931C258000C7BE9 /* HATArticleTitleView.m */; };
 		EDB7D08218D94A6A0025D63C /* UIDevice+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB7D08118D94A6A0025D63C /* UIDevice+Util.m */; };
+		EDBE98422F639BFC00CAE4F9 /* HATNotePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBE98412F639BFC00CAE4F9 /* HATNotePlayer.m */; };
+		EDBE98482F63A6D800CAE4F9 /* HATNote.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBE98472F63A6D800CAE4F9 /* HATNote.m */; };
+		EDBE984B2F63A8F000CAE4F9 /* HATSoundFont.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBE984A2F63A8F000CAE4F9 /* HATSoundFont.m */; };
+		EDBE984E2F63AA8600CAE4F9 /* HATSoundFontInstrument.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBE984D2F63AA8600CAE4F9 /* HATSoundFontInstrument.m */; };
 		EDCBD04118D51FF800EC2892 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDCBD04018D51FF800EC2892 /* Settings.storyboard */; };
 		EDCBD04518D5206A00EC2892 /* HATLanguageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCBD04418D5206A00EC2892 /* HATLanguageTableViewCell.m */; };
 		EDCE382918CBC004006C3B6F /* HATContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCE382818CBC004006C3B6F /* HATContainerView.m */; };
@@ -233,6 +237,14 @@
 		EDB697F22931C258000C7BE9 /* HATArticleTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HATArticleTitleView.m; sourceTree = "<group>"; };
 		EDB7D08018D94A6A0025D63C /* UIDevice+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Util.h"; sourceTree = "<group>"; };
 		EDB7D08118D94A6A0025D63C /* UIDevice+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Util.m"; sourceTree = "<group>"; };
+		EDBE98402F639BFC00CAE4F9 /* HATNotePlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HATNotePlayer.h; sourceTree = "<group>"; };
+		EDBE98412F639BFC00CAE4F9 /* HATNotePlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HATNotePlayer.m; sourceTree = "<group>"; };
+		EDBE98462F63A6D800CAE4F9 /* HATNote.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HATNote.h; sourceTree = "<group>"; };
+		EDBE98472F63A6D800CAE4F9 /* HATNote.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HATNote.m; sourceTree = "<group>"; };
+		EDBE98492F63A8F000CAE4F9 /* HATSoundFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HATSoundFont.h; sourceTree = "<group>"; };
+		EDBE984A2F63A8F000CAE4F9 /* HATSoundFont.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HATSoundFont.m; sourceTree = "<group>"; };
+		EDBE984C2F63AA8600CAE4F9 /* HATSoundFontInstrument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HATSoundFontInstrument.h; sourceTree = "<group>"; };
+		EDBE984D2F63AA8600CAE4F9 /* HATSoundFontInstrument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HATSoundFontInstrument.m; sourceTree = "<group>"; };
 		EDCBD04018D51FF800EC2892 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		EDCBD04318D5206A00EC2892 /* HATLanguageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HATLanguageTableViewCell.h; sourceTree = "<group>"; };
 		EDCBD04418D5206A00EC2892 /* HATLanguageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HATLanguageTableViewCell.m; sourceTree = "<group>"; };
@@ -251,6 +263,10 @@
 		EDF73D4B29306E3800FDD97F /* HATUserJoinedBanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HATUserJoinedBanner.h; sourceTree = "<group>"; };
 		EDF73D4C29306E3800FDD97F /* HATUserJoinedBanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HATUserJoinedBanner.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		EDBE98432F639EE000CAE4F9 /* Sound Fonts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Sound Fonts"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		ED5B866A18BACA6500932430 /* Frameworks */ = {
@@ -374,6 +390,8 @@
 				ED5B867718BACA6500932430 /* Supporting Files */,
 				EDF73D4A29306E2300FDD97F /* Views */,
 				EDF73D462930575D00FDD97F /* Wikipedia */,
+				EDBE98402F639BFC00CAE4F9 /* HATNotePlayer.h */,
+				EDBE98412F639BFC00CAE4F9 /* HATNotePlayer.m */,
 			);
 			path = HatnoteListen;
 			sourceTree = "<group>";
@@ -413,9 +431,16 @@
 		ED755C4C18BB04BB00E7AC88 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				EDBE98432F639EE000CAE4F9 /* Sound Fonts */,
 				ED755D3918BB084600E7AC88 /* celesta */,
 				ED755D5518BB084600E7AC88 /* clav */,
 				ED755D7118BB084600E7AC88 /* swells */,
+				EDBE98462F63A6D800CAE4F9 /* HATNote.h */,
+				EDBE98472F63A6D800CAE4F9 /* HATNote.m */,
+				EDBE98492F63A8F000CAE4F9 /* HATSoundFont.h */,
+				EDBE984A2F63A8F000CAE4F9 /* HATSoundFont.m */,
+				EDBE984C2F63AA8600CAE4F9 /* HATSoundFontInstrument.h */,
+				EDBE984D2F63AA8600CAE4F9 /* HATSoundFontInstrument.m */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -579,6 +604,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				EDBE98432F639EE000CAE4F9 /* Sound Fonts */,
 			);
 			name = HatnoteListen;
 			productName = HatnoteListen;
@@ -805,10 +833,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDBE984B2F63A8F000CAE4F9 /* HATSoundFont.m in Sources */,
 				ED5B868118BACA6500932430 /* HATAppDelegate.m in Sources */,
 				ED3C834218E12B100018190A /* UIColor+Theme.m in Sources */,
 				ED536D4318D67B2400A5827C /* HATWikipediaLanguage.m in Sources */,
 				EDEFBEA718C3FE1E002AE9C6 /* NSArray+Util.m in Sources */,
+				EDBE984E2F63AA8600CAE4F9 /* HATSoundFontInstrument.m in Sources */,
 				ED9D311B18DA72FB0038DD46 /* HATSidePanelController.m in Sources */,
 				EDF73D492930578A00FDD97F /* HATWikipediaService.m in Sources */,
 				EDCE382918CBC004006C3B6F /* HATContainerView.m in Sources */,
@@ -817,8 +847,10 @@
 				ED5A04A118CEA71C0068D325 /* HATSettingsViewController.m in Sources */,
 				EDF73D4D29306E3800FDD97F /* HATUserJoinedBanner.m in Sources */,
 				EDEFBEA318C3F8F6002AE9C6 /* UIColor+Util.m in Sources */,
+				EDBE98482F63A6D800CAE4F9 /* HATNote.m in Sources */,
 				ED946AA718BC239700B4EEAF /* HATUpdateView.m in Sources */,
 				ED075D2118D7E10100581187 /* HATAboutViewController.m in Sources */,
+				EDBE98422F639BFC00CAE4F9 /* HATNotePlayer.m in Sources */,
 				EDCBD04518D5206A00EC2892 /* HATLanguageTableViewCell.m in Sources */,
 				EDB7D08218D94A6A0025D63C /* UIDevice+Util.m in Sources */,
 				ED5B868718BACA6500932430 /* HATViewController.m in Sources */,
@@ -961,7 +993,10 @@
 				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
 				INFOPLIST_FILE = "HatnoteListen/HatnoteListen-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = HatnoteListen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -987,7 +1022,10 @@
 				GCC_PREFIX_HEADER = "HatnoteListen/HatnoteListen-Prefix.pch";
 				INFOPLIST_FILE = "HatnoteListen/HatnoteListen-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = HatnoteListen;
 				PRODUCT_NAME = "$(TARGET_NAME)";

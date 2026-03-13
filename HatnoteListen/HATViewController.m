@@ -10,6 +10,8 @@
 
 #import "HATArticleTitleView.h"
 #import "HATControlOverlayView.h"
+#import "HATNote.h"
+#import "HATNotePlayer.h"
 #import "HATSettingsViewController.h"
 #import "HATUpdateView.h"
 #import "HATUserJoinedBanner.h"
@@ -65,6 +67,7 @@ int indexForChangeSize(double changeSize) {
 @property(strong, nonatomic) HATUserJoinedBanner* userJoinedBanner;
 @property(strong, nonatomic) HATControlOverlayView* controlOverlayView;
 @property(strong, nonatomic) HATUpdateView* selectedView;
+@property(strong, nonatomic) HATNotePlayer* notePlayer;
 @property(nonatomic) BOOL isDisplayingNewUserBanner;
 @end
 
@@ -98,6 +101,7 @@ int indexForChangeSize(double changeSize) {
     self.motionManager.deviceMotionUpdateInterval = 1.f / 60.f;
     self.wikipediaService = [[HATWikipediaService alloc] init];
     self.wikipediaService.delegate = self;
+    self.notePlayer = [[HATNotePlayer alloc] init];
 
     CADisplayLink* displayLink =
         [CADisplayLink displayLinkWithTarget:self selector:@selector(displayLinkTriggered:)];
@@ -550,28 +554,34 @@ int indexForChangeSize(double changeSize) {
     return;
   }
 
-  NSString* soundPath = [[NSBundle mainBundle] pathForResource:path ofType:@"mp3"];
-  if (!soundPath) {
-    NSLog(@"Could not find sound file at path %@", soundPath);
-    return;
-  }
+  //  NSString* soundPath = [[NSBundle mainBundle] pathForResource:path ofType:@"mp3"];
+  //  if (!soundPath) {
+  //    NSLog(@"Could not find sound file at path %@", soundPath);
+  //    return;
+  //  }
+  //
+  //  NSURL* url = [NSURL fileURLWithPath:soundPath];
+  //
+//  NSError* error;
+  //  AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+  //  if (error) {
+  //    NSLog(@"error creating audio player with contents of %@: %@", url, error);
+  //    return;
+  //  }
+  //
+  //  player.delegate = self;
+  //  [self.avPlayers addObject:player];
+  //  [player play];
+  //  numCurrentlyPlayingSounds++;
 
-  NSURL* url = [NSURL fileURLWithPath:soundPath];
-
-  NSError* error;
-  AVAudioPlayer* player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-  if (error) {
-    NSLog(@"error creating audio player with contents of %@: %@", url, error);
-    return;
-  }
-
-  player.delegate = self;
-  [self.avPlayers addObject:player];
-  [player play];
-  numCurrentlyPlayingSounds++;
+  NSArray *scaleNotes = [HATNote scaleFromRootNote:MIDINoteB2 mode:MusicalModeDorian octaves:2];
+  int note = [[scaleNotes randomObject] intValue];
+  
+  [self.notePlayer playNote:note velocity:100];
 
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
     numCurrentlyPlayingSounds--;
+    [self.notePlayer stopNote:note];
   });
 }
 
